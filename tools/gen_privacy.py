@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""site/gizlilik.html'i uygulamanın bütün dillerinde üretir.
+"""site/privacy.html'i uygulamanın bütün dillerinde üretir.
 
 Gizlilik politikası tek adreste durur (Play bir URL ister), her dil kendi
 bölümünde. Metinler tools/privacy/<dil>.json dosyalarında; üretilen sayfa
@@ -16,7 +16,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, "site", "gizlilik.html")
+OUT = os.path.join(ROOT, "site", "privacy.html")
 TEXTS = os.path.join(ROOT, "tools", "privacy")
 APP_LOCALE = os.path.join(ROOT, "app", "src", "main", "kotlin", "com", "aripd",
                           "kodokur", "platform", "AppLocale.kt")
@@ -43,9 +43,11 @@ STYLE = """  :root {
   body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.6; }
   .wrap { max-width: 720px; margin: 0 auto; padding: 40px 16px 64px; }
   a { color: var(--title); }
-  .back { display: inline-block; text-decoration: none; font-weight: 700; margin-bottom: 20px; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .back { text-decoration: none; font-weight: 700; }
+  .picker { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+  .picker select { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--card-border); border-radius: 8px; padding: 6px 10px; }
   h1 { font-size: 34px; font-weight: 800; line-height: 1.15; }
-  h2 { font-size: 24px; margin-top: 8px; }
   h3 { font-size: 18px; margin-top: 22px; }
   .meta { color: var(--muted); font-size: 14px; margin-top: 6px; }
   p, li { margin-top: 10px; }
@@ -54,10 +56,10 @@ STYLE = """  :root {
     margin-top: 18px; background: var(--surface); border: 1px solid var(--card-border); border-radius: 16px; padding: 16px 18px;
   }
   .summary strong { color: var(--title); }
-  .langs { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 15px; }
-  .langs a { text-decoration: none; background: var(--surface); border: 1px solid var(--card-border); border-radius: 999px; padding: 4px 12px; }
-  section { margin-top: 44px; padding-top: 12px; border-top: 1px solid var(--card-border); }
-  section:first-of-type { border-top: 0; }
+  /* JavaScript kapalıyken bölümler alt alta; açıkken yalnız biri görünür. */
+  section + section { margin-top: 44px; padding-top: 12px; border-top: 1px solid var(--card-border); }
+  section[hidden] { display: none; }
+  html.one section { margin-top: 0; padding-top: 0; border-top: 0; }
   section[dir="rtl"] { text-align: right; }
   footer { margin-top: 48px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
   footer a { text-decoration: none; }"""
@@ -87,8 +89,10 @@ def load():
 def section(tag, policy):
     p = policy[tag]
     rtl = ' dir="rtl"' if tag in RTL else ""
-    out = [f'  <section id="{tag}" lang="{tag}"{rtl}>',
-           f'    <h2>{p["name"]} · {p["title"]}</h2>',
+    # data-lang: site.js yalnız seçilen dilin bölümünü gösterir; id, uygulamanın
+    # açtığı privacy.html#tr gibi bağlantılar için.
+    out = [f'  <section id="{tag}" lang="{tag}" data-lang="{tag}" data-title="Kodokur · {p["title"]}"{rtl}>',
+           f'    <h1>{p["title"]}</h1>',
            f'    <p class="meta">{p["meta"]}</p>',
            '    <div class="summary">',
            f'      <strong>{p["short_label"]}</strong> {p["short"]}',
@@ -104,17 +108,23 @@ def section(tag, policy):
 
 
 def page(tags, policy):
-    nav = " ".join(f'<a href="#{t}">{policy[t]["name"]}</a>' for t in tags)
     body = "\n".join(section(t, policy) for t in tags)
     return f"""<!doctype html>
-<html lang="tr">
+<!--
+  ÜRETİLMİŞ DOSYA: tools/privacy/<dil>.json → python3 tools/gen_privacy.py
+  Her dil kendi bölümünde; assets/site.js seçilen dilinkini gösterir (index.html
+  ile aynı seçim: ?lang=xx, #xx, önceki seçim, tarayıcının dili). JavaScript
+  kapalıysa bütün bölümler alt alta okunur.
+-->
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#F4F8F7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#101414" media="(prefers-color-scheme: dark)">
-<title>Kodokur · Gizlilik politikası · Privacy policy</title>
-<meta name="description" content="Kodokur gizlilik politikası, {len(tags)} dilde: tek izin kamera, kareler telefondan çıkmaz, internet izni yok, veri toplanmaz.">
+<title>Kodokur · Privacy policy</title>
+<meta name="description" content="Kodokur privacy policy in {len(tags)} languages: the camera is the only permission, frames never leave the phone, no internet permission, no data collected.">
+<link rel="canonical" href="https://aripdcom.github.io/kodokur/privacy.html">
 <link rel="icon" href="{ICON}">
 <style>
 {STYLE}
@@ -122,19 +132,23 @@ def page(tags, policy):
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="./">← Kodokur</a>
-  <h1>Gizlilik politikası · Privacy policy</h1>
-  <p class="meta">Aynı politika, {len(tags)} dilde. / The same policy, in {len(tags)} languages.</p>
-  <nav class="langs">{nav}</nav>
+  <div class="top">
+    <a class="back" href="./" data-keep-lang="./">← Kodokur</a>
+    <form class="picker" id="picker" hidden>
+      <label for="lang" data-i18n="langLabel">Language</label>
+      <select id="lang" name="lang"></select>
+    </form>
+  </div>
 
 {body}
 
   <footer>
     <span>Kodokur · no ads, no trackers, camera only</span>
-    <a href="./">Ana sayfa</a>
     <a href="https://github.com/aripdcom/kodokur">GitHub</a>
   </footer>
 </div>
+<script src="assets/i18n.js"></script>
+<script src="assets/site.js"></script>
 </body>
 </html>
 """

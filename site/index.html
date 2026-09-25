@@ -1,12 +1,34 @@
 <!doctype html>
-<html lang="tr">
+<!--
+  Kodokur'un tanıtım sayfası. İngilizce metin doğrudan bu dosyada; öbür diller
+  assets/i18n.js'te (tools/site/<dil>.json → tools/gen_site_i18n.py). Metin
+  taşıyan her öğe data-i18n anahtarıyla işaretli; assets/site.js açılışta dili
+  seçip metinleri değiştirir. Kerteriz'in sitesiyle aynı düzen.
+-->
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#F4F8F7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#101414" media="(prefers-color-scheme: dark)">
-<title>Kodokur · Barkod ve QR okuyucu</title>
-<meta name="description" content="Kodokur: Android için barkod ve QR okuyucu. Kitap barkodundan ISBN'i tireleriyle, ISBN-10 karşılığıyla ve kayıt grubuyla gösterir; dergi, market ürünü, Wi-Fi, bağlantı, kişi kartı. 14 dil, tek izin kamera, internet izni yok.">
+<title>Kodokur · Barcode and QR reader that knows its ISBNs</title>
+<meta name="description" content="Kodokur: a barcode and QR reader for Android. Shows a book's ISBN hyphenated, with its ISBN-10 and registration group; also magazines, products, Wi-Fi, links and contact cards. 14 languages, camera is the only permission, no internet permission.">
+<link rel="canonical" href="https://aripdcom.github.io/kodokur/">
+<link rel="alternate" hreflang="x-default" href="https://aripdcom.github.io/kodokur/">
+<link rel="alternate" hreflang="en" href="https://aripdcom.github.io/kodokur/?lang=en">
+<link rel="alternate" hreflang="tr" href="https://aripdcom.github.io/kodokur/?lang=tr">
+<link rel="alternate" hreflang="de" href="https://aripdcom.github.io/kodokur/?lang=de">
+<link rel="alternate" hreflang="fr" href="https://aripdcom.github.io/kodokur/?lang=fr">
+<link rel="alternate" hreflang="nl" href="https://aripdcom.github.io/kodokur/?lang=nl">
+<link rel="alternate" hreflang="es" href="https://aripdcom.github.io/kodokur/?lang=es">
+<link rel="alternate" hreflang="pt" href="https://aripdcom.github.io/kodokur/?lang=pt">
+<link rel="alternate" hreflang="it" href="https://aripdcom.github.io/kodokur/?lang=it">
+<link rel="alternate" hreflang="da" href="https://aripdcom.github.io/kodokur/?lang=da">
+<link rel="alternate" hreflang="sv" href="https://aripdcom.github.io/kodokur/?lang=sv">
+<link rel="alternate" hreflang="nb" href="https://aripdcom.github.io/kodokur/?lang=nb">
+<link rel="alternate" hreflang="fi" href="https://aripdcom.github.io/kodokur/?lang=fi">
+<link rel="alternate" hreflang="ru" href="https://aripdcom.github.io/kodokur/?lang=ru">
+<link rel="alternate" hreflang="ar" href="https://aripdcom.github.io/kodokur/?lang=ar">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F3D3E'/%3E%3Cpath fill='%23E8F3F1' d='M8 9h2v14H8zM11.5 9h1v14h-1zM14 9h2v14h-2zM17.5 9h1v14h-1zM20 9h2.5v14H20zM24 9h1v14h-1z'/%3E%3Crect x='6' y='15' width='20' height='2' fill='%23FFB347'/%3E%3C/svg%3E">
 <style>
   /* Uygulamanın renkleri. Tema düğmesi yok; sistem tercihine uyulur. */
@@ -152,6 +174,14 @@
   }
   footer a { color: var(--brand); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
+  /* Dil seçici: JavaScript kapalıysa gizli kalır, sayfa İngilizce okunur. */
+  .top { display: flex; justify-content: flex-end; margin-bottom: 24px; }
+  .picker { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+  .picker select {
+    font: inherit; color: var(--text); background: var(--surface);
+    border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px;
+  }
+  [dir="rtl"] .sample dl, [dir="rtl"] .card { text-align: right; }
   @media (max-width: 540px) {
     header h1 { font-size: 36px; }
     .mark { width: 52px; height: 52px; border-radius: 13px; }
@@ -159,7 +189,7 @@
   }
 </style>
 </head>
-<body>
+<body data-i18n-page>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="i-book" viewBox="0 0 24 24"><path d="M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1 -1 1H6a2 2 0 0 1 -2 -2V5a2 2 0 0 1 2 -2zM9 3v8l2.5 -1.5L14 11V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -171,128 +201,122 @@
   </defs>
 </svg>
 <div class="wrap">
+  <div class="top">
+    <form class="picker" id="picker" hidden>
+      <label for="lang" data-i18n="langLabel">Language</label>
+      <select id="lang" name="lang"></select>
+    </form>
+  </div>
+
   <header>
     <div class="brand">
       <div class="mark" aria-hidden="true">
         <svg width="44" height="44" viewBox="0 0 32 32"><path fill="#E8F3F1" d="M8 9h2v14H8zM11.5 9h1v14h-1zM14 9h2v14h-2zM17.5 9h1v14h-1zM20 9h2.5v14H20zM24 9h1v14h-1z"/><rect x="6" y="15" width="20" height="2" fill="#FFB347"/></svg>
       </div>
-      <h1>Kodokur<span class="sub">ISBN'den anlayan barkod ve QR okuyucu</span></h1>
+      <h1>Kodokur<span class="sub" data-i18n="subtitle">Barcode and QR reader that knows its ISBNs</span></h1>
     </div>
-    <p class="tagline">Kitabın arkasındaki barkodu okur; ISBN'i doğru yerlerden tireler, ISBN-10 karşılığını ve kayıt grubunu gösterir. Dergi, market ürünü, Wi-Fi, bağlantı, kişi kartı da okur. 14 dil, çevrimdışı.</p>
+    <p class="tagline" data-i18n="tagline">Reads the barcode on the back of a book, hyphenates the ISBN in the right places and shows its ISBN-10 and registration group. Also reads magazines, products, Wi-Fi, links and contact cards. 14 languages, works offline.</p>
     <div class="chips">
-      <span class="chip">0 reklam</span>
-      <span class="chip">0 izleyici</span>
-      <span class="chip">tek izin: kamera</span>
-      <span class="chip">internet izni yok</span>
-      <span class="chip">açık kaynak</span>
+      <span class="chip" data-i18n="chipAds">0 ads</span>
+      <span class="chip" data-i18n="chipTrackers">0 trackers</span>
+      <span class="chip" data-i18n="chipCamera">only permission: camera</span>
+      <span class="chip" data-i18n="chipInternet">no internet permission</span>
+      <span class="chip" data-i18n="chipOpen">open source</span>
     </div>
     <div class="cta">
-      <a class="btn" href="https://github.com/aripdcom/kodokur/releases/latest/download/kodokur.apk">APK indir</a>
-      <a class="all" href="https://github.com/aripdcom/kodokur/releases">Bütün sürümler ve kaynak arşivleri</a>
+      <a class="btn" href="https://github.com/aripdcom/kodokur/releases/latest/download/kodokur.apk" data-i18n="btnDownload">Download the APK</a>
+      <a class="all" href="https://github.com/aripdcom/kodokur/releases" data-i18n="allReleases">All releases and source archives</a>
     </div>
   </header>
 
   <main>
-    <section lang="tr">
-      <h2>Kitap barkodu</h2>
-      <p class="lead">978 ya da 979 ile başlayan her EAN-13 bir ISBN'dir. Kodokur sağlama hanesini doğrular, ISBN International'ın aralık tablosuna bakarak numarayı bölümlerine ayırır ve arkasındaki 5 haneli ek barkoddan fiyatı okur. Tablo uygulamanın içinde; okumak için internet gerekmez.</p>
-      <div class="sample" aria-label="Örnek sonuç">
-        <div class="head">978-975-08-0171-6</div>
+    <section>
+      <h2 data-i18n="bookH">Book barcodes</h2>
+      <p class="lead" data-i18n="bookLead">Every EAN-13 that starts with 978 or 979 is an ISBN. Kodokur checks the check digit, splits the number into its parts using the ISBN International range table and reads the price from the 5-digit add-on behind it. The table is built into the app; no internet is needed.</p>
+      <div class="sample">
+        <div class="head" dir="ltr">978-975-08-0171-6</div>
         <dl>
-          <dt>ISBN-13</dt><dd>978-975-08-0171-6</dd>
-          <dt>ISBN-10</dt><dd>975-08-0171-7</dd>
-          <dt>Kayıt grubu</dt><dd>Türkiye</dd>
-          <dt>Biçim</dt><dd>EAN-13</dd>
+          <dt>ISBN-13</dt><dd dir="ltr">978-975-08-0171-6</dd>
+          <dt>ISBN-10</dt><dd dir="ltr">975-08-0171-7</dd>
+          <dt data-i18n="lblGroup">Registration group</dt><dd>Türkiye</dd>
+          <dt data-i18n="lblFormat">Format</dt><dd dir="ltr">EAN-13</dd>
         </dl>
       </div>
     </section>
 
-    <section lang="tr">
-      <h2>Neler okur</h2>
-      <p class="lead">Çizgili barkodlar (EAN, UPC, Code 128/39/93, ITF, Codabar, GS1 DataBar) ve iki boyutlu kodlar (QR, Data Matrix, PDF417, Aztec). Barkod dik tutulsa da okunur; kamera izni vermeden bir fotoğraftaki kodu da okuyabilirsiniz.</p>
+    <section>
+      <h2 data-i18n="readsH">What it reads</h2>
+      <p class="lead" data-i18n="readsLead">Linear barcodes (EAN, UPC, Code 128/39/93, ITF, Codabar, GS1 DataBar) and 2D codes (QR, Data Matrix, PDF417, Aztec). A barcode held sideways is read too.</p>
       <div class="cards">
       <article class="card">
         <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-book"/></svg></div>
         <div class="info">
-          <h3>Kitap</h3>
-          <p>Tireli ISBN-13, ISBN-10, kayıt grubu (Türkiye, English language…) ve varsa fiyat. Open Library, Google Books ya da web aramasında tek dokunuşla açılır.</p>
+          <h3 data-i18n="cardBookH">Books</h3>
+          <p data-i18n="cardBookP">Hyphenated ISBN-13, ISBN-10, registration group and, if present, the price. Opens in Open Library, Google Books or a web search with one tap.</p>
         </div>
       </article>
       <article class="card">
         <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-news"/></svg></div>
         <div class="info">
-          <h3>Dergi ve gazete</h3>
-          <p>977 önekli barkoddan ISSN, 2 haneli ek barkoddan sayı numarası. ISSN Portal'da açılır.</p>
+          <h3 data-i18n="cardMagH">Magazines and newspapers</h3>
+          <p data-i18n="cardMagP">The ISSN from barcodes starting with 977, and the issue number from the 2-digit add-on. Opens in the ISSN Portal.</p>
         </div>
       </article>
       <article class="card">
         <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-cart"/></svg></div>
         <div class="info">
-          <h3>Market ürünü</h3>
-          <p>EAN-13, EAN-8, UPC-A, UPC-E. İsterseniz Open Food Facts'te bakılır.</p>
+          <h3 data-i18n="cardProdH">Products</h3>
+          <p data-i18n="cardProdP">EAN-13, EAN-8, UPC-A, UPC-E. Look them up in Open Food Facts if you like.</p>
         </div>
       </article>
       <article class="card">
         <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-qr"/></svg></div>
         <div class="info">
-          <h3>QR kod</h3>
-          <p>Bağlantı, Wi-Fi (sistem penceresiyle tek dokunuşta bağlanır, parola gizli durur), e-posta, telefon, SMS, konum, kişi kartı. Tanınmayan her şey düz metin olarak kopyalanır.</p>
-        </div>
-      </article>
-      </div>
-    </section>
-
-    <section lang="tr">
-      <h2>Kitaplık sayımı</h2>
-      <div class="cards">
-      <article class="card">
-        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-stack"/></svg></div>
-        <div class="info">
-          <h3>Seri tarama ve CSV</h3>
-          <p>Seri kipinde okunan her kod durmadan geçmişe eklenir; aynı kitap ikinci kez eklenmez. Geçmiş, ISBN-13 ve ISBN-10 sütunlarıyla CSV olarak paylaşılır; Excel Türkçe karakterleri doğru açar.</p>
-        </div>
-      </article>
-      </div>
-    </section>
-
-    <section lang="tr">
-      <h2>Cihazda kalır</h2>
-      <div class="note">
-        <strong>Uygulamanın internet izni yok.</strong> Tek izin kamera; kareler telefonda incelenir, hiçbir yere
-        kaydedilmez ya da gönderilmez. Kitap araması gibi düğmeler kodu tarayıcınıza devreder. Okuma geçmişi
-        yalnızca telefonunuzda durur ve Wi-Fi parolası içerebileceği için yedeklemeye girmez. Ayrıntı:
-        <a href="gizlilik.html">gizlilik politikası</a>.
-      </div>
-    </section>
-
-    <section lang="en">
-      <h2>In English</h2>
-      <p class="lead">Kodokur is a barcode and QR reader for Android that knows its ISBNs: it validates the check digit, hyphenates the number using the ISBN International range table built into the app, shows the ISBN-10 and the registration group, and reads the price from the 5-digit add-on. It also reads ISSNs on magazines, product codes, Wi-Fi, links, e-mail, phone, SMS, locations and contact cards. Batch mode and CSV export for cataloguing a bookshelf. 14 languages. The only permission is the camera; there is no INTERNET permission, no ads and no trackers.</p>
-      <div class="cards">
-      <article class="card">
-        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-book"/></svg></div>
-        <div class="info">
-          <h3>Books</h3>
-          <p>Hyphenated ISBN-13, ISBN-10, registration group and price. Open Library, Google Books or a web search in one tap, in your browser.</p>
+          <h3 data-i18n="cardQrH">QR codes</h3>
+          <p data-i18n="cardQrP">Links, Wi-Fi (connect in one tap through the system dialog, the password stays hidden), e-mail, phone, SMS, locations and contact cards. Anything else can be copied as plain text.</p>
         </div>
       </article>
       <article class="card">
         <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-image"/></svg></div>
         <div class="info">
-          <h3>From a photo, too</h3>
-          <p>No camera permission needed to read a code from a picture: the system photo picker hands over just that one image.</p>
+          <h3 data-i18n="cardPhotoH">From a photo, too</h3>
+          <p data-i18n="cardPhotoP">Reading a code from a picture needs no camera permission: the system photo picker hands over just that one image.</p>
         </div>
       </article>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-i18n="shelfH">Counting a bookshelf</h2>
+      <div class="cards">
+      <article class="card">
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-stack"/></svg></div>
+        <div class="info">
+          <h3 data-i18n="batchH">Batch scanning and CSV</h3>
+          <p data-i18n="batchP">In batch mode every code goes straight to the history without stopping, and the same book is never added twice. Share the history as a CSV file with ISBN-13 and ISBN-10 columns; spreadsheets open accented characters correctly.</p>
+        </div>
+      </article>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-i18n="localH">Stays on the device</h2>
+      <div class="note">
+        <strong data-i18n="localStrong">The app has no internet permission.</strong>
+        <span data-i18n="localP">The only permission is the camera; frames are examined on the phone and never saved or sent anywhere. Buttons such as book search hand the code to your browser. The scan history stays on your phone only and, because it can contain Wi-Fi passwords, is left out of backups.</span>
+        <a href="privacy.html" data-keep-lang="privacy.html" data-i18n="localLink">Privacy policy</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <span>Kodokur · no ads, no trackers, camera only</span>
-    <a href="gizlilik.html">Gizlilik politikası · Privacy</a>
+    <span data-i18n="footerTag">Kodokur · no ads, no trackers, camera only</span>
+    <a href="privacy.html" data-keep-lang="privacy.html" data-i18n="footerPrivacy">Privacy policy</a>
     <a href="https://github.com/aripdcom/kodokur">GitHub</a>
     <a href="https://github.com/aripdcom/kodokur/blob/main/LICENSE">GPL-3.0</a>
   </footer>
 </div>
+<script src="assets/i18n.js"></script>
+<script src="assets/site.js"></script>
 </body>
 </html>

@@ -27,7 +27,7 @@ import java.time.LocalDate
 object Actions {
 
     const val SOURCE_URL = "https://github.com/aripdcom/kodokur"
-    const val PRIVACY_URL = "https://aripdcom.github.io/kodokur/gizlilik.html"
+    const val PRIVACY_URL = "https://aripdcom.github.io/kodokur/privacy.html"
 
     fun start(context: Context, intent: Intent): Boolean = try {
         context.startActivity(intent)

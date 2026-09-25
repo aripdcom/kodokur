@@ -4,7 +4,7 @@ package com.aripd.kodokur.core
  * ISBN International'ın aralık tablosu: bir ISBN'in hangi gruba (dil/ülke)
  * ait olduğunu ve yayıncı bölümünün kaç hane sürdüğünü söyler; tireleme
  * buna dayanır. Tablo pakete gömülüdür (uygulama ağa bağlanmaz) ve
- * `tools/isbn_araliklari.py` ile tazelenir.
+ * `tools/isbn_ranges.py` ile tazelenir.
  */
 internal object IsbnRanges {
 

@@ -7,8 +7,8 @@ Kaynak, ISBN International'ın herkese açık RangeMessage.xml dosyasıdır:
 Uygulama ağa bağlanmadığı için tablo pakete gömülüdür; yeni yayıncı aralıkları
 açıldıkça ara ara tazelenmelidir:
 
-    python3 tools/isbn_araliklari.py            # indirir ve yazar
-    python3 tools/isbn_araliklari.py dosya.xml  # elde olan dosyadan yazar
+    python3 tools/isbn_ranges.py            # indirir ve yazar
+    python3 tools/isbn_ranges.py dosya.xml  # elde olan dosyadan yazar
 
 Çıktı (core/src/main/resources/.../isbn-ranges.txt), satır başına bir grup:
 
@@ -37,7 +37,7 @@ def main() -> None:
     serial = (root.findtext("MessageSerialNumber") or "").strip()
 
     lines = [f"# ISBN International RangeMessage · {date} · {serial}",
-             "# tools/isbn_araliklari.py ile üretildi; elle düzenlemeyin."]
+             "# tools/isbn_ranges.py ile üretildi; elle düzenlemeyin."]
     for group in root.iter("Group"):
         prefix = group.findtext("Prefix").strip()
         agency = " ".join(group.findtext("Agency").split())

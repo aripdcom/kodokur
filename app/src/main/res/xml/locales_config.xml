@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 13+ Ayarlar → Uygulamalar → Kodokur → Dil seçicisini bu listeden kurar.
+     Varsayılan İngilizce (res/values); çeviriler res/values-<dil>. Portekizce tek
+     klasörde (values-pt) Brezilya Portekizcesi olarak; pt-BR ve pt-PT buraya çözülür. -->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android"
+    android:defaultLocale="en">
+    <locale android:name="en" />
+    <locale android:name="tr" />
+    <locale android:name="de" />
+    <locale android:name="fr" />
+    <locale android:name="nl" />
+    <locale android:name="es" />
+    <locale android:name="pt" />
+    <locale android:name="it" />
+    <locale android:name="da" />
+    <locale android:name="sv" />
+    <locale android:name="nb" />
+    <locale android:name="fi" />
+    <locale android:name="ru" />
+    <locale android:name="ar" />
+</locale-config>

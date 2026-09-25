@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Kodokur'un metinleri: Fince. Varsayılan values altında İngilizce.
+  Bölüm başlıkları Türkçe: depodaki öbür yorumlar gibi geliştirici notu.
+-->
+<resources>
+    <string name="app_tagline">Viivakoodi- ja QR-lukija, joka tuntee ISBN-koodit</string>
+
+    <!-- Ortak -->
+    <string name="back">Takaisin</string>
+    <string name="cancel">Peruuta</string>
+    <string name="delete">Poista</string>
+    <string name="undo">Kumoa</string>
+    <string name="act_show">Näytä</string>
+    <string name="copied">Kopioitu</string>
+    <string name="no_app">Mikään tämän puhelimen sovellus ei voi avata tätä</string>
+
+    <!-- Tarayıcı -->
+    <string name="scan_hint">Osoita viivakoodia tai QR-koodia</string>
+    <string name="action_gallery">Kuvasta</string>
+    <string name="action_torch_on">Sytytä taskulamppu</string>
+    <string name="action_torch_off">Sammuta taskulamppu</string>
+    <string name="action_history">Historia</string>
+    <string name="action_about">Tietoja</string>
+    <string name="batch_mode">Sarja</string>
+    <string name="batch_mode_on">Sarjatila päällä: koodit menevät suoraan historiaan</string>
+    <string name="batch_added">Lisätty %1$s</string>
+    <string name="batch_duplicate">Jo tässä sarjassa: %1$s</string>
+    <plurals name="batch_count">
+        <item quantity="one">%1$d koodi tässä sarjassa</item>
+        <item quantity="other">%1$d koodia tässä sarjassa</item>
+    </plurals>
+    <string name="gallery_none">Kuvasta ei löytynyt koodia</string>
+    <string name="gallery_error">Kuvaa ei voitu avata</string>
+    <string name="gallery_reading">Luetaan kuvaa…</string>
+
+    <!-- Kamera izni -->
+    <string name="permission_title">Kameran käyttö</string>
+    <string name="permission_body">Kodokur lukee koodit kameran kautta. Kuvat käsitellään puhelimessa, niitä ei tallenneta eikä lähetetä minnekään.</string>
+    <string name="permission_grant">Salli kamera</string>
+    <string name="permission_settings">Avaa sovelluksen asetukset</string>
+    <string name="permission_gallery_hint">Voit lukea koodin myös valokuvasta ilman kameran käyttöoikeutta.</string>
+    <string name="no_camera">Tässä laitteessa ei ole kameraa. Voit silti lukea koodin valokuvasta.</string>
+    <string name="camera_error">Kameraa ei voitu käynnistää</string>
+
+    <!-- İçerik türleri -->
+    <string name="kind_book">Kirja</string>
+    <string name="kind_periodical">Aikakausjulkaisu</string>
+    <string name="kind_product">Tuote</string>
+    <string name="kind_link">Linkki</string>
+    <string name="kind_wifi">Wi-Fi-verkko</string>
+    <string name="kind_email">Sähköposti</string>
+    <string name="kind_phone">Puhelinnumero</string>
+    <string name="kind_sms">SMS</string>
+    <string name="kind_geo">Sijainti</string>
+    <string name="kind_contact">Yhteystieto</string>
+    <string name="kind_text">Teksti</string>
+
+    <!-- Ayrıntı etiketleri -->
+    <string name="label_isbn13">ISBN-13</string>
+    <string name="label_isbn10">ISBN-10</string>
+    <string name="label_group">Rekisteröintiryhmä</string>
+    <string name="label_price">Hinta (lisäkoodi)</string>
+    <string name="label_issn">ISSN</string>
+    <string name="label_issue">Numero</string>
+    <string name="label_gtin">GTIN</string>
+    <string name="label_network">Verkko</string>
+    <string name="label_password">Salasana</string>
+    <string name="label_security">Suojaus</string>
+    <string name="label_to">Vastaanottaja</string>
+    <string name="label_subject">Aihe</string>
+    <string name="label_message">Viesti</string>
+    <string name="label_coordinates">Koordinaatit</string>
+    <string name="label_name">Nimi</string>
+    <string name="label_organization">Organisaatio</string>
+    <string name="label_phone">Puhelin</string>
+    <string name="label_email">Sähköposti</string>
+    <string name="label_website">Verkkosivu</string>
+    <string name="label_format">Muoto</string>
+    <string name="label_add_on">Lisäkoodi</string>
+    <string name="label_raw">Raakasisältö</string>
+    <string name="label_scanned_at">Luettu</string>
+
+    <!-- Eylemler -->
+    <string name="act_copy">Kopioi</string>
+    <string name="act_share">Jaa</string>
+    <string name="act_open">Avaa</string>
+    <string name="act_open_library">Open Library</string>
+    <string name="act_google_books">Google Books</string>
+    <string name="act_issn_portal">ISSN Portal</string>
+    <string name="act_open_food_facts">Open Food Facts</string>
+    <string name="act_search_web">Hae verkosta</string>
+    <string name="act_connect_wifi">Yhdistä</string>
+    <string name="act_copy_password">Kopioi salasana</string>
+    <string name="act_send_email">Kirjoita sähköposti</string>
+    <string name="act_dial">Soita</string>
+    <string name="act_send_sms">Kirjoita SMS</string>
+    <string name="act_show_map">Näytä kartalla</string>
+    <string name="act_add_contact">Lisää yhteystietoihin</string>
+    <string name="external_notice">Avautuu selaimessa tai toisessa sovelluksessa. Kodokur itse ei koskaan ota yhteyttä verkkoon.</string>
+
+    <!-- Geçmiş -->
+    <string name="history_title">Historia</string>
+    <string name="history_empty">Mitään ei ole vielä luettu</string>
+    <string name="history_export">Vie CSV</string>
+    <string name="history_clear">Tyhjennä historia</string>
+    <string name="history_clear_title">Tyhjennetäänkö historia?</string>
+    <plurals name="history_clear_body">
+        <item quantity="one">%1$d luku poistetaan tästä puhelimesta.</item>
+        <item quantity="other">Kaikki %1$d lukua poistetaan tästä puhelimesta.</item>
+    </plurals>
+    <string name="history_deleted">Luku poistettu</string>
+
+    <!-- Dil -->
+    <string name="language_title">Kieli</string>
+    <string name="language_system">Puhelimen kieli</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">Tietoja</string>
+    <string name="about_promise">Ei mainoksia. Ei seuraimia. Ei internet-lupaa. Ainoa lupa on kamera, eivätkä kameran kuvat koskaan poistu puhelimesta. Historia pysyy tässä laitteessa, eikä sitä sisällytetä varmuuskopioihin.</string>
+    <string name="about_version">Versio %1$s</string>
+    <string name="about_source">Lähdekoodi</string>
+    <string name="about_privacy">Tietosuojakäytäntö</string>
+    <string name="about_license">Vapaa ohjelmisto, GNU GPL v3 -lisenssi.</string>
+    <string name="about_libraries">Koodien tulkinta: ZXing (Apache License 2.0). Kamera: AndroidX CameraX (Apache License 2.0).</string>
+    <string name="about_isbn_ranges">ISBN-alueet: ISBN International, %1$s</string>
+</resources>

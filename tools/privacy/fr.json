@@ -1,0 +1,35 @@
+{
+  "name": "Français",
+  "title": "Politique de confidentialité",
+  "meta": "Kodokur pour Android · En vigueur le 26 septembre 2026 · Développeur : aripdcom",
+  "short_label": "En bref :",
+  "short": "Kodokur ne collecte, ne partage ni ne vend aucune donnée personnelle. Sa seule autorisation est l’appareil photo : les images sont analysées sur le téléphone et ne sont jamais enregistrées ni envoyées nulle part. L’appli n’a pas d’autorisation INTERNET, ni publicité, ni bibliothèque de suivi. Votre historique de scans reste sur votre appareil et est exclu des sauvegardes.",
+  "sections": [
+    [
+      "Données collectées",
+      "Aucune. Ni nom, ni e-mail, ni position, ni identifiant d’appareil, ni statistique d’usage, ni rapport de plantage. L’appli ne contient aucun SDK d’analyse, de publicité ou tiers."
+    ],
+    [
+      "Appareil photo",
+      "Kodokur demande l’autorisation <code>CAMERA</code> et ne l’utilise que tant que l’écran de scan est ouvert. Chaque image est examinée en mémoire à la recherche d’un code-barres ou d’un code QR, puis supprimée ; aucune photo ni vidéo n’est jamais enregistrée. Si vous refusez l’autorisation, vous pouvez quand même lire un code depuis une image : le sélecteur de photos d’Android ne donne à l’appli accès qu’à cette seule image, et aucune autorisation de stockage n’est nécessaire."
+    ],
+    [
+      "Réseau",
+      "Le manifeste de l’appli ne déclare pas l’autorisation <code>INTERNET</code> : Kodokur ne peut donc se connecter à aucun serveur. Les boutons comme Open Library, Google Books, ISSN Portal, Open Food Facts, la recherche sur le web ou l’ouverture d’un lien transmettent le code à votre navigateur ou à une autre appli de votre choix. À partir de là, c’est la politique de ce site ou de cette appli qui s’applique ; Kodokur ignore ce qui s’y passe."
+    ],
+    [
+      "Ce qui reste sur votre appareil",
+      "L’historique des scans (le contenu décodé, le format du code-barres et l’heure) est conservé dans le stockage privé de l’appli, inaccessible aux autres applis. Vous pouvez supprimer des entrées une à une ou effacer tout l’historique, et tout est supprimé quand vous désinstallez l’appli ou effacez ses données. Comme l’historique peut contenir des mots de passe Wi-Fi, il est exclu de la sauvegarde cloud d’Android et du transfert d’appareil à appareil. Sous Android 8 à 12, la langue choisie dans l’appli est stockée de la même façon."
+    ],
+    [
+      "Partage, export et transmission",
+      "Le partage et l’export CSV ouvrent le panneau de partage d’Android ; un fichier est transmis en lecture seule à l’appli que vous choisissez, et Kodokur n’envoie rien lui-même. La connexion à un réseau Wi-Fi ouvre la boîte de confirmation du système, et l’ajout d’un contact ouvre votre appli de contacts avec les champs préremplis ; rien n’est enregistré tant que vous n’y avez pas confirmé."
+    ],
+    [
+      "Enfants et modifications",
+      "Comme aucune donnée n’est collectée, l’appli convient à tous les âges. Si cette politique change, la nouvelle version sera publiée sur cette page."
+    ]
+  ],
+  "contact": "Contact",
+  "contact_intro": "Questions et signalements :"
+}

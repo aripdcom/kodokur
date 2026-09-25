@@ -1,0 +1,23 @@
+{
+  "name": "Italiano",
+  "title": "Informativa sulla privacy",
+  "meta": "Kodokur per Android · In vigore dal 26 settembre 2026 · Sviluppatore: aripdcom",
+  "short_label": "In breve:",
+  "short": "Kodokur non raccoglie, condivide né vende dati personali. Il suo unico permesso è la fotocamera: le immagini vengono analizzate sul telefono e non vengono mai salvate né inviate da nessuna parte. L'app non ha il permesso INTERNET, né pubblicità né librerie di tracciamento. La cronologia delle scansioni resta sul tuo dispositivo ed è esclusa dai backup.",
+  "sections": [
+    ["Dati raccolti",
+     "Nessuno. Niente nomi, email, posizione, identificativi del dispositivo, statistiche d'uso o segnalazioni di arresti anomali. Nell'app non ci sono SDK di analisi, pubblicità o di terze parti."],
+    ["Fotocamera",
+     "Kodokur chiede il permesso <code>CAMERA</code> e lo usa solo mentre la schermata di scansione è aperta. Ogni immagine viene esaminata in memoria alla ricerca di un codice a barre o QR e poi scartata; nessuna foto o video viene mai salvato. Se rifiuti il permesso puoi comunque leggere un codice da un'immagine: il selettore di foto di Android dà all'app accesso solo a quell'immagine, e non serve alcun permesso di archiviazione."],
+    ["Rete",
+     "Il manifest dell'app non contiene il permesso <code>INTERNET</code>, quindi Kodokur non può collegarsi a nessun server. Pulsanti come Open Library, Google Books, ISSN Portal, Open Food Facts, la ricerca sul web o l'apertura di un link passano il codice al tuo browser o a un'altra app che scegli tu. Da quel momento vale l'informativa di quel sito o di quell'app; Kodokur non sa cosa succede lì."],
+    ["Cosa resta sul tuo dispositivo",
+     "La cronologia delle scansioni (il contenuto decodificato, il formato del codice e l'ora) è conservata nella memoria privata dell'app, dove nessun'altra app può accedere. Puoi eliminare singole voci o cancellare l'intera cronologia, e tutto viene rimosso quando disinstalli l'app o ne cancelli i dati. Poiché la cronologia può contenere password Wi-Fi, è esclusa dal backup su cloud di Android e dal trasferimento da dispositivo a dispositivo. Su Android da 8 a 12, la lingua che scegli nell'app viene salvata allo stesso modo."],
+    ["Condivisione, esportazione e passaggio ad altre app",
+     "Condividi ed Esporta CSV aprono il menu di condivisione di Android; il file viene consegnato in sola lettura all'app che scegli, e Kodokur di per sé non invia nulla. La connessione a una rete Wi-Fi apre la finestra di conferma del sistema stesso, e l'aggiunta di un contatto apre la tua app dei contatti con i campi già compilati; nulla viene salvato finché non confermi lì."],
+    ["Minori e modifiche",
+     "Poiché non viene raccolto alcun dato, l'app è adatta a tutte le età. Se questa informativa cambia, la nuova versione sarà pubblicata su questa pagina."]
+  ],
+  "contact": "Contatti",
+  "contact_intro": "Domande e segnalazioni:"
+}

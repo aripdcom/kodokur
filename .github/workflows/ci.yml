@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main, 'claude/**']
+  pull_request:
+  workflow_dispatch:
+
+# Aynı dala üst üste push gelirse eski çalışmayı iptal et (koşucu tasarrufu).
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Çeviri denetimi: dil listeleri tutarlı mı, her dilde bütün metinler var
+      # mı, biçim belirteçleri uyuşuyor mu. Saniyeler sürer, Gradle'dan önce.
+      - name: Çok dilli metin denetimi
+        run: python3 tools/check_strings.py
+
+      - name: Site denetimi
+        run: python3 tools/check_site.py
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Çekirdek birim testleri (çözücü, ISBN/ISSN, içerik, CSV)
+        run: ./gradlew :core:test
+
+      - name: Debug APK derle
+        run: ./gradlew :app:assembleDebug
+
+      - name: Test raporlarını yükle
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kodokur-test-reports
+          path: |
+            core/build/reports/tests
+            core/build/test-results
+
+      - name: APK'yı yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: kodokur-debug-apk
+          path: app/build/outputs/apk/debug/*.apk

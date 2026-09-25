@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F4F8F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101414" media="(prefers-color-scheme: dark)">
+<title>Kodokur · Barkod ve QR okuyucu</title>
+<meta name="description" content="Kodokur: Android için barkod ve QR okuyucu. Kitap barkodundan ISBN'i tireleriyle, ISBN-10 karşılığıyla ve kayıt grubuyla gösterir; dergi, market ürünü, Wi-Fi, bağlantı, kişi kartı. 14 dil, tek izin kamera, internet izni yok.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F3D3E'/%3E%3Cpath fill='%23E8F3F1' d='M8 9h2v14H8zM11.5 9h1v14h-1zM14 9h2v14h-2zM17.5 9h1v14h-1zM20 9h2.5v14H20zM24 9h1v14h-1z'/%3E%3Crect x='6' y='15' width='20' height='2' fill='%23FFB347'/%3E%3C/svg%3E">
+<style>
+  /* Uygulamanın renkleri. Tema düğmesi yok; sistem tercihine uyulur. */
+  :root {
+    color-scheme: light dark;
+    --bg: #F4F8F7;
+    --surface: #FFFFFF;
+    --text: #10201F;
+    --muted: #52625F;
+    --line: #D8E3E1;
+    --brand: #0F5F5C;
+    --on-brand: #FFFFFF;
+    --brand-weak: #DDF0ED;
+    --on-brand-weak: #0F5F5C;
+    --amber: #B86E00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101414;
+      --surface: #182020;
+      --text: #E3EEEC;
+      --muted: #A5B6B3;
+      --line: #2A3635;
+      --brand: #8ED4CC;
+      --on-brand: #003734;
+      --brand-weak: #1C3634;
+      --on-brand-weak: #B6ECE6;
+      --amber: #FFB347;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 16px 64px; }
+  header .brand { display: flex; align-items: center; gap: 18px; }
+  .mark {
+    flex: 0 0 auto;
+    width: 64px; height: 64px;
+    border-radius: 16px;
+    background: #0F3D3E;
+    display: grid; place-items: center;
+  }
+  header h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  header h1 .sub { display: block; font-size: 18px; font-weight: 500; letter-spacing: 0; color: var(--muted); margin-top: 4px; }
+  header p.tagline { font-size: 18px; color: var(--muted); margin-top: 18px; max-width: 640px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .chip {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  .cta { margin-top: 24px; display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    background: var(--brand);
+    color: var(--on-brand);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 13px 24px;
+    border-radius: 10px;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  .btn:hover { filter: brightness(1.1); }
+  .cta a.all { color: var(--brand); font-size: 14px; text-decoration: none; }
+  .cta a.all:hover { text-decoration: underline; }
+  main { margin-top: 40px; display: grid; gap: 36px; }
+  section h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 6px;
+  }
+  section p.lead { color: var(--muted); font-size: 15px; margin-bottom: 14px; }
+  .cards { display: grid; gap: 10px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .icon {
+    flex: 0 0 auto;
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--brand-weak);
+    color: var(--on-brand-weak);
+    display: grid; place-items: center;
+  }
+  .card h3 { font-size: 17px; font-weight: 600; }
+  .card .info { flex: 1 1 auto; min-width: 0; }
+  .card .info p { color: var(--muted); font-size: 15px; margin-top: 2px; }
+  /* Örnek sonuç: kitap barkodundan çıkan bilgiler, uygulamadaki gibi. */
+  .sample {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .sample .head {
+    background: var(--brand-weak);
+    color: var(--on-brand-weak);
+    padding: 16px 18px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 22px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+  .sample dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 18px; padding: 14px 18px; font-size: 15px; }
+  .sample dt { color: var(--muted); }
+  .sample dd { font-family: ui-monospace, "SF Mono", Menlo, monospace; overflow-wrap: anywhere; }
+  .note {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .note strong { color: var(--text); }
+  footer {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+  }
+  footer a { color: var(--brand); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  @media (max-width: 540px) {
+    header h1 { font-size: 36px; }
+    .mark { width: 52px; height: 52px; border-radius: 13px; }
+    .btn { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1 -1 1H6a2 2 0 0 1 -2 -2V5a2 2 0 0 1 2 -2zM9 3v8l2.5 -1.5L14 11V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-news" viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1 -2 -2zM17 9h3v8a2 2 0 0 1 -2 2M8 9h5M8 13h5M8 17h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1 -.8L20 8H6.2M9 20h.01M17 20h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-qr" viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 18h2v2h-2zM14 18h2M18 14h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-stack" viewBox="0 0 24 24"><path d="M8 4h11a1 1 0 0 1 1 1v11a1 1 0 0 1 -1 1H8a1 1 0 0 1 -1 -1V5a1 1 0 0 1 1 -1zM4 8v11a1 1 0 0 0 1 1h11M13.5 7.5v6M10.5 10.5h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><path d="M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1H5a1 1 0 0 1 -1 -1V5a1 1 0 0 1 1 -1zM4 16l4.5 -4.5 3.5 3.5 2.5 -2.5L20 18M15 8.5h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="mark" aria-hidden="true">
+        <svg width="44" height="44" viewBox="0 0 32 32"><path fill="#E8F3F1" d="M8 9h2v14H8zM11.5 9h1v14h-1zM14 9h2v14h-2zM17.5 9h1v14h-1zM20 9h2.5v14H20zM24 9h1v14h-1z"/><rect x="6" y="15" width="20" height="2" fill="#FFB347"/></svg>
+      </div>
+      <h1>Kodokur<span class="sub">ISBN'den anlayan barkod ve QR okuyucu</span></h1>
+    </div>
+    <p class="tagline">Kitabın arkasındaki barkodu okur; ISBN'i doğru yerlerden tireler, ISBN-10 karşılığını ve kayıt grubunu gösterir. Dergi, market ürünü, Wi-Fi, bağlantı, kişi kartı da okur. 14 dil, çevrimdışı.</p>
+    <div class="chips">
+      <span class="chip">0 reklam</span>
+      <span class="chip">0 izleyici</span>
+      <span class="chip">tek izin: kamera</span>
+      <span class="chip">internet izni yok</span>
+      <span class="chip">açık kaynak</span>
+    </div>
+    <div class="cta">
+      <a class="btn" href="https://github.com/aripdcom/kodokur/releases/latest/download/kodokur.apk">APK indir</a>
+      <a class="all" href="https://github.com/aripdcom/kodokur/releases">Bütün sürümler ve kaynak arşivleri</a>
+    </div>
+  </header>
+
+  <main>
+    <section lang="tr">
+      <h2>Kitap barkodu</h2>
+      <p class="lead">978 ya da 979 ile başlayan her EAN-13 bir ISBN'dir. Kodokur sağlama hanesini doğrular, ISBN International'ın aralık tablosuna bakarak numarayı bölümlerine ayırır ve arkasındaki 5 haneli ek barkoddan fiyatı okur. Tablo uygulamanın içinde; okumak için internet gerekmez.</p>
+      <div class="sample" aria-label="Örnek sonuç">
+        <div class="head">978-975-08-0171-6</div>
+        <dl>
+          <dt>ISBN-13</dt><dd>978-975-08-0171-6</dd>
+          <dt>ISBN-10</dt><dd>975-08-0171-7</dd>
+          <dt>Kayıt grubu</dt><dd>Türkiye</dd>
+          <dt>Biçim</dt><dd>EAN-13</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section lang="tr">
+      <h2>Neler okur</h2>
+      <p class="lead">Çizgili barkodlar (EAN, UPC, Code 128/39/93, ITF, Codabar, GS1 DataBar) ve iki boyutlu kodlar (QR, Data Matrix, PDF417, Aztec). Barkod dik tutulsa da okunur; kamera izni vermeden bir fotoğraftaki kodu da okuyabilirsiniz.</p>
+      <div class="cards">
+      <article class="card">
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-book"/></svg></div>
+        <div class="info">
+          <h3>Kitap</h3>
+          <p>Tireli ISBN-13, ISBN-10, kayıt grubu (Türkiye, English language…) ve varsa fiyat. Open Library, Google Books ya da web aramasında tek dokunuşla açılır.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-news"/></svg></div>
+        <div class="info">
+          <h3>Dergi ve gazete</h3>
+          <p>977 önekli barkoddan ISSN, 2 haneli ek barkoddan sayı numarası. ISSN Portal'da açılır.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-cart"/></svg></div>
+        <div class="info">
+          <h3>Market ürünü</h3>
+          <p>EAN-13, EAN-8, UPC-A, UPC-E. İsterseniz Open Food Facts'te bakılır.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-qr"/></svg></div>
+        <div class="info">
+          <h3>QR kod</h3>
+          <p>Bağlantı, Wi-Fi (sistem penceresiyle tek dokunuşta bağlanır, parola gizli durur), e-posta, telefon, SMS, konum, kişi kartı. Tanınmayan her şey düz metin olarak kopyalanır.</p>
+        </div>
+      </article>
+      </div>
+    </section>
+
+    <section lang="tr">
+      <h2>Kitaplık sayımı</h2>
+      <div class="cards">
+      <article class="card">
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-stack"/></svg></div>
+        <div class="info">
+          <h3>Seri tarama ve CSV</h3>
+          <p>Seri kipinde okunan her kod durmadan geçmişe eklenir; aynı kitap ikinci kez eklenmez. Geçmiş, ISBN-13 ve ISBN-10 sütunlarıyla CSV olarak paylaşılır; Excel Türkçe karakterleri doğru açar.</p>
+        </div>
+      </article>
+      </div>
+    </section>
+
+    <section lang="tr">
+      <h2>Cihazda kalır</h2>
+      <div class="note">
+        <strong>Uygulamanın internet izni yok.</strong> Tek izin kamera; kareler telefonda incelenir, hiçbir yere
+        kaydedilmez ya da gönderilmez. Kitap araması gibi düğmeler kodu tarayıcınıza devreder. Okuma geçmişi
+        yalnızca telefonunuzda durur ve Wi-Fi parolası içerebileceği için yedeklemeye girmez. Ayrıntı:
+        <a href="gizlilik.html">gizlilik politikası</a>.
+      </div>
+    </section>
+
+    <section lang="en">
+      <h2>In English</h2>
+      <p class="lead">Kodokur is a barcode and QR reader for Android that knows its ISBNs: it validates the check digit, hyphenates the number using the ISBN International range table built into the app, shows the ISBN-10 and the registration group, and reads the price from the 5-digit add-on. It also reads ISSNs on magazines, product codes, Wi-Fi, links, e-mail, phone, SMS, locations and contact cards. Batch mode and CSV export for cataloguing a bookshelf. 14 languages. The only permission is the camera; there is no INTERNET permission, no ads and no trackers.</p>
+      <div class="cards">
+      <article class="card">
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-book"/></svg></div>
+        <div class="info">
+          <h3>Books</h3>
+          <p>Hyphenated ISBN-13, ISBN-10, registration group and price. Open Library, Google Books or a web search in one tap, in your browser.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-image"/></svg></div>
+        <div class="info">
+          <h3>From a photo, too</h3>
+          <p>No camera permission needed to read a code from a picture: the system photo picker hands over just that one image.</p>
+        </div>
+      </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Kodokur · no ads, no trackers, camera only</span>
+    <a href="gizlilik.html">Gizlilik politikası · Privacy</a>
+    <a href="https://github.com/aripdcom/kodokur">GitHub</a>
+    <a href="https://github.com/aripdcom/kodokur/blob/main/LICENSE">GPL-3.0</a>
+  </footer>
+</div>
+</body>
+</html>

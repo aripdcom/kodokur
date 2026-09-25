@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Kodokur'un metinleri. Varsayılan (bu dosya) İngilizce; Türkçe values-tr altında.
+  Bölüm başlıkları Türkçe: depodaki öbür yorumlar gibi geliştirici notu.
+-->
+<resources>
+    <string name="app_name" translatable="false">Kodokur</string>
+    <string name="app_tagline">Barcode and QR reader that knows its ISBNs</string>
+
+    <!-- Ortak -->
+    <string name="back">Back</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="undo">Undo</string>
+    <string name="act_show">Show</string>
+    <string name="copied">Copied</string>
+    <string name="no_app">No app on this phone can open this</string>
+
+    <!-- Tarayıcı -->
+    <string name="scan_hint">Point at a barcode or QR code</string>
+    <string name="action_gallery">From photo</string>
+    <string name="action_torch_on">Turn torch on</string>
+    <string name="action_torch_off">Turn torch off</string>
+    <string name="action_history">History</string>
+    <string name="action_about">About</string>
+    <string name="batch_mode">Batch</string>
+    <string name="batch_mode_on">Batch mode on: codes go straight to history</string>
+    <string name="batch_added">Added %1$s</string>
+    <string name="batch_duplicate">Already in this batch: %1$s</string>
+    <plurals name="batch_count">
+        <item quantity="one">%1$d code in this batch</item>
+        <item quantity="other">%1$d codes in this batch</item>
+    </plurals>
+    <string name="gallery_none">No code found in this image</string>
+    <string name="gallery_error">The image could not be opened</string>
+    <string name="gallery_reading">Reading image…</string>
+
+    <!-- Kamera izni -->
+    <string name="permission_title">Camera access</string>
+    <string name="permission_body">Kodokur reads codes through the camera. Frames are processed on the phone, never stored and never sent anywhere.</string>
+    <string name="permission_grant">Allow camera</string>
+    <string name="permission_settings">Open app settings</string>
+    <string name="permission_gallery_hint">You can also read a code from a photo without camera access.</string>
+    <string name="no_camera">This device has no camera. You can still read a code from a photo.</string>
+    <string name="camera_error">The camera could not be started</string>
+
+    <!-- İçerik türleri -->
+    <string name="kind_book">Book</string>
+    <string name="kind_periodical">Periodical</string>
+    <string name="kind_product">Product</string>
+    <string name="kind_link">Link</string>
+    <string name="kind_wifi">Wi-Fi network</string>
+    <string name="kind_email">Email</string>
+    <string name="kind_phone">Phone number</string>
+    <string name="kind_sms">SMS</string>
+    <string name="kind_geo">Location</string>
+    <string name="kind_contact">Contact</string>
+    <string name="kind_text">Text</string>
+
+    <!-- Ayrıntı etiketleri -->
+    <string name="label_isbn13">ISBN-13</string>
+    <string name="label_isbn10">ISBN-10</string>
+    <string name="label_group">Registration group</string>
+    <string name="label_price">Price (add-on)</string>
+    <string name="label_issn">ISSN</string>
+    <string name="label_issue">Issue</string>
+    <string name="label_gtin">GTIN</string>
+    <string name="label_network">Network</string>
+    <string name="label_password">Password</string>
+    <string name="label_security">Security</string>
+    <string name="label_to">To</string>
+    <string name="label_subject">Subject</string>
+    <string name="label_message">Message</string>
+    <string name="label_coordinates">Coordinates</string>
+    <string name="label_name">Name</string>
+    <string name="label_organization">Organization</string>
+    <string name="label_phone">Phone</string>
+    <string name="label_email">Email</string>
+    <string name="label_website">Website</string>
+    <string name="label_format">Format</string>
+    <string name="label_add_on">Add-on</string>
+    <string name="label_raw">Raw content</string>
+    <string name="label_scanned_at">Scanned</string>
+
+    <!-- Eylemler -->
+    <string name="act_copy">Copy</string>
+    <string name="act_share">Share</string>
+    <string name="act_open">Open</string>
+    <string name="act_open_library">Open Library</string>
+    <string name="act_google_books">Google Books</string>
+    <string name="act_issn_portal">ISSN Portal</string>
+    <string name="act_open_food_facts">Open Food Facts</string>
+    <string name="act_search_web">Search the web</string>
+    <string name="act_connect_wifi">Connect</string>
+    <string name="act_copy_password">Copy password</string>
+    <string name="act_send_email">Write email</string>
+    <string name="act_dial">Call</string>
+    <string name="act_send_sms">Write SMS</string>
+    <string name="act_show_map">Show on map</string>
+    <string name="act_add_contact">Add to contacts</string>
+    <string name="external_notice">Opens in your browser or another app. Kodokur itself never goes online.</string>
+
+    <!-- Geçmiş -->
+    <string name="history_title">History</string>
+    <string name="history_empty">Nothing scanned yet</string>
+    <string name="history_export">Export CSV</string>
+    <string name="history_clear">Clear history</string>
+    <string name="history_clear_title">Clear history?</string>
+    <plurals name="history_clear_body">
+        <item quantity="one">%1$d scan will be deleted from this phone.</item>
+        <item quantity="other">All %1$d scans will be deleted from this phone.</item>
+    </plurals>
+    <string name="history_deleted">Scan deleted</string>
+
+    <!-- Dil -->
+    <string name="language_title">Language</string>
+    <string name="language_system">Phone language</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">About</string>
+    <string name="about_promise">No ads. No trackers. No internet permission. The only permission is the camera, and camera frames never leave the phone. History stays on this device and is excluded from backups.</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_source">Source code</string>
+    <string name="about_privacy">Privacy policy</string>
+    <string name="about_license">Free software under the GNU GPL v3.</string>
+    <string name="about_libraries">Decoding by ZXing (Apache License 2.0). Camera by AndroidX CameraX (Apache License 2.0).</string>
+    <string name="about_isbn_ranges">ISBN ranges: ISBN International, %1$s</string>
+</resources>

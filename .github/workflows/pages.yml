@@ -1,0 +1,42 @@
+name: Pages
+
+# site/ klasörünü GitHub Pages'e yayınlar (aripdcom.github.io/kodokur).
+# Depo ayarlarında Pages kaynağı "GitHub Actions" olmalı. Kendi alan adı
+# bağlanınca Settings → Pages'ten tanımlanır ve platform/Actions.kt ile
+# tools/check_site.py'deki adresler birlikte güncellenir.
+
+on:
+  push:
+    # github-pages ortamı yalnızca varsayılan daldan (main) dağıtıma izin verir.
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,23 @@
+{
+  "name": "English",
+  "title": "Privacy policy",
+  "meta": "Kodokur for Android · Effective 26 September 2026 · Developer: aripdcom",
+  "short_label": "In short:",
+  "short": "Kodokur collects, shares or sells no personal data. Its only permission is the camera: frames are analysed on the phone and are never saved or sent anywhere. The app has no INTERNET permission, no ads and no tracking libraries. Your scan history stays on your device and is left out of backups.",
+  "sections": [
+    ["Data collected",
+     "None. No names, e-mails, location, device identifiers, usage statistics or crash reports. There are no analytics, advertising or third-party SDKs in the app."],
+    ["Camera",
+     "Kodokur asks for the <code>CAMERA</code> permission and uses it only while the scanner screen is open. Each frame is examined in memory for a barcode or QR code and then discarded; no photo or video is ever stored. If you refuse the permission you can still read a code from a picture: the Android photo picker gives the app access to that one picture only, and no storage permission is needed."],
+    ["Network",
+     "The app manifest has no <code>INTERNET</code> permission, so Kodokur cannot connect to any server. Buttons such as Open Library, Google Books, ISSN Portal, Open Food Facts, web search or opening a link hand the code to your browser or to another app you choose. From that point that website's or app's own policy applies; Kodokur does not know what happens there."],
+    ["What stays on your device",
+     "The scan history (the decoded content, the barcode format and the time) is kept in the app's private storage, where no other app can reach it. You can delete single entries or clear the whole history, and everything is removed when you uninstall the app or clear its data. Because the history can contain Wi-Fi passwords, it is excluded from Android cloud backup and from device-to-device transfer. On Android 8 to 12 the language you choose inside the app is stored the same way."],
+    ["Sharing, exporting and handing over",
+     "Share and CSV export open the Android share sheet; a file is handed read-only to the app you choose, and Kodokur itself sends nothing. Connecting to a Wi-Fi network opens the system's own confirmation dialog, and adding a contact opens your contacts app with the fields filled in; nothing is saved until you confirm it there."],
+    ["Children and changes",
+     "Because no data is collected, the app is suitable for all ages. If this policy changes, the new version will be published on this page."]
+  ],
+  "contact": "Contact",
+  "contact_intro": "Questions and reports:"
+}

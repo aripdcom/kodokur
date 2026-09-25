@@ -1,0 +1,23 @@
+{
+  "name": "Türkçe",
+  "title": "Gizlilik politikası",
+  "meta": "Kodokur (Android) · Yürürlük: 26 Eylül 2026 · Geliştirici: aripdcom",
+  "short_label": "Kısaca:",
+  "short": "Kodokur hiçbir kişisel veri toplamaz, paylaşmaz ya da satmaz. İstediği tek izin kameradır: kareler telefonda incelenir, hiçbir yere kaydedilmez ve gönderilmez. Uygulamanın İNTERNET izni yoktur, reklam ya da izleme kütüphanesi içermez. Okuma geçmişi yalnızca cihazınızda durur ve yedeklemeye girmez.",
+  "sections": [
+    ["Toplanan veriler",
+     "Hiçbiri. Kodokur ad, e-posta, konum, cihaz kimliği, kullanım istatistiği ya da çökme raporu toplamaz. Uygulamada analitik, reklam ya da üçüncü taraf SDK'sı yoktur."],
+    ["Kamera",
+     "Kodokur <code>CAMERA</code> iznini ister ve yalnızca tarayıcı ekranı açıkken kullanır. Her kare bellekte barkod ya da QR kod için incelenir, sonra atılır; hiçbir fotoğraf ya da video saklanmaz. İzni vermezseniz de bir görseldeki kodu okuyabilirsiniz: Android'in fotoğraf seçicisi uygulamaya yalnızca seçtiğiniz o görseli verir, depolama izni gerekmez."],
+    ["Ağ",
+     "Uygulama manifestosunda <code>INTERNET</code> izni yoktur; Kodokur hiçbir sunucuya bağlanamaz. Open Library, Google Books, ISSN Portal, Open Food Facts, web araması ya da bağlantı açma gibi düğmeler kodu tarayıcınıza veya seçtiğiniz başka bir uygulamaya devreder. Oradan sonrası o sitenin ya da uygulamanın kendi politikasına tabidir; Kodokur orada ne olduğunu bilmez."],
+    ["Cihazda kalanlar",
+     "Okuma geçmişi (çözülen içerik, barkod biçimi ve zaman) uygulamanın özel alanında saklanır; başka uygulamalar erişemez. Kayıtları tek tek silebilir ya da geçmişin tamamını temizleyebilirsiniz; uygulamayı kaldırdığınızda ya da verisini temizlediğinizde hepsi silinir. Geçmiş Wi-Fi parolası içerebileceği için Android'in bulut yedeğine ve cihazdan cihaza aktarıma dahil edilmez. Android 8–12'de uygulama içinden seçtiğiniz dil de aynı şekilde saklanır."],
+    ["Paylaşma, dışa aktarma ve devretme",
+     "Paylaş ve CSV dışa aktarımı Android'in paylaşım sayfasını açar; dosya yalnızca sizin seçtiğiniz uygulamaya, yalnızca okuma için verilir ve Kodokur'un kendisi hiçbir şey göndermez. Wi-Fi ağına bağlanmak sistemin kendi onay penceresini, kişi eklemek ise alanları doldurulmuş hâlde rehber uygulamanızı açar; siz orada onaylamadan hiçbir şey kaydedilmez."],
+    ["Çocuklar ve değişiklikler",
+     "Veri toplanmadığı için uygulama her yaş için uygundur. Bu politika değişirse yeni sürüm bu sayfada yayımlanır."]
+  ],
+  "contact": "İletişim",
+  "contact_intro": "Sorular ve bildirimler için:"
+}

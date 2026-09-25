@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Kodokur'un metinleri: Rusça. Varsayılan values altında İngilizce.
+  Bölüm başlıkları Türkçe: depodaki öbür yorumlar gibi geliştirici notu.
+-->
+<resources>
+    <string name="app_tagline">Сканер штрихкодов и QR, который разбирается в ISBN</string>
+
+    <!-- Ortak -->
+    <string name="back">Назад</string>
+    <string name="cancel">Отмена</string>
+    <string name="delete">Удалить</string>
+    <string name="undo">Отменить</string>
+    <string name="act_show">Показать</string>
+    <string name="copied">Скопировано</string>
+    <string name="no_app">На этом телефоне нет приложения, которое может это открыть</string>
+
+    <!-- Tarayıcı -->
+    <string name="scan_hint">Наведите на штрихкод или QR-код</string>
+    <string name="action_gallery">Из фото</string>
+    <string name="action_torch_on">Включить фонарик</string>
+    <string name="action_torch_off">Выключить фонарик</string>
+    <string name="action_history">История</string>
+    <string name="action_about">О приложении</string>
+    <string name="batch_mode">Серия</string>
+    <string name="batch_mode_on">Серийный режим включён: коды сразу попадают в историю</string>
+    <string name="batch_added">Добавлено: %1$s</string>
+    <string name="batch_duplicate">Уже в этой серии: %1$s</string>
+    <plurals name="batch_count">
+        <item quantity="one">%1$d код в этой серии</item>
+        <item quantity="few">%1$d кода в этой серии</item>
+        <item quantity="many">%1$d кодов в этой серии</item>
+        <item quantity="other">%1$d кода в этой серии</item>
+    </plurals>
+    <string name="gallery_none">На изображении не найден код</string>
+    <string name="gallery_error">Не удалось открыть изображение</string>
+    <string name="gallery_reading">Чтение изображения…</string>
+
+    <!-- Kamera izni -->
+    <string name="permission_title">Доступ к камере</string>
+    <string name="permission_body">Kodokur считывает коды через камеру. Кадры обрабатываются на телефоне, никогда не сохраняются и никуда не отправляются.</string>
+    <string name="permission_grant">Разрешить камеру</string>
+    <string name="permission_settings">Открыть настройки приложения</string>
+    <string name="permission_gallery_hint">Код можно считать и с фото, без доступа к камере.</string>
+    <string name="no_camera">На этом устройстве нет камеры. Код всё равно можно считать с фото.</string>
+    <string name="camera_error">Не удалось запустить камеру</string>
+
+    <!-- İçerik türleri -->
+    <string name="kind_book">Книга</string>
+    <string name="kind_periodical">Периодическое издание</string>
+    <string name="kind_product">Товар</string>
+    <string name="kind_link">Ссылка</string>
+    <string name="kind_wifi">Сеть Wi-Fi</string>
+    <string name="kind_email">Эл. почта</string>
+    <string name="kind_phone">Номер телефона</string>
+    <string name="kind_sms">SMS</string>
+    <string name="kind_geo">Местоположение</string>
+    <string name="kind_contact">Контакт</string>
+    <string name="kind_text">Текст</string>
+
+    <!-- Ayrıntı etiketleri -->
+    <string name="label_isbn13">ISBN-13</string>
+    <string name="label_isbn10">ISBN-10</string>
+    <string name="label_group">Регистрационная группа</string>
+    <string name="label_price">Цена (доп. код)</string>
+    <string name="label_issn">ISSN</string>
+    <string name="label_issue">Выпуск</string>
+    <string name="label_gtin">GTIN</string>
+    <string name="label_network">Сеть</string>
+    <string name="label_password">Пароль</string>
+    <string name="label_security">Защита</string>
+    <string name="label_to">Кому</string>
+    <string name="label_subject">Тема</string>
+    <string name="label_message">Сообщение</string>
+    <string name="label_coordinates">Координаты</string>
+    <string name="label_name">Имя</string>
+    <string name="label_organization">Организация</string>
+    <string name="label_phone">Телефон</string>
+    <string name="label_email">Эл. почта</string>
+    <string name="label_website">Сайт</string>
+    <string name="label_format">Формат</string>
+    <string name="label_add_on">Доп. код</string>
+    <string name="label_raw">Исходное содержимое</string>
+    <string name="label_scanned_at">Считано</string>
+
+    <!-- Eylemler -->
+    <string name="act_copy">Копировать</string>
+    <string name="act_share">Поделиться</string>
+    <string name="act_open">Открыть</string>
+    <string name="act_open_library">Open Library</string>
+    <string name="act_google_books">Google Books</string>
+    <string name="act_issn_portal">ISSN Portal</string>
+    <string name="act_open_food_facts">Open Food Facts</string>
+    <string name="act_search_web">Искать в интернете</string>
+    <string name="act_connect_wifi">Подключиться</string>
+    <string name="act_copy_password">Копировать пароль</string>
+    <string name="act_send_email">Написать письмо</string>
+    <string name="act_dial">Позвонить</string>
+    <string name="act_send_sms">Написать SMS</string>
+    <string name="act_show_map">Показать на карте</string>
+    <string name="act_add_contact">Добавить в контакты</string>
+    <string name="external_notice">Откроется в браузере или другом приложении. Сам Kodokur никогда не выходит в сеть.</string>
+
+    <!-- Geçmiş -->
+    <string name="history_title">История</string>
+    <string name="history_empty">Пока ничего не отсканировано</string>
+    <string name="history_export">Экспорт CSV</string>
+    <string name="history_clear">Очистить историю</string>
+    <string name="history_clear_title">Очистить историю?</string>
+    <plurals name="history_clear_body">
+        <item quantity="one">%1$d запись будет удалена с этого телефона.</item>
+        <item quantity="few">Все %1$d записи будут удалены с этого телефона.</item>
+        <item quantity="many">Все %1$d записей будут удалены с этого телефона.</item>
+        <item quantity="other">Все %1$d записи будут удалены с этого телефона.</item>
+    </plurals>
+    <string name="history_deleted">Запись удалена</string>
+
+    <!-- Dil -->
+    <string name="language_title">Язык</string>
+    <string name="language_system">Язык телефона</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">О приложении</string>
+    <string name="about_promise">Без рекламы. Без трекеров. Без разрешения на доступ к интернету. Единственное разрешение — камера, и кадры с неё никогда не покидают телефон. История хранится только на этом устройстве и не попадает в резервные копии.</string>
+    <string name="about_version">Версия %1$s</string>
+    <string name="about_source">Исходный код</string>
+    <string name="about_privacy">Политика конфиденциальности</string>
+    <string name="about_license">Свободное ПО под лицензией GNU GPL v3.</string>
+    <string name="about_libraries">Распознавание: ZXing (Apache License 2.0). Камера: AndroidX CameraX (Apache License 2.0).</string>
+    <string name="about_isbn_ranges">Диапазоны ISBN: ISBN International, %1$s</string>
+</resources>

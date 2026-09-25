@@ -1,0 +1,23 @@
+{
+  "name": "Português",
+  "title": "Política de privacidade",
+  "meta": "Kodokur para Android · Em vigor desde 26 de setembro de 2026 · Desenvolvedor: aripdcom",
+  "short_label": "Em resumo:",
+  "short": "O Kodokur não coleta, compartilha nem vende dados pessoais. Sua única permissão é a câmera: as imagens são analisadas no telefone e nunca são salvas nem enviadas para lugar nenhum. O app não tem permissão de INTERNET, nem anúncios, nem bibliotecas de rastreamento. Seu histórico de leituras fica no seu dispositivo e não entra nos backups.",
+  "sections": [
+    ["Dados coletados",
+     "Nenhum. Nada de nomes, e-mails, localização, identificadores do dispositivo, estatísticas de uso ou relatórios de falhas. Não há SDKs de análise, de publicidade ou de terceiros no app."],
+    ["Câmera",
+     "O Kodokur pede a permissão <code>CAMERA</code> e só a usa enquanto a tela do leitor está aberta. Cada imagem é examinada na memória em busca de um código de barras ou QR e depois descartada; nenhuma foto ou vídeo é salvo. Se você recusar a permissão, ainda pode ler um código de uma imagem: o seletor de fotos do Android dá ao app acesso somente àquela imagem, e nenhuma permissão de armazenamento é necessária."],
+    ["Rede",
+     "O manifesto do app não tem a permissão <code>INTERNET</code>, então o Kodokur não consegue se conectar a nenhum servidor. Botões como Open Library, Google Books, ISSN Portal, Open Food Facts, a pesquisa na web ou abrir um link entregam o código ao seu navegador ou a outro app que você escolher. A partir daí vale a política própria desse site ou app; o Kodokur não sabe o que acontece lá."],
+    ["O que fica no seu dispositivo",
+     "O histórico de leituras (o conteúdo decodificado, o formato do código e o horário) é mantido no armazenamento privado do app, onde nenhum outro app consegue chegar. Você pode excluir entradas avulsas ou limpar todo o histórico, e tudo é removido quando você desinstala o app ou limpa os dados dele. Como o histórico pode conter senhas de Wi-Fi, ele fica fora do backup na nuvem do Android e da transferência entre dispositivos. No Android 8 a 12, o idioma que você escolhe dentro do app é armazenado da mesma forma."],
+    ["Compartilhar, exportar e passar adiante",
+     "Compartilhar e exportar CSV abrem a planilha de compartilhamento do Android; o arquivo é entregue somente para leitura ao app que você escolher, e o Kodokur em si não envia nada. Conectar a uma rede Wi-Fi abre a caixa de confirmação do próprio sistema, e adicionar um contato abre o seu app de contatos com os campos preenchidos; nada é salvo até você confirmar lá."],
+    ["Crianças e alterações",
+     "Como nenhum dado é coletado, o app é adequado para todas as idades. Se esta política mudar, a nova versão será publicada nesta página."]
+  ],
+  "contact": "Contato",
+  "contact_intro": "Dúvidas e relatos:"
+}

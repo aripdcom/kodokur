@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_tagline">Strekkode- og QR-leser som kan sine ISBN</string>
+
+    <!-- Ortak -->
+    <string name="back">Tilbake</string>
+    <string name="cancel">Avbryt</string>
+    <string name="delete">Slett</string>
+    <string name="undo">Angre</string>
+    <string name="act_show">Vis</string>
+    <string name="copied">Kopiert</string>
+    <string name="no_app">Ingen app på denne telefonen kan åpne dette</string>
+
+    <!-- Tarayıcı -->
+    <string name="scan_hint">Rett kameraet mot en strekkode eller QR-kode</string>
+    <string name="action_gallery">Fra bilde</string>
+    <string name="action_torch_on">Slå på lykten</string>
+    <string name="action_torch_off">Slå av lykten</string>
+    <string name="action_history">Historikk</string>
+    <string name="action_about">Om</string>
+    <string name="batch_mode">Serie</string>
+    <string name="batch_mode_on">Serieskanning er på: kodene går rett til historikken</string>
+    <string name="batch_added">Lagt til: %1$s</string>
+    <string name="batch_duplicate">Finnes allerede i denne serien: %1$s</string>
+    <plurals name="batch_count">
+        <item quantity="one">%1$d kode i denne serien</item>
+        <item quantity="other">%1$d koder i denne serien</item>
+    </plurals>
+    <string name="gallery_none">Fant ingen kode i bildet</string>
+    <string name="gallery_error">Klarte ikke å åpne bildet</string>
+    <string name="gallery_reading">Leser bildet…</string>
+
+    <!-- Kamera izni -->
+    <string name="permission_title">Kameratilgang</string>
+    <string name="permission_body">Kodokur leser koder med kameraet. Bildene behandles på telefonen og blir aldri lagret eller sendt noe sted.</string>
+    <string name="permission_grant">Tillat kamera</string>
+    <string name="permission_settings">Åpne appinnstillinger</string>
+    <string name="permission_gallery_hint">Du kan også lese en kode fra et bilde uten kameratilgang.</string>
+    <string name="no_camera">Denne enheten har ikke kamera. Du kan likevel lese en kode fra et bilde.</string>
+    <string name="camera_error">Klarte ikke å starte kameraet</string>
+
+    <!-- İçerik türleri -->
+    <string name="kind_book">Bok</string>
+    <string name="kind_periodical">Tidsskrift</string>
+    <string name="kind_product">Produkt</string>
+    <string name="kind_link">Lenke</string>
+    <string name="kind_wifi">Wi-Fi-nettverk</string>
+    <string name="kind_email">E-post</string>
+    <string name="kind_phone">Telefonnummer</string>
+    <string name="kind_sms">SMS</string>
+    <string name="kind_geo">Posisjon</string>
+    <string name="kind_contact">Kontakt</string>
+    <string name="kind_text">Tekst</string>
+
+    <!-- Ayrıntı etiketleri -->
+    <string name="label_isbn13">ISBN-13</string>
+    <string name="label_isbn10">ISBN-10</string>
+    <string name="label_group">Registreringsgruppe</string>
+    <string name="label_price">Pris (tilleggskode)</string>
+    <string name="label_issn">ISSN</string>
+    <string name="label_issue">Nummer</string>
+    <string name="label_gtin">GTIN</string>
+    <string name="label_network">Nettverk</string>
+    <string name="label_password">Passord</string>
+    <string name="label_security">Sikkerhet</string>
+    <string name="label_to">Til</string>
+    <string name="label_subject">Emne</string>
+    <string name="label_message">Melding</string>
+    <string name="label_coordinates">Koordinater</string>
+    <string name="label_name">Navn</string>
+    <string name="label_organization">Organisasjon</string>
+    <string name="label_phone">Telefon</string>
+    <string name="label_email">E-post</string>
+    <string name="label_website">Nettsted</string>
+    <string name="label_format">Format</string>
+    <string name="label_add_on">Tilleggskode</string>
+    <string name="label_raw">Råinnhold</string>
+    <string name="label_scanned_at">Skannet</string>
+
+    <!-- Eylemler -->
+    <string name="act_copy">Kopier</string>
+    <string name="act_share">Del</string>
+    <string name="act_open">Åpne</string>
+    <string name="act_open_library">Open Library</string>
+    <string name="act_google_books">Google Books</string>
+    <string name="act_issn_portal">ISSN Portal</string>
+    <string name="act_open_food_facts">Open Food Facts</string>
+    <string name="act_search_web">Søk på nettet</string>
+    <string name="act_connect_wifi">Koble til</string>
+    <string name="act_copy_password">Kopier passord</string>
+    <string name="act_send_email">Skriv e-post</string>
+    <string name="act_dial">Ring</string>
+    <string name="act_send_sms">Skriv SMS</string>
+    <string name="act_show_map">Vis på kart</string>
+    <string name="act_add_contact">Legg til i kontakter</string>
+    <string name="external_notice">Åpnes i nettleseren eller en annen app. Kodokur selv kobler seg aldri til nettet.</string>
+
+    <!-- Geçmiş -->
+    <string name="history_title">Historikk</string>
+    <string name="history_empty">Ingenting skannet ennå</string>
+    <string name="history_export">Eksporter CSV</string>
+    <string name="history_clear">Tøm historikken</string>
+    <string name="history_clear_title">Tømme historikken?</string>
+    <plurals name="history_clear_body">
+        <item quantity="one">%1$d skanning slettes fra denne telefonen.</item>
+        <item quantity="other">Alle %1$d skanninger slettes fra denne telefonen.</item>
+    </plurals>
+    <string name="history_deleted">Skanningen er slettet</string>
+
+    <!-- Dil -->
+    <string name="language_title">Språk</string>
+    <string name="language_system">Språket på telefonen</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">Om</string>
+    <string name="about_promise">Ingen annonser. Ingen sporing. Ingen internettillatelse. Den eneste tillatelsen er kameraet, og kamerabildene forlater aldri telefonen. Historikken blir på denne enheten og er holdt utenfor sikkerhetskopier.</string>
+    <string name="about_version">Versjon %1$s</string>
+    <string name="about_source">Kildekode</string>
+    <string name="about_privacy">Personvernerklæring</string>
+    <string name="about_license">Fri programvare under GNU GPL v3.</string>
+    <string name="about_libraries">Dekoding: ZXing (Apache License 2.0). Kamera: AndroidX CameraX (Apache License 2.0).</string>
+    <string name="about_isbn_ranges">ISBN-intervaller: ISBN International, %1$s</string>
+</resources>

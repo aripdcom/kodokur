@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Kodokur'un metinleri: Arapça (Modern Standart). Varsayılan values altında İngilizce.
+  Bölüm başlıkları Türkçe: depodaki öbür yorumlar gibi geliştirici notu.
+-->
+<resources>
+    <string name="app_tagline">قارئ باركود وQR يعرف أرقام ISBN</string>
+
+    <!-- Ortak -->
+    <string name="back">رجوع</string>
+    <string name="cancel">إلغاء</string>
+    <string name="delete">احذف</string>
+    <string name="undo">تراجع</string>
+    <string name="act_show">أظهر</string>
+    <string name="copied">نُسخ</string>
+    <string name="no_app">لا يوجد على هذا الهاتف تطبيق يمكنه فتح هذا</string>
+
+    <!-- Tarayıcı -->
+    <string name="scan_hint">وجّه الكاميرا نحو باركود أو رمز QR</string>
+    <string name="action_gallery">من صورة</string>
+    <string name="action_torch_on">تشغيل المصباح</string>
+    <string name="action_torch_off">إطفاء المصباح</string>
+    <string name="action_history">السجل</string>
+    <string name="action_about">حول</string>
+    <string name="batch_mode">دفعة</string>
+    <string name="batch_mode_on">وضع الدفعة مفعّل: تذهب الرموز مباشرة إلى السجل</string>
+    <string name="batch_added">أُضيف %1$s</string>
+    <string name="batch_duplicate">موجود في هذه الدفعة: %1$s</string>
+    <plurals name="batch_count">
+        <item quantity="zero">%1$d رمز في هذه الدفعة</item>
+        <item quantity="one">%1$d رمز في هذه الدفعة</item>
+        <item quantity="two">%1$d رمزان في هذه الدفعة</item>
+        <item quantity="few">%1$d رموز في هذه الدفعة</item>
+        <item quantity="many">%1$d رمزاً في هذه الدفعة</item>
+        <item quantity="other">%1$d رمز في هذه الدفعة</item>
+    </plurals>
+    <string name="gallery_none">لم يُعثر على رمز في هذه الصورة</string>
+    <string name="gallery_error">تعذّر فتح الصورة</string>
+    <string name="gallery_reading">تجري قراءة الصورة…</string>
+
+    <!-- Kamera izni -->
+    <string name="permission_title">الوصول إلى الكاميرا</string>
+    <string name="permission_body">يقرأ Kodokur الرموز عبر الكاميرا. تُعالَج الإطارات على الهاتف، ولا تُحفظ أبداً ولا تُرسل إلى أي مكان.</string>
+    <string name="permission_grant">اسمح بالكاميرا</string>
+    <string name="permission_settings">افتح إعدادات التطبيق</string>
+    <string name="permission_gallery_hint">يمكنك أيضاً قراءة رمز من صورة دون الوصول إلى الكاميرا.</string>
+    <string name="no_camera">لا توجد كاميرا في هذا الجهاز. لا يزال بإمكانك قراءة رمز من صورة.</string>
+    <string name="camera_error">تعذّر تشغيل الكاميرا</string>
+
+    <!-- İçerik türleri -->
+    <string name="kind_book">كتاب</string>
+    <string name="kind_periodical">دورية</string>
+    <string name="kind_product">منتج</string>
+    <string name="kind_link">رابط</string>
+    <string name="kind_wifi">شبكة Wi-Fi</string>
+    <string name="kind_email">بريد إلكتروني</string>
+    <string name="kind_phone">رقم هاتف</string>
+    <string name="kind_sms">SMS</string>
+    <string name="kind_geo">موقع</string>
+    <string name="kind_contact">جهة اتصال</string>
+    <string name="kind_text">نص</string>
+
+    <!-- Ayrıntı etiketleri -->
+    <string name="label_isbn13">ISBN-13</string>
+    <string name="label_isbn10">ISBN-10</string>
+    <string name="label_group">مجموعة التسجيل</string>
+    <string name="label_price">السعر (الرمز الإضافي)</string>
+    <string name="label_issn">ISSN</string>
+    <string name="label_issue">العدد</string>
+    <string name="label_gtin">GTIN</string>
+    <string name="label_network">الشبكة</string>
+    <string name="label_password">كلمة المرور</string>
+    <string name="label_security">الحماية</string>
+    <string name="label_to">إلى</string>
+    <string name="label_subject">الموضوع</string>
+    <string name="label_message">الرسالة</string>
+    <string name="label_coordinates">الإحداثيات</string>
+    <string name="label_name">الاسم</string>
+    <string name="label_organization">المؤسسة</string>
+    <string name="label_phone">الهاتف</string>
+    <string name="label_email">البريد الإلكتروني</string>
+    <string name="label_website">الموقع الإلكتروني</string>
+    <string name="label_format">التنسيق</string>
+    <string name="label_add_on">الرمز الإضافي</string>
+    <string name="label_raw">المحتوى الخام</string>
+    <string name="label_scanned_at">وقت المسح</string>
+
+    <!-- Eylemler -->
+    <string name="act_copy">انسخ</string>
+    <string name="act_share">شارك</string>
+    <string name="act_open">افتح</string>
+    <string name="act_open_library">Open Library</string>
+    <string name="act_google_books">Google Books</string>
+    <string name="act_issn_portal">ISSN Portal</string>
+    <string name="act_open_food_facts">Open Food Facts</string>
+    <string name="act_search_web">ابحث في الويب</string>
+    <string name="act_connect_wifi">اتصل</string>
+    <string name="act_copy_password">انسخ كلمة المرور</string>
+    <string name="act_send_email">اكتب بريداً</string>
+    <string name="act_dial">اتصل هاتفياً</string>
+    <string name="act_send_sms">اكتب SMS</string>
+    <string name="act_show_map">أظهر على الخريطة</string>
+    <string name="act_add_contact">أضف إلى جهات الاتصال</string>
+    <string name="external_notice">يُفتح في المتصفّح أو في تطبيق آخر. أما Kodokur نفسه فلا يتصل بالإنترنت أبداً.</string>
+
+    <!-- Geçmiş -->
+    <string name="history_title">السجل</string>
+    <string name="history_empty">لم يُمسح شيء بعد</string>
+    <string name="history_export">صدّر CSV</string>
+    <string name="history_clear">أفرغ السجل</string>
+    <string name="history_clear_title">أتريد إفراغ السجل؟</string>
+    <plurals name="history_clear_body">
+        <item quantity="zero">ستُحذف %1$d عملية مسح من هذا الهاتف.</item>
+        <item quantity="one">ستُحذف %1$d عملية مسح من هذا الهاتف.</item>
+        <item quantity="two">ستُحذف عمليتا المسح (%1$d) من هذا الهاتف.</item>
+        <item quantity="few">ستُحذف جميع عمليات المسح الـ%1$d من هذا الهاتف.</item>
+        <item quantity="many">ستُحذف جميع عمليات المسح الـ%1$d من هذا الهاتف.</item>
+        <item quantity="other">ستُحذف جميع عمليات المسح الـ%1$d من هذا الهاتف.</item>
+    </plurals>
+    <string name="history_deleted">حُذفت عملية المسح</string>
+
+    <!-- Dil -->
+    <string name="language_title">اللغة</string>
+    <string name="language_system">لغة الهاتف</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">حول</string>
+    <string name="about_promise">بلا إعلانات. بلا أدوات تتبّع. بلا إذن الوصول إلى الإنترنت. الإذن الوحيد هو الكاميرا، وإطاراتها لا تغادر الهاتف أبداً. يبقى السجل على هذا الجهاز ولا يُدرج في النسخ الاحتياطية.</string>
+    <string name="about_version">الإصدار %1$s</string>
+    <string name="about_source">الشيفرة المصدرية</string>
+    <string name="about_privacy">سياسة الخصوصية</string>
+    <string name="about_license">برنامج حر بموجب ترخيص GNU GPL v3.</string>
+    <string name="about_libraries">فك الترميز: ZXing (Apache License 2.0). الكاميرا: AndroidX CameraX (Apache License 2.0).</string>
+    <string name="about_isbn_ranges">نطاقات ISBN: ISBN International، %1$s</string>
+</resources>

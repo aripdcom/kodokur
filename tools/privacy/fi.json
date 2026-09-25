@@ -1,0 +1,23 @@
+{
+  "name": "Suomi",
+  "title": "Tietosuojakäytäntö",
+  "meta": "Kodokur Androidille · Voimassa 26. syyskuuta 2026 alkaen · Kehittäjä: aripdcom",
+  "short_label": "Lyhyesti:",
+  "short": "Kodokur ei kerää, jaa eikä myy henkilötietoja. Sen ainoa lupa on kamera: kuvat analysoidaan puhelimessa, eikä niitä koskaan tallenneta tai lähetetä minnekään. Sovelluksella ei ole INTERNET-lupaa, mainoksia eikä seurantakirjastoja. Lukuhistoriasi pysyy laitteessasi, eikä sitä sisällytetä varmuuskopioihin.",
+  "sections": [
+    ["Kerättävät tiedot",
+     "Ei mitään. Ei nimiä, sähköpostiosoitteita, sijaintia, laitetunnisteita, käyttötilastoja eikä kaatumisraportteja. Sovelluksessa ei ole analytiikka-, mainos- eikä kolmannen osapuolen SDK:ita."],
+    ["Kamera",
+     "Kodokur pyytää <code>CAMERA</code>-lupaa ja käyttää sitä vain, kun lukunäkymä on auki. Jokaisesta kuvasta etsitään muistissa viivakoodia tai QR-koodia, minkä jälkeen kuva hylätään; valokuvia tai videoita ei koskaan tallenneta. Jos kiellät luvan, voit silti lukea koodin kuvasta: Androidin kuvanvalitsin antaa sovellukselle pääsyn vain siihen yhteen kuvaan, eikä tallennustilan lupaa tarvita."],
+    ["Verkko",
+     "Sovelluksen manifestissa ei ole <code>INTERNET</code>-lupaa, joten Kodokur ei voi muodostaa yhteyttä mihinkään palvelimeen. Painikkeet kuten Open Library, Google Books, ISSN Portal, Open Food Facts, verkkohaku tai linkin avaaminen välittävät koodin selaimellesi tai valitsemallesi toiselle sovellukselle. Siitä eteenpäin sovelletaan kyseisen verkkosivuston tai sovelluksen omaa käytäntöä; Kodokur ei tiedä, mitä siellä tapahtuu."],
+    ["Mitä laitteeseesi jää",
+     "Lukuhistoria (tulkittu sisältö, viivakoodin muoto ja aika) säilytetään sovelluksen yksityisessä tallennustilassa, johon mikään muu sovellus ei pääse. Voit poistaa yksittäisiä merkintöjä tai tyhjentää koko historian, ja kaikki poistuu, kun poistat sovelluksen tai tyhjennät sen tiedot. Koska historia voi sisältää Wi-Fi-salasanoja, se on suljettu Androidin pilvivarmuuskopioinnin ja laitteesta toiseen siirron ulkopuolelle. Android 8–12:ssa sovelluksessa valitsemasi kieli tallennetaan samalla tavalla."],
+    ["Jakaminen, vienti ja luovutus",
+     "Jakaminen ja CSV-vienti avaavat Androidin jakovalikon; tiedosto luovutetaan vain luku -muodossa valitsemallesi sovellukselle, eikä Kodokur itse lähetä mitään. Wi-Fi-verkkoon yhdistäminen avaa järjestelmän oman vahvistusikkunan, ja yhteystiedon lisääminen avaa yhteystietosovelluksesi kentät valmiiksi täytettyinä; mitään ei tallenneta ennen kuin vahvistat sen siellä."],
+    ["Lapset ja muutokset",
+     "Koska tietoja ei kerätä, sovellus sopii kaikenikäisille. Jos tämä käytäntö muuttuu, uusi versio julkaistaan tällä sivulla."]
+  ],
+  "contact": "Yhteystiedot",
+  "contact_intro": "Kysymykset ja ilmoitukset:"
+}

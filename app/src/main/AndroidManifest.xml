@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Söz: tek izin kamera. INTERNET yok; kitap araması, bağlantı açma gibi her
+         şey tarayıcıya ya da ilgili uygulamaya niyet (intent) ile devredilir.
+         Galeriden görsel sistem seçicisiyle gelir (izin gerekmez); CSV paylaşımı
+         FileProvider ile yalnızca o tek dosyaya okuma yetkisi verir. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Kamerası olmayan cihaz da kurabilir: galeriden okuma çalışır. -->
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="false" />
+
+    <!-- androidx.core'un kendi manifestinden gelen imza düzeyi izin (bkz. Reyon).
+         Kodokur registerReceiver(…, RECEIVER_NOT_EXPORTED) çağırmıyor; biri
+         eklerse bu iki satır kaldırılmalı, yoksa API 26–32'de çöker. -->
+    <permission
+        android:name="${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        tools:node="remove" />
+    <uses-permission
+        android:name="${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        tools:node="remove" />
+
+    <!-- Geçmiş Wi-Fi parolası içerebilir: bulut yedeğine girmez, cihazda kalır. -->
+    <application
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="false"
+        android:appCategory="productivity"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:localeConfig="@xml/locales_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Kodokur"
+        tools:targetApi="33">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.share"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/share_paths" />
+        </provider>
+    </application>
+
+</manifest>

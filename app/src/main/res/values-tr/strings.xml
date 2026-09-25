@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_tagline">ISBN\'den anlayan barkod ve QR okuyucu</string>
+
+    <!-- Ortak -->
+    <string name="back">Geri</string>
+    <string name="cancel">Vazgeç</string>
+    <string name="delete">Sil</string>
+    <string name="undo">Geri al</string>
+    <string name="act_show">Göster</string>
+    <string name="copied">Kopyalandı</string>
+    <string name="no_app">Bu telefonda bunu açabilecek bir uygulama yok</string>
+
+    <!-- Tarayıcı -->
+    <string name="scan_hint">Kamerayı bir barkoda ya da QR koda tutun</string>
+    <string name="action_gallery">Fotoğraftan</string>
+    <string name="action_torch_on">Feneri aç</string>
+    <string name="action_torch_off">Feneri kapat</string>
+    <string name="action_history">Geçmiş</string>
+    <string name="action_about">Hakkında</string>
+    <string name="batch_mode">Seri</string>
+    <string name="batch_mode_on">Seri tarama açık: kodlar doğrudan geçmişe eklenir</string>
+    <string name="batch_added">Eklendi: %1$s</string>
+    <string name="batch_duplicate">Bu seride zaten var: %1$s</string>
+    <plurals name="batch_count">
+        <item quantity="one">Bu seride %1$d kod</item>
+        <item quantity="other">Bu seride %1$d kod</item>
+    </plurals>
+    <string name="gallery_none">Bu görselde kod bulunamadı</string>
+    <string name="gallery_error">Görsel açılamadı</string>
+    <string name="gallery_reading">Görsel okunuyor…</string>
+
+    <!-- Kamera izni -->
+    <string name="permission_title">Kamera erişimi</string>
+    <string name="permission_body">Kodokur kodları kamerayla okur. Kareler telefonda işlenir; hiçbir yere kaydedilmez, hiçbir yere gönderilmez.</string>
+    <string name="permission_grant">Kameraya izin ver</string>
+    <string name="permission_settings">Uygulama ayarlarını aç</string>
+    <string name="permission_gallery_hint">Kamera izni olmadan da bir fotoğraftaki kodu okuyabilirsiniz.</string>
+    <string name="no_camera">Bu cihazda kamera yok. Bir fotoğraftaki kodu yine de okuyabilirsiniz.</string>
+    <string name="camera_error">Kamera başlatılamadı</string>
+
+    <!-- İçerik türleri -->
+    <string name="kind_book">Kitap</string>
+    <string name="kind_periodical">Süreli yayın</string>
+    <string name="kind_product">Ürün</string>
+    <string name="kind_link">Bağlantı</string>
+    <string name="kind_wifi">Wi-Fi ağı</string>
+    <string name="kind_email">E-posta</string>
+    <string name="kind_phone">Telefon numarası</string>
+    <string name="kind_sms">SMS</string>
+    <string name="kind_geo">Konum</string>
+    <string name="kind_contact">Kişi</string>
+    <string name="kind_text">Metin</string>
+
+    <!-- Ayrıntı etiketleri -->
+    <string name="label_isbn13">ISBN-13</string>
+    <string name="label_isbn10">ISBN-10</string>
+    <string name="label_group">Kayıt grubu</string>
+    <string name="label_price">Fiyat (ek barkod)</string>
+    <string name="label_issn">ISSN</string>
+    <string name="label_issue">Sayı</string>
+    <string name="label_gtin">GTIN</string>
+    <string name="label_network">Ağ</string>
+    <string name="label_password">Parola</string>
+    <string name="label_security">Güvenlik</string>
+    <string name="label_to">Alıcı</string>
+    <string name="label_subject">Konu</string>
+    <string name="label_message">İleti</string>
+    <string name="label_coordinates">Koordinatlar</string>
+    <string name="label_name">Ad</string>
+    <string name="label_organization">Kurum</string>
+    <string name="label_phone">Telefon</string>
+    <string name="label_email">E-posta</string>
+    <string name="label_website">Web sitesi</string>
+    <string name="label_format">Biçim</string>
+    <string name="label_add_on">Ek barkod</string>
+    <string name="label_raw">Ham içerik</string>
+    <string name="label_scanned_at">Okunma</string>
+
+    <!-- Eylemler -->
+    <string name="act_copy">Kopyala</string>
+    <string name="act_share">Paylaş</string>
+    <string name="act_open">Aç</string>
+    <string name="act_open_library">Open Library</string>
+    <string name="act_google_books">Google Books</string>
+    <string name="act_issn_portal">ISSN Portal</string>
+    <string name="act_open_food_facts">Open Food Facts</string>
+    <string name="act_search_web">Web\'de ara</string>
+    <string name="act_connect_wifi">Bağlan</string>
+    <string name="act_copy_password">Parolayı kopyala</string>
+    <string name="act_send_email">E-posta yaz</string>
+    <string name="act_dial">Ara</string>
+    <string name="act_send_sms">SMS yaz</string>
+    <string name="act_show_map">Haritada göster</string>
+    <string name="act_add_contact">Kişilere ekle</string>
+    <string name="external_notice">Tarayıcınızda ya da başka bir uygulamada açılır. Kodokur kendisi internete hiç çıkmaz.</string>
+
+    <!-- Geçmiş -->
+    <string name="history_title">Geçmiş</string>
+    <string name="history_empty">Henüz bir şey okunmadı</string>
+    <string name="history_export">CSV olarak dışa aktar</string>
+    <string name="history_clear">Geçmişi temizle</string>
+    <string name="history_clear_title">Geçmiş temizlensin mi?</string>
+    <plurals name="history_clear_body">
+        <item quantity="one">%1$d okuma bu telefondan silinecek.</item>
+        <item quantity="other">%1$d okumanın tümü bu telefondan silinecek.</item>
+    </plurals>
+    <string name="history_deleted">Okuma silindi</string>
+
+    <!-- Dil -->
+    <string name="language_title">Dil</string>
+    <string name="language_system">Telefonun dili</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">Hakkında</string>
+    <string name="about_promise">Reklam yok. İzleyici yok. İnternet izni yok. Tek izin kamera; kamera kareleri telefondan hiç çıkmaz. Geçmiş bu cihazda kalır, yedeklemeye de girmez.</string>
+    <string name="about_version">Sürüm %1$s</string>
+    <string name="about_source">Kaynak kod</string>
+    <string name="about_privacy">Gizlilik politikası</string>
+    <string name="about_license">GNU GPL v3 ile özgür yazılım.</string>
+    <string name="about_libraries">Çözme: ZXing (Apache Lisansı 2.0). Kamera: AndroidX CameraX (Apache Lisansı 2.0).</string>
+    <string name="about_isbn_ranges">ISBN aralıkları: ISBN International, %1$s</string>
+</resources>

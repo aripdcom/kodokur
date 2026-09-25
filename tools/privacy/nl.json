@@ -1,0 +1,35 @@
+{
+  "name": "Nederlands",
+  "title": "Privacybeleid",
+  "meta": "Kodokur voor Android · Geldig vanaf 26 september 2026 · Ontwikkelaar: aripdcom",
+  "short_label": "Kort gezegd:",
+  "short": "Kodokur verzamelt, deelt of verkoopt geen persoonsgegevens. Het enige recht is de camera: beelden worden op de telefoon geanalyseerd en nooit opgeslagen of ergens naartoe gestuurd. De app heeft geen INTERNET-recht, geen advertenties en geen trackingbibliotheken. Je scangeschiedenis blijft op je toestel en is uitgesloten van back-ups.",
+  "sections": [
+    [
+      "Verzamelde gegevens",
+      "Geen. Geen namen, e-mailadressen, locatie, apparaat-id’s, gebruiksstatistieken of crashrapporten. Er zitten geen analyse-, advertentie- of externe SDK’s in de app."
+    ],
+    [
+      "Camera",
+      "Kodokur vraagt het recht <code>CAMERA</code> en gebruikt het alleen zolang het scanscherm open is. Elk beeld wordt in het geheugen op een barcode of QR-code onderzocht en daarna weggegooid; er wordt nooit een foto of video opgeslagen. Weiger je het recht, dan kun je nog steeds een code uit een afbeelding lezen: de fotokiezer van Android geeft de app alleen toegang tot die ene afbeelding, en er is geen opslagrecht nodig."
+    ],
+    [
+      "Netwerk",
+      "Het app-manifest bevat geen <code>INTERNET</code>-recht, dus Kodokur kan met geen enkele server verbinding maken. Knoppen zoals Open Library, Google Books, ISSN Portal, Open Food Facts, zoeken op het web of een link openen geven de code door aan je browser of aan een andere app die jij kiest. Vanaf dat moment geldt het beleid van die website of app; Kodokur weet niet wat daar gebeurt."
+    ],
+    [
+      "Wat op je toestel blijft",
+      "De scangeschiedenis (de gedecodeerde inhoud, het barcodeformaat en het tijdstip) staat in de privéopslag van de app, waar geen andere app bij kan. Je kunt losse items verwijderen of de hele geschiedenis wissen, en alles verdwijnt zodra je de app verwijdert of de gegevens wist. Omdat de geschiedenis Wi-Fi-wachtwoorden kan bevatten, is ze uitgesloten van de cloudback-up van Android en van overzetten van toestel naar toestel. Op Android 8 tot en met 12 wordt de taal die je in de app kiest op dezelfde manier bewaard."
+    ],
+    [
+      "Delen, exporteren en doorgeven",
+      "Delen en CSV-export openen het deelvenster van Android; een bestand gaat alleen-lezen naar de app die jij kiest, en Kodokur zelf stuurt niets. Verbinden met een Wi-Fi-netwerk opent het eigen bevestigingsvenster van het systeem, en een contact toevoegen opent je contacten-app met ingevulde velden; er wordt niets opgeslagen tot je het daar bevestigt."
+    ],
+    [
+      "Kinderen en wijzigingen",
+      "Omdat er geen gegevens worden verzameld, is de app geschikt voor alle leeftijden. Als dit beleid verandert, wordt de nieuwe versie op deze pagina gepubliceerd."
+    ]
+  ],
+  "contact": "Contact",
+  "contact_intro": "Vragen en meldingen:"
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Compose teması ui/Theme.kt'de; bu yalnızca açılış penceresi için. -->
+    <style name="Theme.Kodokur" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/kodokur_background</item>
+    </style>
+</resources>

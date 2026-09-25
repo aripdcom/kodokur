@@ -1,0 +1,10 @@
+# Satır sonlarını platformdan bağımsız sabitle.
+* text=auto eol=lf
+*.bat text eol=crlf
+*.jar binary
+*.png binary
+*.webp binary
+*.ttf binary
+
+# Ses dosyaları ikili.
+*.wav binary

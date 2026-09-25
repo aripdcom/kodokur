@@ -1,0 +1,23 @@
+{
+  "name": "Dansk",
+  "title": "Privatlivspolitik",
+  "meta": "Kodokur til Android · Gældende fra 26. september 2026 · Udvikler: aripdcom",
+  "short_label": "Kort fortalt:",
+  "short": "Kodokur indsamler, deler og sælger ingen personoplysninger. Appens eneste tilladelse er kameraet: billederne analyseres på telefonen og bliver aldrig gemt eller sendt nogen steder hen. Appen har ingen INTERNET-tilladelse, ingen reklamer og ingen sporingsbiblioteker. Din scanningshistorik bliver på din enhed og er udeladt af sikkerhedskopier.",
+  "sections": [
+    ["Indsamlede data",
+     "Ingen. Ingen navne, e-mailadresser, placering, enheds-id'er, brugsstatistik eller nedbrudsrapporter. Appen indeholder ingen analyse-, reklame- eller tredjeparts-SDK'er."],
+    ["Kamera",
+     "Kodokur beder om tilladelsen <code>CAMERA</code> og bruger den kun, mens scannerskærmen er åben. Hvert billede undersøges i hukommelsen for en stregkode eller QR-kode og kasseres derefter; der gemmes aldrig fotos eller video. Hvis du afviser tilladelsen, kan du stadig læse en kode fra et billede: Androids billedvælger giver appen adgang til netop det ene billede, og der kræves ingen lagertilladelse."],
+    ["Netværk",
+     "Appens manifest har ingen <code>INTERNET</code>-tilladelse, så Kodokur kan ikke oprette forbindelse til nogen server. Knapper som Open Library, Google Books, ISSN Portal, Open Food Facts, websøgning eller åbning af et link giver koden videre til din browser eller til en anden app, du vælger. Derfra gælder det pågældende websteds eller den pågældende apps egen politik; Kodokur ved ikke, hvad der sker der."],
+    ["Det, der bliver på din enhed",
+     "Scanningshistorikken (det afkodede indhold, stregkodeformatet og tidspunktet) opbevares i appens private lager, hvor ingen anden app kan nå den. Du kan slette enkelte poster eller rydde hele historikken, og alt fjernes, når du afinstallerer appen eller rydder dens data. Da historikken kan indeholde Wi-Fi-adgangskoder, er den udeladt af Androids sikkerhedskopiering i skyen og af overførsel fra enhed til enhed. På Android 8 til 12 gemmes det sprog, du vælger i appen, på samme måde."],
+    ["Deling, eksport og videregivelse",
+     "Deling og CSV-eksport åbner Androids delingsmenu; en fil gives skrivebeskyttet til den app, du vælger, og Kodokur selv sender intet. Forbindelse til et Wi-Fi-netværk åbner systemets egen bekræftelsesdialog, og tilføjelse af en kontakt åbner din kontaktapp med felterne udfyldt; intet gemmes, før du bekræfter det der."],
+    ["Børn og ændringer",
+     "Da der ikke indsamles data, er appen egnet til alle aldre. Hvis denne politik ændres, offentliggøres den nye version på denne side."]
+  ],
+  "contact": "Kontakt",
+  "contact_intro": "Spørgsmål og henvendelser:"
+}

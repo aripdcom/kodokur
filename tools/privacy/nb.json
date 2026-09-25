@@ -1,0 +1,23 @@
+{
+  "name": "Norsk bokmål",
+  "title": "Personvernerklæring",
+  "meta": "Kodokur for Android · Gjelder fra 26. september 2026 · Utvikler: aripdcom",
+  "short_label": "Kort fortalt:",
+  "short": "Kodokur samler ikke inn, deler eller selger personopplysninger. Den eneste tillatelsen appen har, er kameraet: bildene analyseres på telefonen og blir aldri lagret eller sendt noe sted. Appen har ingen INTERNET-tillatelse, ingen annonser og ingen sporingsbiblioteker. Skannehistorikken din blir på enheten og er holdt utenfor sikkerhetskopier.",
+  "sections": [
+    ["Innsamlede data",
+     "Ingen. Ingen navn, e-postadresser, posisjon, enhets-ID-er, bruksstatistikk eller krasjrapporter. Appen inneholder ingen analyse-, reklame- eller tredjeparts-SDK-er."],
+    ["Kamera",
+     "Kodokur ber om tillatelsen <code>CAMERA</code> og bruker den bare mens skannerskjermen er åpen. Hvert bilde undersøkes i minnet etter en strekkode eller QR-kode og forkastes deretter; det lagres aldri bilder eller video. Hvis du avslår tillatelsen, kan du likevel lese en kode fra et bilde: Androids bildevelger gir appen tilgang til akkurat det ene bildet, og det trengs ingen lagringstillatelse."],
+    ["Nettverk",
+     "Appens manifest har ingen <code>INTERNET</code>-tillatelse, så Kodokur kan ikke koble til noen server. Knapper som Open Library, Google Books, ISSN Portal, Open Food Facts, nettsøk eller åpning av en lenke gir koden videre til nettleseren din eller til en annen app du velger. Fra da av gjelder nettstedets eller appens egne retningslinjer; Kodokur vet ikke hva som skjer der."],
+    ["Det som blir på enheten din",
+     "Skannehistorikken (det dekodede innholdet, strekkodeformatet og tidspunktet) lagres i appens private lagring, der ingen andre apper kan nå den. Du kan slette enkeltoppføringer eller tømme hele historikken, og alt fjernes når du avinstallerer appen eller sletter dataene dens. Fordi historikken kan inneholde Wi-Fi-passord, er den holdt utenfor Androids skysikkerhetskopi og overføring fra enhet til enhet. På Android 8 til 12 lagres språket du velger i appen, på samme måte."],
+    ["Deling, eksport og overlevering",
+     "Deling og CSV-eksport åpner Androids delingsmeny; en fil gis skrivebeskyttet til appen du velger, og Kodokur selv sender ingenting. Tilkobling til et Wi-Fi-nettverk åpner systemets egen bekreftelsesdialog, og å legge til en kontakt åpner kontaktappen med feltene utfylt; ingenting lagres før du bekrefter det der."],
+    ["Barn og endringer",
+     "Siden det ikke samles inn data, passer appen for alle aldre. Hvis denne erklæringen endres, publiseres den nye versjonen på denne siden."]
+  ],
+  "contact": "Kontakt",
+  "contact_intro": "Spørsmål og henvendelser:"
+}

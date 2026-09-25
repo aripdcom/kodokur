@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_tagline">Barcode- en QR-lezer die ISBN’s begrijpt</string>
+
+    <!-- Ortak -->
+    <string name="back">Terug</string>
+    <string name="cancel">Annuleren</string>
+    <string name="delete">Verwijderen</string>
+    <string name="undo">Ongedaan maken</string>
+    <string name="act_show">Tonen</string>
+    <string name="copied">Gekopieerd</string>
+    <string name="no_app">Geen app op deze telefoon kan dit openen</string>
+
+    <!-- Tarayıcı -->
+    <string name="scan_hint">Richt op een barcode of QR-code</string>
+    <string name="action_gallery">Uit foto</string>
+    <string name="action_torch_on">Zaklamp aan</string>
+    <string name="action_torch_off">Zaklamp uit</string>
+    <string name="action_history">Geschiedenis</string>
+    <string name="action_about">Over</string>
+    <string name="batch_mode">Reeks</string>
+    <string name="batch_mode_on">Reeksmodus aan: codes gaan direct naar de geschiedenis</string>
+    <string name="batch_added">Toegevoegd: %1$s</string>
+    <string name="batch_duplicate">Al in deze reeks: %1$s</string>
+    <plurals name="batch_count">
+        <item quantity="one">%1$d code in deze reeks</item>
+        <item quantity="other">%1$d codes in deze reeks</item>
+    </plurals>
+    <string name="gallery_none">Geen code gevonden in deze afbeelding</string>
+    <string name="gallery_error">De afbeelding kon niet worden geopend</string>
+    <string name="gallery_reading">Afbeelding lezen…</string>
+
+    <!-- Kamera izni -->
+    <string name="permission_title">Cameratoegang</string>
+    <string name="permission_body">Kodokur leest codes via de camera. Beelden worden op de telefoon verwerkt, nooit opgeslagen en nergens naartoe gestuurd.</string>
+    <string name="permission_grant">Camera toestaan</string>
+    <string name="permission_settings">App-instellingen openen</string>
+    <string name="permission_gallery_hint">Je kunt een code ook zonder cameratoegang uit een foto lezen.</string>
+    <string name="no_camera">Dit apparaat heeft geen camera. Je kunt nog steeds een code uit een foto lezen.</string>
+    <string name="camera_error">De camera kon niet worden gestart</string>
+
+    <!-- İçerik türleri -->
+    <string name="kind_book">Boek</string>
+    <string name="kind_periodical">Tijdschrift</string>
+    <string name="kind_product">Product</string>
+    <string name="kind_link">Link</string>
+    <string name="kind_wifi">Wi-Fi-netwerk</string>
+    <string name="kind_email">E-mail</string>
+    <string name="kind_phone">Telefoonnummer</string>
+    <string name="kind_sms">SMS</string>
+    <string name="kind_geo">Locatie</string>
+    <string name="kind_contact">Contact</string>
+    <string name="kind_text">Tekst</string>
+
+    <!-- Ayrıntı etiketleri -->
+    <string name="label_isbn13">ISBN-13</string>
+    <string name="label_isbn10">ISBN-10</string>
+    <string name="label_group">Registratiegroep</string>
+    <string name="label_price">Prijs (extra code)</string>
+    <string name="label_issn">ISSN</string>
+    <string name="label_issue">Nummer</string>
+    <string name="label_gtin">GTIN</string>
+    <string name="label_network">Netwerk</string>
+    <string name="label_password">Wachtwoord</string>
+    <string name="label_security">Beveiliging</string>
+    <string name="label_to">Aan</string>
+    <string name="label_subject">Onderwerp</string>
+    <string name="label_message">Bericht</string>
+    <string name="label_coordinates">Coördinaten</string>
+    <string name="label_name">Naam</string>
+    <string name="label_organization">Organisatie</string>
+    <string name="label_phone">Telefoon</string>
+    <string name="label_email">E-mail</string>
+    <string name="label_website">Website</string>
+    <string name="label_format">Formaat</string>
+    <string name="label_add_on">Extra code</string>
+    <string name="label_raw">Ruwe inhoud</string>
+    <string name="label_scanned_at">Gescand</string>
+
+    <!-- Eylemler -->
+    <string name="act_copy">Kopiëren</string>
+    <string name="act_share">Delen</string>
+    <string name="act_open">Openen</string>
+    <string name="act_open_library">Open Library</string>
+    <string name="act_google_books">Google Books</string>
+    <string name="act_issn_portal">ISSN Portal</string>
+    <string name="act_open_food_facts">Open Food Facts</string>
+    <string name="act_search_web">Zoeken op het web</string>
+    <string name="act_connect_wifi">Verbinden</string>
+    <string name="act_copy_password">Wachtwoord kopiëren</string>
+    <string name="act_send_email">E-mail schrijven</string>
+    <string name="act_dial">Bellen</string>
+    <string name="act_send_sms">SMS schrijven</string>
+    <string name="act_show_map">Op kaart tonen</string>
+    <string name="act_add_contact">Aan contacten toevoegen</string>
+    <string name="external_notice">Opent in je browser of een andere app. Kodokur zelf gaat nooit online.</string>
+
+    <!-- Geçmiş -->
+    <string name="history_title">Geschiedenis</string>
+    <string name="history_empty">Nog niets gescand</string>
+    <string name="history_export">CSV exporteren</string>
+    <string name="history_clear">Geschiedenis wissen</string>
+    <string name="history_clear_title">Geschiedenis wissen?</string>
+    <plurals name="history_clear_body">
+        <item quantity="one">%1$d scan wordt van deze telefoon verwijderd.</item>
+        <item quantity="other">Alle %1$d scans worden van deze telefoon verwijderd.</item>
+    </plurals>
+    <string name="history_deleted">Scan verwijderd</string>
+
+    <!-- Dil -->
+    <string name="language_title">Taal</string>
+    <string name="language_system">Taal van de telefoon</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">Over</string>
+    <string name="about_promise">Geen advertenties. Geen trackers. Geen internetrecht. Het enige recht is de camera, en camerabeelden verlaten de telefoon nooit. De geschiedenis blijft op dit apparaat en is uitgesloten van back-ups.</string>
+    <string name="about_version">Versie %1$s</string>
+    <string name="about_source">Broncode</string>
+    <string name="about_privacy">Privacybeleid</string>
+    <string name="about_license">Vrije software onder de GNU GPL v3.</string>
+    <string name="about_libraries">Decodering door ZXing (Apache License 2.0). Camera door AndroidX CameraX (Apache License 2.0).</string>
+    <string name="about_isbn_ranges">ISBN-bereiken: ISBN International, %1$s</string>
+</resources>

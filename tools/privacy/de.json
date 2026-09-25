@@ -1,0 +1,35 @@
+{
+  "name": "Deutsch",
+  "title": "Datenschutzerklärung",
+  "meta": "Kodokur für Android · Gültig ab 26. September 2026 · Entwickler: aripdcom",
+  "short_label": "Kurz gesagt:",
+  "short": "Kodokur erhebt, teilt und verkauft keine personenbezogenen Daten. Die einzige Berechtigung ist die Kamera: Die Bilder werden auf dem Telefon ausgewertet und nie gespeichert oder irgendwohin gesendet. Die App hat keine INTERNET-Berechtigung, keine Werbung und keine Tracking-Bibliotheken. Dein Scan-Verlauf bleibt auf deinem Gerät und ist von Backups ausgenommen.",
+  "sections": [
+    [
+      "Erhobene Daten",
+      "Keine. Keine Namen, E-Mail-Adressen, Standorte, Gerätekennungen, Nutzungsstatistiken oder Absturzberichte. In der App gibt es keine Analyse-, Werbe- oder Drittanbieter-SDKs."
+    ],
+    [
+      "Kamera",
+      "Kodokur fragt nach der Berechtigung <code>CAMERA</code> und nutzt sie nur, solange der Scanner-Bildschirm geöffnet ist. Jedes Bild wird im Arbeitsspeicher nach einem Barcode oder QR-Code durchsucht und dann verworfen; Fotos oder Videos werden nie gespeichert. Verweigerst du die Berechtigung, kannst du trotzdem einen Code aus einem Bild lesen: Die Fotoauswahl von Android gibt der App nur Zugriff auf genau dieses eine Bild, eine Speicherberechtigung ist nicht nötig."
+    ],
+    [
+      "Netz",
+      "Das App-Manifest enthält keine <code>INTERNET</code>-Berechtigung, daher kann sich Kodokur mit keinem Server verbinden. Schaltflächen wie Open Library, Google Books, ISSN Portal, Open Food Facts, die Websuche oder das Öffnen eines Links übergeben den Code an deinen Browser oder an eine andere App deiner Wahl. Ab dann gilt die Richtlinie dieser Website oder App; Kodokur weiß nicht, was dort geschieht."
+    ],
+    [
+      "Was auf deinem Gerät bleibt",
+      "Der Scan-Verlauf (der dekodierte Inhalt, das Barcode-Format und die Uhrzeit) liegt im privaten Speicher der App, an den keine andere App kommt. Du kannst einzelne Einträge löschen oder den ganzen Verlauf leeren; beim Deinstallieren der App oder Löschen ihrer Daten wird alles entfernt. Da der Verlauf WLAN-Passwörter enthalten kann, ist er von der Android-Cloud-Sicherung und der Übertragung von Gerät zu Gerät ausgenommen. Unter Android 8 bis 12 wird die in der App gewählte Sprache auf dieselbe Weise gespeichert."
+    ],
+    [
+      "Teilen, Exportieren und Übergeben",
+      "Teilen und CSV-Export öffnen das Teilen-Menü von Android; eine Datei geht nur lesend an die App, die du auswählst, und Kodokur selbst sendet nichts. Das Verbinden mit einem WLAN öffnet den eigenen Bestätigungsdialog des Systems, und das Hinzufügen eines Kontakts öffnet deine Kontakte-App mit ausgefüllten Feldern; gespeichert wird erst, wenn du dort bestätigst."
+    ],
+    [
+      "Kinder und Änderungen",
+      "Da keine Daten erhoben werden, ist die App für jedes Alter geeignet. Ändert sich diese Erklärung, wird die neue Fassung auf dieser Seite veröffentlicht."
+    ]
+  ],
+  "contact": "Kontakt",
+  "contact_intro": "Fragen und Meldungen:"
+}

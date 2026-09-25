@@ -7,8 +7,8 @@ tek izin kamera, internet izni yok.
 
 [![CI](https://github.com/aripdcom/kodokur/actions/workflows/ci.yml/badge.svg)](https://github.com/aripdcom/kodokur/actions/workflows/ci.yml)
 
-- **Site:** https://aripdcom.github.io/kodokur
-- **Gizlilik:** https://aripdcom.github.io/kodokur/privacy.html
+- **Site:** https://kodokur.aripd.com
+- **Gizlilik:** https://kodokur.aripd.com/privacy.html
 - **APK:** [en yeni sürüm](https://github.com/aripdcom/kodokur/releases/latest/download/kodokur.apk)
 
 ## Ne okur
@@ -79,7 +79,7 @@ Gerekli secret'lar: `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD` (alia
 Uygulamanın manifestinde tek izin var: `CAMERA`. Kareler bellekte çözülür ve atılır.
 `INTERNET` izni yok; kitap araması gibi düğmeler kodu tarayıcıya devreder. Geçmiş
 uygulamanın özel alanında durur ve Wi-Fi parolası içerebileceği için bulut yedeğine
-ve cihazdan cihaza aktarıma girmez. Ayrıntı: [gizlilik politikası](https://aripdcom.github.io/kodokur/privacy.html).
+ve cihazdan cihaza aktarıma girmez. Ayrıntı: [gizlilik politikası](https://kodokur.aripd.com/privacy.html).
 
 ## Lisans
 

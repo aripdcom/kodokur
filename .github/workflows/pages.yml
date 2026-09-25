@@ -1,8 +1,9 @@
 name: Pages
 
-# site/ klasörünü GitHub Pages'e yayınlar (aripdcom.github.io/kodokur).
-# Depo ayarlarında Pages kaynağı "GitHub Actions" olmalı. Kendi alan adı
-# bağlanınca Settings → Pages'ten tanımlanır ve platform/Actions.kt ile
+# site/ klasörünü GitHub Pages'e yayınlar: https://kodokur.aripd.com
+# (aripdcom.github.io/kodokur oraya yönlenir). Depo ayarlarında Pages kaynağı
+# "GitHub Actions", alan adı Settings → Pages'te tanımlı. Alan adı değişirse
+# platform/Actions.kt, site/index.html, tools/gen_privacy.py ve
 # tools/check_site.py'deki adresler birlikte güncellenir.
 
 on:

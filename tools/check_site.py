@@ -21,7 +21,7 @@ ROOT = gen_privacy.ROOT
 ACTIONS = os.path.join(ROOT, "app", "src", "main", "kotlin", "com", "aripd", "kodokur",
                        "platform", "Actions.kt")
 INDEX = os.path.join(ROOT, "site", "index.html")
-SITE = "https://aripdcom.github.io/kodokur"
+SITE = "https://kodokur.aripd.com"
 SOURCE = "https://github.com/aripdcom/kodokur"
 
 errors = []

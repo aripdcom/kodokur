@@ -124,7 +124,7 @@ def page(tags, policy):
 <meta name="theme-color" content="#101414" media="(prefers-color-scheme: dark)">
 <title>Kodokur · Privacy policy</title>
 <meta name="description" content="Kodokur privacy policy in {len(tags)} languages: the camera is the only permission, frames never leave the phone, no internet permission, no data collected.">
-<link rel="canonical" href="https://aripdcom.github.io/kodokur/privacy.html">
+<link rel="canonical" href="https://kodokur.aripd.com/privacy.html">
 <link rel="icon" href="{ICON}">
 <style>
 {STYLE}

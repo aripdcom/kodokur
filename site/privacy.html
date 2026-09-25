@@ -1,12 +1,19 @@
 <!doctype html>
-<html lang="tr">
+<!--
+  ÜRETİLMİŞ DOSYA: tools/privacy/<dil>.json → python3 tools/gen_privacy.py
+  Her dil kendi bölümünde; assets/site.js seçilen dilinkini gösterir (index.html
+  ile aynı seçim: ?lang=xx, #xx, önceki seçim, tarayıcının dili). JavaScript
+  kapalıysa bütün bölümler alt alta okunur.
+-->
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#F4F8F7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#101414" media="(prefers-color-scheme: dark)">
-<title>Kodokur · Gizlilik politikası · Privacy policy</title>
-<meta name="description" content="Kodokur gizlilik politikası, 14 dilde: tek izin kamera, kareler telefondan çıkmaz, internet izni yok, veri toplanmaz.">
+<title>Kodokur · Privacy policy</title>
+<meta name="description" content="Kodokur privacy policy in 14 languages: the camera is the only permission, frames never leave the phone, no internet permission, no data collected.">
+<link rel="canonical" href="https://aripdcom.github.io/kodokur/privacy.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F3D3E'/%3E%3Cpath fill='%23E8F3F1' d='M8 9h2v14H8zM11.5 9h1v14h-1zM14 9h2v14h-2zM17.5 9h1v14h-1zM20 9h2.5v14H20zM24 9h1v14h-1z'/%3E%3Crect x='6' y='15' width='20' height='2' fill='%23FFB347'/%3E%3C/svg%3E">
 <style>
   :root {
@@ -21,9 +28,11 @@
   body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.6; }
   .wrap { max-width: 720px; margin: 0 auto; padding: 40px 16px 64px; }
   a { color: var(--title); }
-  .back { display: inline-block; text-decoration: none; font-weight: 700; margin-bottom: 20px; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .back { text-decoration: none; font-weight: 700; }
+  .picker { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+  .picker select { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--card-border); border-radius: 8px; padding: 6px 10px; }
   h1 { font-size: 34px; font-weight: 800; line-height: 1.15; }
-  h2 { font-size: 24px; margin-top: 8px; }
   h3 { font-size: 18px; margin-top: 22px; }
   .meta { color: var(--muted); font-size: 14px; margin-top: 6px; }
   p, li { margin-top: 10px; }
@@ -32,10 +41,10 @@
     margin-top: 18px; background: var(--surface); border: 1px solid var(--card-border); border-radius: 16px; padding: 16px 18px;
   }
   .summary strong { color: var(--title); }
-  .langs { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 15px; }
-  .langs a { text-decoration: none; background: var(--surface); border: 1px solid var(--card-border); border-radius: 999px; padding: 4px 12px; }
-  section { margin-top: 44px; padding-top: 12px; border-top: 1px solid var(--card-border); }
-  section:first-of-type { border-top: 0; }
+  /* JavaScript kapalıyken bölümler alt alta; açıkken yalnız biri görünür. */
+  section + section { margin-top: 44px; padding-top: 12px; border-top: 1px solid var(--card-border); }
+  section[hidden] { display: none; }
+  html.one section { margin-top: 0; padding-top: 0; border-top: 0; }
   section[dir="rtl"] { text-align: right; }
   footer { margin-top: 48px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
   footer a { text-decoration: none; }
@@ -43,13 +52,16 @@
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="./">← Kodokur</a>
-  <h1>Gizlilik politikası · Privacy policy</h1>
-  <p class="meta">Aynı politika, 14 dilde. / The same policy, in 14 languages.</p>
-  <nav class="langs"><a href="#en">English</a> <a href="#tr">Türkçe</a> <a href="#de">Deutsch</a> <a href="#fr">Français</a> <a href="#nl">Nederlands</a> <a href="#es">Español</a> <a href="#pt">Português</a> <a href="#it">Italiano</a> <a href="#da">Dansk</a> <a href="#sv">Svenska</a> <a href="#nb">Norsk bokmål</a> <a href="#fi">Suomi</a> <a href="#ru">Русский</a> <a href="#ar">العربية</a></nav>
+  <div class="top">
+    <a class="back" href="./" data-keep-lang="./">← Kodokur</a>
+    <form class="picker" id="picker" hidden>
+      <label for="lang" data-i18n="langLabel">Language</label>
+      <select id="lang" name="lang"></select>
+    </form>
+  </div>
 
-  <section id="en" lang="en">
-    <h2>English · Privacy policy</h2>
+  <section id="en" lang="en" data-lang="en" data-title="Kodokur · Privacy policy">
+    <h1>Privacy policy</h1>
     <p class="meta">Kodokur for Android · Effective 26 September 2026 · Developer: aripdcom</p>
     <div class="summary">
       <strong>In short:</strong> Kodokur collects, shares or sells no personal data. Its only permission is the camera: frames are analysed on the phone and are never saved or sent anywhere. The app has no INTERNET permission, no ads and no tracking libraries. Your scan history stays on your device and is left out of backups.
@@ -69,8 +81,8 @@
     <h3>Contact</h3>
     <p>Questions and reports: <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="tr" lang="tr">
-    <h2>Türkçe · Gizlilik politikası</h2>
+  <section id="tr" lang="tr" data-lang="tr" data-title="Kodokur · Gizlilik politikası">
+    <h1>Gizlilik politikası</h1>
     <p class="meta">Kodokur (Android) · Yürürlük: 26 Eylül 2026 · Geliştirici: aripdcom</p>
     <div class="summary">
       <strong>Kısaca:</strong> Kodokur hiçbir kişisel veri toplamaz, paylaşmaz ya da satmaz. İstediği tek izin kameradır: kareler telefonda incelenir, hiçbir yere kaydedilmez ve gönderilmez. Uygulamanın İNTERNET izni yoktur, reklam ya da izleme kütüphanesi içermez. Okuma geçmişi yalnızca cihazınızda durur ve yedeklemeye girmez.
@@ -90,8 +102,8 @@
     <h3>İletişim</h3>
     <p>Sorular ve bildirimler için: <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="de" lang="de">
-    <h2>Deutsch · Datenschutzerklärung</h2>
+  <section id="de" lang="de" data-lang="de" data-title="Kodokur · Datenschutzerklärung">
+    <h1>Datenschutzerklärung</h1>
     <p class="meta">Kodokur für Android · Gültig ab 26. September 2026 · Entwickler: aripdcom</p>
     <div class="summary">
       <strong>Kurz gesagt:</strong> Kodokur erhebt, teilt und verkauft keine personenbezogenen Daten. Die einzige Berechtigung ist die Kamera: Die Bilder werden auf dem Telefon ausgewertet und nie gespeichert oder irgendwohin gesendet. Die App hat keine INTERNET-Berechtigung, keine Werbung und keine Tracking-Bibliotheken. Dein Scan-Verlauf bleibt auf deinem Gerät und ist von Backups ausgenommen.
@@ -111,8 +123,8 @@
     <h3>Kontakt</h3>
     <p>Fragen und Meldungen: <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="fr" lang="fr">
-    <h2>Français · Politique de confidentialité</h2>
+  <section id="fr" lang="fr" data-lang="fr" data-title="Kodokur · Politique de confidentialité">
+    <h1>Politique de confidentialité</h1>
     <p class="meta">Kodokur pour Android · En vigueur le 26 septembre 2026 · Développeur : aripdcom</p>
     <div class="summary">
       <strong>En bref :</strong> Kodokur ne collecte, ne partage ni ne vend aucune donnée personnelle. Sa seule autorisation est l’appareil photo : les images sont analysées sur le téléphone et ne sont jamais enregistrées ni envoyées nulle part. L’appli n’a pas d’autorisation INTERNET, ni publicité, ni bibliothèque de suivi. Votre historique de scans reste sur votre appareil et est exclu des sauvegardes.
@@ -132,8 +144,8 @@
     <h3>Contact</h3>
     <p>Questions et signalements : <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="nl" lang="nl">
-    <h2>Nederlands · Privacybeleid</h2>
+  <section id="nl" lang="nl" data-lang="nl" data-title="Kodokur · Privacybeleid">
+    <h1>Privacybeleid</h1>
     <p class="meta">Kodokur voor Android · Geldig vanaf 26 september 2026 · Ontwikkelaar: aripdcom</p>
     <div class="summary">
       <strong>Kort gezegd:</strong> Kodokur verzamelt, deelt of verkoopt geen persoonsgegevens. Het enige recht is de camera: beelden worden op de telefoon geanalyseerd en nooit opgeslagen of ergens naartoe gestuurd. De app heeft geen INTERNET-recht, geen advertenties en geen trackingbibliotheken. Je scangeschiedenis blijft op je toestel en is uitgesloten van back-ups.
@@ -153,8 +165,8 @@
     <h3>Contact</h3>
     <p>Vragen en meldingen: <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="es" lang="es">
-    <h2>Español · Política de privacidad</h2>
+  <section id="es" lang="es" data-lang="es" data-title="Kodokur · Política de privacidad">
+    <h1>Política de privacidad</h1>
     <p class="meta">Kodokur para Android · En vigor desde el 26 de septiembre de 2026 · Desarrollador: aripdcom</p>
     <div class="summary">
       <strong>En resumen:</strong> Kodokur no recoge, comparte ni vende datos personales. Su único permiso es la cámara: las imágenes se analizan en el teléfono y nunca se guardan ni se envían a ninguna parte. La app no tiene permiso de INTERNET, ni anuncios, ni bibliotecas de seguimiento. Tu historial de escaneos se queda en tu dispositivo y no se incluye en las copias de seguridad.
@@ -174,8 +186,8 @@
     <h3>Contacto</h3>
     <p>Preguntas y avisos: <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="pt" lang="pt">
-    <h2>Português · Política de privacidade</h2>
+  <section id="pt" lang="pt" data-lang="pt" data-title="Kodokur · Política de privacidade">
+    <h1>Política de privacidade</h1>
     <p class="meta">Kodokur para Android · Em vigor desde 26 de setembro de 2026 · Desenvolvedor: aripdcom</p>
     <div class="summary">
       <strong>Em resumo:</strong> O Kodokur não coleta, compartilha nem vende dados pessoais. Sua única permissão é a câmera: as imagens são analisadas no telefone e nunca são salvas nem enviadas para lugar nenhum. O app não tem permissão de INTERNET, nem anúncios, nem bibliotecas de rastreamento. Seu histórico de leituras fica no seu dispositivo e não entra nos backups.
@@ -195,8 +207,8 @@
     <h3>Contato</h3>
     <p>Dúvidas e relatos: <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="it" lang="it">
-    <h2>Italiano · Informativa sulla privacy</h2>
+  <section id="it" lang="it" data-lang="it" data-title="Kodokur · Informativa sulla privacy">
+    <h1>Informativa sulla privacy</h1>
     <p class="meta">Kodokur per Android · In vigore dal 26 settembre 2026 · Sviluppatore: aripdcom</p>
     <div class="summary">
       <strong>In breve:</strong> Kodokur non raccoglie, condivide né vende dati personali. Il suo unico permesso è la fotocamera: le immagini vengono analizzate sul telefono e non vengono mai salvate né inviate da nessuna parte. L'app non ha il permesso INTERNET, né pubblicità né librerie di tracciamento. La cronologia delle scansioni resta sul tuo dispositivo ed è esclusa dai backup.
@@ -216,8 +228,8 @@
     <h3>Contatti</h3>
     <p>Domande e segnalazioni: <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="da" lang="da">
-    <h2>Dansk · Privatlivspolitik</h2>
+  <section id="da" lang="da" data-lang="da" data-title="Kodokur · Privatlivspolitik">
+    <h1>Privatlivspolitik</h1>
     <p class="meta">Kodokur til Android · Gældende fra 26. september 2026 · Udvikler: aripdcom</p>
     <div class="summary">
       <strong>Kort fortalt:</strong> Kodokur indsamler, deler og sælger ingen personoplysninger. Appens eneste tilladelse er kameraet: billederne analyseres på telefonen og bliver aldrig gemt eller sendt nogen steder hen. Appen har ingen INTERNET-tilladelse, ingen reklamer og ingen sporingsbiblioteker. Din scanningshistorik bliver på din enhed og er udeladt af sikkerhedskopier.
@@ -237,8 +249,8 @@
     <h3>Kontakt</h3>
     <p>Spørgsmål og henvendelser: <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="sv" lang="sv">
-    <h2>Svenska · Integritetspolicy</h2>
+  <section id="sv" lang="sv" data-lang="sv" data-title="Kodokur · Integritetspolicy">
+    <h1>Integritetspolicy</h1>
     <p class="meta">Kodokur för Android · Gäller från 26 september 2026 · Utvecklare: aripdcom</p>
     <div class="summary">
       <strong>Kort sagt:</strong> Kodokur samlar inte in, delar eller säljer några personuppgifter. Appens enda behörighet är kameran: bilderna analyseras på telefonen och sparas eller skickas aldrig någonstans. Appen har ingen INTERNET-behörighet, inga annonser och inga spårningsbibliotek. Din skanningshistorik stannar på din enhet och ingår inte i säkerhetskopior.
@@ -258,8 +270,8 @@
     <h3>Kontakt</h3>
     <p>Frågor och rapporter: <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="nb" lang="nb">
-    <h2>Norsk bokmål · Personvernerklæring</h2>
+  <section id="nb" lang="nb" data-lang="nb" data-title="Kodokur · Personvernerklæring">
+    <h1>Personvernerklæring</h1>
     <p class="meta">Kodokur for Android · Gjelder fra 26. september 2026 · Utvikler: aripdcom</p>
     <div class="summary">
       <strong>Kort fortalt:</strong> Kodokur samler ikke inn, deler eller selger personopplysninger. Den eneste tillatelsen appen har, er kameraet: bildene analyseres på telefonen og blir aldri lagret eller sendt noe sted. Appen har ingen INTERNET-tillatelse, ingen annonser og ingen sporingsbiblioteker. Skannehistorikken din blir på enheten og er holdt utenfor sikkerhetskopier.
@@ -279,8 +291,8 @@
     <h3>Kontakt</h3>
     <p>Spørsmål og henvendelser: <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="fi" lang="fi">
-    <h2>Suomi · Tietosuojakäytäntö</h2>
+  <section id="fi" lang="fi" data-lang="fi" data-title="Kodokur · Tietosuojakäytäntö">
+    <h1>Tietosuojakäytäntö</h1>
     <p class="meta">Kodokur Androidille · Voimassa 26. syyskuuta 2026 alkaen · Kehittäjä: aripdcom</p>
     <div class="summary">
       <strong>Lyhyesti:</strong> Kodokur ei kerää, jaa eikä myy henkilötietoja. Sen ainoa lupa on kamera: kuvat analysoidaan puhelimessa, eikä niitä koskaan tallenneta tai lähetetä minnekään. Sovelluksella ei ole INTERNET-lupaa, mainoksia eikä seurantakirjastoja. Lukuhistoriasi pysyy laitteessasi, eikä sitä sisällytetä varmuuskopioihin.
@@ -300,8 +312,8 @@
     <h3>Yhteystiedot</h3>
     <p>Kysymykset ja ilmoitukset: <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="ru" lang="ru">
-    <h2>Русский · Политика конфиденциальности</h2>
+  <section id="ru" lang="ru" data-lang="ru" data-title="Kodokur · Политика конфиденциальности">
+    <h1>Политика конфиденциальности</h1>
     <p class="meta">Kodokur для Android · Действует с 26 сентября 2026 г. · Разработчик: aripdcom</p>
     <div class="summary">
       <strong>Коротко:</strong> Kodokur не собирает, не передаёт и не продаёт персональные данные. Единственное разрешение приложения — камера: кадры анализируются на телефоне и никогда не сохраняются и никуда не отправляются. У приложения нет разрешения INTERNET, нет рекламы и библиотек отслеживания. История сканирования остаётся на вашем устройстве и не попадает в резервные копии.
@@ -321,8 +333,8 @@
     <h3>Контакты</h3>
     <p>Вопросы и сообщения: <a href="mailto:kodokur@aripd.com">kodokur@aripd.com</a> · <a href="https://github.com/aripdcom/kodokur/issues/new">github.com/aripdcom/kodokur/issues</a></p>
   </section>
-  <section id="ar" lang="ar" dir="rtl">
-    <h2>العربية · سياسة الخصوصية</h2>
+  <section id="ar" lang="ar" data-lang="ar" data-title="Kodokur · سياسة الخصوصية" dir="rtl">
+    <h1>سياسة الخصوصية</h1>
     <p class="meta">Kodokur لنظام Android · سارية اعتباراً من 26 سبتمبر 2026 · المطوّر: aripdcom</p>
     <div class="summary">
       <strong>باختصار:</strong> لا يجمع Kodokur أي بيانات شخصية ولا يشاركها ولا يبيعها. إذنه الوحيد هو الكاميرا: تُحلَّل الإطارات على الهاتف ولا تُحفظ ولا تُرسل إلى أي مكان أبداً. لا يملك التطبيق إذن INTERNET، ولا يحتوي على إعلانات ولا على مكتبات تتبّع. يبقى سجل المسح على جهازك ولا يُدرج في النسخ الاحتياطية.
@@ -345,9 +357,10 @@
 
   <footer>
     <span>Kodokur · no ads, no trackers, camera only</span>
-    <a href="./">Ana sayfa</a>
     <a href="https://github.com/aripdcom/kodokur">GitHub</a>
   </footer>
 </div>
+<script src="assets/i18n.js"></script>
+<script src="assets/site.js"></script>
 </body>
 </html>

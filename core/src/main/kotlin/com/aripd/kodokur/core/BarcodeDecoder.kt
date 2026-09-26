@@ -52,13 +52,21 @@ class BarcodeDecoder(private val thorough: Boolean = false) {
         }
     }
 
+    private companion object {
+        val GS1_IDENTIFIERS = setOf("]d2", "]C1", "]Q3", "]e0")
+    }
+
     private fun Result.toScan(): Scan? {
         val symbology = Symbology.fromName(barcodeFormat.name) ?: return null
         if (text.isNullOrEmpty()) return null
+        val identifier = resultMetadata?.get(ResultMetadataType.SYMBOLOGY_IDENTIFIER) as? String
         return Scan(
             text = text,
             symbology = symbology,
             addOn = resultMetadata?.get(ResultMetadataType.UPC_EAN_EXTENSION) as? String,
+            // ]d2 DataMatrix, ]C1 Code 128, ]Q3 QR, ]e0 DataBar: FNC1 ile başlayan GS1 kodu.
+            gs1 = identifier in GS1_IDENTIFIERS ||
+                symbology == Symbology.RSS_14 || symbology == Symbology.RSS_EXPANDED,
         )
     }
 }

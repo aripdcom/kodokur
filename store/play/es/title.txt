@@ -1,0 +1,1 @@
+Kodokur: lector de barras y QR

@@ -25,6 +25,10 @@ jobs:
       - name: Site denetimi
         run: python3 tools/check_site.py
 
+      # Play metinleri: karakter sınırları, 14 dilin tamamı, görünmez karakter.
+      - name: Mağaza metinleri denetimi
+        run: python3 tools/check_store.py
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

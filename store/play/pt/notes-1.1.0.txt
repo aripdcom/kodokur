@@ -1,0 +1,5 @@
+• Primeira versão no Google Play.
+• Lê todos os códigos de barras e QR comuns; códigos de remédios com validade, lote e número de série.
+• Mostra para onde um link realmente vai e avisa sobre links parecidos, disfarçados ou sem criptografia.
+• Zoom para códigos minúsculos; modo série e exportação em CSV.
+• 14 idiomas. Sem anúncios, sem rastreadores, sem permissão de internet.

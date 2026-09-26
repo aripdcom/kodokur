@@ -9,7 +9,7 @@ plugins {
 // Sürüm tek kaynaktan yönetilir: release.yml, etiketten türettiği sürümü
 // -PappVersion=X.Y.Z olarak geçirir; yerel derlemeler alttaki varsayılanı
 // kullanır. versionCode = major*10000 + minor*100 + patch.
-val appVersion: String = (project.findProperty("appVersion") as? String) ?: "1.0.0"
+val appVersion: String = (project.findProperty("appVersion") as? String) ?: "1.1.0"
 val appVersionCode: Int = appVersion.split('.').map { it.toInt() }.let { (major, minor, patch) ->
     require(major < 214 && minor < 100 && patch < 100) { "Geçersiz sürüm: $appVersion" }
     // AGP, versionCode için pozitif tamsayı ister.

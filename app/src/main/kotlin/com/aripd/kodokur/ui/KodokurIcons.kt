@@ -58,6 +58,13 @@ object KodokurIcons {
                 "2,-0.9 2,-2V4c0,-1.1 -0.9,-2 -2,-2zM19,11h-4v4h-2v-4H9V9h4V5h2v4h4v2z",
         )
     }
+    /** DataMatrix: sol ve alt kenarda dolu "L", üst ve sağda kesikli kenar. */
+    val DataMatrix by lazy {
+        icon(
+            "M3,3h2v18H3zM3,19h18v2H3zM7,3h2v2H7zM11,3h2v2h-2zM15,3h2v2h-2zM19,3h2v2h-2zM19,7h2v2h-2z" +
+                "M19,11h2v2h-2zM19,15h2v2h-2zM8,8h3v3H8zM13,12h3v3h-3zM8,14h2v2H8zM14,7h2v2h-2z",
+        )
+    }
     val Text by lazy { icon("M2.5,4v3h5v12h3V7h5V4H2.5zM21.5,9h-9v3h3v7h3v-7h3V9z") }
 
     private fun icon(path: String): ImageVector =

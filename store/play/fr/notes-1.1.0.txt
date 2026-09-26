@@ -1,0 +1,5 @@
+• Première version sur Google Play.
+• Lit tous les codes-barres et QR codes courants ; codes de médicaments avec date de péremption, lot et numéro de série.
+• Montre où mène vraiment un lien et signale les liens trompeurs, masqués ou non chiffrés.
+• Zoom pour les codes-barres minuscules ; mode série et export CSV.
+• 14 langues. Pas de pub, pas de traceurs, pas d’autorisation Internet.

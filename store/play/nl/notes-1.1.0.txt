@@ -1,0 +1,5 @@
+• Eerste release op Google Play.
+• Leest alle gangbare barcodes en QR-codes; medicijncodes met vervaldatum, partijnummer en serienummer.
+• Laat zien waar een link echt naartoe gaat en waarschuwt voor misleidende, verborgen of onversleutelde links.
+• Zoom voor piepkleine barcodes; reeksmodus en CSV-export.
+• 14 talen. Geen advertenties, geen trackers, geen internettoestemming.

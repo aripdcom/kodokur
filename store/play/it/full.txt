@@ -1,0 +1,34 @@
+Kodokur legge ogni codice a barre e QR, ti dice cos'è e cosa puoi farci, e non va mai online per farlo. Niente pubblicità, niente tracker, nessun account. La fotocamera è il suo unico permesso; l'app non ha alcun permesso di accesso a internet.
+
+UN'APP PER OGNI CODICE
+• Spesa e prodotti: codici EAN e UPC. Cerca un prodotto su Open Food Facts o sul web con un tocco.
+• Codici dei farmaci: il codice quadrato sulla confezione di un farmaco mostra in chiaro scadenza, lotto e numero di serie, e Kodokur ti avvisa se la data è passata.
+• Libri e riviste: ISBN con i trattini al posto giusto, con l'ISBN-10 e il gruppo di paese o lingua; il prezzo dal piccolo codice aggiuntivo. I codici delle riviste danno l'ISSN e il numero dell'uscita.
+• Wi-Fi: collegati a una rete dal suo codice QR con un tocco. La password resta nascosta finché non scegli di vederla.
+• Contatti: il codice QR di un biglietto da visita (vCard, MECARD) finisce dritto nei tuoi contatti. I codici di email, telefono, SMS e mappe si aprono nell'app giusta.
+• Tutto il resto viene mostrato come testo da copiare, condividere o cercare.
+
+SAI DOVE PORTA UN LINK
+I codici QR su manifesti, parchimetri e menu sono un modo facile per mandare le persone su siti falsi. Prima che tu apra un link, Kodokur ti mostra il sito a cui porta davvero e ti avvisa in caso di:
+• indirizzi che imitano altri con lettere di altri alfabeti,
+• un nome falso nascosto prima di una «@»,
+• semplici indirizzi IP,
+• pagine http non cifrate.
+I link non si aprono mai da soli, e quelli rischiosi chiedono prima conferma.
+
+FATTO PER I CODICI DEL MONDO REALE
+• Pizzica, tocca due volte o usa il pulsante dello zoom per i codici minuscoli.
+• Di lato, capovolti o stampati in negativo, i codici vengono letti lo stesso.
+• Leggi un codice da una foto, anche senza dare accesso alla fotocamera.
+• Torcia e tocco per mettere a fuoco.
+• Formati: EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, ITF, Codabar, GS1 DataBar, QR, Data Matrix, PDF417, Aztec.
+
+INVENTARIO E CATALOGAZIONE
+In modalità serie i codici si aggiungono uno dopo l'altro alla cronologia senza fermarsi, e lo stesso articolo non viene mai contato due volte. Condividi l'elenco come file CSV per un foglio di calcolo: lo scaffale di un negozio, l'armadietto dei medicinali o la libreria di casa.
+
+RESTA SUL TUO TELEFONO
+Le immagini della fotocamera vengono analizzate sul telefono e non vengono mai salvate né inviate. La cronologia resta sul tuo telefono e, dato che può contenere password Wi-Fi, è esclusa dai backup. Pulsanti come la ricerca di prodotti o libri passano il codice al tuo browser; Kodokur di per sé non si collega mai a niente.
+
+14 lingue: English, Türkçe, Deutsch, Français, Nederlands, Español, Português, Italiano, Dansk, Svenska, Norsk, Suomi, Русский, العربية.
+
+Open source (GNU GPL v3): github.com/aripdcom/kodokur

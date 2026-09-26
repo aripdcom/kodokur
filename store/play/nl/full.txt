@@ -1,0 +1,34 @@
+Kodokur leest elke barcode en QR-code, vertelt je wat het is en wat je ermee kunt, en gaat daarvoor nooit online. Geen advertenties, geen trackers, geen account. De camera is de enige toestemming; internettoestemming heeft de app helemaal niet.
+
+ÉÉN APP VOOR ELKE CODE
+• Boodschappen en producten: EAN- en UPC-barcodes. Zoek een product met één tik op in Open Food Facts of op het web.
+• Medicijncodes: de vierkante code op een medicijndoosje toont de vervaldatum, het partijnummer en het serienummer in gewone woorden, en Kodokur waarschuwt je als de datum verstreken is.
+• Boeken en tijdschriften: ISBN’s met de streepjes op de juiste plek, met het ISBN-10 en de landen- of taalgroep; de prijs uit de kleine extra barcode. Tijdschriftbarcodes geven het ISSN en het nummer van de uitgave.
+• Wi-Fi: maak met één tik verbinding met een netwerk via de QR-code. Het wachtwoord blijft verborgen tot je het zelf wilt zien.
+• Contacten: QR-codes op visitekaartjes (vCard, MECARD) gaan direct naar je contacten. E-mail-, telefoon-, sms- en kaartcodes openen de juiste app.
+• Al het andere verschijnt als tekst die je kunt kopiëren, delen of opzoeken.
+
+WEET WAAR EEN LINK NAARTOE GAAT
+QR-codes op posters, parkeerautomaten en menukaarten zijn een makkelijke manier om mensen naar nepsites te sturen. Voordat je een link opent, laat Kodokur zien naar welke site hij echt gaat, en waarschuwt je voor:
+• misleidend gelijkende adressen met letters uit andere alfabetten,
+• een valse naam die vóór een “@” verstopt zit,
+• kale IP-adressen,
+• onversleutelde http-pagina’s.
+Links openen nooit vanzelf, en bij riskante links wordt het eerst gevraagd.
+
+GEMAAKT VOOR ECHTE CODES
+• Knijp, tik twee keer of gebruik de zoomknop voor piepkleine barcodes.
+• Zijwaarts gehouden, ondersteboven of in negatief gedrukt: codes worden toch gelezen.
+• Lees een code uit een foto, ook zonder cameratoegang te geven.
+• Zaklamp, tikken om scherp te stellen.
+• Formaten: EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, ITF, Codabar, GS1 DataBar, QR, Data Matrix, PDF417, Aztec.
+
+VOORRAAD TELLEN EN CATALOGISEREN
+In reeksmodus gaat code na code zonder onderbreking naar de geschiedenis, en niets wordt twee keer geteld. Deel de lijst als CSV-bestand voor een spreadsheet: een winkelschap, een medicijnkastje of de boekenkast thuis.
+
+BLIJFT OP JE TELEFOON
+Camerabeelden worden op de telefoon bekeken en nooit opgeslagen of ergens naartoe gestuurd. Je geschiedenis blijft op je telefoon en valt buiten back-ups, omdat er Wi-Fi-wachtwoorden in kunnen staan. Knoppen zoals product- of boekzoeken geven de code door aan je browser; Kodokur zelf maakt nergens verbinding mee.
+
+14 talen: English, Türkçe, Deutsch, Français, Nederlands, Español, Português, Italiano, Dansk, Svenska, Norsk, Suomi, Русский, العربية.
+
+Open source (GNU GPL v3): github.com/aripdcom/kodokur

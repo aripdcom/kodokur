@@ -1,0 +1,1 @@
+Viivakoodit ja QR-koodit. Tarkistaa linkit, lukee lääkekoodit. Ei mainoksia.

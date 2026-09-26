@@ -1,0 +1,34 @@
+O Kodokur lê todo código de barras e QR, diz o que é e o que você pode fazer com ele, e nunca se conecta à internet para isso. Sem anúncios, sem rastreadores, sem conta. A câmera é a única permissão; o app não tem permissão de internet.
+
+UM APP PARA TODO TIPO DE CÓDIGO
+• Mercado e produtos: códigos EAN e UPC. Consulte o produto no Open Food Facts ou pesquise na web com um toque.
+• Códigos de remédios: o código quadrado da caixa do remédio mostra a validade, o lote e o número de série em linguagem clara, e o Kodokur avisa se a data já passou.
+• Livros e revistas: ISBNs com os hífens no lugar certo, com o ISBN-10 e o grupo de país ou idioma; o preço vem do pequeno código de barras adicional. Os códigos de revistas mostram o ISSN e o número da edição.
+• Wi-Fi: conecte-se a uma rede pelo QR code com um toque. A senha fica oculta até você decidir vê-la.
+• Contatos: o QR code de um cartão de visita (vCard, MECARD) vai direto para os seus contatos. Códigos de e-mail, telefone, SMS e mapa abrem no app certo.
+• Todo o resto aparece como texto que você pode copiar, compartilhar ou pesquisar.
+
+SAIBA PARA ONDE O LINK VAI
+QR codes em cartazes, parquímetros e cardápios são um jeito fácil de levar pessoas a sites falsos. Antes de você abrir um link, o Kodokur mostra o site para onde ele realmente leva e avisa sobre:
+• endereços parecidos, escritos com letras de outros alfabetos,
+• um nome falso escondido antes de um “@”,
+• endereços IP puros,
+• páginas http sem criptografia.
+Os links nunca abrem sozinhos, e os arriscados pedem confirmação antes.
+
+FEITO PARA CÓDIGOS DO MUNDO REAL
+• Faça pinça, toque duas vezes ou use o botão de zoom para códigos minúsculos.
+• De lado, de cabeça para baixo ou impressos em negativo, os códigos são lidos do mesmo jeito.
+• Leia um código de uma foto, mesmo sem dar acesso à câmera.
+• Lanterna e toque para focar.
+• Formatos: EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, ITF, Codabar, GS1 DataBar, QR, Data Matrix, PDF417, Aztec.
+
+INVENTÁRIO E CATALOGAÇÃO
+No modo série, os códigos entram no histórico um atrás do outro, sem parar, e o mesmo item nunca é contado duas vezes. Compartilhe a lista como CSV para uma planilha: uma prateleira de loja, um armário de farmácia ou a biblioteca de casa.
+
+FICA NO SEU TELEFONE
+As imagens da câmera são analisadas no telefone e nunca são salvas nem enviadas. O histórico fica no seu telefone e, como pode conter senhas de Wi-Fi, fica fora dos backups. Botões como a busca de produtos ou livros passam o código para o seu navegador; o Kodokur em si nunca se conecta a nada.
+
+14 idiomas: English, Türkçe, Deutsch, Français, Nederlands, Español, Português, Italiano, Dansk, Svenska, Norsk, Suomi, Русский, العربية.
+
+Código aberto (GNU GPL v3): github.com/aripdcom/kodokur

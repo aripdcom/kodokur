@@ -1,0 +1,5 @@
+• Første utgivelse på Google Play.
+• Leser alle vanlige strekkoder og QR-koder; legemiddelkoder med utløpsdato, batch- og serienummer.
+• Viser hvor en lenke egentlig går, og advarer mot forvekslbare, skjulte eller ukrypterte lenker.
+• Zoom for bitte små strekkoder; seriemodus og CSV-eksport.
+• 14 språk. Ingen annonser, ingen sporing, ingen internettillatelse.

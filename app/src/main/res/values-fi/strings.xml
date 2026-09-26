@@ -4,7 +4,7 @@
   Bölüm başlıkları Türkçe: depodaki öbür yorumlar gibi geliştirici notu.
 -->
 <resources>
-    <string name="app_tagline">Viivakoodi- ja QR-lukija, joka tuntee ISBN-koodit</string>
+    <string name="app_tagline">Kaikki viivakoodit ja QR-koodit. Mikään ei lähde puhelimestasi.</string>
 
     <!-- Ortak -->
     <string name="back">Takaisin</string>
@@ -76,6 +76,9 @@
     <string name="label_phone">Puhelin</string>
     <string name="label_email">Sähköposti</string>
     <string name="label_website">Verkkosivu</string>
+    <string name="label_job_title">Tehtävänimike</string>
+    <string name="label_postal_address">Postiosoite</string>
+    <string name="label_note">Muistiinpano</string>
     <string name="label_format">Muoto</string>
     <string name="label_add_on">Lisäkoodi</string>
     <string name="label_raw">Raakasisältö</string>
@@ -98,6 +101,35 @@
     <string name="act_show_map">Näytä kartalla</string>
     <string name="act_add_contact">Lisää yhteystietoihin</string>
     <string name="external_notice">Avautuu selaimessa tai toisessa sovelluksessa. Kodokur itse ei koskaan ota yhteyttä verkkoon.</string>
+
+    <!-- GS1 (ilaç karekodu) -->
+    <string name="kind_gs1">Tuotekoodi (GS1)</string>
+    <string name="label_expiry">Viimeinen käyttöpäivä</string>
+    <string name="label_best_before">Parasta ennen</string>
+    <string name="label_production">Valmistuspäivä</string>
+    <string name="label_batch">Eränumero</string>
+    <string name="label_serial">Sarjanumero</string>
+    <string name="label_count">Määrä</string>
+    <string name="label_gs1_field">Kenttä (%1$s)</string>
+    <string name="gs1_expired">Vanhentunut: viimeinen käyttöpäivä oli %1$s.</string>
+
+    <!-- Bağlantı güvenliği -->
+    <string name="label_destination">Kohde</string>
+    <string name="label_encoded_name">Koodattu nimi</string>
+    <string name="label_address">Koko osoite</string>
+    <string name="warn_not_encrypted">Salaamaton yhteys (http). Sivua voidaan muuttaa matkalla.</string>
+    <string name="warn_lookalike">Osoitteessa on muita kuin latinalaisia kirjaimia. Se voi jäljitellä tunnettua sivustoa.</string>
+    <string name="warn_ip_address">Linkki vie pelkkään IP-osoitteeseen eikä nimettyyn sivustoon.</string>
+    <string name="warn_hidden_destination">Merkkiä ”@” edeltävä osa on vain käyttäjänimi. Linkki vie todellisuudessa osoitteeseen %1$s.</string>
+    <string name="link_confirm_title">Avataanko linkki?</string>
+    <string name="link_confirm_body">Se vie osoitteeseen %1$s. Avaa se vain, jos luotat koodin alkuperään.</string>
+    <string name="link_open_anyway">Avaa silti</string>
+
+    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <string name="zoom_level">Zoomaus %1$s. Muuta napauttamalla.</string>
+    <string name="act_copy_item">Kopioi %1$s</string>
+    <string name="act_delete_item">Poista %1$s</string>
+    <string name="act_more">Lisää vaihtoehtoja</string>
 
     <!-- Geçmiş -->
     <string name="history_title">Historia</string>

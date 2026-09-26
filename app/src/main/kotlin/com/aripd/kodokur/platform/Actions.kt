@@ -99,6 +99,9 @@ object Actions {
             type = ContactsContract.RawContacts.CONTENT_TYPE
             contact.name?.let { putExtra(ContactsContract.Intents.Insert.NAME, it) }
             contact.organization?.let { putExtra(ContactsContract.Intents.Insert.COMPANY, it) }
+            contact.title?.let { putExtra(ContactsContract.Intents.Insert.JOB_TITLE, it) }
+            contact.address?.let { putExtra(ContactsContract.Intents.Insert.POSTAL, it) }
+            contact.note?.let { putExtra(ContactsContract.Intents.Insert.NOTES, it) }
             val phoneKeys = listOf(
                 ContactsContract.Intents.Insert.PHONE,
                 ContactsContract.Intents.Insert.SECONDARY_PHONE,

@@ -1,0 +1,34 @@
+Kodokur lukee kaikki viivakoodit ja QR-koodit, kertoo mikä koodi on ja mitä sillä voi tehdä, eikä käy verkossa missään vaiheessa. Ei mainoksia, ei seurantaa, ei tiliä. Kamera on sen ainoa lupa; sovelluksella ei ole internet-lupaa lainkaan.
+
+YKSI SOVELLUS KAIKILLE KOODEILLE
+• Ruokaostokset ja tuotteet: EAN- ja UPC-viivakoodit. Hae tuote Open Food Factsista tai verkosta yhdellä napautuksella.
+• Lääkepakkausten koodit: lääkepakkauksen neliönmuotoinen koodi näyttää viimeisen käyttöpäivän, eränumeron ja sarjanumeron selkokielellä, ja Kodokur varoittaa, jos päivä on jo mennyt.
+• Kirjat ja lehdet: ISBN-tunnukset oikein tavuviivoin, ISBN-10-muodon ja maa- tai kieliryhmän kanssa; hinta pienestä lisäkoodista. Lehtien viivakoodeista saat ISSN:n ja numeron.
+• Wi-Fi: liity verkkoon sen QR-koodista yhdellä napautuksella. Salasana pysyy piilossa, kunnes haluat nähdä sen.
+• Yhteystiedot: käyntikorttien QR-koodit (vCard, MECARD) menevät suoraan yhteystietoihisi. Sähköposti-, puhelin-, SMS- ja karttakoodit avautuvat oikeassa sovelluksessa.
+• Kaikki muu näytetään tekstinä, jonka voit kopioida, jakaa tai hakea.
+
+TIEDÄ, MINNE LINKKI VIE
+Julisteiden, pysäköintiautomaattien ja ruokalistojen QR-koodit ovat helppo tapa ohjata ihmisiä huijaussivustoille. Ennen kuin avaat linkin, Kodokur näyttää, mille sivustolle se todella vie, ja varoittaa:
+• osoitteista, joissa on toisten aakkostojen samannäköisiä kirjaimia,
+• ”@”-merkin eteen piilotetusta valenimestä,
+• pelkistä IP-osoitteista,
+• salaamattomista http-sivuista.
+Linkit eivät koskaan avaudu itsestään, ja riskialttiit linkit kysyvät ensin.
+
+TEHTY OIKEAN ELÄMÄN KOODEILLE
+• Nipistä, kaksoisnapauta tai käytä zoomauspainiketta pieniin viivakoodeihin.
+• Koodit lukeutuvat, vaikka ne olisivat vinossa, ylösalaisin tai käänteisvärein painettuja.
+• Lue koodi valokuvasta, myös ilman kameran käyttöoikeutta.
+• Taskulamppu, tarkennus napauttamalla.
+• Muodot: EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, ITF, Codabar, GS1 DataBar, QR, Data Matrix, PDF417, Aztec.
+
+INVENTAARIO JA LUETTELOINTI
+Sarjatilassa koodit lisätään historiaan yksi toisensa perään ilman taukoja, eikä samaa tuotetta lasketa kahdesti. Jaa lista CSV-tiedostona taulukkolaskentaan: kaupan hylly, lääkekaappi tai kotikirjasto.
+
+PYSYY PUHELIMESSASI
+Kameran kuvat käsitellään puhelimessa, eikä niitä koskaan tallenneta tai lähetetä minnekään. Historia pysyy puhelimessasi, ja koska se voi sisältää Wi-Fi-salasanoja, sitä ei sisällytetä varmuuskopioihin. Esimerkiksi tuote- ja kirjahaun painikkeet antavat koodin selaimellesi; Kodokur itse ei ota yhteyttä mihinkään.
+
+14 kieltä: English, Türkçe, Deutsch, Français, Nederlands, Español, Português, Italiano, Dansk, Svenska, Norsk, Suomi, Русский, العربية.
+
+Avoin lähdekoodi (GNU GPL v3): github.com/aripdcom/kodokur

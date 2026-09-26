@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_tagline">Strekkode- og QR-leser som kan sine ISBN</string>
+    <string name="app_tagline">Alle strekkoder og QR-koder. Ingenting forlater telefonen.</string>
 
     <!-- Ortak -->
     <string name="back">Tilbake</string>
@@ -72,6 +72,9 @@
     <string name="label_phone">Telefon</string>
     <string name="label_email">E-post</string>
     <string name="label_website">Nettsted</string>
+    <string name="label_job_title">Stilling</string>
+    <string name="label_postal_address">Postadresse</string>
+    <string name="label_note">Notat</string>
     <string name="label_format">Format</string>
     <string name="label_add_on">Tilleggskode</string>
     <string name="label_raw">Råinnhold</string>
@@ -94,6 +97,35 @@
     <string name="act_show_map">Vis på kart</string>
     <string name="act_add_contact">Legg til i kontakter</string>
     <string name="external_notice">Åpnes i nettleseren eller en annen app. Kodokur selv kobler seg aldri til nettet.</string>
+
+    <!-- GS1 (ilaç karekodu) -->
+    <string name="kind_gs1">Produktkode (GS1)</string>
+    <string name="label_expiry">Utløpsdato</string>
+    <string name="label_best_before">Best før</string>
+    <string name="label_production">Produksjonsdato</string>
+    <string name="label_batch">Batch / lot</string>
+    <string name="label_serial">Serienummer</string>
+    <string name="label_count">Antall</string>
+    <string name="label_gs1_field">Felt (%1$s)</string>
+    <string name="gs1_expired">Utløpt: utløpsdatoen var %1$s.</string>
+
+    <!-- Bağlantı güvenliği -->
+    <string name="label_destination">Går til</string>
+    <string name="label_encoded_name">Kodet navn</string>
+    <string name="label_address">Full adresse</string>
+    <string name="warn_not_encrypted">Ikke kryptert (http). Siden kan bli endret underveis.</string>
+    <string name="warn_lookalike">Adressen bruker ikke-latinske bokstaver. Den kan etterligne et kjent nettsted.</string>
+    <string name="warn_ip_address">Lenken peker til en ren IP-adresse, ikke et navngitt nettsted.</string>
+    <string name="warn_hidden_destination">Delen foran «@» er bare et brukernavn. Lenken går egentlig til %1$s.</string>
+    <string name="link_confirm_title">Åpne denne lenken?</string>
+    <string name="link_confirm_body">Den går til %1$s. Åpne den bare hvis du stoler på hvor koden kommer fra.</string>
+    <string name="link_open_anyway">Åpne likevel</string>
+
+    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <string name="zoom_level">Zoom %1$s. Trykk for å endre.</string>
+    <string name="act_copy_item">Kopier %1$s</string>
+    <string name="act_delete_item">Slett %1$s</string>
+    <string name="act_more">Flere valg</string>
 
     <!-- Geçmiş -->
     <string name="history_title">Historikk</string>

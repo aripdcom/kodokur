@@ -71,8 +71,12 @@ git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
       locale table in `store/README.md` (`nb` → Norwegian `no-NO`, `pt` → `pt-BR`)
 - [ ] **Graphics:** icon `graphics/icon-512.png`, feature graphic
       `graphics/feature-1024.png`, phone screenshots `screenshots/en/1…6`
-- [ ] **Store settings:** category **Tools**, tags (Barcode scanner, QR code scanner),
-      email `kodokur@aripd.com`, website `https://kodokur.aripd.com`
+- [x] **Store settings:** category **Tools**; tags **Barcode scanner, Books & reference,
+      Privacy & security, Shopping, Wi-Fi** (no health tag, to stay consistent with the
+      "no health features" declaration); email `kodokur@aripd.com`, website
+      `https://kodokur.aripd.com`
+- [x] **External marketing:** left **on**. Google may promote the app outside Play at no
+      cost; it does not change the app, its data safety answers or its privacy
 - [ ] **App content:**
   - Privacy policy: `https://kodokur.aripd.com/privacy.html`
   - Ads: no ads

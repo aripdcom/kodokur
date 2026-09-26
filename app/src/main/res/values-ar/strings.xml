@@ -80,6 +80,9 @@
     <string name="label_phone">الهاتف</string>
     <string name="label_email">البريد الإلكتروني</string>
     <string name="label_website">الموقع الإلكتروني</string>
+    <string name="label_job_title">المسمى الوظيفي</string>
+    <string name="label_postal_address">العنوان البريدي</string>
+    <string name="label_note">ملاحظة</string>
     <string name="label_format">التنسيق</string>
     <string name="label_add_on">الرمز الإضافي</string>
     <string name="label_raw">المحتوى الخام</string>

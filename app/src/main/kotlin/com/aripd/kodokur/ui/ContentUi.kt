@@ -145,10 +145,13 @@ fun Content.details(locale: Locale, today: java.time.LocalDate = java.time.Local
         is Content.Geo -> add(Detail(R.string.label_coordinates, c.coordinates()))
         is Content.Contact -> {
             c.name?.let { add(Detail(R.string.label_name, it)) }
+            c.title?.let { add(Detail(R.string.label_job_title, it)) }
             c.organization?.let { add(Detail(R.string.label_organization, it)) }
             c.phones.forEach { add(Detail(R.string.label_phone, it)) }
             c.emails.forEach { add(Detail(R.string.label_email, it)) }
             c.url?.let { add(Detail(R.string.label_website, it)) }
+            c.address?.let { add(Detail(R.string.label_postal_address, it)) }
+            c.note?.let { add(Detail(R.string.label_note, it)) }
         }
         is Content.Text -> Unit
     }

@@ -43,6 +43,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -70,6 +71,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import com.aripd.kodokur.KodokurViewModel
@@ -106,6 +108,16 @@ fun ScannerScreen(
     var readingImage by remember { mutableStateOf(false) }
     val trigger = remember { ScanTrigger() }
     val zoom = remember { ZoomControl() }
+
+    // Tarayıcının zemini her temada siyah: durum çubuğu simgeleri açık renk olmalı.
+    // Açık temada öbür ekranlar koyu simge kullanır; çıkarken önceki hâle dönülür.
+    DisposableEffect(view) {
+        val window = context.findActivity()?.window
+        val controller = window?.let { WindowCompat.getInsetsController(it, view) }
+        val previous = controller?.isAppearanceLightStatusBars
+        controller?.isAppearanceLightStatusBars = false
+        onDispose { if (previous != null) controller.isAppearanceLightStatusBars = previous }
+    }
 
     val permissionLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
         granted = it

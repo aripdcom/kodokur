@@ -72,6 +72,9 @@
     <string name="label_phone">Telefoon</string>
     <string name="label_email">E-mail</string>
     <string name="label_website">Website</string>
+    <string name="label_job_title">Functie</string>
+    <string name="label_postal_address">Postadres</string>
+    <string name="label_note">Notitie</string>
     <string name="label_format">Formaat</string>
     <string name="label_add_on">Extra code</string>
     <string name="label_raw">Ruwe inhoud</string>

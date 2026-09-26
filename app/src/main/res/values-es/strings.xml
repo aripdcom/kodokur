@@ -73,6 +73,9 @@
     <string name="label_phone">Teléfono</string>
     <string name="label_email">Correo</string>
     <string name="label_website">Sitio web</string>
+    <string name="label_job_title">Cargo</string>
+    <string name="label_postal_address">Dirección postal</string>
+    <string name="label_note">Nota</string>
     <string name="label_format">Formato</string>
     <string name="label_add_on">Add-on</string>
     <string name="label_raw">Contenido sin procesar</string>

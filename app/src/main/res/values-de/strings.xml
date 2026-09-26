@@ -72,6 +72,9 @@
     <string name="label_phone">Telefon</string>
     <string name="label_email">E-Mail</string>
     <string name="label_website">Website</string>
+    <string name="label_job_title">Position</string>
+    <string name="label_postal_address">Postanschrift</string>
+    <string name="label_note">Notiz</string>
     <string name="label_format">Format</string>
     <string name="label_add_on">Zusatzcode</string>
     <string name="label_raw">Rohinhalt</string>

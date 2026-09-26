@@ -72,6 +72,9 @@
     <string name="label_phone">Telefon</string>
     <string name="label_email">E-post</string>
     <string name="label_website">Nettsted</string>
+    <string name="label_job_title">Stilling</string>
+    <string name="label_postal_address">Postadresse</string>
+    <string name="label_note">Notat</string>
     <string name="label_format">Format</string>
     <string name="label_add_on">Tilleggskode</string>
     <string name="label_raw">Råinnhold</string>

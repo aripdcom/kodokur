@@ -6,7 +6,8 @@
       market ürünü, Wi-Fi etiketi) koşuldu; sonuç o dosyanın sonuna yazıldı
 - [ ] `python3 tools/check_strings.py`, `check_site.py`, `check_store.py` temiz
 - [ ] `./gradlew :core:test :app:assembleDebug` geçti
-- [ ] `store/screenshots/{en,tr}/` güncel (1080×2400, en az 2, önerilen 4–6)
+- [ ] `store/screenshots/en/` güncel (1080×2160, en az 2, önerilen 4–6; bütün dillerde
+      aynı İngilizce görüntüler kullanılır)
 
 ## Sürüm
 

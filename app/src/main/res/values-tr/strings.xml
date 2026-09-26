@@ -72,6 +72,9 @@
     <string name="label_phone">Telefon</string>
     <string name="label_email">E-posta</string>
     <string name="label_website">Web sitesi</string>
+    <string name="label_job_title">Unvan</string>
+    <string name="label_postal_address">Posta adresi</string>
+    <string name="label_note">Not</string>
     <string name="label_format">Biçim</string>
     <string name="label_add_on">Ek barkod</string>
     <string name="label_raw">Ham içerik</string>

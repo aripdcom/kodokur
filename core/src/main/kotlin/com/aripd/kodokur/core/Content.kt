@@ -39,6 +39,11 @@ sealed interface Content {
         val phones: List<String>,
         val emails: List<String>,
         val url: String?,
+        /** Unvan (vCard TITLE). */
+        val title: String? = null,
+        /** Posta adresi, bileşenleri virgülle birleşmiş. */
+        val address: String? = null,
+        val note: String? = null,
     ) : Content
 
     data class Text(val text: String) : Content

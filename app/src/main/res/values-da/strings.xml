@@ -72,6 +72,9 @@
     <string name="label_phone">Telefon</string>
     <string name="label_email">E-mail</string>
     <string name="label_website">Hjemmeside</string>
+    <string name="label_job_title">Stilling</string>
+    <string name="label_postal_address">Postadresse</string>
+    <string name="label_note">Note</string>
     <string name="label_format">Format</string>
     <string name="label_add_on">Tillægskode</string>
     <string name="label_raw">Råt indhold</string>

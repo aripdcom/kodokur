@@ -78,6 +78,9 @@
     <string name="label_phone">Телефон</string>
     <string name="label_email">Эл. почта</string>
     <string name="label_website">Сайт</string>
+    <string name="label_job_title">Должность</string>
+    <string name="label_postal_address">Почтовый адрес</string>
+    <string name="label_note">Заметка</string>
     <string name="label_format">Формат</string>
     <string name="label_add_on">Доп. код</string>
     <string name="label_raw">Исходное содержимое</string>

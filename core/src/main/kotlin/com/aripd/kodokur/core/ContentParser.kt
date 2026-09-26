@@ -120,6 +120,10 @@ object ContentParser {
             phones = f.filter { it.first == "TEL" && it.second.isNotEmpty() }.map { it.second },
             emails = f.filter { it.first == "EMAIL" && it.second.isNotEmpty() }.map { it.second },
             url = f.first("URL"),
+            // MECARD adresi tek alan; bileşenler virgülle ayrılır.
+            address = f.first("ADR")?.split(',')?.map(String::trim)?.filter(String::isNotEmpty)
+                ?.joinToString(", ")?.takeIf { it.isNotEmpty() },
+            note = f.first("NOTE"),
         )
     }
 
@@ -156,39 +160,137 @@ object ContentParser {
         return Content.Geo(lat, lon)
     }
 
+    /**
+     * vCard 2.1–4.0. Katlanmış satırlar açılır; quoted-printable değerler (eski
+     * telefonların ve kartvizit üreticilerinin Türkçe karakterleri =C3=BC diye
+     * yazdığı biçim) CHARSET'e göre çözülür. Yapılı alanlar (N, ORG, ADR) kaçışsız
+     * ";" işaretlerinden bölünür, kaçışlar ondan sonra açılır.
+     */
     private fun parseVcard(text: String): Content {
-        // Katlanmış satırları (boşlukla başlayan devam satırları) aç.
-        val lines = text.replace("\r\n", "\n").replace(Regex("\n[ \t]"), "").split('\n')
         var fn: String? = null
         var n: String? = null
         var org: String? = null
         var url: String? = null
+        var title: String? = null
+        var address: String? = null
+        var note: String? = null
         val phones = ArrayList<String>()
         val emails = ArrayList<String>()
-        for (line in lines) {
+        for (line in vcardLines(text)) {
             val colon = line.indexOf(':')
             if (colon <= 0) continue
-            val key = line.substring(0, colon).substringBefore(';').uppercase()
-            val value = line.substring(colon + 1).trim().replace("\\,", ",").replace("\\;", ";")
-            if (value.isEmpty()) continue
+            val params = line.substring(0, colon).split(';')
+            val key = params.first().substringAfterLast('.').uppercase() // "item1.TEL" → TEL
+            var raw = line.substring(colon + 1).trim()
+            if (params.any { it.uppercase().let { p -> p == "QUOTED-PRINTABLE" || p == "ENCODING=QUOTED-PRINTABLE" } }) {
+                val charset = params.firstOrNull { it.uppercase().startsWith("CHARSET=") }?.substringAfter('=')
+                raw = decodeQuotedPrintable(raw, charset)
+            }
+            if (raw.isEmpty()) continue
+            val parts = splitUnescaped(raw).map(::unescapeVcard)
+            val value = unescapeVcard(raw)
             when (key) {
                 "FN" -> fn = value
-                "N" -> n = value.split(';').let { p ->
-                    listOfNotNull(p.getOrNull(1), p.getOrNull(0)).filter(String::isNotBlank).joinToString(" ")
-                }
-                "ORG" -> org = value.split(';').filter(String::isNotBlank).joinToString(", ")
+                "N" -> n = listOfNotNull(parts.getOrNull(1), parts.getOrNull(0))
+                    .filter(String::isNotBlank).joinToString(" ")
+                "ORG" -> org = parts.filter(String::isNotBlank).joinToString(", ")
+                "TITLE" -> title = value
                 "TEL" -> phones += value.removePrefix("tel:")
                 "EMAIL" -> emails += value
-                "URL" -> url = value
+                "URL" -> url = url ?: value
+                "ADR" -> address = address ?: parts.filter(String::isNotBlank).joinToString(", ")
+                "NOTE" -> note = value
             }
         }
         return Content.Contact(
-            name = fn ?: n?.takeIf { it.isNotBlank() },
-            organization = org,
+            name = fn?.takeIf { it.isNotBlank() } ?: n?.takeIf { it.isNotBlank() },
+            organization = org?.takeIf { it.isNotBlank() },
             phones = phones,
             emails = emails,
             url = url,
+            title = title,
+            address = address?.takeIf { it.isNotBlank() },
+            note = note,
         )
+    }
+
+    /** Satırları açar: boşlukla başlayan devam satırı ve quoted-printable'ın "=" ile biten yumuşak sonu. */
+    private fun vcardLines(text: String): List<String> {
+        val physical = text.replace("\r\n", "\n").replace('\r', '\n').split('\n')
+        val out = ArrayList<String>()
+        for (line in physical) {
+            val last = out.lastOrNull()
+            when {
+                last != null && (line.startsWith(" ") || line.startsWith("\t")) ->
+                    out[out.size - 1] = last + line.substring(1)
+                last != null && last.endsWith("=") && isQuotedPrintable(last) ->
+                    out[out.size - 1] = last.dropLast(1) + line
+                else -> out += line
+            }
+        }
+        return out
+    }
+
+    private fun isQuotedPrintable(line: String): Boolean =
+        line.substringBefore(':').uppercase().contains("QUOTED-PRINTABLE")
+
+    internal fun decodeQuotedPrintable(value: String, charset: String?): String {
+        val bytes = java.io.ByteArrayOutputStream()
+        var i = 0
+        while (i < value.length) {
+            val c = value[i]
+            if (c == '=' && i + 2 < value.length) {
+                val b = value.substring(i + 1, i + 3).toIntOrNull(16)
+                if (b != null) {
+                    bytes.write(b)
+                    i += 3
+                    continue
+                }
+            }
+            bytes.write(c.toString().toByteArray(Charsets.UTF_8))
+            i++
+        }
+        val cs = try {
+            charset?.let { java.nio.charset.Charset.forName(it) } ?: Charsets.UTF_8
+        } catch (_: Exception) {
+            Charsets.UTF_8
+        }
+        return String(bytes.toByteArray(), cs)
+    }
+
+    /** Kaçışsız ";" işaretlerinden böler (kaçışlar korunur). */
+    private fun splitUnescaped(value: String): List<String> {
+        val out = ArrayList<String>()
+        val cur = StringBuilder()
+        var escaped = false
+        for (c in value) {
+            when {
+                escaped -> { cur.append('\\').append(c); escaped = false }
+                c == '\\' -> escaped = true
+                c == ';' -> { out += cur.toString(); cur.clear() }
+                else -> cur.append(c)
+            }
+        }
+        if (escaped) cur.append('\\')
+        out += cur.toString()
+        return out
+    }
+
+    private fun unescapeVcard(value: String): String {
+        val out = StringBuilder()
+        var i = 0
+        while (i < value.length) {
+            val c = value[i]
+            if (c == '\\' && i + 1 < value.length) {
+                val next = value[i + 1]
+                out.append(if (next == 'n' || next == 'N') '\n' else next)
+                i += 2
+            } else {
+                out.append(c)
+                i++
+            }
+        }
+        return out.toString().trim()
     }
 
     private fun decodePercent(s: String): String = try {

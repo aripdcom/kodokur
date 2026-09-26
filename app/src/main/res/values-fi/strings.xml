@@ -76,6 +76,9 @@
     <string name="label_phone">Puhelin</string>
     <string name="label_email">Sähköposti</string>
     <string name="label_website">Verkkosivu</string>
+    <string name="label_job_title">Tehtävänimike</string>
+    <string name="label_postal_address">Postiosoite</string>
+    <string name="label_note">Muistiinpano</string>
     <string name="label_format">Muoto</string>
     <string name="label_add_on">Lisäkoodi</string>
     <string name="label_raw">Raakasisältö</string>

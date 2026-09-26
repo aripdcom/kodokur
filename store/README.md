@@ -11,7 +11,9 @@ play/<dil>/full.txt           tam açıklama          ≤ 4000
 play/<dil>/notes-<sürüm>.txt  sürüm notu            ≤ 500
 graphics/icon-512.png         yüksek çözünürlüklü simge (512×512)
 graphics/feature-1024.png     öne çıkan görsel (1024×500); metinsiz, bütün dillerde aynı
-screenshots/<dil>/            telefon ekran görüntüleri (1080×2400)
+screenshots/en/               telefon ekran görüntüleri, yalnız İngilizce (1080×2160: Play
+                              uzun kenarın kısa kenarın en fazla 2 katı olmasını ister;
+                              durum ve gezinme çubukları kırpılmış)
 data-safety.md                Veri güvenliği formunun cevapları
 content-rating.md             İçerik derecelendirme (IARC) ve hedef kitle cevapları
 checklist.md                  yayın adımları

@@ -131,6 +131,9 @@ jobs:
           cp "$APK" dist/kodokur.apk
           # The bundle uploaded to Play Console; it cannot be sideloaded, which is what the APK is for.
           cp app/build/outputs/bundle/release/app-release.aab "dist/kodokur-$TAG-play.aab"
+          # R8 mapping: uploaded to Play Console with the AAB so crash stack traces are
+          # readable. The source is public, so publishing it reveals nothing new.
+          cp app/build/outputs/mapping/release/mapping.txt "dist/kodokur-$TAG-mapping.txt"
           git archive --format=zip --prefix="kodokur-$TAG/" -o "dist/kodokur-$TAG-source.zip" HEAD
           git archive --format=tar.gz --prefix="kodokur-$TAG/" -o "dist/kodokur-$TAG-source.tar.gz" HEAD
           cd dist && sha256sum kodokur* > SHA256SUMS.txt && cat SHA256SUMS.txt

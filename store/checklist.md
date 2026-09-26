@@ -1,35 +1,93 @@
 # Release checklist
 
-## Before the release
+The Play developer account is an **organization account** (opened September 2026), so
+the 12-tester / 14-day closed testing requirement for new personal accounts does not
+apply: the first release can go straight to **Production**.
 
-- [ ] The `docs/device-test.md` protocol was run on a phone with real codes (book, medicine
-      box, grocery product, Wi-Fi label); the result was logged at the end of that file
+## 1. Before the release
+
+- [ ] `docs/device-test.md` was run on a phone with real codes; result logged there
 - [ ] `python3 tools/check_strings.py`, `check_site.py`, `check_store.py` are clean
 - [ ] `./gradlew :core:test :app:assembleDebug` passed
-- [ ] `store/screenshots/en/` is up to date (1080×2160, at least 2, 4–6 recommended; the
-      same English screenshots are used for every language)
+- [ ] `store/screenshots/en/` is up to date (1080×2160, 2–8 images; the same English
+      screenshots are used for every language)
+- [ ] `store/play/<lang>/notes-<X.Y.Z>.txt` exists for the version in all 14 languages
 
-## Release
+## 2. Tag and verify the build
 
-- [ ] `v<X.Y.Z>` tag (`git tag -a v1.1.0 -m "Kodokur 1.1.0"` + `git push origin v1.1.0`)
-- [ ] `release.yml` is green: APK signed, only permission is `CAMERA`, AAB built
-- [ ] Signing fingerprint matches the Kodokur line in `~/keystores/aripdcom/README.md`
-      (`apksigner verify --print-certs kodokur.apk`)
+```sh
+git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
+```
 
-## Play Console (first upload)
+- [ ] `release.yml` is green: APK signed, only permission `CAMERA`, AAB built
+- [ ] From the GitHub release download `kodokur-v1.1.1-play.aab` and
+      `kodokur-v1.1.1-mapping.txt`
+- [ ] Signing fingerprint matches the Kodokur line in `~/keystores/aripdcom/README.md`:
+      `apksigner verify --print-certs kodokur.apk | grep 'certificate SHA-256'`
+      → `8e97d791…448e16`
 
-- [ ] Create the app: name "Kodokur", default language en-US, App, Free
-- [ ] **Play App Signing:** use "Export and upload a key from Java keystore" (PEPK)
-      with `~/keystores/aripdcom/kodokur-release.jks` (alias `kodokur`), so that
-      Play and GitHub APKs carry the same signature. The upload key can be separate.
-- [ ] Store listing: texts from `store/play/<lang>/`, 14 languages per the locale table
-      in `store/README.md`; icon `graphics/icon-512.png`, feature graphic
-      `graphics/feature-1024.png`, screenshots
-- [ ] Category: **Tools**; contact email `kodokur@aripd.com`; website
-      `https://kodokur.aripd.com`
-- [ ] Privacy policy: `https://kodokur.aripd.com/privacy.html`
-- [ ] App content: `data-safety.md`, `content-rating.md` (see the health apps declaration
-      note), no ads, target audience 13+
-- [ ] Release: `kodokur-v<X.Y.Z>-play.aab`; release notes `play/<lang>/notes-<X.Y.Z>.txt`
-- [ ] **Internal testing** track first; install from Play on a phone and check that it
-      launches, then Production
+## 3. Play Console: create the app (one time)
+
+- [ ] **Create app:** name "Kodokur", default language English (United States),
+      App, Free, accept the declarations
+- [ ] **App signing** (Test and release → Setup → App signing): choose
+      *Use a different key* → *Export and upload a key from a Java keystore*. Download
+      the PEPK tool and the encryption public key shown there, then run:
+
+      ```sh
+      java -jar pepk.jar \
+        --keystore=$HOME/keystores/aripdcom/kodokur-release.jks \
+        --alias=kodokur \
+        --output=kodokur-signing-key.zip \
+        --include-cert \
+        --rsa-aes-encryption \
+        --encryption-key-path=encryption_public_key.pem
+      ```
+
+      (it asks for the keystore password twice: `~/keystores/aripdcom/kodokur-release.password`).
+      Upload `kodokur-signing-key.zip`. The same key then signs uploads too, so no separate
+      upload key is needed. Result: apps installed from Play and from GitHub carry the same
+      signature and update each other.
+- [ ] Delete `kodokur-signing-key.zip` afterwards (it contains the encrypted private key)
+
+## 4. Play Console: store listing and app content
+
+- [ ] **Main store listing:** app name, short and full description from `store/play/en/`;
+      then *Manage translations → Add your own* for the other 13 languages using the
+      locale table in `store/README.md` (`nb` → Norwegian `no-NO`, `pt` → `pt-BR`)
+- [ ] **Graphics:** icon `graphics/icon-512.png`, feature graphic
+      `graphics/feature-1024.png`, phone screenshots `screenshots/en/1…6`
+- [ ] **Store settings:** category **Tools**, tags (Barcode scanner, QR code scanner),
+      email `kodokur@aripd.com`, website `https://kodokur.aripd.com`
+- [ ] **App content:**
+  - Privacy policy: `https://kodokur.aripd.com/privacy.html`
+  - Ads: no ads
+  - App access: all functionality available without special access
+  - Content rating: questionnaire answers in `content-rating.md`
+  - Target audience: 13–15, 16–17, 18+ (`content-rating.md`)
+  - Data safety: no data collected, no data shared (`data-safety.md`)
+  - Health apps: *My app does not have any health features* (see the note in
+    `content-rating.md`)
+  - Government apps / financial features / news: not applicable
+- [ ] **Countries:** all countries and regions
+
+## 5. Play Console: production release
+
+- [ ] Test and release → **Production → Create new release**
+- [ ] Upload `kodokur-v1.1.1-play.aab`
+- [ ] Upload the deobfuscation file `kodokur-v1.1.1-mapping.txt` (App bundle explorer →
+      the version → Downloads → *ReTrace mapping file*), so crash reports are readable
+- [ ] Release notes: paste every language, each wrapped in its Play locale tag, e.g.
+      `<en-US>` … `</en-US>`, `<tr-TR>` … `</tr-TR>` (texts: `play/<lang>/notes-1.1.1.txt`)
+- [ ] Review the warnings: "no native debug symbols" can be ignored (only CameraX ships a
+      small native library; there is no NDK code of our own)
+- [ ] **Send for review**; the first review of a new app can take several days
+
+## 6. After it is live
+
+- [ ] Install from Play on a phone; open it, scan a code, switch language in About
+- [ ] Check the Play-installed signature equals GitHub's:
+      `adb shell pm path com.aripd.kodokur` → `adb pull <base.apk>` →
+      `apksigner verify --print-certs base.apk`
+- [ ] Add the Play link to `site/index.html` and `README.md`
+- [ ] Watch the pre-launch report and Android vitals during the first week

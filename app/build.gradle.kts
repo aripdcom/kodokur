@@ -9,7 +9,7 @@ plugins {
 // The version has a single source: release.yml derives it from the tag and
 // passes it as -PappVersion=X.Y.Z; local builds use the default below.
 // versionCode = major*10000 + minor*100 + patch.
-val appVersion: String = (project.findProperty("appVersion") as? String) ?: "1.1.0"
+val appVersion: String = (project.findProperty("appVersion") as? String) ?: "1.1.1"
 val appVersionCode: Int = appVersion.split('.').map { it.toInt() }.let { (major, minor, patch) ->
     require(major < 214 && minor < 100 && patch < 100) { "Invalid version: $appVersion" }
     // AGP requires a positive integer versionCode.
@@ -68,6 +68,16 @@ android {
 
     buildFeatures {
         compose = true
+    }
+
+    // Play splits an AAB by language and installs only the device's language.
+    // The in-app language picker (About → Language) needs every language on
+    // the device: without this, picking German on a Turkish phone would fall
+    // back to English strings. All 14 languages together are small.
+    bundle {
+        language {
+            enableSplit = false
+        }
     }
 }
 

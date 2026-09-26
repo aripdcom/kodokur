@@ -17,6 +17,8 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -37,12 +39,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.aripd.kodokur.R
+import com.aripd.kodokur.core.Content
 import com.aripd.kodokur.core.ContentParser
+import com.aripd.kodokur.core.Gs1
+import com.aripd.kodokur.core.LinkCheck
+import com.aripd.kodokur.core.LinkWarning
 import com.aripd.kodokur.core.Record
 import com.aripd.kodokur.platform.Actions
 
@@ -50,8 +59,12 @@ import com.aripd.kodokur.platform.Actions
 @Composable
 fun ResultScreen(record: Record, onBack: () -> Unit) {
     val context = LocalContext.current
+    val locale = LocalConfiguration.current.locales[0]
     val content = remember(record) { ContentParser.parse(record.scan) }
     val actions = remember(content) { content.actions(record.scan.text) }
+    val link = remember(content) { (content as? Content.Link)?.let { LinkCheck.inspect(it.url) } }
+    // Onay bekleyen eylem: uyarılı bir bağlantıyı açmak.
+    var pending by remember { mutableStateOf<ResultAction?>(null) }
 
     Scaffold(
         topBar = {
@@ -84,7 +97,7 @@ fun ResultScreen(record: Record, onBack: () -> Unit) {
                         modifier = Modifier.size(32.dp),
                     )
                     Spacer(Modifier.width(16.dp))
-                    SelectionContainer {
+                    SelectionContainer(Modifier.semantics { heading() }) {
                         Text(
                             content.headline(),
                             style = if (content.isCode) {
@@ -98,6 +111,16 @@ fun ResultScreen(record: Record, onBack: () -> Unit) {
                 }
             }
 
+            // Uyarılar: bağlantının gerçek hedefi ve süresi geçmiş son kullanma tarihi.
+            val warnings = buildList {
+                link?.warnings?.forEach { add(warningText(it, link.host)) }
+                val expiry = (content as? Content.Gs1)?.data?.expiry
+                if (expiry != null && expiry.isPast(java.time.LocalDate.now())) {
+                    add(stringResource(R.string.gs1_expired, expiry.format(locale)))
+                }
+            }
+            if (warnings.isNotEmpty()) WarningCard(warnings)
+
             FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -109,10 +132,13 @@ fun ResultScreen(record: Record, onBack: () -> Unit) {
                         Spacer(Modifier.width(8.dp))
                         Text(label)
                     }
+                    val onClick = {
+                        if (action.confirm && link?.warnings?.isNotEmpty() == true) pending = action else action.run(context)
+                    }
                     if (i == 0) {
-                        Button(onClick = { action.run(context) }) { inner() }
+                        Button(onClick = onClick) { inner() }
                     } else {
-                        FilledTonalButton(onClick = { action.run(context) }) { inner() }
+                        FilledTonalButton(onClick = onClick) { inner() }
                     }
                 }
             }
@@ -124,7 +150,7 @@ fun ResultScreen(record: Record, onBack: () -> Unit) {
                 )
             }
 
-            val details = remember(content) { content.details() }
+            val details = remember(content, locale) { content.details(locale) }
             val rows = details + listOfNotNull(
                 Detail(R.string.label_format, record.scan.symbology.label, copyable = false),
                 record.scan.addOn?.let { Detail(R.string.label_add_on, it, copyable = false) },
@@ -133,20 +159,69 @@ fun ResultScreen(record: Record, onBack: () -> Unit) {
             Card(Modifier.fillMaxWidth()) {
                 rows.forEachIndexed { i, detail ->
                     if (i > 0) HorizontalDivider()
-                    DetailRow(stringResource(detail.label), detail)
+                    val label = detail.labelArg?.let { stringResource(detail.label, it) } ?: stringResource(detail.label)
+                    DetailRow(label, detail)
                 }
             }
 
             // Ham içerik, ayrıştırılmış görünümden farklıysa (kişi kartı, e-posta…).
             // Gizli alan (Wi-Fi parolası) varsa gösterilmez: maske anlamsız kalırdı.
-            if (record.scan.text != content.headline() && details.none { it.sensitive }) {
+            // Bağlantının tam adresi zaten ayrıntılarda; tekrar gösterilmez.
+            if (record.scan.text != content.headline() && content !is Content.Link && details.none { it.sensitive }) {
                 Text(stringResource(R.string.label_raw), style = MaterialTheme.typography.labelLarge)
                 SelectionContainer {
                     Text(
-                        record.scan.text,
+                        // GS1 ayracı görünmez bir denetim karakteri; yerini belli et.
+                        record.scan.text.replace(Gs1.GS, '\u241D'),
                         style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
+                }
+            }
+        }
+    }
+
+    pending?.let { action ->
+        AlertDialog(
+            onDismissRequest = { pending = null },
+            icon = { Icon(Icons.Filled.Warning, null) },
+            title = { Text(stringResource(R.string.link_confirm_title)) },
+            text = { Text(stringResource(R.string.link_confirm_body, link?.host.orEmpty())) },
+            confirmButton = {
+                TextButton(onClick = { pending = null; action.run(context) }) {
+                    Text(stringResource(R.string.link_open_anyway))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { pending = null }) { Text(stringResource(R.string.cancel)) }
+            },
+        )
+    }
+}
+
+@Composable
+private fun warningText(warning: LinkWarning, host: String): String = when (warning) {
+    LinkWarning.NOT_ENCRYPTED -> stringResource(R.string.warn_not_encrypted)
+    LinkWarning.LOOKALIKE_HOST -> stringResource(R.string.warn_lookalike)
+    LinkWarning.IP_ADDRESS -> stringResource(R.string.warn_ip_address)
+    LinkWarning.HIDDEN_DESTINATION -> stringResource(R.string.warn_hidden_destination, host)
+}
+
+@Composable
+private fun WarningCard(lines: List<String>) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.errorContainer,
+            contentColor = MaterialTheme.colorScheme.onErrorContainer,
+        ),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            lines.forEach { line ->
+                Row(verticalAlignment = Alignment.Top) {
+                    Icon(Icons.Filled.Warning, null, Modifier.size(20.dp))
+                    Spacer(Modifier.width(12.dp))
+                    Text(line, style = MaterialTheme.typography.bodyMedium)
                 }
             }
         }
@@ -167,6 +242,7 @@ private fun DetailRow(label: String, detail: Detail) {
                 Text(
                     if (revealed) detail.value else "•".repeat(minOf(detail.value.length, 12)),
                     style = MaterialTheme.typography.bodyLarge,
+                    color = if (detail.alert) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface,
                 )
             }
         }
@@ -175,7 +251,7 @@ private fun DetailRow(label: String, detail: Detail) {
         }
         if (detail.copyable) {
             IconButton(onClick = { Actions.copy(context, detail.value, detail.sensitive) }) {
-                Icon(KodokurIcons.Copy, stringResource(R.string.act_copy), Modifier.size(20.dp))
+                Icon(KodokurIcons.Copy, stringResource(R.string.act_copy_item, label), Modifier.size(20.dp))
             }
         }
     }

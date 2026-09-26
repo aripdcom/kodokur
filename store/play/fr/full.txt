@@ -1,0 +1,34 @@
+Kodokur lit tous les codes-barres et QR codes, te dit ce que c’est et ce que tu peux en faire, sans jamais se connecter à Internet. Pas de pub, pas de traceurs, pas de compte. L’appareil photo est sa seule autorisation ; l’app n’a aucune autorisation Internet.
+
+UNE SEULE APP POUR TOUS LES CODES
+• Courses et produits : codes-barres EAN et UPC. Consulte un produit sur Open Food Facts ou cherche-le sur le web d’un simple geste.
+• Codes de médicaments : le code carré sur une boîte de médicaments affiche en clair la date de péremption, le lot et le numéro de série, et Kodokur te prévient si la date est dépassée.
+• Livres et magazines : ISBN avec les tirets aux bons endroits, avec l’ISBN-10 et le groupe de pays ou de langue ; le prix tiré du petit code additionnel. Les codes-barres de magazines donnent l’ISSN et le numéro de parution.
+• Wi-Fi : connecte-toi à un réseau depuis son QR code d’un simple geste. Le mot de passe reste masqué jusqu’à ce que tu choisisses de l’afficher.
+• Contacts : le QR code d’une carte de visite (vCard, MECARD) va directement dans tes contacts. Les codes e-mail, téléphone, SMS et carte ouvrent la bonne app.
+• Tout le reste s’affiche en texte que tu peux copier, partager ou rechercher.
+
+SACHE OÙ MÈNE UN LIEN
+Les QR codes sur les affiches, les horodateurs et les menus sont un moyen facile d’envoyer les gens vers de faux sites. Avant que tu ouvres un lien, Kodokur montre le site vers lequel il mène vraiment et te prévient en cas de :
+• adresses trompeuses écrites avec des lettres d’autres alphabets,
+• faux nom caché devant un « @ »,
+• simples adresses IP,
+• pages http non chiffrées.
+Les liens ne s’ouvrent jamais tout seuls, et les liens risqués demandent confirmation.
+
+PENSÉ POUR LES VRAIS CODES
+• Pince, touche deux fois ou utilise le bouton de zoom pour les codes-barres minuscules.
+• Tenus de côté, à l’envers ou imprimés en négatif, les codes sont quand même lus.
+• Lis un code depuis une photo, même sans donner accès à l’appareil photo.
+• Lampe torche, mise au point d’une touche.
+• Formats : EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, ITF, Codabar, GS1 DataBar, QR, Data Matrix, PDF417, Aztec.
+
+INVENTAIRE ET CATALOGAGE
+En mode série, les codes s’ajoutent à l’historique les uns après les autres sans interruption, et le même article n’est jamais compté deux fois. Partage la liste en fichier CSV pour un tableur : un rayon de magasin, une armoire à pharmacie ou la bibliothèque de la maison.
+
+TOUT RESTE SUR TON TÉLÉPHONE
+Les images de l’appareil photo sont analysées sur le téléphone, jamais enregistrées et jamais envoyées nulle part. Ton historique reste sur ton téléphone et, comme il peut contenir des mots de passe Wi-Fi, il est exclu des sauvegardes. Les boutons comme la recherche de produit ou de livre transmettent le code à ton navigateur ; Kodokur lui-même ne se connecte à rien.
+
+14 langues : English, Türkçe, Deutsch, Français, Nederlands, Español, Português, Italiano, Dansk, Svenska, Norsk, Suomi, Русский, العربية.
+
+Open source (GNU GPL v3) : github.com/aripdcom/kodokur

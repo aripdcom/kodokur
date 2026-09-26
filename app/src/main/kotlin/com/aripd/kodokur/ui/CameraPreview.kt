@@ -3,7 +3,9 @@ package com.aripd.kodokur.ui
 import android.annotation.SuppressLint
 import android.util.Log
 import android.util.Size
+import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.FocusMeteringAction
@@ -18,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
@@ -42,12 +45,43 @@ class ScanTrigger {
 }
 
 /**
+ * Yakınlaştırma. Kitap barkodu küçük; birçok telefon çok yakına odaklanamıyor,
+ * uzaktan yakınlaştırmak daha iyi okur. Üç yol: iki parmak, çift dokunuş (1× ↔ 2×)
+ * ve tarayıcıdaki oran düğmesi ([cycle]); sonuncusu ekran okuyucuyla da kullanılır.
+ */
+class ZoomControl {
+    internal var camera: Camera? = null
+
+    /** Kameranın bildirdiği anlık oran. */
+    var ratio by mutableFloatStateOf(1f)
+        internal set
+
+    var maxRatio by mutableFloatStateOf(1f)
+        internal set
+
+    fun set(value: Float) {
+        camera?.cameraControl?.setZoomRatio(value.coerceIn(1f, maxRatio))
+    }
+
+    /** 1× → 2× → 4× → 1×; kameranın sınırını aşan adım atlanır. */
+    fun cycle() {
+        val next = STEPS.firstOrNull { it > ratio + 0.05f && it <= maxRatio } ?: 1f
+        set(next)
+    }
+
+    private companion object {
+        val STEPS = listOf(2f, 4f)
+    }
+}
+
+/**
  * Arka kamera önizlemesi ve kare çözümleme. Önizleme ekranı doldurur; çözümleyici
  * karenin tamamına bakar, vizör yalnızca kullanıcıya yol gösterir.
  */
 @Composable
 fun CameraPreview(
     trigger: ScanTrigger,
+    zoom: ZoomControl,
     torch: Boolean,
     onTorchAvailable: (Boolean) -> Unit,
     onScan: (Scan) -> Unit,
@@ -64,7 +98,7 @@ fun CameraPreview(
     val previewView = remember {
         PreviewView(context).apply {
             scaleType = PreviewView.ScaleType.FILL_CENTER
-            setTapToFocus { camera }
+            setGestures({ camera }, zoom)
         }
     }
 
@@ -101,6 +135,11 @@ fun CameraPreview(
                 p.unbindAll()
                 val bound = p.bindToLifecycle(lifecycleOwner, CameraSelector.DEFAULT_BACK_CAMERA, preview, analysis)
                 camera = bound
+                zoom.camera = bound
+                bound.cameraInfo.zoomState.observe(lifecycleOwner) { state ->
+                    zoom.ratio = state.zoomRatio
+                    zoom.maxRatio = state.maxZoomRatio
+                }
                 currentOnTorchAvailable(bound.cameraInfo.hasFlashUnit())
             } catch (e: Exception) {
                 Log.w("Kodokur", "Kamera başlatılamadı", e)
@@ -110,7 +149,9 @@ fun CameraPreview(
         onDispose {
             disposed = true
             provider?.unbindAll()
+            camera?.cameraInfo?.zoomState?.removeObservers(lifecycleOwner)
             camera = null
+            zoom.camera = null
             executor.shutdown()
         }
     }
@@ -122,15 +163,36 @@ fun CameraPreview(
     AndroidView(factory = { previewView }, modifier = modifier)
 }
 
-/** Dokunulan noktaya odaklanır ve pozlamayı oraya göre ayarlar. */
+/**
+ * Dokunma hareketleri: tek dokunuş o noktaya odaklar ve pozlar, çift dokunuş
+ * 1× ile 2× arasında geçer, iki parmak yakınlaştırır. Tek dokunuş, çift dokunuşun
+ * ilk yarısı olmadığı kesinleşince çalışır; iki parmak hareketinin sonunda odak
+ * yanlışlıkla değişmez.
+ */
 @SuppressLint("ClickableViewAccessibility")
-private fun PreviewView.setTapToFocus(camera: () -> Camera?) {
-    setOnTouchListener { view, event ->
-        if (event.action == MotionEvent.ACTION_UP) {
-            val point = meteringPointFactory.createPoint(event.x, event.y)
-            camera()?.cameraControl?.startFocusAndMetering(FocusMeteringAction.Builder(point).build())
-            view.performClick()
+private fun PreviewView.setGestures(camera: () -> Camera?, zoom: ZoomControl) {
+    val scale = ScaleGestureDetector(context, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+        override fun onScale(detector: ScaleGestureDetector): Boolean {
+            zoom.set(zoom.ratio * detector.scaleFactor)
+            return true
         }
+    })
+    val taps = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
+        override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+            val point = meteringPointFactory.createPoint(e.x, e.y)
+            camera()?.cameraControl?.startFocusAndMetering(FocusMeteringAction.Builder(point).build())
+            performClick()
+            return true
+        }
+
+        override fun onDoubleTap(e: MotionEvent): Boolean {
+            zoom.set(if (zoom.ratio > 1.5f) 1f else 2f)
+            return true
+        }
+    })
+    setOnTouchListener { _, event ->
+        scale.onTouchEvent(event)
+        if (!scale.isInProgress) taps.onTouchEvent(event)
         true
     }
 }

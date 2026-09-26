@@ -4,7 +4,7 @@
   Bölüm başlıkları Türkçe: depodaki öbür yorumlar gibi geliştirici notu.
 -->
 <resources>
-    <string name="app_tagline">Сканер штрихкодов и QR, который разбирается в ISBN</string>
+    <string name="app_tagline">Любые штрихкоды и QR-коды. Ничто не покидает ваш телефон.</string>
 
     <!-- Ortak -->
     <string name="back">Назад</string>
@@ -100,6 +100,35 @@
     <string name="act_show_map">Показать на карте</string>
     <string name="act_add_contact">Добавить в контакты</string>
     <string name="external_notice">Откроется в браузере или другом приложении. Сам Kodokur никогда не выходит в сеть.</string>
+
+    <!-- GS1 (ilaç karekodu) -->
+    <string name="kind_gs1">Код товара (GS1)</string>
+    <string name="label_expiry">Годен до</string>
+    <string name="label_best_before">Лучше употребить до</string>
+    <string name="label_production">Дата производства</string>
+    <string name="label_batch">Серия / партия</string>
+    <string name="label_serial">Серийный номер</string>
+    <string name="label_count">Количество</string>
+    <string name="label_gs1_field">Поле (%1$s)</string>
+    <string name="gs1_expired">Просрочено: срок годности истёк %1$s.</string>
+
+    <!-- Bağlantı güvenliği -->
+    <string name="label_destination">Ведёт на</string>
+    <string name="label_encoded_name">Закодированное имя</string>
+    <string name="label_address">Полный адрес</string>
+    <string name="warn_not_encrypted">Без шифрования (http). Страницу могут подменить по пути.</string>
+    <string name="warn_lookalike">В адресе есть нелатинские буквы. Он может выдавать себя за известный сайт.</string>
+    <string name="warn_ip_address">Ссылка ведёт на голый IP-адрес, а не на сайт с именем.</string>
+    <string name="warn_hidden_destination">Часть до «@» — лишь имя пользователя. На самом деле ссылка ведёт на %1$s.</string>
+    <string name="link_confirm_title">Открыть эту ссылку?</string>
+    <string name="link_confirm_body">Она ведёт на %1$s. Открывайте, только если доверяете источнику кода.</string>
+    <string name="link_open_anyway">Всё равно открыть</string>
+
+    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <string name="zoom_level">Масштаб %1$s. Нажмите, чтобы изменить.</string>
+    <string name="act_copy_item">Копировать %1$s</string>
+    <string name="act_delete_item">Удалить %1$s</string>
+    <string name="act_more">Другие действия</string>
 
     <!-- Geçmiş -->
     <string name="history_title">История</string>

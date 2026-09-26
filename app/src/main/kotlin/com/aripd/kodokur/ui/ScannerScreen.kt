@@ -105,6 +105,7 @@ fun ScannerScreen(
     var torchAvailable by remember { mutableStateOf(false) }
     var readingImage by remember { mutableStateOf(false) }
     val trigger = remember { ScanTrigger() }
+    val zoom = remember { ZoomControl() }
 
     val permissionLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
         granted = it
@@ -132,6 +133,11 @@ fun ScannerScreen(
     fun onScan(scan: Scan) {
         confirm()
         if (!vm.batchMode) {
+            // Ekran okuyucu yeni ekrana kendiliğinden geçmeyebilir: ne okunduğunu söyle.
+            // Seri kipte bildirim zaten duyurulur.
+            val content = ContentParser.parse(scan)
+            @Suppress("DEPRECATION")
+            view.announceForAccessibility("${context.getString(content.kindLabel())}: ${content.headline()}")
             vm.open(scan)
             return
         }
@@ -174,6 +180,7 @@ fun ScannerScreen(
         if (cameraReady) {
             CameraPreview(
                 trigger = trigger,
+                zoom = zoom,
                 torch = torch,
                 onTorchAvailable = { torchAvailable = it },
                 onScan = ::onScan,
@@ -258,6 +265,16 @@ fun ScannerScreen(
                         )
                     }
                 }
+                if (cameraReady && zoom.maxRatio > 1.05f) {
+                    val label = String.format(java.util.Locale.ROOT, "%.1f×", zoom.ratio)
+                    val description = stringResource(R.string.zoom_level, label)
+                    RoundButton(
+                        onClick = { zoom.cycle() },
+                        modifier = Modifier.semantics { contentDescription = description },
+                    ) {
+                        Text(label, color = if (zoom.ratio > 1.05f) Amber else Color.White, style = MaterialTheme.typography.labelLarge)
+                    }
+                }
                 if (cameraReady) {
                     FilterChip(
                         selected = vm.batchMode,
@@ -292,13 +309,18 @@ private fun batchLabel(scan: Scan): String = when (val c = ContentParser.parse(s
 }
 
 @Composable
-private fun RoundButton(onClick: () -> Unit, enabled: Boolean = true, content: @Composable () -> Unit) {
+private fun RoundButton(
+    onClick: () -> Unit,
+    enabled: Boolean = true,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
     Surface(
         onClick = onClick,
         enabled = enabled,
         shape = RoundedCornerShape(50),
         color = Color.Black.copy(alpha = 0.45f),
-        modifier = Modifier.size(52.dp),
+        modifier = modifier.size(52.dp),
     ) {
         Box(contentAlignment = Alignment.Center) { content() }
     }

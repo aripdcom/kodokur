@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_tagline">Leitor de código de barras e QR que entende de ISBN</string>
+    <string name="app_tagline">Todo código de barras e QR. Nada sai do seu telefone.</string>
 
     <!-- Ortak -->
     <string name="back">Voltar</string>
@@ -95,6 +95,35 @@
     <string name="act_show_map">Ver no mapa</string>
     <string name="act_add_contact">Adicionar aos contatos</string>
     <string name="external_notice">Abre no seu navegador ou em outro app. O Kodokur em si nunca se conecta à internet.</string>
+
+    <!-- GS1 (ilaç karekodu) -->
+    <string name="kind_gs1">Código de produto (GS1)</string>
+    <string name="label_expiry">Validade</string>
+    <string name="label_best_before">Consumir preferencialmente até</string>
+    <string name="label_production">Data de fabricação</string>
+    <string name="label_batch">Lote</string>
+    <string name="label_serial">Número de série</string>
+    <string name="label_count">Quantidade</string>
+    <string name="label_gs1_field">Campo (%1$s)</string>
+    <string name="gs1_expired">Vencido: a validade era %1$s.</string>
+
+    <!-- Bağlantı güvenliği -->
+    <string name="label_destination">Vai para</string>
+    <string name="label_encoded_name">Nome codificado</string>
+    <string name="label_address">Endereço completo</string>
+    <string name="warn_not_encrypted">Sem criptografia (http). A página pode ser alterada no caminho.</string>
+    <string name="warn_lookalike">O endereço usa letras não latinas. Ele pode estar imitando um site conhecido.</string>
+    <string name="warn_ip_address">O link leva a um endereço IP puro, não a um site com nome.</string>
+    <string name="warn_hidden_destination">A parte antes do “@” é só um nome de usuário. Na verdade, o link vai para %1$s.</string>
+    <string name="link_confirm_title">Abrir este link?</string>
+    <string name="link_confirm_body">Ele vai para %1$s. Abra só se você confia na origem do código.</string>
+    <string name="link_open_anyway">Abrir mesmo assim</string>
+
+    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <string name="zoom_level">Zoom %1$s. Toque para mudar.</string>
+    <string name="act_copy_item">Copiar %1$s</string>
+    <string name="act_delete_item">Excluir %1$s</string>
+    <string name="act_more">Mais opções</string>
 
     <!-- Geçmiş -->
     <string name="history_title">Histórico</string>

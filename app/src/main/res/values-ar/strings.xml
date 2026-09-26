@@ -4,7 +4,7 @@
   Bölüm başlıkları Türkçe: depodaki öbür yorumlar gibi geliştirici notu.
 -->
 <resources>
-    <string name="app_tagline">قارئ باركود وQR يعرف أرقام ISBN</string>
+    <string name="app_tagline">كل باركود وكل رمز QR. لا شيء يغادر هاتفك.</string>
 
     <!-- Ortak -->
     <string name="back">رجوع</string>
@@ -102,6 +102,35 @@
     <string name="act_show_map">أظهر على الخريطة</string>
     <string name="act_add_contact">أضف إلى جهات الاتصال</string>
     <string name="external_notice">يُفتح في المتصفّح أو في تطبيق آخر. أما Kodokur نفسه فلا يتصل بالإنترنت أبداً.</string>
+
+    <!-- GS1 (ilaç karekodu) -->
+    <string name="kind_gs1">رمز المنتج (GS1)</string>
+    <string name="label_expiry">تاريخ انتهاء الصلاحية</string>
+    <string name="label_best_before">يُفضَّل استهلاكه قبل</string>
+    <string name="label_production">تاريخ الإنتاج</string>
+    <string name="label_batch">رقم التشغيلة</string>
+    <string name="label_serial">الرقم التسلسلي</string>
+    <string name="label_count">الكمية</string>
+    <string name="label_gs1_field">حقل (%1$s)</string>
+    <string name="gs1_expired">منتهي الصلاحية: كان تاريخ الانتهاء %1$s.</string>
+
+    <!-- Bağlantı güvenliği -->
+    <string name="label_destination">يذهب إلى</string>
+    <string name="label_encoded_name">الاسم المُرمَّز</string>
+    <string name="label_address">العنوان الكامل</string>
+    <string name="warn_not_encrypted">اتصال غير مشفّر (http). يمكن تعديل الصفحة في الطريق.</string>
+    <string name="warn_lookalike">يستخدم العنوان حروفاً غير لاتينية. قد ينتحل صفة موقع معروف.</string>
+    <string name="warn_ip_address">يشير الرابط إلى عنوان IP مجرّد، لا إلى موقع له اسم.</string>
+    <string name="warn_hidden_destination">الجزء الذي يسبق «@» ليس إلا اسم مستخدم. الرابط يذهب فعلياً إلى %1$s.</string>
+    <string name="link_confirm_title">أتريد فتح هذا الرابط؟</string>
+    <string name="link_confirm_body">يذهب إلى %1$s. لا تفتحه إلا إذا كنت تثق بمصدر الرمز.</string>
+    <string name="link_open_anyway">افتحه على أي حال</string>
+
+    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <string name="zoom_level">التكبير %1$s. انقر للتغيير.</string>
+    <string name="act_copy_item">انسخ %1$s</string>
+    <string name="act_delete_item">احذف %1$s</string>
+    <string name="act_more">خيارات أخرى</string>
 
     <!-- Geçmiş -->
     <string name="history_title">السجل</string>

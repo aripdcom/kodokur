@@ -1,0 +1,34 @@
+Kodokur læser alle stregkoder og QR-koder, fortæller, hvad det er, og hvad du kan gøre med det, og går aldrig på nettet for at gøre det. Ingen reklamer, ingen sporing, ingen konto. Kameraet er den eneste tilladelse; appen har slet ingen internettilladelse.
+
+ÉN APP TIL ALLE KODER
+• Dagligvarer og produkter: EAN- og UPC-stregkoder. Slå en vare op i Open Food Facts eller søg på nettet med ét tryk.
+• Koder på medicin: den firkantede kode på en medicinpakning viser udløbsdato, batch og serienummer i klart sprog, og Kodokur advarer dig, hvis datoen er overskredet.
+• Bøger og blade: ISBN med bindestreger på de rigtige steder, med ISBN-10 og lande- eller sproggruppe; prisen fra den lille tillægskode. Stregkoder på blade giver ISSN og nummer.
+• Wi-Fi: kom på et netværk fra dets QR-kode med ét tryk. Adgangskoden er skjult, indtil du selv vælger at se den.
+• Kontakter: QR-koder på visitkort (vCard, MECARD) går direkte i dine kontakter. Koder til e-mail, telefon, SMS og kort åbner i den rigtige app.
+• Alt andet vises som tekst, du kan kopiere, dele eller søge på.
+
+SE, HVOR ET LINK FØRER HEN
+QR-koder på plakater, parkeringsautomater og menukort er en nem måde at lokke folk hen på falske sider. Før du åbner et link, viser Kodokur, hvilken side det egentlig fører til, og advarer dig om:
+• forvekslelige adresser skrevet med bogstaver fra andre alfabeter,
+• et falsk navn gemt foran et »@«,
+• rene IP-adresser,
+• ukrypterede http-sider.
+Links åbner aldrig af sig selv, og risikable links spørger først.
+
+LAVET TIL KODER I DEN VIRKELIGE VERDEN
+• Knib, dobbelttryk eller brug zoomknappen til bittesmå stregkoder.
+• Holdt på skrå, på hovedet eller trykt i negativ bliver koderne stadig læst.
+• Læs en kode fra et foto, også uden at give kameraadgang.
+• Lygte og tryk for at fokusere.
+• Formater: EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, ITF, Codabar, GS1 DataBar, QR, Data Matrix, PDF417, Aztec.
+
+OPTÆLLING OG KATALOGISERING
+I seriescanning lægges kode efter kode i historikken uden stop, og den samme vare tælles aldrig to gange. Del listen som en CSV-fil til et regneark: en butikshylde, et medicinskab eller bogreolen derhjemme.
+
+BLIVER PÅ DIN TELEFON
+Kamerabillederne undersøges på telefonen og bliver aldrig gemt eller sendt nogen steder hen. Historikken bliver på din telefon og er udeladt af sikkerhedskopier, fordi den kan indeholde Wi-Fi-adgangskoder. Knapper som vare- eller bogsøgning giver koden videre til din browser; Kodokur selv opretter aldrig forbindelse til noget.
+
+14 sprog: English, Türkçe, Deutsch, Français, Nederlands, Español, Português, Italiano, Dansk, Svenska, Norsk, Suomi, Русский, العربية.
+
+Open source (GNU GPL v3): github.com/aripdcom/kodokur

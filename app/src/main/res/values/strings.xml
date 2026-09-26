@@ -5,7 +5,7 @@
 -->
 <resources>
     <string name="app_name" translatable="false">Kodokur</string>
-    <string name="app_tagline">Barcode and QR reader that knows its ISBNs</string>
+    <string name="app_tagline">Every barcode and QR code. Nothing leaves your phone.</string>
 
     <!-- Ortak -->
     <string name="back">Back</string>
@@ -99,6 +99,35 @@
     <string name="act_show_map">Show on map</string>
     <string name="act_add_contact">Add to contacts</string>
     <string name="external_notice">Opens in your browser or another app. Kodokur itself never goes online.</string>
+
+    <!-- GS1 (ilaç karekodu) -->
+    <string name="kind_gs1">Product code (GS1)</string>
+    <string name="label_expiry">Expiry date</string>
+    <string name="label_best_before">Best before</string>
+    <string name="label_production">Production date</string>
+    <string name="label_batch">Batch / lot</string>
+    <string name="label_serial">Serial number</string>
+    <string name="label_count">Quantity</string>
+    <string name="label_gs1_field">Field (%1$s)</string>
+    <string name="gs1_expired">Expired: the expiry date was %1$s.</string>
+
+    <!-- Bağlantı güvenliği -->
+    <string name="label_destination">Goes to</string>
+    <string name="label_encoded_name">Encoded name</string>
+    <string name="label_address">Full address</string>
+    <string name="warn_not_encrypted">Not encrypted (http). The page can be altered on the way.</string>
+    <string name="warn_lookalike">The address uses non-Latin letters. It may imitate a well-known site.</string>
+    <string name="warn_ip_address">The link points to a bare IP address, not a named site.</string>
+    <string name="warn_hidden_destination">The part before “@” is only a user name. The link really goes to %1$s.</string>
+    <string name="link_confirm_title">Open this link?</string>
+    <string name="link_confirm_body">It goes to %1$s. Open it only if you trust where the code came from.</string>
+    <string name="link_open_anyway">Open anyway</string>
+
+    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <string name="zoom_level">Zoom %1$s. Tap to change.</string>
+    <string name="act_copy_item">Copy %1$s</string>
+    <string name="act_delete_item">Delete %1$s</string>
+    <string name="act_more">More options</string>
 
     <!-- Geçmiş -->
     <string name="history_title">History</string>

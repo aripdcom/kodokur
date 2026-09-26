@@ -11,8 +11,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#F4F8F7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#101414" media="(prefers-color-scheme: dark)">
-<title>Kodokur · Barcode and QR reader that knows its ISBNs</title>
-<meta name="description" content="Kodokur: a barcode and QR reader for Android. Shows a book's ISBN hyphenated, with its ISBN-10 and registration group; also magazines, products, Wi-Fi, links and contact cards. 14 languages, camera is the only permission, no internet permission.">
+<title>Kodokur · Barcode and QR scanner that stays on your phone</title>
+<meta name="description" content="Kodokur reads every barcode and QR code: products, medicine codes with expiry dates, books, magazines, Wi-Fi, links and contact cards. It checks where a link really goes. No ads, no trackers, no internet permission. 14 languages.">
 <link rel="canonical" href="https://kodokur.aripd.com/">
 <link rel="alternate" hreflang="x-default" href="https://kodokur.aripd.com/">
 <link rel="alternate" hreflang="en" href="https://kodokur.aripd.com/?lang=en">
@@ -44,6 +44,8 @@
     --brand-weak: #DDF0ED;
     --on-brand-weak: #0F5F5C;
     --amber: #B86E00;
+    --warn-bg: #FBE7E5;
+    --warn-fg: #8F1C13;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -57,6 +59,8 @@
       --brand-weak: #1C3634;
       --on-brand-weak: #B6ECE6;
       --amber: #FFB347;
+      --warn-bg: #43201C;
+      --warn-fg: #F4ADA5;
     }
   }
   * { box-sizing: border-box; margin: 0; }
@@ -162,6 +166,7 @@
     font-size: 15px;
   }
   .note strong { color: var(--text); }
+  .note a { color: var(--brand); }
   footer {
     margin-top: 48px;
     padding-top: 18px;
@@ -187,17 +192,22 @@
     .mark { width: 52px; height: 52px; border-radius: 13px; }
     .btn { width: 100%; text-align: center; }
   }
+  .sample .head.warn { background: var(--warn-bg); color: var(--warn-fg); display: flex; gap: 12px; align-items: flex-start; font-family: inherit; font-size: 16px; font-weight: 500; }
+  .sample .host { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 22px; font-weight: 600; padding: 16px 18px 0; overflow-wrap: anywhere; }
 </style>
 </head>
 <body data-i18n-page>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="i-book" viewBox="0 0 24 24"><path d="M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1 -1 1H6a2 2 0 0 1 -2 -2V5a2 2 0 0 1 2 -2zM9 3v8l2.5 -1.5L14 11V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-news" viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1 -2 -2zM17 9h3v8a2 2 0 0 1 -2 2M8 9h5M8 13h5M8 17h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1 -.8L20 8H6.2M9 20h.01M17 20h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-qr" viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 18h2v2h-2zM14 18h2M18 14h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pill" viewBox="0 0 24 24"><path d="M10.5 3.5a5 5 0 0 1 7 7l-7 7a5 5 0 0 1 -7 -7zM7 7l7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1 -1 1H6a2 2 0 0 1 -2 -2V5a2 2 0 0 1 2 -2zM9 3v8l2.5 -1.5L14 11V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5 -3.5 8 -8 9c-4.5 -1 -8 -4 -8 -9V6zM9 12l2 2 4 -4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0 -8a4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-stack" viewBox="0 0 24 24"><path d="M8 4h11a1 1 0 0 1 1 1v11a1 1 0 0 1 -1 1H8a1 1 0 0 1 -1 -1V5a1 1 0 0 1 1 -1zM4 8v11a1 1 0 0 0 1 1h11M13.5 7.5v6M10.5 10.5h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-image" viewBox="0 0 24 24"><path d="M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1H5a1 1 0 0 1 -1 -1V5a1 1 0 0 1 1 -1zM4 16l4.5 -4.5 3.5 3.5 2.5 -2.5L20 18M15 8.5h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-zoom" viewBox="0 0 24 24"><path d="M10.5 17a6.5 6.5 0 1 0 0 -13a6.5 6.5 0 0 0 0 13zM20 20l-4.8 -4.8M10.5 7.5v6M7.5 10.5h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3l10 18H2zM12 10v4M12 17.5h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   </defs>
 </svg>
 <div class="wrap">
@@ -213,14 +223,15 @@
       <div class="mark" aria-hidden="true">
         <svg width="44" height="44" viewBox="0 0 32 32"><path fill="#E8F3F1" d="M8 9h2v14H8zM11.5 9h1v14h-1zM14 9h2v14h-2zM17.5 9h1v14h-1zM20 9h2.5v14H20zM24 9h1v14h-1z"/><rect x="6" y="15" width="20" height="2" fill="#FFB347"/></svg>
       </div>
-      <h1>Kodokur<span class="sub" data-i18n="subtitle">Barcode and QR reader that knows its ISBNs</span></h1>
+      <h1>Kodokur<span class="sub" data-i18n="subtitle">The barcode and QR scanner that stays on your phone</span></h1>
     </div>
-    <p class="tagline" data-i18n="tagline">Reads the barcode on the back of a book, hyphenates the ISBN in the right places and shows its ISBN-10 and registration group. Also reads magazines, products, Wi-Fi, links and contact cards. 14 languages, works offline.</p>
+    <p class="tagline" data-i18n="tagline">Point your camera at any code, from a cereal box to a medicine pack, a book, a Wi-Fi sticker or a poster. Kodokur tells you what it is and what you can do with it, and it never goes online to do it.</p>
     <div class="chips">
       <span class="chip" data-i18n="chipAds">0 ads</span>
       <span class="chip" data-i18n="chipTrackers">0 trackers</span>
       <span class="chip" data-i18n="chipCamera">only permission: camera</span>
       <span class="chip" data-i18n="chipInternet">no internet permission</span>
+      <span class="chip" data-i18n="chipLangs">14 languages</span>
       <span class="chip" data-i18n="chipOpen">open source</span>
     </div>
     <div class="cta">
@@ -231,79 +242,85 @@
 
   <main>
     <section>
-      <h2 data-i18n="bookH">Book barcodes</h2>
-      <p class="lead" data-i18n="bookLead">Every EAN-13 that starts with 978 or 979 is an ISBN. Kodokur checks the check digit, splits the number into its parts using the ISBN International range table and reads the price from the 5-digit add-on behind it. The table is built into the app; no internet is needed.</p>
-      <div class="sample">
-        <div class="head" dir="ltr">978-975-08-0171-6</div>
-        <dl>
-          <dt>ISBN-13</dt><dd dir="ltr">978-975-08-0171-6</dd>
-          <dt>ISBN-10</dt><dd dir="ltr">975-08-0171-7</dd>
-          <dt data-i18n="lblGroup">Registration group</dt><dd>Türkiye</dd>
-          <dt data-i18n="lblFormat">Format</dt><dd dir="ltr">EAN-13</dd>
-        </dl>
-      </div>
-    </section>
-
-    <section>
-      <h2 data-i18n="readsH">What it reads</h2>
-      <p class="lead" data-i18n="readsLead">Linear barcodes (EAN, UPC, Code 128/39/93, ITF, Codabar, GS1 DataBar) and 2D codes (QR, Data Matrix, PDF417, Aztec). A barcode held sideways is read too.</p>
+      <h2 data-i18n="readsH">One app for every code</h2>
+      <p class="lead" data-i18n="readsLead">Linear barcodes and 2D codes of every common kind: EAN, UPC, Code 128, ITF, GS1 DataBar, QR, Data Matrix, PDF417, Aztec. Held sideways, upside down or printed in reverse, they still read.</p>
       <div class="cards">
-      <article class="card">
-        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-book"/></svg></div>
-        <div class="info">
-          <h3 data-i18n="cardBookH">Books</h3>
-          <p data-i18n="cardBookP">Hyphenated ISBN-13, ISBN-10, registration group and, if present, the price. Opens in Open Library, Google Books or a web search with one tap.</p>
-        </div>
-      </article>
-      <article class="card">
-        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-news"/></svg></div>
-        <div class="info">
-          <h3 data-i18n="cardMagH">Magazines and newspapers</h3>
-          <p data-i18n="cardMagP">The ISSN from barcodes starting with 977, and the issue number from the 2-digit add-on. Opens in the ISSN Portal.</p>
-        </div>
-      </article>
       <article class="card">
         <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-cart"/></svg></div>
         <div class="info">
-          <h3 data-i18n="cardProdH">Products</h3>
-          <p data-i18n="cardProdP">EAN-13, EAN-8, UPC-A, UPC-E. Look them up in Open Food Facts if you like.</p>
+          <h3 data-i18n="cardProdH">Groceries and products</h3>
+          <p data-i18n="cardProdP">EAN and UPC barcodes on anything you buy. Look a product up in Open Food Facts or search the web in one tap.</p>
         </div>
       </article>
       <article class="card">
-        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-qr"/></svg></div>
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-pill"/></svg></div>
         <div class="info">
-          <h3 data-i18n="cardQrH">QR codes</h3>
-          <p data-i18n="cardQrP">Links, Wi-Fi (connect in one tap through the system dialog, the password stays hidden), e-mail, phone, SMS, locations and contact cards. Anything else can be copied as plain text.</p>
+          <h3 data-i18n="cardMedH">Medicine codes</h3>
+          <p data-i18n="cardMedP">The square code on a medicine box shows its expiry date, batch and serial number in plain words, and Kodokur warns you if the date has passed.</p>
         </div>
       </article>
       <article class="card">
-        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-image"/></svg></div>
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-book"/></svg></div>
         <div class="info">
-          <h3 data-i18n="cardPhotoH">From a photo, too</h3>
-          <p data-i18n="cardPhotoP">Reading a code from a picture needs no camera permission: the system photo picker hands over just that one image.</p>
+          <h3 data-i18n="cardBookH">Books and magazines</h3>
+          <p data-i18n="cardBookP">ISBNs come out properly hyphenated, with the ISBN-10 and the country or language group. Magazine barcodes give the ISSN and issue number.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-wifi"/></svg></div>
+        <div class="info">
+          <h3 data-i18n="cardWifiH">Wi-Fi</h3>
+          <p data-i18n="cardWifiP">Join a network from its QR code in one tap. The password stays hidden until you choose to see it.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-person"/></svg></div>
+        <div class="info">
+          <h3 data-i18n="cardContactH">Contacts and more</h3>
+          <p data-i18n="cardContactP">Business card QR codes go straight to your contacts. E-mail, phone, SMS and map codes open the right app.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-zoom"/></svg></div>
+        <div class="info">
+          <h3 data-i18n="cardZoomH">Small codes, old photos</h3>
+          <p data-i18n="cardZoomP">Pinch or double-tap to zoom in on tiny barcodes, and read a code from a photo without giving camera access.</p>
         </div>
       </article>
       </div>
     </section>
 
     <section>
-      <h2 data-i18n="shelfH">Counting a bookshelf</h2>
+      <h2 data-i18n="safeH">Know where a link goes</h2>
+      <p class="lead" data-i18n="safeLead">QR codes on posters, parking meters and menus are an easy way to send people to fake sites. Before you open a link, Kodokur shows the site it really leads to and warns you when something looks wrong.</p>
+      <div class="sample">
+        <div class="host" dir="ltr">kotu.example</div>
+        <div class="head warn" style="margin: 12px 18px 18px; border-radius: 10px;">
+          <svg width="22" height="22" aria-hidden="true" style="flex: 0 0 auto"><use href="#i-warn"/></svg>
+          <span data-i18n="sampleWarn">The part before “@” is only a user name. The link really goes to kotu.example.</span>
+        </div>
+      </div>
+      <p class="lead" style="margin-top: 14px" data-i18n="safeList">It also flags addresses written with look-alike letters from other alphabets, links to bare IP addresses and unencrypted http pages, and asks before opening any of them.</p>
+    </section>
+
+    <section>
+      <h2 data-i18n="batchSectionH">Stock-taking and cataloguing</h2>
       <div class="cards">
       <article class="card">
         <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-stack"/></svg></div>
         <div class="info">
           <h3 data-i18n="batchH">Batch scanning and CSV</h3>
-          <p data-i18n="batchP">In batch mode every code goes straight to the history without stopping, and the same book is never added twice. Share the history as a CSV file with ISBN-13 and ISBN-10 columns; spreadsheets open accented characters correctly.</p>
+          <p data-i18n="batchP">Batch mode adds code after code to the history without stopping and never counts the same item twice. Share the list as a CSV file for a spreadsheet: a shop shelf, a pharmacy cabinet or a home library.</p>
         </div>
       </article>
       </div>
     </section>
 
     <section>
-      <h2 data-i18n="localH">Stays on the device</h2>
+      <h2 data-i18n="localH">Stays on your phone</h2>
       <div class="note">
         <strong data-i18n="localStrong">The app has no internet permission.</strong>
-        <span data-i18n="localP">The only permission is the camera; frames are examined on the phone and never saved or sent anywhere. Buttons such as book search hand the code to your browser. The scan history stays on your phone only and, because it can contain Wi-Fi passwords, is left out of backups.</span>
+        <span data-i18n="localP">The only permission is the camera; frames are examined on the phone and never saved or sent anywhere. Buttons such as product or book search hand the code to your browser. Your history stays on your phone and, because it can contain Wi-Fi passwords, is left out of backups.</span>
         <a href="privacy.html" data-keep-lang="privacy.html" data-i18n="localLink">Privacy policy</a>
       </div>
     </section>

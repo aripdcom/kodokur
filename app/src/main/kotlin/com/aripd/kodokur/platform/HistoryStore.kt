@@ -62,7 +62,12 @@ class HistoryStore(context: Context) {
                 val symbology = Symbology.fromName(o.optString("f")) ?: return@mapNotNull null
                 Record(
                     timeMillis = o.getLong("t"),
-                    scan = Scan(o.getString("x"), symbology, o.optString("a").ifEmpty { null }),
+                    scan = Scan(
+                        text = o.getString("x"),
+                        symbology = symbology,
+                        addOn = o.optString("a").ifEmpty { null },
+                        gs1 = o.optBoolean("g", false),
+                    ),
                 )
             }
         } catch (e: Exception) {
@@ -81,7 +86,10 @@ class HistoryStore(context: Context) {
                     .put("t", r.timeMillis)
                     .put("f", r.scan.symbology.name)
                     .put("x", r.scan.text)
-                    .apply { r.scan.addOn?.let { put("a", it) } },
+                    .apply {
+                        r.scan.addOn?.let { put("a", it) }
+                        if (r.scan.gs1) put("g", true)
+                    },
             )
         }
         val tmp = File(file.parentFile, "history.json.tmp")

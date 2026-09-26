@@ -1,0 +1,5 @@
+• Prima versione su Google Play.
+• Legge tutti i codici a barre e QR più diffusi; codici dei farmaci con scadenza, lotto e numero di serie.
+• Mostra dove porta davvero un link e avvisa di link ingannevoli, camuffati o non cifrati.
+• Zoom per i codici minuscoli; modalità serie ed esportazione CSV.
+• 14 lingue. Niente pubblicità, niente tracker, nessun permesso internet.

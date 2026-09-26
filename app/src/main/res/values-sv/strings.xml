@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_tagline">Streckkods- och QR-läsare som kan sina ISBN</string>
+    <string name="app_tagline">Alla streckkoder och QR-koder. Inget lämnar din telefon.</string>
 
     <!-- Ortak -->
     <string name="back">Tillbaka</string>
@@ -94,6 +94,35 @@
     <string name="act_show_map">Visa på karta</string>
     <string name="act_add_contact">Lägg till i kontakter</string>
     <string name="external_notice">Öppnas i din webbläsare eller en annan app. Kodokur själv kopplar aldrig upp sig mot nätet.</string>
+
+    <!-- GS1 (ilaç karekodu) -->
+    <string name="kind_gs1">Produktkod (GS1)</string>
+    <string name="label_expiry">Utgångsdatum</string>
+    <string name="label_best_before">Bäst före</string>
+    <string name="label_production">Tillverkningsdatum</string>
+    <string name="label_batch">Batch/lot</string>
+    <string name="label_serial">Serienummer</string>
+    <string name="label_count">Antal</string>
+    <string name="label_gs1_field">Fält (%1$s)</string>
+    <string name="gs1_expired">Utgånget: utgångsdatumet var %1$s.</string>
+
+    <!-- Bağlantı güvenliği -->
+    <string name="label_destination">Går till</string>
+    <string name="label_encoded_name">Kodat namn</string>
+    <string name="label_address">Fullständig adress</string>
+    <string name="warn_not_encrypted">Inte krypterad (http). Sidan kan ändras på vägen.</string>
+    <string name="warn_lookalike">Adressen använder icke-latinska bokstäver. Den kan härma en känd webbplats.</string>
+    <string name="warn_ip_address">Länken pekar på en ren IP-adress, inte på en namngiven webbplats.</string>
+    <string name="warn_hidden_destination">Delen före ”@” är bara ett användarnamn. Länken går egentligen till %1$s.</string>
+    <string name="link_confirm_title">Öppna den här länken?</string>
+    <string name="link_confirm_body">Den går till %1$s. Öppna den bara om du litar på var koden kommer ifrån.</string>
+    <string name="link_open_anyway">Öppna ändå</string>
+
+    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <string name="zoom_level">Zoom %1$s. Tryck för att ändra.</string>
+    <string name="act_copy_item">Kopiera %1$s</string>
+    <string name="act_delete_item">Radera %1$s</string>
+    <string name="act_more">Fler alternativ</string>
 
     <!-- Geçmiş -->
     <string name="history_title">Historik</string>

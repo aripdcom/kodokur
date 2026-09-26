@@ -1,0 +1,1 @@
+Scannt jeden Barcode und QR-Code. Prüft Links, liest Arzneicodes. Ohne Werbung.

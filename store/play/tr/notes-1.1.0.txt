@@ -1,0 +1,5 @@
+• Google Play'deki ilk sürüm.
+• Yaygın bütün barkod ve karekodları okur; ilaç karekodundan son kullanma tarihi, parti ve seri numarası.
+• Bağlantının gerçekte nereye gittiğini gösterir; benzer, gizlenmiş ya da şifresiz bağlantılara karşı uyarır.
+• Minik barkodlar için yakınlaştırma; seri tarama ve CSV.
+• 14 dil. Reklam yok, izleyici yok, internet izni yok.

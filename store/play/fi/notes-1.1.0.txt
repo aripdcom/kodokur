@@ -1,0 +1,5 @@
+• Ensimmäinen julkaisu Google Playssa.
+• Lukee kaikki yleiset viivakoodit ja QR-koodit; lääkepakkausten koodeista viimeinen käyttöpäivä, eränumero ja sarjanumero.
+• Näyttää, minne linkki todella vie, ja varoittaa harhaanjohtavista, piilotetuista tai salaamattomista linkeistä.
+• Zoomaus pieniin viivakoodeihin; sarjatila ja CSV-vienti.
+• 14 kieltä. Ei mainoksia, ei seurantaa, ei internet-lupaa.

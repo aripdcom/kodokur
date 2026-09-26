@@ -9,6 +9,9 @@ sealed interface Content {
     /** 977 önekli EAN-13: dergi, gazete. [issue] 2 haneli ekten sayı numarası. */
     data class Periodical(val issn: Issn, val issue: String?) : Content
 
+    /** GS1 verisi: ilaç karekodu, GS1-128, GS1 DataBar (GTIN + SKT, parti, seri…). */
+    data class Gs1(val data: Gs1Data) : Content
+
     /** Öbür EAN/UPC kodları: market ürünleri. */
     data class Product(val gtin: String) : Content
 

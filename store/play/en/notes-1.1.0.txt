@@ -1,0 +1,5 @@
+• First release on Google Play.
+• Reads every common barcode and QR code; medicine codes with expiry date, batch and serial number.
+• Shows where a link really goes and warns about look-alike, hidden or unencrypted links.
+• Zoom for tiny barcodes; batch mode and CSV export.
+• 14 languages. No ads, no trackers, no internet permission.

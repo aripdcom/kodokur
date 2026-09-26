@@ -1,0 +1,1 @@
+Scan elke barcode en QR-code. Controleert links, leest medicijncodes. Geen ads.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_tagline">ISBN\'den anlayan barkod ve QR okuyucu</string>
+    <string name="app_tagline">Her barkodu ve karekodu okur. Telefonunuzdan hiçbir şey çıkmaz.</string>
 
     <!-- Ortak -->
     <string name="back">Geri</string>
@@ -94,6 +94,35 @@
     <string name="act_show_map">Haritada göster</string>
     <string name="act_add_contact">Kişilere ekle</string>
     <string name="external_notice">Tarayıcınızda ya da başka bir uygulamada açılır. Kodokur kendisi internete hiç çıkmaz.</string>
+
+    <!-- GS1 (ilaç karekodu) -->
+    <string name="kind_gs1">Ürün karekodu (GS1)</string>
+    <string name="label_expiry">Son kullanma tarihi</string>
+    <string name="label_best_before">Tavsiye edilen tüketim tarihi</string>
+    <string name="label_production">Üretim tarihi</string>
+    <string name="label_batch">Parti numarası</string>
+    <string name="label_serial">Seri numarası</string>
+    <string name="label_count">Adet</string>
+    <string name="label_gs1_field">Alan (%1$s)</string>
+    <string name="gs1_expired">Süresi geçmiş: son kullanma tarihi %1$s idi.</string>
+
+    <!-- Bağlantı güvenliği -->
+    <string name="label_destination">Gideceği site</string>
+    <string name="label_encoded_name">Kodlanmış ad</string>
+    <string name="label_address">Tam adres</string>
+    <string name="warn_not_encrypted">Şifresiz bağlantı (http). Sayfa yolda değiştirilebilir.</string>
+    <string name="warn_lookalike">Adreste Latin dışı harfler var. Tanınmış bir siteyi taklit ediyor olabilir.</string>
+    <string name="warn_ip_address">Bağlantı bir site adına değil, çıplak bir IP adresine gidiyor.</string>
+    <string name="warn_hidden_destination">“@” işaretinden önceki kısım yalnızca bir kullanıcı adı. Bağlantı aslında %1$s adresine gidiyor.</string>
+    <string name="link_confirm_title">Bağlantı açılsın mı?</string>
+    <string name="link_confirm_body">%1$s adresine gidiyor. Kodun nereden geldiğine güveniyorsanız açın.</string>
+    <string name="link_open_anyway">Yine de aç</string>
+
+    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <string name="zoom_level">Yakınlaştırma %1$s. Değiştirmek için dokunun.</string>
+    <string name="act_copy_item">Kopyala: %1$s</string>
+    <string name="act_delete_item">Sil: %1$s</string>
+    <string name="act_more">Diğer seçenekler</string>
 
     <!-- Geçmiş -->
     <string name="history_title">Geçmiş</string>

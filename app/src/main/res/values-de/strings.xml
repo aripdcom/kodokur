@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_tagline">Barcode- und QR-Leser, der sich mit ISBN auskennt</string>
+    <string name="app_tagline">Jeder Barcode und QR-Code. Nichts verlässt dein Telefon.</string>
 
     <!-- Ortak -->
     <string name="back">Zurück</string>
@@ -94,6 +94,35 @@
     <string name="act_show_map">Auf Karte zeigen</string>
     <string name="act_add_contact">Zu Kontakten</string>
     <string name="external_notice">Öffnet sich im Browser oder in einer anderen App. Kodokur selbst geht nie online.</string>
+
+    <!-- GS1 (ilaç karekodu) -->
+    <string name="kind_gs1">Produktcode (GS1)</string>
+    <string name="label_expiry">Verfallsdatum</string>
+    <string name="label_best_before">Mindestens haltbar bis</string>
+    <string name="label_production">Herstellungsdatum</string>
+    <string name="label_batch">Charge / Los</string>
+    <string name="label_serial">Seriennummer</string>
+    <string name="label_count">Menge</string>
+    <string name="label_gs1_field">Feld (%1$s)</string>
+    <string name="gs1_expired">Abgelaufen: Das Verfallsdatum (%1$s) ist überschritten.</string>
+
+    <!-- Bağlantı güvenliği -->
+    <string name="label_destination">Führt zu</string>
+    <string name="label_encoded_name">Kodierter Name</string>
+    <string name="label_address">Vollständige Adresse</string>
+    <string name="warn_not_encrypted">Nicht verschlüsselt (http). Die Seite kann unterwegs verändert werden.</string>
+    <string name="warn_lookalike">Die Adresse enthält nicht-lateinische Buchstaben. Sie könnte eine bekannte Website nachahmen.</string>
+    <string name="warn_ip_address">Der Link führt zu einer bloßen IP-Adresse, nicht zu einer benannten Website.</string>
+    <string name="warn_hidden_destination">Der Teil vor „@“ ist nur ein Benutzername. Der Link führt in Wirklichkeit zu %1$s.</string>
+    <string name="link_confirm_title">Diesen Link öffnen?</string>
+    <string name="link_confirm_body">Er führt zu %1$s. Öffne ihn nur, wenn du der Herkunft des Codes vertraust.</string>
+    <string name="link_open_anyway">Trotzdem öffnen</string>
+
+    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <string name="zoom_level">Zoom %1$s. Zum Ändern tippen.</string>
+    <string name="act_copy_item">%1$s kopieren</string>
+    <string name="act_delete_item">%1$s löschen</string>
+    <string name="act_more">Weitere Optionen</string>
 
     <!-- Geçmiş -->
     <string name="history_title">Verlauf</string>

@@ -1,0 +1,5 @@
+• Erste Veröffentlichung bei Google Play.
+• Liest alle gängigen Barcodes und QR-Codes; Arzneimittelcodes mit Verfallsdatum, Charge und Seriennummer.
+• Zeigt, wohin ein Link wirklich führt, und warnt vor nachgeahmten, versteckten oder unverschlüsselten Links.
+• Zoom für winzige Barcodes; Serienmodus und CSV-Export.
+• 14 Sprachen. Keine Werbung, keine Tracker, keine Internet-Berechtigung.

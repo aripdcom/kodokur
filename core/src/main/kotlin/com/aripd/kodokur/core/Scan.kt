@@ -3,11 +3,14 @@ package com.aripd.kodokur.core
 /**
  * Bir okuma. [addOn], EAN/UPC barkodunun sağındaki 2 ya da 5 haneli ek barkoddur:
  * kitaplarda 5 hane önerilen fiyatı, dergilerde 2 hane sayı numarasını taşır.
+ * [gs1]: tarayıcı kodu GS1 olarak işaretledi (ilaç karekodu, GS1-128, DataBar);
+ * metindeki alanlar [Gs1] ile ayrıştırılır.
  */
 data class Scan(
     val text: String,
     val symbology: Symbology,
     val addOn: String? = null,
+    val gs1: Boolean = false,
 ) {
     /** 5 haneli ekten fiyat ("$24.95", "£7.99"); fiyat yoksa ya da ek başka türse null. */
     val suggestedPrice: String?

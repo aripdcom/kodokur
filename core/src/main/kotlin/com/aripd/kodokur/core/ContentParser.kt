@@ -23,6 +23,13 @@ object ContentParser {
             return Content.Product(text)
         }
 
+        // İlaç karekodu ve öbür GS1 kodları. İşaretsiz metin yalnızca açık GS1
+        // yazımındaysa (parantezli ya da GS ayraçlı) kabul edilir, bkz. Gs1.parse.
+        Gs1.parse(text, scan.gs1)?.let { data ->
+            // Tek alan olarak yalnız GTIN taşıyan DataBar, market ürünüdür.
+            return if (data.elements.size == 1 && data.gtin != null) Content.Product(data.gtin!!) else Content.Gs1(data)
+        }
+
         // QR'a ya da Code 128'e metin olarak yazılmış ISBN.
         if (ISBN_TEXT.matches(text)) Isbn.parse(text)?.let { return Content.Book(it, null) }
 

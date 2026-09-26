@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_tagline">Barcode- en QR-lezer die ISBN’s begrijpt</string>
+    <string name="app_tagline">Elke barcode en QR-code. Niets verlaat je telefoon.</string>
 
     <!-- Ortak -->
     <string name="back">Terug</string>
@@ -94,6 +94,35 @@
     <string name="act_show_map">Op kaart tonen</string>
     <string name="act_add_contact">Aan contacten toevoegen</string>
     <string name="external_notice">Opent in je browser of een andere app. Kodokur zelf gaat nooit online.</string>
+
+    <!-- GS1 (ilaç karekodu) -->
+    <string name="kind_gs1">Productcode (GS1)</string>
+    <string name="label_expiry">Vervaldatum</string>
+    <string name="label_best_before">Ten minste houdbaar tot</string>
+    <string name="label_production">Productiedatum</string>
+    <string name="label_batch">Partij / lot</string>
+    <string name="label_serial">Serienummer</string>
+    <string name="label_count">Aantal</string>
+    <string name="label_gs1_field">Veld (%1$s)</string>
+    <string name="gs1_expired">Verlopen: de vervaldatum (%1$s) is voorbij.</string>
+
+    <!-- Bağlantı güvenliği -->
+    <string name="label_destination">Gaat naar</string>
+    <string name="label_encoded_name">Gecodeerde naam</string>
+    <string name="label_address">Volledig adres</string>
+    <string name="warn_not_encrypted">Niet versleuteld (http). De pagina kan onderweg worden gewijzigd.</string>
+    <string name="warn_lookalike">Het adres bevat niet-Latijnse letters. Het kan een bekende site nabootsen.</string>
+    <string name="warn_ip_address">De link verwijst naar een kaal IP-adres, niet naar een site met een naam.</string>
+    <string name="warn_hidden_destination">Het deel vóór “@” is alleen een gebruikersnaam. De link gaat eigenlijk naar %1$s.</string>
+    <string name="link_confirm_title">Deze link openen?</string>
+    <string name="link_confirm_body">Hij gaat naar %1$s. Open hem alleen als je vertrouwt waar de code vandaan komt.</string>
+    <string name="link_open_anyway">Toch openen</string>
+
+    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <string name="zoom_level">Zoom %1$s. Tik om te wijzigen.</string>
+    <string name="act_copy_item">%1$s kopiëren</string>
+    <string name="act_delete_item">%1$s verwijderen</string>
+    <string name="act_more">Meer opties</string>
 
     <!-- Geçmiş -->
     <string name="history_title">Geschiedenis</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_tagline">Stregkode- og QR-læser, der forstår ISBN</string>
+    <string name="app_tagline">Alle stregkoder og QR-koder. Intet forlader din telefon.</string>
 
     <!-- Ortak -->
     <string name="back">Tilbage</string>
@@ -94,6 +94,35 @@
     <string name="act_show_map">Vis på kort</string>
     <string name="act_add_contact">Føj til kontakter</string>
     <string name="external_notice">Åbnes i din browser eller en anden app. Kodokur selv går aldrig på nettet.</string>
+
+    <!-- GS1 (ilaç karekodu) -->
+    <string name="kind_gs1">Produktkode (GS1)</string>
+    <string name="label_expiry">Udløbsdato</string>
+    <string name="label_best_before">Bedst før</string>
+    <string name="label_production">Produktionsdato</string>
+    <string name="label_batch">Batch/lot</string>
+    <string name="label_serial">Serienummer</string>
+    <string name="label_count">Antal</string>
+    <string name="label_gs1_field">Felt (%1$s)</string>
+    <string name="gs1_expired">Udløbet: udløbsdatoen var %1$s.</string>
+
+    <!-- Bağlantı güvenliği -->
+    <string name="label_destination">Går til</string>
+    <string name="label_encoded_name">Kodet navn</string>
+    <string name="label_address">Fuld adresse</string>
+    <string name="warn_not_encrypted">Ikke krypteret (http). Siden kan ændres undervejs.</string>
+    <string name="warn_lookalike">Adressen bruger ikke-latinske bogstaver. Den kan efterligne et kendt websted.</string>
+    <string name="warn_ip_address">Linket peger på en ren IP-adresse, ikke på et navngivet websted.</string>
+    <string name="warn_hidden_destination">Delen før »@« er kun et brugernavn. Linket går i virkeligheden til %1$s.</string>
+    <string name="link_confirm_title">Åbn dette link?</string>
+    <string name="link_confirm_body">Det går til %1$s. Åbn det kun, hvis du stoler på, hvor koden kommer fra.</string>
+    <string name="link_open_anyway">Åbn alligevel</string>
+
+    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <string name="zoom_level">Zoom %1$s. Tryk for at ændre.</string>
+    <string name="act_copy_item">Kopiér %1$s</string>
+    <string name="act_delete_item">Slet %1$s</string>
+    <string name="act_more">Flere muligheder</string>
 
     <!-- Geçmiş -->
     <string name="history_title">Historik</string>

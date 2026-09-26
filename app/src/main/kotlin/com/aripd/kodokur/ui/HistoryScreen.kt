@@ -80,7 +80,9 @@ fun HistoryScreen(store: HistoryStore, onOpen: (Record) -> Unit, onBack: () -> U
                 },
                 actions = {
                     if (records.isNotEmpty()) {
-                        IconButton(onClick = { menu = true }) { Icon(Icons.Filled.MoreVert, null) }
+                        IconButton(onClick = { menu = true }) {
+                            Icon(Icons.Filled.MoreVert, stringResource(R.string.act_more))
+                        }
                         DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
                             DropdownMenuItem(
                                 text = { Text(stringResource(R.string.history_export)) },
@@ -136,7 +138,7 @@ fun HistoryScreen(store: HistoryStore, onOpen: (Record) -> Unit, onBack: () -> U
                                 if (result == SnackbarResult.ActionPerformed) store.restore(record)
                             }
                         }) {
-                            Icon(Icons.Filled.Delete, stringResource(R.string.delete))
+                            Icon(Icons.Filled.Delete, stringResource(R.string.act_delete_item, content.headline()))
                         }
                     },
                     modifier = Modifier.clickable { onOpen(record) },

@@ -1,0 +1,34 @@
+Kodokur liest jeden Barcode und QR-Code, sagt dir, was es ist und was du damit tun kannst, und geht dafür nie online. Keine Werbung, keine Tracker, kein Konto. Die Kamera ist die einzige Berechtigung; eine Internet-Berechtigung hat die App überhaupt nicht.
+
+EINE APP FÜR JEDEN CODE
+• Lebensmittel und Produkte: EAN- und UPC-Barcodes. Schlag ein Produkt mit einem Tipp bei Open Food Facts nach oder such im Web danach.
+• Arzneimittelcodes: Der quadratische Code auf der Medikamentenpackung zeigt Verfallsdatum, Charge und Seriennummer im Klartext, und Kodokur warnt dich, wenn das Datum überschritten ist.
+• Bücher und Zeitschriften: ISBNs korrekt mit Bindestrichen, mit ISBN-10 und Länder- oder Sprachgruppe; der Preis aus dem kleinen Zusatzcode. Zeitschriften-Barcodes liefern ISSN und Ausgabennummer.
+• WLAN: Mit einem Tipp über den QR-Code ins Netzwerk. Das Passwort bleibt verborgen, bis du es sehen willst.
+• Kontakte: QR-Codes auf Visitenkarten (vCard, MECARD) landen direkt in deinen Kontakten. E-Mail-, Telefon-, SMS- und Kartencodes öffnen die passende App.
+• Alles andere erscheint als Text, den du kopieren, teilen oder suchen kannst.
+
+WISSEN, WOHIN EIN LINK FÜHRT
+QR-Codes auf Plakaten, Parkautomaten und Speisekarten sind ein einfacher Weg, Menschen auf gefälschte Seiten zu locken. Bevor du einen Link öffnest, zeigt Kodokur, zu welcher Website er wirklich führt, und warnt dich vor:
+• täuschend ähnlichen Adressen mit Buchstaben aus anderen Alphabeten,
+• einem falschen Namen, versteckt vor einem „@“,
+• bloßen IP-Adressen,
+• unverschlüsselten http-Seiten.
+Links öffnen sich nie von selbst, und bei riskanten wird zuerst nachgefragt.
+
+GEMACHT FÜR ECHTE CODES
+• Zieh mit zwei Fingern, tippe doppelt oder nutze die Zoomtaste für winzige Barcodes.
+• Seitlich gehalten, kopfüber oder invertiert gedruckt: Codes werden trotzdem gelesen.
+• Lies einen Code aus einem Foto, auch ohne Kamerazugriff.
+• Taschenlampe, Fokus per Tippen.
+• Formate: EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, Code 93, ITF, Codabar, GS1 DataBar, QR, Data Matrix, PDF417, Aztec.
+
+INVENTUR UND KATALOGISIERUNG
+Im Serienmodus landet Code um Code ohne Unterbrechung im Verlauf, und nichts wird doppelt gezählt. Teile die Liste als CSV-Datei für die Tabellenkalkulation: ein Ladenregal, ein Arzneischrank oder die Bücherwand zu Hause.
+
+BLEIBT AUF DEINEM TELEFON
+Kamerabilder werden auf dem Telefon ausgewertet und nie gespeichert oder irgendwohin gesendet. Dein Verlauf bleibt auf deinem Telefon und ist von Backups ausgenommen, weil er WLAN-Passwörter enthalten kann. Schaltflächen wie die Produkt- oder Buchsuche übergeben den Code an deinen Browser; Kodokur selbst verbindet sich mit nichts.
+
+14 Sprachen: English, Türkçe, Deutsch, Français, Nederlands, Español, Português, Italiano, Dansk, Svenska, Norsk, Suomi, Русский, العربية.
+
+Open Source (GNU GPL v3): github.com/aripdcom/kodokur

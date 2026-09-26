@@ -1,24 +1,24 @@
 name: Release
 
-# İmzalı APK ve Play için AAB üretimi. `v*` etiketi push'lanınca çalışır, APK'yı
-# GitHub Release'e `kodokur.apk` adıyla ekler; Pages sitesindeki indirme bağlantısı
-# releases/latest/download/kodokur.apk adresinden her zaman en yeni sürümü verir.
+# Builds the signed APK and the AAB for Play. Runs when a `v*` tag is pushed and
+# attaches the APK to the GitHub Release as `kodokur.apk`; the download link on the
+# Pages site, releases/latest/download/kodokur.apk, always serves the newest version.
 #
-# Gerekli secret'lar (depo sahibi ayarlar):
-#   ANDROID_KEYSTORE_BASE64   — base64 kodlu kodokur-release.jks
-#   ANDROID_KEYSTORE_PASSWORD — keystore parolası (alias: kodokur)
+# Required secrets (set by the repository owner):
+#   ANDROID_KEYSTORE_BASE64   — base64-encoded kodokur-release.jks
+#   ANDROID_KEYSTORE_PASSWORD — keystore password (alias: kodokur)
 
 on:
   push:
     tags: ['v*']
-    # İş akışı değişince imzalı derlemeyi doğrula (Release oluşturmaz).
+    # When the workflow changes, verify the signed build (no Release is created).
     branches: [main, 'claude/**']
     paths: ['.github/workflows/release.yml']
-  # Elle tetikleme: verilen etiketi ve Release'i iş akışı kendisi oluşturur.
+  # Manual trigger: the workflow creates the given tag and the Release itself.
   workflow_dispatch:
     inputs:
       tag_name:
-        description: 'Oluşturulacak sürüm etiketi (örn. v1.0.0)'
+        description: 'Release tag to create (e.g. v1.0.0)'
         required: true
         default: 'v1.0.0'
 
@@ -38,26 +38,26 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
-      - name: Çekirdek birim testleri
+      - name: Core unit tests
         run: ./gradlew :core:test
 
-      - name: Sürümü etiketten türet
+      - name: Derive version from tag
         id: version
         run: |
           TAG="${{ inputs.tag_name || github.ref_name }}"
           case "$TAG" in
             v[0-9]*) ;;
-            *) TAG="v0.0.1" ;; # dal push'u = yalnızca doğrulama derlemesi
+            *) TAG="v0.0.1" ;; # branch push = verification build only
           esac
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
 
-      # Secret yoksa dosya hiç yazılmaz ve yol boş geçer. Eski hâli `echo "" |
-      # base64 -d` ile sıfır baytlık bir .jks yazıyordu: AGP böyle bir
-      # yapılandırmayı imzaya hazır saymaz, uyarıp imzasız APK üretir ve koşum
-      # yeşil döner. Etiketli koşumda secret eksikse adım burada durur —
-      # imzasız sürüm yayımlanmaz.
-      - name: Keystore'u çöz
+      # Without the secrets no file is written and the path stays empty. The old
+      # version wrote a zero-byte .jks via `echo "" | base64 -d`: AGP does not
+      # treat such a configuration as ready to sign, so it warns, builds an
+      # unsigned APK and the run goes green. On a tagged run a missing secret
+      # stops the step here, so no unsigned release is published.
+      - name: Decode keystore
         id: keystore
         env:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
@@ -66,62 +66,62 @@ jobs:
         run: |
           if [ -z "$ANDROID_KEYSTORE_BASE64" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD" ]; then
             if [ "$RELEASING" = 'true' ]; then
-              echo "::error::ANDROID_KEYSTORE_BASE64 ve ANDROID_KEYSTORE_PASSWORD secret'ları gerekli; imzasız sürüm yayımlanmaz."
+              echo "::error::The ANDROID_KEYSTORE_BASE64 and ANDROID_KEYSTORE_PASSWORD secrets are required; an unsigned release is not published."
               exit 1
             fi
-            echo "Keystore secret'ı yok: dal koşumu imzasız derlemeyle doğrulanacak."
+            echo "No keystore secret: the branch run is verified with an unsigned build."
             echo 'path=' >> "$GITHUB_OUTPUT"
             exit 0
           fi
           printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/kodokur-release.jks"
           if [ ! -s "$RUNNER_TEMP/kodokur-release.jks" ]; then
-            echo "::error::Çözülen keystore boş; ANDROID_KEYSTORE_BASE64 bozuk."
+            echo "::error::The decoded keystore is empty; ANDROID_KEYSTORE_BASE64 is corrupt."
             exit 1
           fi
           echo "path=$RUNNER_TEMP/kodokur-release.jks" >> "$GITHUB_OUTPUT"
 
-      - name: İmzalı release APK ve AAB derle
+      - name: Build signed release APK and AAB
         run: ./gradlew :app:assembleRelease :app:bundleRelease -PappVersion=${{ steps.version.outputs.version }}
         env:
           ANDROID_KEYSTORE_PATH: ${{ steps.keystore.outputs.path }}
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
 
-      # İmza gerçekten APK'ya indi mi? Yapılandırma eksikse AGP imzalamayı
-      # sessizce atlar, yani "derleme başarılı" imzayı göstermez. Etiketli
-      # koşumda imzasızlık hata; dal koşumunda yalnızca uyarı, çünkü orada
-      # keystore zaten yok. Parmak izi de burada kütüğe basılır.
-      - name: APK imzasını doğrula
+      # Did the signature actually land in the APK? With incomplete configuration
+      # AGP silently skips signing, so "build succeeded" does not prove a signature.
+      # On a tagged run an unsigned APK is an error; on a branch run only a warning,
+      # since there is no keystore there anyway. The fingerprint is logged here too.
+      - name: Verify APK signature
         id: apk
         env:
           RELEASING: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
         run: |
-          # İmzalanmamış çıktıyı AGP "-unsigned" ekiyle adlandırır. Keystore'suz
-          # dal koşumunda çıktı odur; etiketli koşum zaten imzasız geçemiyor.
+          # AGP names unsigned output with an "-unsigned" suffix. That is the output
+          # of a branch run without a keystore; a tagged run cannot pass unsigned anyway.
           BASE=app/build/outputs/apk/release
           if [ -f "$BASE/app-release.apk" ]; then
             APK="$BASE/app-release.apk"
           elif [ -f "$BASE/app-release-unsigned.apk" ]; then
             APK="$BASE/app-release-unsigned.apk"
           else
-            echo "::error::Release APK'sı bulunamadı ($BASE)."
+            echo "::error::Release APK not found ($BASE)."
             exit 1
           fi
           echo "path=$APK" >> "$GITHUB_OUTPUT"
           APKSIGNER="$(find "${ANDROID_HOME:-$ANDROID_SDK_ROOT}/build-tools" -maxdepth 2 -name apksigner -type f | sort -V | tail -1)"
           if [ -z "$APKSIGNER" ]; then
-            echo "::error::apksigner bulunamadı; imza doğrulanamıyor."
+            echo "::error::apksigner not found; cannot verify the signature."
             exit 1
           fi
           if "$APKSIGNER" verify --verbose --print-certs "$APK"; then
-            echo "APK imzalı."
+            echo "APK is signed."
           elif [ "$RELEASING" = 'true' ]; then
-            echo "::error::APK imzasız; sürüm yayımlanmayacak."
+            echo "::error::APK is unsigned; the release will not be published."
             exit 1
           else
-            echo "::warning::APK imzasız — keystore secret'ı olmayan dal koşumunda beklenen."
+            echo "::warning::APK is unsigned, as expected on a branch run without the keystore secret."
           fi
 
-      - name: Yayın dosyalarını hazırla (APK + AAB + kaynak arşivleri + SHA256)
+      - name: Prepare release files (APK + AAB + source archives + SHA256)
         env:
           APK: ${{ steps.apk.outputs.path }}
         run: |
@@ -129,21 +129,21 @@ jobs:
           mkdir -p dist
           cp "$APK" "dist/kodokur-$TAG.apk"
           cp "$APK" dist/kodokur.apk
-          # Play Console'a yüklenen paket; yandan kurulamaz, APK onun için.
+          # The bundle uploaded to Play Console; it cannot be sideloaded, which is what the APK is for.
           cp app/build/outputs/bundle/release/app-release.aab "dist/kodokur-$TAG-play.aab"
           git archive --format=zip --prefix="kodokur-$TAG/" -o "dist/kodokur-$TAG-source.zip" HEAD
           git archive --format=tar.gz --prefix="kodokur-$TAG/" -o "dist/kodokur-$TAG-source.tar.gz" HEAD
           cd dist && sha256sum kodokur* > SHA256SUMS.txt && cat SHA256SUMS.txt
 
-      - name: Yayın dosyalarını iş akışı çıktısı olarak yükle
+      - name: Upload release files as workflow artifacts
         uses: actions/upload-artifact@v4
         with:
           name: kodokur-release-${{ steps.version.outputs.tag }}
           path: dist/*
 
-      # Söz: tek izin kamera. Bir kütüphane manifestten yeni bir izin taşırsa
-      # (androidx.core bunu bir kez yapmıştı) sürüm yayımlanmaz.
-      - name: İzinleri doğrula
+      # Promise: the camera is the only permission. If a library carries a new
+      # permission in through its manifest (androidx.core did this once), no release is published.
+      - name: Verify permissions
         env:
           APK: ${{ steps.apk.outputs.path }}
         run: |
@@ -151,11 +151,11 @@ jobs:
           PERMS="$("$AAPT" dump permissions "$APK" | grep -E '^uses-permission' | sed -E "s/.*name='([^']+)'.*/\1/" | sort)"
           echo "$PERMS"
           if [ "$PERMS" != "android.permission.CAMERA" ]; then
-            echo "::error::APK kameradan başka izin istiyor ya da kamera iznini taşımıyor."
+            echo "::error::The APK requests a permission other than the camera, or lacks the camera permission."
             exit 1
           fi
 
-      - name: GitHub Release oluştur
+      - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
         uses: softprops/action-gh-release@v2
         with:

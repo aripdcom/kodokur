@@ -11,12 +11,12 @@ import com.google.zxing.ResultMetadataType
 import com.google.zxing.common.HybridBinarizer
 
 /**
- * ZXing üzerine ince bir katman. Örnek iş parçacığı güvenli değildir: kamera
- * çözümleyicisi kendi örneğini tek iş parçacığında kullanır.
+ * A thin layer over ZXing. An instance is not thread-safe: the camera analyzer
+ * uses its own instance on a single thread.
  *
- * [thorough] galeriden seçilen tek görsel içindir: daha yavaş ama daha inatçı
- * (TRY_HARDER, ters renkli kodlar). Kamerada kapalıdır; her kare hızlı geçmeli,
- * nasılsa bir sonraki kare gelir.
+ * [thorough] is for a single image picked from the gallery: slower but more
+ * persistent (TRY_HARDER, inverted codes). Off for the camera; each frame must
+ * go through quickly, and another frame is coming anyway.
  */
 class BarcodeDecoder(private val thorough: Boolean = false) {
 
@@ -31,10 +31,10 @@ class BarcodeDecoder(private val thorough: Boolean = false) {
     }
 
     /**
-     * Görüntüyü olduğu gibi dener; [alsoSideways] ise bulamayınca 90° çevrilmişini
-     * de dener. Çizgili (1B) barkodları ZXing yalnızca yatay satırlarda arar;
-     * telefona dik tutulan bir kitabın barkodu ancak çevrilince okunur. 2B kodlar
-     * yönden bağımsızdır.
+     * Tries the image as is; with [alsoSideways], if nothing is found, also tries it
+     * rotated 90°. ZXing searches linear (1D) barcodes only along horizontal rows;
+     * the barcode of a book held perpendicular to the phone reads only once rotated.
+     * 2D codes are orientation-independent.
      */
     fun decode(image: LumaImage, alsoSideways: Boolean = true): Scan? =
         decodeOnce(image) ?: if (alsoSideways) decodeOnce(image.rotated(90)) else null
@@ -64,7 +64,7 @@ class BarcodeDecoder(private val thorough: Boolean = false) {
             text = text,
             symbology = symbology,
             addOn = resultMetadata?.get(ResultMetadataType.UPC_EAN_EXTENSION) as? String,
-            // ]d2 DataMatrix, ]C1 Code 128, ]Q3 QR, ]e0 DataBar: FNC1 ile başlayan GS1 kodu.
+            // ]d2 DataMatrix, ]C1 Code 128, ]Q3 QR, ]e0 DataBar: a GS1 code starting with FNC1.
             gs1 = identifier in GS1_IDENTIFIERS ||
                 symbology == Symbology.RSS_14 || symbology == Symbology.RSS_EXPANDED,
         )

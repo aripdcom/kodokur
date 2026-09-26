@@ -4,13 +4,13 @@ import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-/** Geçmişteki bir okuma: ne zaman, ne okundu. */
+/** A scan in the history: when, and what was scanned. */
 data class Record(val timeMillis: Long, val scan: Scan)
 
 /**
- * Geçmişi CSV'ye döker (RFC 4180, UTF-8, BOM'lu: Excel Türkçe karakterleri
- * ancak BOM görünce doğru okur). Kitaplık envanteri için ISBN sütunları hazır
- * gelir; kitap olmayan satırlarda boştur.
+ * Exports the history to CSV (RFC 4180, UTF-8 with BOM: Excel reads Turkish
+ * characters correctly only when it sees the BOM). ISBN columns are included for
+ * library inventories; they are empty on non-book rows.
  */
 object HistoryCsv {
 
@@ -42,9 +42,9 @@ object HistoryCsv {
     }
 
     /**
-     * Gerekirse tırnaklar. =, +, -, @ ile başlayan metin tablo programında formül
-     * sayılır; QR'dan gelen bir metin formül çalıştırmasın diye başına ' eklenir.
-     * Sayılar (ISBN, "-12") olduğu gibi kalır.
+     * Quotes if needed. Text starting with =, +, -, @ counts as a formula in a
+     * spreadsheet; a ' is prepended so text from a QR code cannot run a formula.
+     * Numbers (ISBN, "-12") are left as is.
      */
     internal fun field(value: String): String {
         var v = value

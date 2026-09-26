@@ -1,9 +1,9 @@
 package com.aripd.kodokur.core
 
-/** Sağlama haneleri: GS1 (EAN/UPC, ISBN-13), ISBN-10 ve ISSN. */
+/** Check digits: GS1 (EAN/UPC, ISBN-13), ISBN-10 and ISSN. */
 internal object CheckDigits {
 
-    /** GS1 mod-10: sağdan başlayarak 3, 1, 3, 1… ağırlıkları. [body] sağlama hanesiz. */
+    /** GS1 mod-10: weights 3, 1, 3, 1… starting from the right. [body] excludes the check digit. */
     fun gs1(body: String): Char {
         var sum = 0
         for (i in body.indices) {
@@ -16,10 +16,10 @@ internal object CheckDigits {
     fun isValidGs1(code: String): Boolean =
         code.length >= 2 && code.all { it in '0'..'9' } && gs1(code.dropLast(1)) == code.last()
 
-    /** ISBN-10: ağırlıklar 10…2, mod 11; 10 çıkarsa 'X'. [body] dokuz hane. */
+    /** ISBN-10: weights 10…2, mod 11; 'X' when the result is 10. [body] is nine digits. */
     fun isbn10(body: String): Char = mod11(body, firstWeight = 10)
 
-    /** ISSN: ağırlıklar 8…2, mod 11; 10 çıkarsa 'X'. [body] yedi hane. */
+    /** ISSN: weights 8…2, mod 11; 'X' when the result is 10. [body] is seven digits. */
     fun issn(body: String): Char = mod11(body, firstWeight = 8)
 
     private fun mod11(body: String, firstWeight: Int): Char {

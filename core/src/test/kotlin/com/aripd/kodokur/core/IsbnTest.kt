@@ -6,21 +6,21 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-// Beklenen sağlama haneleri ve tirelemeler kodu kullanmadan, elle/bağımsız
-// hesaplanmıştır; test, kodun kendi çıktısını doğrulamasın.
+// Expected check digits and hyphenations were computed by hand/independently,
+// without using the code, so the test does not validate the code's own output.
 class IsbnTest {
 
     private fun isbn(text: String): Isbn =
-        Isbn.parse(text).also { assertNotNull("geçerli olmalı: $text", it) }!!
+        Isbn.parse(text).also { assertNotNull("should be valid: $text", it) }!!
 
     @Test
-    fun `ISBN-13 ve ISBN-10 aynı kitaba çözülür`() {
+    fun `ISBN-13 and ISBN-10 resolve to the same book`() {
         assertEquals(isbn("9780306406157"), isbn("0-306-40615-2"))
         assertEquals("0306406152", isbn("978-0-306-40615-7").isbn10)
     }
 
     @Test
-    fun `X sağlamalı ISBN-10`() {
+    fun `ISBN-10 with X check digit`() {
         val book = isbn("0-8044-2957-X")
         assertEquals("9780804429573", book.isbn13)
         assertEquals("080442957X", book.isbn10)
@@ -29,23 +29,23 @@ class IsbnTest {
     }
 
     @Test
-    fun `etiket ve boşluklar yok sayılır`() {
+    fun `label and whitespace are ignored`() {
         assertEquals("9780306406157", isbn("ISBN 978-0-306-40615-7").isbn13)
         assertEquals("9780306406157", isbn("ISBN-13: 978 0 306 40615 7").isbn13)
         assertEquals("9780306406157", isbn("isbn-10:0306406152").isbn13)
     }
 
     @Test
-    fun `sağlaması tutmayan ya da ISBN olmayan kod reddedilir`() {
+    fun `code with invalid check digit or non-ISBN code is rejected`() {
         assertNull(Isbn.parse("9780306406158"))
         assertNull(Isbn.parse("0306406153"))
-        assertNull(Isbn.parse("4006381333931")) // market ürünü
+        assertNull(Isbn.parse("4006381333931")) // retail product
         assertNull(Isbn.parse("978030640615"))
         assertNull(Isbn.parse("97803064061X7"))
     }
 
     @Test
-    fun `tireleme aralık tablosuna göre`() {
+    fun `hyphenation follows the range table`() {
         assertEquals("978-0-306-40615-7", isbn("9780306406157").hyphenated13)
         assertEquals("978-0-8044-2957-3", isbn("9780804429573").hyphenated13)
         assertEquals("978-975-08-0171-6", isbn("9789750801716").hyphenated13)
@@ -57,20 +57,20 @@ class IsbnTest {
     }
 
     @Test
-    fun `979 önekinin ISBN-10'u yoktur`() {
+    fun `979 prefix has no ISBN-10`() {
         val book = isbn("9791090636071")
         assertNull(book.isbn10)
         assertNull(book.hyphenated10)
     }
 
     @Test
-    fun `tanımsız aralıkta tiresiz kalır`() {
-        // 978-625'te 0200000-3199999 henüz dağıtılmamış (uzunluk 0).
+    fun `undefined range stays unhyphenated`() {
+        // In 978-625, 0200000-3199999 is not allocated yet (length 0).
         assertEquals("9786251000006", isbn("9786251000006").hyphenated13)
     }
 
     @Test
-    fun `kayıt grubu adı`() {
+    fun `registration group name`() {
         assertEquals("Türkiye", isbn("9789750801716").agency)
         assertEquals("Türkiye", isbn("9786053600183").agency)
         assertEquals("English language", isbn("9780306406157").agency)
@@ -78,7 +78,7 @@ class IsbnTest {
     }
 
     @Test
-    fun `aralık tablosu tarihli`() {
+    fun `range table is dated`() {
         assertTrue(Isbn.rangesDate, Isbn.rangesDate.contains("20"))
     }
 }

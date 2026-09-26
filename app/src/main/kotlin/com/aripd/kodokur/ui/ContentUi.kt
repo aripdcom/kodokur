@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.Locale
 
-/** Sonuç ekranının ve geçmiş satırlarının içerik türüne göre değişen kısmı. */
+/** The parts of the result screen and history rows that vary by content kind. */
 
 @StringRes
 fun Content.kindLabel(): Int = when (this) {
@@ -53,13 +53,13 @@ fun Content.kindIcon(): ImageVector = when (this) {
     is Content.Text -> KodokurIcons.Text
 }
 
-/** Büyük puntoyla gösterilen tek satır. */
+/** The single line shown in large type. */
 fun Content.headline(): String = when (this) {
     is Content.Book -> isbn.hyphenated13
     is Content.Periodical -> "ISSN ${issn.formatted}"
     is Content.Product -> gtin
     is Content.Gs1 -> data.ean13 ?: data.gtin ?: data.elements.first().let { "(${it.ai}) ${it.value}" }
-    // Bağlantıda büyük yazılan, gideceği site: tam adres ayrıntıda.
+    // For a link, the large text is the destination site; the full address is in the details.
     is Content.Link -> LinkCheck.inspect(url)?.host ?: url
     is Content.Wifi -> ssid
     is Content.Email -> address
@@ -70,7 +70,7 @@ fun Content.headline(): String = when (this) {
     is Content.Text -> text
 }
 
-/** Numara gibi okunan başlıklar eşit aralıklı yazıyla gösterilir. */
+/** Headlines that read like numbers are shown in a monospace font. */
 val Content.isCode: Boolean
     get() = this is Content.Book || this is Content.Periodical || this is Content.Product || this is Content.Gs1
 
@@ -78,9 +78,9 @@ private fun Content.Geo.coordinates() =
     String.format(Locale.ROOT, "%.6f, %.6f", latitude, longitude)
 
 /**
- * [copyable] değilse (biçim, zaman gibi üst bilgi) satırda kopyalama düğmesi çıkmaz.
- * [labelArg], etiket metnindeki %1$s'in yerine geçer (GS1'in tanınmayan alanları).
- * [alert]: dikkat çekilecek değer (süresi geçmiş son kullanma tarihi).
+ * If not [copyable] (metadata such as format or time), the row has no copy button.
+ * [labelArg] replaces %1$s in the label text (unrecognized GS1 fields).
+ * [alert]: a value to draw attention to (an expiry date in the past).
  */
 class Detail(
     @StringRes val label: Int,
@@ -91,7 +91,7 @@ class Detail(
     val alert: Boolean = false,
 )
 
-/** GS1 tarihi: gün verilmişse uygulama dilinde tarih, verilmemişse ay ve yıl. */
+/** GS1 date: a full date in the app language if the day is given, otherwise month and year. */
 fun Gs1Date.format(locale: Locale): String =
     if (dayGiven) {
         DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(locale).format(date)
@@ -158,14 +158,14 @@ fun Content.details(locale: Locale, today: java.time.LocalDate = java.time.Local
 }
 
 /**
- * Bir eylem düğmesi. [external] ise tarayıcıya ya da başka bir uygulamaya çıkar;
- * ekranda "Kodokur internete çıkmaz" notu bunlar için gösterilir.
+ * An action button. If [external], it leaves for the browser or another app; the
+ * "Kodokur does not go online" note is shown for these.
  */
 class ResultAction(
     @StringRes val label: Int,
     val icon: ImageVector,
     val external: Boolean = false,
-    /** Uyarılı bağlantılar gibi, çalıştırmadan önce onay istenebilecek eylem. */
+    /** An action that may ask for confirmation before running, such as a flagged link. */
     val confirm: Boolean = false,
     val run: (Context) -> Unit,
 )
@@ -198,7 +198,7 @@ fun Content.actions(raw: String): List<ResultAction> = when (val c = this) {
             Actions.webSearch(it, c.gtin)
         },
     )
-    // Açma, uyarı varsa önce onay ister: sonuç ekranı bu eylemi kendisi yönetir.
+    // Opening asks for confirmation first if there is a warning; the result screen handles this action itself.
     is Content.Link -> listOf(
         ResultAction(R.string.act_open, KodokurIcons.OpenInNew, external = true, confirm = true) { Actions.browse(it, c.url) },
     )
@@ -239,13 +239,13 @@ fun Content.actions(raw: String): List<ResultAction> = when (val c = this) {
 )
 
 /**
- * Kopyalanan metin: kitapta tiresiz ISBN-13 (katalog ve kitapçı aramalarına
- * olduğu gibi yapışır), dergide ISSN; öbürlerinde ham içerik.
+ * The copied text: for a book, the ISBN-13 without hyphens (pastes as-is into
+ * catalog and bookstore searches); for a periodical, the ISSN; otherwise the raw content.
  */
 private fun Content.copyText(raw: String): String = when (this) {
     is Content.Book -> isbn.isbn13
     is Content.Periodical -> issn.formatted
-    // GS1: insanın okuyabildiği parantezli yazım; ham metindeki GS ayracı yapıştırılınca kaybolur.
+    // GS1: the human-readable form with parentheses; the GS separator in the raw text is lost on paste.
     is Content.Gs1 -> data.toString()
     else -> raw
 }

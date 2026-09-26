@@ -1,7 +1,7 @@
 /*
-  Sitenin çevirileri. ÜRETİLMİŞ DOSYA: elle düzenlemeyin.
-  Kaynak: tools/site/<dil>.json → python3 tools/gen_site_i18n.py
-  İngilizce burada yok; index.html'in kendisinde duruyor.
+  Website translations. GENERATED FILE: do not edit by hand.
+  Source: tools/site/<lang>.json → python3 tools/gen_site_i18n.py
+  English is not here; it lives in index.html itself.
 */
 
 window.KODOKUR_I18N = {

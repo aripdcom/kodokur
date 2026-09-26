@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Android 13+ Ayarlar → Uygulamalar → Kodokur → Dil seçicisini bu listeden kurar.
-     Varsayılan İngilizce (res/values); çeviriler res/values-<dil>. Portekizce tek
-     klasörde (values-pt) Brezilya Portekizcesi olarak; pt-BR ve pt-PT buraya çözülür. -->
+<!-- Android 13+ builds the Settings → Apps → Kodokur → Language picker from this list.
+     Default is English (res/values); translations live in res/values-<lang>. Portuguese
+     is a single folder (values-pt) in Brazilian Portuguese; pt-BR and pt-PT resolve to it. -->
 <locale-config xmlns:android="http://schemas.android.com/apk/res/android"
     android:defaultLocale="en">
     <locale android:name="en" />

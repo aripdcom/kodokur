@@ -2,7 +2,7 @@
 <resources>
     <string name="app_tagline">Elke barcode en QR-code. Niets verlaat je telefoon.</string>
 
-    <!-- Ortak -->
+    <!-- Common -->
     <string name="back">Terug</string>
     <string name="cancel">Annuleren</string>
     <string name="delete">Verwijderen</string>
@@ -11,7 +11,7 @@
     <string name="copied">Gekopieerd</string>
     <string name="no_app">Geen app op deze telefoon kan dit openen</string>
 
-    <!-- Tarayıcı -->
+    <!-- Scanner -->
     <string name="scan_hint">Richt op een barcode of QR-code</string>
     <string name="action_gallery">Uit foto</string>
     <string name="action_torch_on">Zaklamp aan</string>
@@ -30,7 +30,7 @@
     <string name="gallery_error">De afbeelding kon niet worden geopend</string>
     <string name="gallery_reading">Afbeelding lezen…</string>
 
-    <!-- Kamera izni -->
+    <!-- Camera permission -->
     <string name="permission_title">Cameratoegang</string>
     <string name="permission_body">Kodokur leest codes via de camera. Beelden worden op de telefoon verwerkt, nooit opgeslagen en nergens naartoe gestuurd.</string>
     <string name="permission_grant">Camera toestaan</string>
@@ -39,7 +39,7 @@
     <string name="no_camera">Dit apparaat heeft geen camera. Je kunt nog steeds een code uit een foto lezen.</string>
     <string name="camera_error">De camera kon niet worden gestart</string>
 
-    <!-- İçerik türleri -->
+    <!-- Content kinds -->
     <string name="kind_book">Boek</string>
     <string name="kind_periodical">Tijdschrift</string>
     <string name="kind_product">Product</string>
@@ -52,7 +52,7 @@
     <string name="kind_contact">Contact</string>
     <string name="kind_text">Tekst</string>
 
-    <!-- Ayrıntı etiketleri -->
+    <!-- Detail labels -->
     <string name="label_isbn13">ISBN-13</string>
     <string name="label_isbn10">ISBN-10</string>
     <string name="label_group">Registratiegroep</string>
@@ -80,7 +80,7 @@
     <string name="label_raw">Ruwe inhoud</string>
     <string name="label_scanned_at">Gescand</string>
 
-    <!-- Eylemler -->
+    <!-- Actions -->
     <string name="act_copy">Kopiëren</string>
     <string name="act_share">Delen</string>
     <string name="act_open">Openen</string>
@@ -98,7 +98,7 @@
     <string name="act_add_contact">Aan contacten toevoegen</string>
     <string name="external_notice">Opent in je browser of een andere app. Kodokur zelf gaat nooit online.</string>
 
-    <!-- GS1 (ilaç karekodu) -->
+    <!-- GS1 (medicine codes) -->
     <string name="kind_gs1">Productcode (GS1)</string>
     <string name="label_expiry">Vervaldatum</string>
     <string name="label_best_before">Ten minste houdbaar tot</string>
@@ -109,7 +109,7 @@
     <string name="label_gs1_field">Veld (%1$s)</string>
     <string name="gs1_expired">Verlopen: de vervaldatum (%1$s) is voorbij.</string>
 
-    <!-- Bağlantı güvenliği -->
+    <!-- Link safety -->
     <string name="label_destination">Gaat naar</string>
     <string name="label_encoded_name">Gecodeerde naam</string>
     <string name="label_address">Volledig adres</string>
@@ -121,13 +121,13 @@
     <string name="link_confirm_body">Hij gaat naar %1$s. Open hem alleen als je vertrouwt waar de code vandaan komt.</string>
     <string name="link_open_anyway">Toch openen</string>
 
-    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <!-- Zoom and accessibility -->
     <string name="zoom_level">Zoom %1$s. Tik om te wijzigen.</string>
     <string name="act_copy_item">%1$s kopiëren</string>
     <string name="act_delete_item">%1$s verwijderen</string>
     <string name="act_more">Meer opties</string>
 
-    <!-- Geçmiş -->
+    <!-- History -->
     <string name="history_title">Geschiedenis</string>
     <string name="history_empty">Nog niets gescand</string>
     <string name="history_export">CSV exporteren</string>
@@ -139,11 +139,11 @@
     </plurals>
     <string name="history_deleted">Scan verwijderd</string>
 
-    <!-- Dil -->
+    <!-- Language -->
     <string name="language_title">Taal</string>
     <string name="language_system">Taal van de telefoon</string>
 
-    <!-- Hakkında -->
+    <!-- About -->
     <string name="about_title">Over</string>
     <string name="about_promise">Geen advertenties. Geen trackers. Geen internetrecht. Het enige recht is de camera, en camerabeelden verlaten de telefoon nooit. De geschiedenis blijft op dit apparaat en is uitgesloten van back-ups.</string>
     <string name="about_version">Versie %1$s</string>

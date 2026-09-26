@@ -2,7 +2,7 @@
 <resources>
     <string name="app_tagline">Todo código de barras e QR. Nada sai do seu telefone.</string>
 
-    <!-- Ortak -->
+    <!-- Common -->
     <string name="back">Voltar</string>
     <string name="cancel">Cancelar</string>
     <string name="delete">Excluir</string>
@@ -11,7 +11,7 @@
     <string name="copied">Copiado</string>
     <string name="no_app">Nenhum app deste telefone consegue abrir isto</string>
 
-    <!-- Tarayıcı -->
+    <!-- Scanner -->
     <string name="scan_hint">Aponte para um código de barras ou QR</string>
     <string name="action_gallery">Da foto</string>
     <string name="action_torch_on">Ligar a lanterna</string>
@@ -31,7 +31,7 @@
     <string name="gallery_error">Não foi possível abrir a imagem</string>
     <string name="gallery_reading">Lendo a imagem…</string>
 
-    <!-- Kamera izni -->
+    <!-- Camera permission -->
     <string name="permission_title">Acesso à câmera</string>
     <string name="permission_body">O Kodokur lê os códigos pela câmera. As imagens são processadas no telefone, nunca são salvas e nunca são enviadas para lugar nenhum.</string>
     <string name="permission_grant">Permitir câmera</string>
@@ -40,7 +40,7 @@
     <string name="no_camera">Este dispositivo não tem câmera. Mesmo assim, você pode ler um código de uma foto.</string>
     <string name="camera_error">Não foi possível iniciar a câmera</string>
 
-    <!-- İçerik türleri -->
+    <!-- Content kinds -->
     <string name="kind_book">Livro</string>
     <string name="kind_periodical">Periódico</string>
     <string name="kind_product">Produto</string>
@@ -53,7 +53,7 @@
     <string name="kind_contact">Contato</string>
     <string name="kind_text">Texto</string>
 
-    <!-- Ayrıntı etiketleri -->
+    <!-- Detail labels -->
     <string name="label_isbn13">ISBN-13</string>
     <string name="label_isbn10">ISBN-10</string>
     <string name="label_group">Grupo de registro</string>
@@ -81,7 +81,7 @@
     <string name="label_raw">Conteúdo bruto</string>
     <string name="label_scanned_at">Lido em</string>
 
-    <!-- Eylemler -->
+    <!-- Actions -->
     <string name="act_copy">Copiar</string>
     <string name="act_share">Compartilhar</string>
     <string name="act_open">Abrir</string>
@@ -99,7 +99,7 @@
     <string name="act_add_contact">Adicionar aos contatos</string>
     <string name="external_notice">Abre no seu navegador ou em outro app. O Kodokur em si nunca se conecta à internet.</string>
 
-    <!-- GS1 (ilaç karekodu) -->
+    <!-- GS1 (medicine codes) -->
     <string name="kind_gs1">Código de produto (GS1)</string>
     <string name="label_expiry">Validade</string>
     <string name="label_best_before">Consumir preferencialmente até</string>
@@ -110,7 +110,7 @@
     <string name="label_gs1_field">Campo (%1$s)</string>
     <string name="gs1_expired">Vencido: a validade era %1$s.</string>
 
-    <!-- Bağlantı güvenliği -->
+    <!-- Link safety -->
     <string name="label_destination">Vai para</string>
     <string name="label_encoded_name">Nome codificado</string>
     <string name="label_address">Endereço completo</string>
@@ -122,13 +122,13 @@
     <string name="link_confirm_body">Ele vai para %1$s. Abra só se você confia na origem do código.</string>
     <string name="link_open_anyway">Abrir mesmo assim</string>
 
-    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <!-- Zoom and accessibility -->
     <string name="zoom_level">Zoom %1$s. Toque para mudar.</string>
     <string name="act_copy_item">Copiar %1$s</string>
     <string name="act_delete_item">Excluir %1$s</string>
     <string name="act_more">Mais opções</string>
 
-    <!-- Geçmiş -->
+    <!-- History -->
     <string name="history_title">Histórico</string>
     <string name="history_empty">Nada foi lido ainda</string>
     <string name="history_export">Exportar CSV</string>
@@ -141,11 +141,11 @@
     </plurals>
     <string name="history_deleted">Leitura excluída</string>
 
-    <!-- Dil -->
+    <!-- Language -->
     <string name="language_title">Idioma</string>
     <string name="language_system">Idioma do telefone</string>
 
-    <!-- Hakkında -->
+    <!-- About -->
     <string name="about_title">Sobre</string>
     <string name="about_promise">Sem anúncios. Sem rastreadores. Sem permissão de internet. A única permissão é a câmera, e as imagens dela nunca saem do telefone. O histórico fica neste dispositivo e não entra nos backups.</string>
     <string name="about_version">Versão %1$s</string>

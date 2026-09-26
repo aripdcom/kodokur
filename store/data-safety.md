@@ -1,32 +1,32 @@
-# Veri güvenliği formu (Play Console → Uygulama içeriği → Veri güvenliği)
+# Data safety form (Play Console → App content → Data safety)
 
-**Uygulamanız, gerekli kullanıcı veri türlerinden herhangi birini topluyor ya da
-paylaşıyor mu?** → **Hayır.**
+**Does your app collect or share any of the required user data types?** → **No.**
 
-Gerekçe (form bir açıklama isterse):
+Reasoning (if the form asks for an explanation):
 
-- Manifestte `INTERNET` izni yok; uygulama hiçbir sunucuya veri gönderemez. Play'in
-  tanımında "toplama", verinin cihazdan çıkarılmasıdır; burada hiçbir veri cihazdan
-  çıkmaz.
-- **Kamera:** kareler bellekte çözülür ve atılır; fotoğraf ya da video saklanmaz.
-- **Galeriden okuma:** sistem fotoğraf seçicisi yalnızca seçilen tek görseli verir,
-  depolama izni yok.
-- **Geçmiş:** okunan içerik, biçim ve zaman uygulamanın özel alanında durur; bulut
-  yedeğine ve cihazdan cihaza aktarıma girmez (`data_extraction_rules.xml`).
-- **Paylaşım ve dışa aktarma** kullanıcının başlattığı, sistemin paylaşım sayfası
-  üzerinden yapılan aktarımlardır. Play bunları "paylaşma" saymaz: kullanıcı başka
-  bir uygulamaya kendisi gönderir.
-- **Dış bağlantılar** (Open Library, Open Food Facts, web araması, bağlantı açma)
-  tarayıcıya niyetle devredilir; Kodokur o isteği yapmaz.
+- The manifest has no `INTERNET` permission; the app cannot send data to any server.
+  In Play's definition, "collection" means data leaving the device. Here no data
+  leaves the device.
+- **Camera:** frames are decoded in memory and discarded; no photo or video is stored.
+- **Reading from the gallery:** the system photo picker hands over only the one image
+  the user selects; there is no storage permission.
+- **History:** the scanned content, format and time stay in the app's private storage.
+  They are excluded from cloud backup and device-to-device transfer
+  (`data_extraction_rules.xml`).
+- **Sharing and export** are user-initiated transfers through the system share sheet.
+  Play does not count them as "sharing": the user sends the data to another app
+  themselves.
+- **External links** (Open Library, Open Food Facts, web search, opening a link) are
+  handed to the browser with an intent; Kodokur does not make that request.
 
-Bu cevapla form "Veri toplanmıyor" ve "Veri paylaşılmıyor" olarak yayımlanır;
-şifreleme ve silme talebi soruları sorulmaz.
+With this answer the form is published as "No data collected" and "No data shared
+with third parties". The encryption and deletion request questions are not asked.
 
-## İzinler
+## Permissions
 
-| İzin | Neden | Beyan gerekir mi |
+| Permission | Why | Declaration needed? |
 |---|---|---|
-| `CAMERA` | kod okumak | Hayır (hassas izin beyanı listesinde değil) |
+| `CAMERA` | reading codes | No (not on the sensitive permissions declaration list) |
 
-Bunu `release.yml` doğrular: imzalı APK kameradan başka
-izin taşırsa sürüm yayımlanmaz.
+`release.yml` enforces this: if the signed APK carries any permission other than
+the camera, the release is not published.

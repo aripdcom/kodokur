@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Kodokur'un metinleri: Arapça (Modern Standart). Varsayılan values altında İngilizce.
-  Bölüm başlıkları Türkçe: depodaki öbür yorumlar gibi geliştirici notu.
+  Kodokur strings: Arabic (Modern Standard). The default in values is English.
+  Section headings are in English, like the other developer notes in the repo.
 -->
 <resources>
     <string name="app_tagline">كل باركود وكل رمز QR. لا شيء يغادر هاتفك.</string>
 
-    <!-- Ortak -->
+    <!-- Common -->
     <string name="back">رجوع</string>
     <string name="cancel">إلغاء</string>
     <string name="delete">احذف</string>
@@ -15,7 +15,7 @@
     <string name="copied">نُسخ</string>
     <string name="no_app">لا يوجد على هذا الهاتف تطبيق يمكنه فتح هذا</string>
 
-    <!-- Tarayıcı -->
+    <!-- Scanner -->
     <string name="scan_hint">وجّه الكاميرا نحو باركود أو رمز QR</string>
     <string name="action_gallery">من صورة</string>
     <string name="action_torch_on">تشغيل المصباح</string>
@@ -38,7 +38,7 @@
     <string name="gallery_error">تعذّر فتح الصورة</string>
     <string name="gallery_reading">تجري قراءة الصورة…</string>
 
-    <!-- Kamera izni -->
+    <!-- Camera permission -->
     <string name="permission_title">الوصول إلى الكاميرا</string>
     <string name="permission_body">يقرأ Kodokur الرموز عبر الكاميرا. تُعالَج الإطارات على الهاتف، ولا تُحفظ أبداً ولا تُرسل إلى أي مكان.</string>
     <string name="permission_grant">اسمح بالكاميرا</string>
@@ -47,7 +47,7 @@
     <string name="no_camera">لا توجد كاميرا في هذا الجهاز. لا يزال بإمكانك قراءة رمز من صورة.</string>
     <string name="camera_error">تعذّر تشغيل الكاميرا</string>
 
-    <!-- İçerik türleri -->
+    <!-- Content kinds -->
     <string name="kind_book">كتاب</string>
     <string name="kind_periodical">دورية</string>
     <string name="kind_product">منتج</string>
@@ -60,7 +60,7 @@
     <string name="kind_contact">جهة اتصال</string>
     <string name="kind_text">نص</string>
 
-    <!-- Ayrıntı etiketleri -->
+    <!-- Detail labels -->
     <string name="label_isbn13">ISBN-13</string>
     <string name="label_isbn10">ISBN-10</string>
     <string name="label_group">مجموعة التسجيل</string>
@@ -88,7 +88,7 @@
     <string name="label_raw">المحتوى الخام</string>
     <string name="label_scanned_at">وقت المسح</string>
 
-    <!-- Eylemler -->
+    <!-- Actions -->
     <string name="act_copy">انسخ</string>
     <string name="act_share">شارك</string>
     <string name="act_open">افتح</string>
@@ -106,7 +106,7 @@
     <string name="act_add_contact">أضف إلى جهات الاتصال</string>
     <string name="external_notice">يُفتح في المتصفّح أو في تطبيق آخر. أما Kodokur نفسه فلا يتصل بالإنترنت أبداً.</string>
 
-    <!-- GS1 (ilaç karekodu) -->
+    <!-- GS1 (medicine codes) -->
     <string name="kind_gs1">رمز المنتج (GS1)</string>
     <string name="label_expiry">تاريخ انتهاء الصلاحية</string>
     <string name="label_best_before">يُفضَّل استهلاكه قبل</string>
@@ -117,7 +117,7 @@
     <string name="label_gs1_field">حقل (%1$s)</string>
     <string name="gs1_expired">منتهي الصلاحية: كان تاريخ الانتهاء %1$s.</string>
 
-    <!-- Bağlantı güvenliği -->
+    <!-- Link safety -->
     <string name="label_destination">يذهب إلى</string>
     <string name="label_encoded_name">الاسم المُرمَّز</string>
     <string name="label_address">العنوان الكامل</string>
@@ -129,13 +129,13 @@
     <string name="link_confirm_body">يذهب إلى %1$s. لا تفتحه إلا إذا كنت تثق بمصدر الرمز.</string>
     <string name="link_open_anyway">افتحه على أي حال</string>
 
-    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <!-- Zoom and accessibility -->
     <string name="zoom_level">التكبير %1$s. انقر للتغيير.</string>
     <string name="act_copy_item">انسخ %1$s</string>
     <string name="act_delete_item">احذف %1$s</string>
     <string name="act_more">خيارات أخرى</string>
 
-    <!-- Geçmiş -->
+    <!-- History -->
     <string name="history_title">السجل</string>
     <string name="history_empty">لم يُمسح شيء بعد</string>
     <string name="history_export">صدّر CSV</string>
@@ -151,11 +151,11 @@
     </plurals>
     <string name="history_deleted">حُذفت عملية المسح</string>
 
-    <!-- Dil -->
+    <!-- Language -->
     <string name="language_title">اللغة</string>
     <string name="language_system">لغة الهاتف</string>
 
-    <!-- Hakkında -->
+    <!-- About -->
     <string name="about_title">حول</string>
     <string name="about_promise">بلا إعلانات. بلا أدوات تتبّع. بلا إذن الوصول إلى الإنترنت. الإذن الوحيد هو الكاميرا، وإطاراتها لا تغادر الهاتف أبداً. يبقى السجل على هذا الجهاز ولا يُدرج في النسخ الاحتياطية.</string>
     <string name="about_version">الإصدار %1$s</string>

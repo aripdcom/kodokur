@@ -1,8 +1,8 @@
 package com.aripd.kodokur.core
 
 /**
- * Barkod türleri. Adlar ZXing'in `BarcodeFormat` adlarıyla aynıdır; geçmiş
- * kaydında bu ad saklanır, ekranda [label] gösterilir.
+ * Barcode types. Names match ZXing's `BarcodeFormat` names; the history stores
+ * this name, and the screen shows [label].
  */
 enum class Symbology(val label: String, val isProductCode: Boolean = false) {
     EAN_13("EAN-13", isProductCode = true),

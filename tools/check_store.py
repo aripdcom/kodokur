@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""Play listeleme metinlerini denetler (Reyon'daki denetimin Kodokur uyarlaması).
+"""Checks the Play listing texts (Kodokur's adaptation of the check in Reyon).
 
-store/play/<dil>/ altında:
-  title.txt   ≤ 30 karakter      short.txt  ≤ 80
-  full.txt    ≤ 4000             notes-<sürüm>.txt ≤ 500 (sürüm notu)
+Under store/play/<lang>/:
+  title.txt   ≤ 30 characters    short.txt  ≤ 80
+  full.txt    ≤ 4000             notes-<version>.txt ≤ 500 (release notes)
 
-Denetimler:
-  * her dilde üç listeleme dosyası var, boş değil, sınırların içinde
-  * dil klasörleri AppLocale.TAGS ile birebir aynı
-  * her dilin Play yerel ayar karşılığı biliniyor (Play Console'a kopyalarken
-    hangi ayarın seçileceği store/README.md'de)
-  * her sürüm notu bütün dillerde var
-  * görünmez karakter yok (yumuşak tire, sıfır genişlikli boşluk, BOM): Play
-    bunları olduğu gibi yayımlar, listelemede bozuk kelime olarak görünür
+Checks:
+  * every language has the three listing files, non-empty and within limits
+  * the language folders match AppLocale.TAGS exactly
+  * every language has a known Play locale (which one to pick when copying
+    into Play Console is in store/README.md)
+  * every release note exists in all languages
+  * no invisible characters (soft hyphen, zero-width space, BOM): Play
+    publishes them as is, and they show up as broken words in the listing
 """
 import glob
 import os
@@ -24,13 +24,13 @@ PLAY = os.path.join(ROOT, "store", "play")
 LIMITS = {"title.txt": 30, "short.txt": 80, "full.txt": 4000}
 NOTE_LIMIT = 500
 
-# Depodaki dil kodu → Play Console yerel ayarı.
+# Repository language code → Play Console locale.
 PLAY_LOCALES = {
     "en": "en-US", "tr": "tr-TR", "de": "de-DE", "fr": "fr-FR", "nl": "nl-NL",
     "es": "es-ES", "pt": "pt-BR", "it": "it-IT", "da": "da-DK", "sv": "sv-SE",
     "nb": "no-NO", "fi": "fi-FI", "ru": "ru-RU", "ar": "ar",
 }
-INVISIBLE = {0x00AD: "yumuşak tire", 0x200B: "sıfır genişlikli boşluk", 0xFEFF: "BOM"}
+INVISIBLE = {0x00AD: "soft hyphen", 0x200B: "zero-width space", 0xFEFF: "BOM"}
 
 errors = []
 
@@ -45,13 +45,13 @@ def app_languages():
 
 def check_text(where, text, limit):
     if not text:
-        errors.append(f"{where} boş")
+        errors.append(f"{where} is empty")
         return
     if len(text) > limit:
-        errors.append(f"{where}: {len(text)} karakter, sınır {limit}")
+        errors.append(f"{where}: {len(text)} characters, limit {limit}")
     for ch in set(text):
         if ord(ch) in INVISIBLE:
-            errors.append(f"{where}: görünmez karakter U+{ord(ch):04X} ({INVISIBLE[ord(ch)]})")
+            errors.append(f"{where}: invisible character U+{ord(ch):04X} ({INVISIBLE[ord(ch)]})")
 
 
 def main():
@@ -63,7 +63,7 @@ def main():
         for name, limit in LIMITS.items():
             path = os.path.join(PLAY, lang, name)
             if not os.path.exists(path):
-                errors.append(f"{lang}/{name} eksik")
+                errors.append(f"{lang}/{name} is missing")
                 continue
             text = open(path, encoding="utf-8").read().strip()
             check_text(f"{lang}/{name}", text, limit)
@@ -71,27 +71,27 @@ def main():
         for version in versions:
             path = os.path.join(PLAY, lang, f"notes-{version}.txt")
             if not os.path.exists(path):
-                errors.append(f"{lang}: {version} sürüm notu eksik")
+                errors.append(f"{lang}: release notes for {version} are missing")
                 continue
             text = open(path, encoding="utf-8").read().strip()
             check_text(f"{lang}/notes-{version}.txt", text, NOTE_LIMIT)
-            sizes.append(f"notlar {version} {len(text)}/{NOTE_LIMIT}")
+            sizes.append(f"notes {version} {len(text)}/{NOTE_LIMIT}")
         print(f"  {lang:<3} {', '.join(sizes)}")
 
     app = app_languages()
     for lang in app:
         if lang not in langs:
-            errors.append(f"uygulamada {lang} var, store/play/{lang}/ yok")
+            errors.append(f"the app has {lang}, but store/play/{lang}/ does not exist")
     for lang in langs:
         if lang not in app:
-            errors.append(f"store/play/{lang}/ var, AppLocale.TAGS'te yok")
+            errors.append(f"store/play/{lang}/ exists, but it is not in AppLocale.TAGS")
         if lang not in PLAY_LOCALES:
-            errors.append(f"{lang} için Play yerel ayar karşılığı yok")
+            errors.append(f"no Play locale mapping for {lang}")
 
     print()
     for e in errors:
-        print(f"HATA   {e}")
-    print(f"✗ {len(errors)} hata" if errors else f"✓ {len(langs)} dil, hata yok")
+        print(f"ERROR  {e}")
+    print(f"✗ {len(errors)} errors" if errors else f"✓ {len(langs)} languages, no errors")
     return 1 if errors else 0
 
 

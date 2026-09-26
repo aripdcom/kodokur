@@ -1,35 +1,35 @@
-# İçerik derecelendirme ve hedef kitle
+# Content rating and target audience
 
-## IARC anketi (Play Console → Uygulama içeriği → İçerik derecelendirme)
+## IARC questionnaire (Play Console → App content → Content rating)
 
-- **Kategori:** Yardımcı program, üretkenlik, iletişim veya diğer
-- Şiddet, cinsellik, küfür, uyuşturucu, kumar, korku öğesi: **hayır** (hepsi)
-- Kullanıcılar arası etkileşim / içerik paylaşımı: **hayır** (uygulama içinde
-  kullanıcılar birbirine ulaşamaz; sistem paylaşım sayfası sayılmaz)
-- Kullanıcının konumunu başkalarıyla paylaşma: **hayır** (konum QR'ı yalnızca harita
-  uygulamasında açılır)
-- Dijital satın alma: **hayır**
-- Sınırsız internet erişimi / web tarayıcı: **hayır** (uygulama bir tarayıcı değil;
-  bağlantıları, kullanıcı onaylayınca cihazın tarayıcısına devreder)
+- **Category:** Utility, Productivity, Communication, or Other
+- Violence, sexuality, profanity, drugs, gambling, horror: **No** (all of them)
+- User interaction / content sharing: **No** (users cannot reach each other inside
+  the app; the system share sheet does not count)
+- Shares the user's location with others: **No** (a location QR only opens in a
+  maps app)
+- Digital purchases: **No**
+- Unrestricted internet access / web browser: **No** (the app is not a browser; it
+  hands links to the device's browser after the user confirms)
 
-Beklenen sonuç: **Herkes / 3+** (PEGI 3, USK 0, ESRB Everyone).
+Expected result: **Everyone / 3+** (PEGI 3, USK 0, ESRB Everyone).
 
-## Hedef kitle ve içerik
+## Target audience and content
 
-- **Hedef yaş grupları:** 13–15, 16–17, 18+. Uygulama çocuklar için tasarlanmadı;
-  13 altını seçmek Aileler politikasının ek şartlarını getirir.
-- **Çocuklara hitap ediyor mu:** Hayır.
-- **Reklam:** Uygulama reklam içermiyor.
-- **Uygulama erişimi:** Kısıtlama yok, giriş gerekmiyor.
+- **Target age groups:** 13–15, 16–17, 18+. The app was not designed for children;
+  choosing under 13 brings the extra requirements of the Families policy.
+- **Appeals to children:** No.
+- **Ads:** The app contains no ads.
+- **App access:** No restrictions, no login required.
 
-## Dikkat: Sağlık uygulamaları beyanı
+## Watch out: Health apps declaration
 
-Play, sağlıkla ilgili özellikler için ayrı bir beyan istiyor (Uygulama içeriği →
-Sağlık uygulamaları). Kodokur ilaç kutusundaki GS1 karekodunu çözüp son kullanma
-tarihini, parti ve seri numarasını gösteriyor; ilaç hakkında tıbbi bilgi, doz ya
-da hatırlatma vermiyor ve sağlık verisi toplamıyor.
+Play asks for a separate declaration for health-related features (App content →
+Health apps). Kodokur decodes the GS1 DataMatrix on a medicine box and shows the
+expiry date, batch and serial number. It gives no medical information, dosage or
+reminders, and it collects no health data.
 
-Önerilen cevap: **"Uygulamamın sağlıkla ilgili özelliği yok."** Play bunu yine de
-ilaç yönetimi olarak yorumlarsa (inceleme notu gelirse), "İlaç ve tedavi yönetimi"
-seçilip açıklamaya yukarıdaki cümle yazılır. Mağaza metinlerinde "tıbbi" iddia yok;
-yalnızca kutunun üzerindeki kodun okunduğu söyleniyor.
+Recommended answer: **"My app does not have any health features."** If Play still
+reads this as medication management (for example, a review note comes in), choose
+"Medication and treatment management" and put the sentence above in the description.
+The store texts make no "medical" claim; they only say that the code on the box is read.

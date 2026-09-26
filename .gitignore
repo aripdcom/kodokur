@@ -29,5 +29,5 @@ __pycache__/
 # OS
 .DS_Store
 
-# Claude Code çalışma ağaçları
+# Claude Code worktrees
 .claude/

@@ -2,7 +2,7 @@
 <resources>
     <string name="app_tagline">Alla streckkoder och QR-koder. Inget lämnar din telefon.</string>
 
-    <!-- Ortak -->
+    <!-- Common -->
     <string name="back">Tillbaka</string>
     <string name="cancel">Avbryt</string>
     <string name="delete">Radera</string>
@@ -11,7 +11,7 @@
     <string name="copied">Kopierat</string>
     <string name="no_app">Ingen app på den här telefonen kan öppna detta</string>
 
-    <!-- Tarayıcı -->
+    <!-- Scanner -->
     <string name="scan_hint">Rikta kameran mot en streckkod eller QR-kod</string>
     <string name="action_gallery">Från foto</string>
     <string name="action_torch_on">Tänd ficklampan</string>
@@ -30,7 +30,7 @@
     <string name="gallery_error">Det gick inte att öppna bilden</string>
     <string name="gallery_reading">Läser bilden…</string>
 
-    <!-- Kamera izni -->
+    <!-- Camera permission -->
     <string name="permission_title">Kameraåtkomst</string>
     <string name="permission_body">Kodokur läser koder med kameran. Bilderna behandlas på telefonen och sparas eller skickas aldrig någonstans.</string>
     <string name="permission_grant">Tillåt kamera</string>
@@ -39,7 +39,7 @@
     <string name="no_camera">Den här enheten har ingen kamera. Du kan ändå läsa en kod från ett foto.</string>
     <string name="camera_error">Det gick inte att starta kameran</string>
 
-    <!-- İçerik türleri -->
+    <!-- Content kinds -->
     <string name="kind_book">Bok</string>
     <string name="kind_periodical">Tidskrift</string>
     <string name="kind_product">Produkt</string>
@@ -52,7 +52,7 @@
     <string name="kind_contact">Kontakt</string>
     <string name="kind_text">Text</string>
 
-    <!-- Ayrıntı etiketleri -->
+    <!-- Detail labels -->
     <string name="label_isbn13">ISBN-13</string>
     <string name="label_isbn10">ISBN-10</string>
     <string name="label_group">Registreringsgrupp</string>
@@ -80,7 +80,7 @@
     <string name="label_raw">Rådata</string>
     <string name="label_scanned_at">Skannad</string>
 
-    <!-- Eylemler -->
+    <!-- Actions -->
     <string name="act_copy">Kopiera</string>
     <string name="act_share">Dela</string>
     <string name="act_open">Öppna</string>
@@ -98,7 +98,7 @@
     <string name="act_add_contact">Lägg till i kontakter</string>
     <string name="external_notice">Öppnas i din webbläsare eller en annan app. Kodokur själv kopplar aldrig upp sig mot nätet.</string>
 
-    <!-- GS1 (ilaç karekodu) -->
+    <!-- GS1 (medicine codes) -->
     <string name="kind_gs1">Produktkod (GS1)</string>
     <string name="label_expiry">Utgångsdatum</string>
     <string name="label_best_before">Bäst före</string>
@@ -109,7 +109,7 @@
     <string name="label_gs1_field">Fält (%1$s)</string>
     <string name="gs1_expired">Utgånget: utgångsdatumet var %1$s.</string>
 
-    <!-- Bağlantı güvenliği -->
+    <!-- Link safety -->
     <string name="label_destination">Går till</string>
     <string name="label_encoded_name">Kodat namn</string>
     <string name="label_address">Fullständig adress</string>
@@ -121,13 +121,13 @@
     <string name="link_confirm_body">Den går till %1$s. Öppna den bara om du litar på var koden kommer ifrån.</string>
     <string name="link_open_anyway">Öppna ändå</string>
 
-    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <!-- Zoom and accessibility -->
     <string name="zoom_level">Zoom %1$s. Tryck för att ändra.</string>
     <string name="act_copy_item">Kopiera %1$s</string>
     <string name="act_delete_item">Radera %1$s</string>
     <string name="act_more">Fler alternativ</string>
 
-    <!-- Geçmiş -->
+    <!-- History -->
     <string name="history_title">Historik</string>
     <string name="history_empty">Inget skannat ännu</string>
     <string name="history_export">Exportera CSV</string>
@@ -139,11 +139,11 @@
     </plurals>
     <string name="history_deleted">Skanningen raderades</string>
 
-    <!-- Dil -->
+    <!-- Language -->
     <string name="language_title">Språk</string>
     <string name="language_system">Telefonens språk</string>
 
-    <!-- Hakkında -->
+    <!-- About -->
     <string name="about_title">Om</string>
     <string name="about_promise">Inga annonser. Ingen spårning. Ingen internetbehörighet. Den enda behörigheten är kameran, och kamerabilderna lämnar aldrig telefonen. Historiken stannar på den här enheten och ingår inte i säkerhetskopior.</string>
     <string name="about_version">Version %1$s</string>

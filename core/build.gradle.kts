@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-// Kodokur çekirdeği: saf Kotlin/JVM, Android'e bağımlı değil.
-// ZXing ile çözme, ISBN/ISSN/GTIN doğrulama ve tireleme, içerik ayrıştırma, CSV.
+// Kodokur core: pure Kotlin/JVM, no Android dependency.
+// ZXing decoding, ISBN/ISSN/GTIN validation and hyphenation, content parsing, CSV.
 plugins {
     alias(libs.plugins.kotlin.jvm)
 }
@@ -18,7 +18,7 @@ kotlin {
 }
 
 dependencies {
-    // ZXing core saf Java'dır (Apache-2.0); Play Services gerektirmez.
+    // ZXing core is pure Java (Apache-2.0); no Play Services required.
     api(libs.zxing.core)
     testImplementation(libs.junit)
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Barkod çizgileri, köşe vizörü ve tarama çizgisi. Güvenli alan 66dp (21–87). -->
+<!-- Barcode bars, corner viewfinder and scan line. Safe zone 66dp (21–87). -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Vizör köşeleri -->
+    <!-- Viewfinder corners -->
     <path
         android:fillColor="#00000000"
         android:strokeColor="#E8F3F1"
@@ -13,11 +13,11 @@
         android:strokeLineCap="round"
         android:strokeLineJoin="round"
         android:pathData="M30,40 V33 A3,3 0 0 1 33,30 H40 M68,30 H75 A3,3 0 0 1 78,33 V40 M78,68 V75 A3,3 0 0 1 75,78 H68 M40,78 H33 A3,3 0 0 1 30,75 V68" />
-    <!-- Çizgiler -->
+    <!-- Bars -->
     <path
         android:fillColor="#E8F3F1"
         android:pathData="M37,39h3v30h-3z M42,39h1.5v30h-1.5z M45.5,39h3v30h-3z M50.5,39h1.5v30h-1.5z M54,39h4v30h-4z M60,39h1.5v30h-1.5z M63.5,39h3v30h-3z M68.5,39h1.5v30h-1.5z" />
-    <!-- Tarama çizgisi -->
+    <!-- Scan line -->
     <path
         android:fillColor="#FFB347"
         android:pathData="M33,52.5h42v3h-42z" />

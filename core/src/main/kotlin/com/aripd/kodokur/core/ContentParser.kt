@@ -1,8 +1,8 @@
 package com.aripd.kodokur.core
 
 /**
- * Okunan metni [Content]'e çevirir. Yaygın QR biçimlerini tanır (bağlantı, Wi-Fi,
- * e-posta, telefon, SMS, konum, kişi kartı); tanımadığı her şey düz metindir.
+ * Turns scanned text into [Content]. Recognizes common QR formats (link, Wi-Fi,
+ * email, phone, SMS, location, contact card); anything else is plain text.
  */
 object ContentParser {
 
@@ -23,14 +23,14 @@ object ContentParser {
             return Content.Product(text)
         }
 
-        // İlaç karekodu ve öbür GS1 kodları. İşaretsiz metin yalnızca açık GS1
-        // yazımındaysa (parantezli ya da GS ayraçlı) kabul edilir, bkz. Gs1.parse.
+        // Medicine DataMatrix and other GS1 codes. Unflagged text is accepted only in
+        // explicit GS1 notation (parenthesized or GS-separated), see Gs1.parse.
         Gs1.parse(text, scan.gs1)?.let { data ->
-            // Tek alan olarak yalnız GTIN taşıyan DataBar, market ürünüdür.
+            // A DataBar carrying only a GTIN as its single field is a retail product.
             return if (data.elements.size == 1 && data.gtin != null) Content.Product(data.gtin!!) else Content.Gs1(data)
         }
 
-        // QR'a ya da Code 128'e metin olarak yazılmış ISBN.
+        // An ISBN written as text into a QR code or Code 128.
         if (ISBN_TEXT.matches(text)) Isbn.parse(text)?.let { return Content.Book(it, null) }
 
         return parseText(text)
@@ -55,11 +55,11 @@ object ContentParser {
         }
     }
 
-    // --- Noktalı virgülle ayrılan KEY:değer biçimleri (WIFI, MATMSG, MECARD) ---
+    // --- Semicolon-separated KEY:value formats (WIFI, MATMSG, MECARD) ---
 
     /**
-     * "WIFI:T:WPA;S:ağ;P:parola;;" gövdesini alanlara böler. Ters bölü kaçışı
-     * (\; \, \: \\ \") çözülür. Aynı anahtar birden çok kez gelebilir (MECARD'da TEL).
+     * Splits a "WIFI:T:WPA;S:network;P:password;;" body into fields. Backslash escapes
+     * (\; \, \: \\ \") are resolved. The same key may appear more than once (TEL in MECARD).
      */
     private fun fields(body: String): List<Pair<String, String>> {
         val result = ArrayList<Pair<String, String>>()
@@ -110,7 +110,7 @@ object ContentParser {
     private fun parseMecard(text: String): Content {
         val f = fields(text.substring(7))
         val name = f.first("N")?.let { n ->
-            // "Soyad,Ad" → "Ad Soyad"
+            // "Last,First" → "First Last"
             val parts = n.split(',').map(String::trim).filter(String::isNotEmpty)
             if (parts.size == 2) "${parts[1]} ${parts[0]}" else parts.joinToString(" ")
         }
@@ -120,14 +120,14 @@ object ContentParser {
             phones = f.filter { it.first == "TEL" && it.second.isNotEmpty() }.map { it.second },
             emails = f.filter { it.first == "EMAIL" && it.second.isNotEmpty() }.map { it.second },
             url = f.first("URL"),
-            // MECARD adresi tek alan; bileşenler virgülle ayrılır.
+            // A MECARD address is a single field; components are comma-separated.
             address = f.first("ADR")?.split(',')?.map(String::trim)?.filter(String::isNotEmpty)
                 ?.joinToString(", ")?.takeIf { it.isNotEmpty() },
             note = f.first("NOTE"),
         )
     }
 
-    // --- URI biçimleri ---
+    // --- URI formats ---
 
     private fun parseMailto(text: String): Content {
         val rest = text.substring(7)
@@ -161,10 +161,10 @@ object ContentParser {
     }
 
     /**
-     * vCard 2.1–4.0. Katlanmış satırlar açılır; quoted-printable değerler (eski
-     * telefonların ve kartvizit üreticilerinin Türkçe karakterleri =C3=BC diye
-     * yazdığı biçim) CHARSET'e göre çözülür. Yapılı alanlar (N, ORG, ADR) kaçışsız
-     * ";" işaretlerinden bölünür, kaçışlar ondan sonra açılır.
+     * vCard 2.1–4.0. Folded lines are unfolded; quoted-printable values (the form in
+     * which old phones and business card generators write Turkish characters as
+     * =C3=BC) are decoded according to CHARSET. Structured fields (N, ORG, ADR) are
+     * split at unescaped ";" characters, and escapes are resolved after that.
      */
     private fun parseVcard(text: String): Content {
         var fn: String? = null
@@ -214,7 +214,7 @@ object ContentParser {
         )
     }
 
-    /** Satırları açar: boşlukla başlayan devam satırı ve quoted-printable'ın "=" ile biten yumuşak sonu. */
+    /** Unfolds lines: continuation lines starting with whitespace, and quoted-printable soft line breaks ending in "=". */
     private fun vcardLines(text: String): List<String> {
         val physical = text.replace("\r\n", "\n").replace('\r', '\n').split('\n')
         val out = ArrayList<String>()
@@ -258,7 +258,7 @@ object ContentParser {
         return String(bytes.toByteArray(), cs)
     }
 
-    /** Kaçışsız ";" işaretlerinden böler (kaçışlar korunur). */
+    /** Splits at unescaped ";" characters (escapes are kept). */
     private fun splitUnescaped(value: String): List<String> {
         val out = ArrayList<String>()
         val cur = StringBuilder()

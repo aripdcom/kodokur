@@ -4,19 +4,19 @@ import java.time.LocalDate
 import java.time.YearMonth
 
 /**
- * GS1 verisi: ilaç karekodu (Türkiye'de İlaç Takip Sistemi, GS1 DataMatrix),
- * GS1-128 lojistik barkodları, GS1 DataBar. İçerik "uygulama tanımlayıcısı" (AI)
- * ile başlayan alanlardan oluşur: (01) GTIN, (17) son kullanma, (10) parti,
- * (21) seri numarası…
+ * GS1 data: medicine DataMatrix (Turkey's Pharmaceutical Track and Trace System,
+ * GS1 DataMatrix), GS1-128 logistics barcodes, GS1 DataBar. The content consists of
+ * fields starting with an "application identifier" (AI): (01) GTIN, (17) expiry,
+ * (10) batch, (21) serial number…
  */
 class Gs1Data(val elements: List<Gs1Element>) {
 
     private fun value(ai: String) = elements.firstOrNull { it.ai == ai }?.value
 
-    /** (01) Ticari ürün numarası, 14 hane. */
+    /** (01) Global Trade Item Number, 14 digits. */
     val gtin: String? get() = value("01")
 
-    /** GTIN'in barkod üzerindeki karşılığı: baştaki 0 atılınca EAN-13. */
+    /** The GTIN as printed on the barcode: EAN-13 once the leading 0 is dropped. */
     val ean13: String? get() = gtin?.takeIf { it.startsWith("0") }?.substring(1)
 
     val expiry: Gs1Date? get() = value("17")?.let(Gs1Date::parse)
@@ -26,7 +26,7 @@ class Gs1Data(val elements: List<Gs1Element>) {
     val serial: String? get() = value("21")
     val count: String? get() = value("30") ?: value("37")
 
-    /** Yukarıdakilerin dışında kalan alanlar; ham hâlleriyle gösterilir. */
+    /** Fields other than the ones above; shown in their raw form. */
     val others: List<Gs1Element>
         get() = elements.filter { it.ai !in KNOWN }
 
@@ -42,18 +42,18 @@ class Gs1Data(val elements: List<Gs1Element>) {
 data class Gs1Element(val ai: String, val value: String)
 
 /**
- * GS1 tarihi (YYAAGG). Gün "00" ise ayın son günü kastedilir; o zaman [dayGiven]
- * false olur ve tarih ay/yıl olarak gösterilir.
+ * GS1 date (YYMMDD). Day "00" means the last day of the month; then [dayGiven]
+ * is false and the date is shown as month/year.
  */
 data class Gs1Date(val date: LocalDate, val dayGiven: Boolean) {
 
-    /** Bugün bu tarihten sonraysa süresi geçmiştir (tarihin kendisi geçerli gündür). */
+    /** Expired if today is after this date (the date itself is still a valid day). */
     fun isPast(today: LocalDate): Boolean = today.isAfter(date)
 
     companion object {
         /**
-         * GS1'in kayan yüzyıl kuralı: iki haneli yıl, bugünün yılından 51–99 ileri
-         * düşüyorsa önceki yüzyıl, 50'den fazla geride kalıyorsa sonraki yüzyıl.
+         * GS1's sliding century rule: if the two-digit year falls 51–99 ahead of the
+         * current year, it is the previous century; if more than 50 behind, the next century.
          */
         fun parse(text: String, today: LocalDate = LocalDate.now()): Gs1Date? {
             if (text.length != 6 || !text.all(Char::isDigit)) return null
@@ -80,16 +80,16 @@ data class Gs1Date(val date: LocalDate, val dayGiven: Boolean) {
 }
 
 /**
- * GS1 element dizisi ayrıştırıcısı. İki yazımı tanır:
- * - ham: "0108690…17261231" + [GS] ayraçlı değişken alanlar (tarayıcının verdiği)
- * - parantezli: "(01)08690…(17)261231(10)ABC" (insanın okuduğu, DataBar Expanded)
+ * GS1 element string parser. Recognizes two notations:
+ * - raw: "0108690…17261231" + [GS]-separated variable fields (as the scanner returns it)
+ * - parenthesized: "(01)08690…(17)261231(10)ABC" (human-readable, DataBar Expanded)
  */
 object Gs1 {
 
-    /** Grup ayracı (FNC1'in veri içindeki karşılığı). */
+    /** Group separator (how FNC1 appears within the data). */
     const val GS = '\u001D'
 
-    /** AI → (sabit veri uzunluğu ya da null, en fazla uzunluk). */
+    /** AI → (fixed data length or null, maximum length). */
     private class Spec(val fixed: Int?, val max: Int)
 
     private val SPECS: Map<String, Spec> = buildMap {
@@ -106,9 +106,9 @@ object Gs1 {
         fixed("402", 17)
         for (d in 0..7) fixed("41$d", 13)
         variable("420", 20); variable("421", 12); fixed("422", 3)
-        for (d in 0..6) variable("71$d", 20) // ulusal sağlık geri ödeme numaraları
+        for (d in 0..6) variable("71$d", 20) // national healthcare reimbursement numbers
         fixed("7003", 10); variable("7004", 4)
-        // 31nn–36nn: ölçüler (ağırlık, uzunluk…), son hane ondalık konumu
+        // 31nn–36nn: measures (weight, length…), last digit is the decimal position
         for (a in 31..36) for (b in 0..9) for (d in 0..9) fixed("$a$b$d", 6)
         variable("8003", 30); variable("8004", 30); fixed("8005", 6); fixed("8006", 18)
         variable("8007", 34); variable("8008", 12); variable("8020", 25)
@@ -119,10 +119,10 @@ object Gs1 {
     private val PAREN = Regex("""\((\d{2,4})\)([^()]*)""")
 
     /**
-     * [text]'i GS1 olarak ayrıştırır. [flagged]: tarayıcı kodun GS1 olduğunu
-     * bildirdi (sembol tanımlayıcı). İşaretsiz metin yalnızca açıkça GS1 biçimindeyse
-     * (parantezli ya da GS ayraçlı, 01 ile başlayan, sağlaması tutan GTIN) kabul
-     * edilir; rastgele bir sayı dizisi ilaç kodu gibi görünmesin.
+     * Parses [text] as GS1. [flagged]: the scanner reported the code as GS1
+     * (symbology identifier). Unflagged text is accepted only if it is explicitly in
+     * GS1 form (parenthesized or GS-separated, starting with 01, with a GTIN whose
+     * check digit is valid), so that a random digit string does not look like a medicine code.
      */
     fun parse(text: String, flagged: Boolean): Gs1Data? {
         val raw = text.trim().removePrefix("]d2").removePrefix("]C1").removePrefix("]Q3").removePrefix("]e0")

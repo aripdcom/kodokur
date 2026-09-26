@@ -3,30 +3,30 @@ package com.aripd.kodokur.core
 import java.net.IDN
 import java.util.Locale
 
-/** Bir bağlantıyı açmadan önce kullanıcıya söylenmesi gerekenler. */
+/** What the user should be told before opening a link. */
 enum class LinkWarning {
-    /** http: bağlantı şifresiz; araya giren sayfayı değiştirebilir. */
+    /** http: the connection is unencrypted; anyone in between can alter the page. */
     NOT_ENCRYPTED,
 
     /**
-     * Alan adında Latin dışı harf ya da punycode (xn--) var. "аpple.com"daki ilk
-     * harf Kiril olabilir: göze aynı görünen başka bir site.
+     * The domain has non-Latin letters or punycode (xn--). The first letter of
+     * "аpple.com" may be Cyrillic: a different site that looks the same.
      */
     LOOKALIKE_HOST,
 
-    /** Alan adı yerine çıplak IP adresi; tanınan bir sitenin adresi değildir. */
+    /** A bare IP address instead of a domain; not the address of a recognizable site. */
     IP_ADDRESS,
 
     /**
-     * Adreste "@" var: "https://banka.com@kotu.site" tarayıcıyı banka.com'a değil
-     * kotu.site'a götürür, öndeki kısım yalnızca kullanıcı adıdır.
+     * The address contains "@": "https://bank.com@evil.site" takes the browser to
+     * evil.site, not bank.com; the part in front is only a user name.
      */
     HIDDEN_DESTINATION,
 }
 
 /**
- * Bağlantının gerçekte gittiği yer. [host] tarayıcının gideceği alan adı (küçük
- * harf, Unicode); [asciiHost] punycode karşılığı, farklıysa gösterilir.
+ * Where the link actually goes. [host] is the domain the browser will visit
+ * (lowercase, Unicode); [asciiHost] is its punycode form, shown if different.
  */
 data class LinkInfo(
     val url: String,
@@ -41,14 +41,14 @@ object LinkCheck {
     private val URL = Regex("^(https?)://([^/?#]*)(.*)$", RegexOption.IGNORE_CASE)
     private val IPV4 = Regex("""^\d{1,3}(\.\d{1,3}){3}$""")
 
-    /** http(s) bağlantısını inceler; biçim tanınmazsa null. */
+    /** Inspects an http(s) link; null if the format is not recognized. */
     fun inspect(url: String): LinkInfo? {
         val m = URL.find(url.trim()) ?: return null
         val scheme = m.groupValues[1].lowercase(Locale.ROOT)
         val authority = m.groupValues[2]
         val warnings = mutableSetOf<LinkWarning>()
 
-        // userinfo@host:port — tarayıcı son "@"tan sonrasına gider.
+        // userinfo@host:port — the browser goes to what follows the last "@".
         val at = authority.lastIndexOf('@')
         if (at >= 0) warnings += LinkWarning.HIDDEN_DESTINATION
         var hostPort = authority.substring(at + 1)

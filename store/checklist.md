@@ -1,34 +1,35 @@
-# Yayın kontrol listesi
+# Release checklist
 
-## Sürümden önce
+## Before the release
 
-- [ ] `docs/device-test.md` protokolü telefonda, gerçek kodlarla (kitap, ilaç kutusu,
-      market ürünü, Wi-Fi etiketi) koşuldu; sonuç o dosyanın sonuna yazıldı
-- [ ] `python3 tools/check_strings.py`, `check_site.py`, `check_store.py` temiz
-- [ ] `./gradlew :core:test :app:assembleDebug` geçti
-- [ ] `store/screenshots/en/` güncel (1080×2160, en az 2, önerilen 4–6; bütün dillerde
-      aynı İngilizce görüntüler kullanılır)
+- [ ] The `docs/device-test.md` protocol was run on a phone with real codes (book, medicine
+      box, grocery product, Wi-Fi label); the result was logged at the end of that file
+- [ ] `python3 tools/check_strings.py`, `check_site.py`, `check_store.py` are clean
+- [ ] `./gradlew :core:test :app:assembleDebug` passed
+- [ ] `store/screenshots/en/` is up to date (1080×2160, at least 2, 4–6 recommended; the
+      same English screenshots are used for every language)
 
-## Sürüm
+## Release
 
-- [ ] `v<X.Y.Z>` etiketi (`git tag -a v1.1.0 -m "Kodokur 1.1.0"` + `git push origin v1.1.0`)
-- [ ] `release.yml` yeşil: APK imzalı, tek izin `CAMERA`, AAB üretildi
-- [ ] İmza parmak izi `~/keystores/aripdcom/README.md`'deki Kodokur satırıyla aynı
+- [ ] `v<X.Y.Z>` tag (`git tag -a v1.1.0 -m "Kodokur 1.1.0"` + `git push origin v1.1.0`)
+- [ ] `release.yml` is green: APK signed, only permission is `CAMERA`, AAB built
+- [ ] Signing fingerprint matches the Kodokur line in `~/keystores/aripdcom/README.md`
       (`apksigner verify --print-certs kodokur.apk`)
 
-## Play Console (ilk yükleme)
+## Play Console (first upload)
 
-- [ ] Uygulamayı oluştur: ad "Kodokur", varsayılan dil en-US, uygulama, ücretsiz
-- [ ] **Play App Signing:** "Uygulama imzalama anahtarını dışa aktar ve yükle" (PEPK)
-      ile `~/keystores/aripdcom/kodokur-release.jks` (alias `kodokur`) verilir; böylece
-      Play ve GitHub APK'leri aynı imzayı taşır. Yükleme anahtarı ayrı olabilir.
-- [ ] Mağaza girişi: `store/play/<dil>/` metinleri, `store/README.md`'deki yerel ayar
-      tablosuna göre 14 dil; simge `graphics/icon-512.png`, öne çıkan görsel
-      `graphics/feature-1024.png`, ekran görüntüleri
-- [ ] Kategori: **Araçlar**; iletişim e-postası `kodokur@aripd.com`; web sitesi
+- [ ] Create the app: name "Kodokur", default language en-US, App, Free
+- [ ] **Play App Signing:** use "Export and upload a key from Java keystore" (PEPK)
+      with `~/keystores/aripdcom/kodokur-release.jks` (alias `kodokur`), so that
+      Play and GitHub APKs carry the same signature. The upload key can be separate.
+- [ ] Store listing: texts from `store/play/<lang>/`, 14 languages per the locale table
+      in `store/README.md`; icon `graphics/icon-512.png`, feature graphic
+      `graphics/feature-1024.png`, screenshots
+- [ ] Category: **Tools**; contact email `kodokur@aripd.com`; website
       `https://kodokur.aripd.com`
-- [ ] Gizlilik politikası: `https://kodokur.aripd.com/privacy.html`
-- [ ] Uygulama içeriği: `data-safety.md`, `content-rating.md` (sağlık beyanı notuna bak),
-      reklam yok, hedef kitle 13+
-- [ ] Sürüm: `kodokur-v<X.Y.Z>-play.aab`; sürüm notları `play/<dil>/notes-<X.Y.Z>.txt`
-- [ ] Önce **dahili test** kanalı; bir telefonda Play'den kurup açılışı dene, sonra üretim
+- [ ] Privacy policy: `https://kodokur.aripd.com/privacy.html`
+- [ ] App content: `data-safety.md`, `content-rating.md` (see the health apps declaration
+      note), no ads, target audience 13+
+- [ ] Release: `kodokur-v<X.Y.Z>-play.aab`; release notes `play/<lang>/notes-<X.Y.Z>.txt`
+- [ ] **Internal testing** track first; install from Play on a phone and check that it
+      launches, then Production

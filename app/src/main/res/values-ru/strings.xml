@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Kodokur'un metinleri: Rusça. Varsayılan values altında İngilizce.
-  Bölüm başlıkları Türkçe: depodaki öbür yorumlar gibi geliştirici notu.
+  Kodokur strings: Russian. The default in values is English.
+  Section headings are in English, like the other developer notes in the repo.
 -->
 <resources>
     <string name="app_tagline">Любые штрихкоды и QR-коды. Ничто не покидает ваш телефон.</string>
 
-    <!-- Ortak -->
+    <!-- Common -->
     <string name="back">Назад</string>
     <string name="cancel">Отмена</string>
     <string name="delete">Удалить</string>
@@ -15,7 +15,7 @@
     <string name="copied">Скопировано</string>
     <string name="no_app">На этом телефоне нет приложения, которое может это открыть</string>
 
-    <!-- Tarayıcı -->
+    <!-- Scanner -->
     <string name="scan_hint">Наведите на штрихкод или QR-код</string>
     <string name="action_gallery">Из фото</string>
     <string name="action_torch_on">Включить фонарик</string>
@@ -36,7 +36,7 @@
     <string name="gallery_error">Не удалось открыть изображение</string>
     <string name="gallery_reading">Чтение изображения…</string>
 
-    <!-- Kamera izni -->
+    <!-- Camera permission -->
     <string name="permission_title">Доступ к камере</string>
     <string name="permission_body">Kodokur считывает коды через камеру. Кадры обрабатываются на телефоне, никогда не сохраняются и никуда не отправляются.</string>
     <string name="permission_grant">Разрешить камеру</string>
@@ -45,7 +45,7 @@
     <string name="no_camera">На этом устройстве нет камеры. Код всё равно можно считать с фото.</string>
     <string name="camera_error">Не удалось запустить камеру</string>
 
-    <!-- İçerik türleri -->
+    <!-- Content kinds -->
     <string name="kind_book">Книга</string>
     <string name="kind_periodical">Периодическое издание</string>
     <string name="kind_product">Товар</string>
@@ -58,7 +58,7 @@
     <string name="kind_contact">Контакт</string>
     <string name="kind_text">Текст</string>
 
-    <!-- Ayrıntı etiketleri -->
+    <!-- Detail labels -->
     <string name="label_isbn13">ISBN-13</string>
     <string name="label_isbn10">ISBN-10</string>
     <string name="label_group">Регистрационная группа</string>
@@ -86,7 +86,7 @@
     <string name="label_raw">Исходное содержимое</string>
     <string name="label_scanned_at">Считано</string>
 
-    <!-- Eylemler -->
+    <!-- Actions -->
     <string name="act_copy">Копировать</string>
     <string name="act_share">Поделиться</string>
     <string name="act_open">Открыть</string>
@@ -104,7 +104,7 @@
     <string name="act_add_contact">Добавить в контакты</string>
     <string name="external_notice">Откроется в браузере или другом приложении. Сам Kodokur никогда не выходит в сеть.</string>
 
-    <!-- GS1 (ilaç karekodu) -->
+    <!-- GS1 (medicine codes) -->
     <string name="kind_gs1">Код товара (GS1)</string>
     <string name="label_expiry">Годен до</string>
     <string name="label_best_before">Лучше употребить до</string>
@@ -115,7 +115,7 @@
     <string name="label_gs1_field">Поле (%1$s)</string>
     <string name="gs1_expired">Просрочено: срок годности истёк %1$s.</string>
 
-    <!-- Bağlantı güvenliği -->
+    <!-- Link safety -->
     <string name="label_destination">Ведёт на</string>
     <string name="label_encoded_name">Закодированное имя</string>
     <string name="label_address">Полный адрес</string>
@@ -127,13 +127,13 @@
     <string name="link_confirm_body">Она ведёт на %1$s. Открывайте, только если доверяете источнику кода.</string>
     <string name="link_open_anyway">Всё равно открыть</string>
 
-    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <!-- Zoom and accessibility -->
     <string name="zoom_level">Масштаб %1$s. Нажмите, чтобы изменить.</string>
     <string name="act_copy_item">Копировать %1$s</string>
     <string name="act_delete_item">Удалить %1$s</string>
     <string name="act_more">Другие действия</string>
 
-    <!-- Geçmiş -->
+    <!-- History -->
     <string name="history_title">История</string>
     <string name="history_empty">Пока ничего не отсканировано</string>
     <string name="history_export">Экспорт CSV</string>
@@ -147,11 +147,11 @@
     </plurals>
     <string name="history_deleted">Запись удалена</string>
 
-    <!-- Dil -->
+    <!-- Language -->
     <string name="language_title">Язык</string>
     <string name="language_system">Язык телефона</string>
 
-    <!-- Hakkında -->
+    <!-- About -->
     <string name="about_title">О приложении</string>
     <string name="about_promise">Без рекламы. Без трекеров. Без разрешения на доступ к интернету. Единственное разрешение — камера, и кадры с неё никогда не покидают телефон. История хранится только на этом устройстве и не попадает в резервные копии.</string>
     <string name="about_version">Версия %1$s</string>

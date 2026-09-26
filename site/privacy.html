@@ -1,9 +1,9 @@
 <!doctype html>
 <!--
-  ÜRETİLMİŞ DOSYA: tools/privacy/<dil>.json → python3 tools/gen_privacy.py
-  Her dil kendi bölümünde; assets/site.js seçilen dilinkini gösterir (index.html
-  ile aynı seçim: ?lang=xx, #xx, önceki seçim, tarayıcının dili). JavaScript
-  kapalıysa bütün bölümler alt alta okunur.
+  GENERATED FILE: tools/privacy/<lang>.json → python3 tools/gen_privacy.py
+  Each language has its own section; assets/site.js shows the selected one (same
+  choice as index.html: ?lang=xx, #xx, previous choice, browser language). With
+  JavaScript off, all sections read one after another.
 -->
 <html lang="en">
 <head>
@@ -41,7 +41,7 @@
     margin-top: 18px; background: var(--surface); border: 1px solid var(--card-border); border-radius: 16px; padding: 16px 18px;
   }
   .summary strong { color: var(--title); }
-  /* JavaScript kapalıyken bölümler alt alta; açıkken yalnız biri görünür. */
+  /* Without JavaScript the sections stack; with it only one is shown. */
   section + section { margin-top: 44px; padding-top: 12px; border-top: 1px solid var(--card-border); }
   section[hidden] { display: none; }
   html.one section { margin-top: 0; padding-top: 0; border-top: 0; }

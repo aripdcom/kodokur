@@ -6,7 +6,7 @@ on:
   pull_request:
   workflow_dispatch:
 
-# Aynı dala üst üste push gelirse eski çalışmayı iptal et (koşucu tasarrufu).
+# Cancel the older run when pushes to the same branch pile up (saves runner time).
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -17,16 +17,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Çeviri denetimi: dil listeleri tutarlı mı, her dilde bütün metinler var
-      # mı, biçim belirteçleri uyuşuyor mu. Saniyeler sürer, Gradle'dan önce.
-      - name: Çok dilli metin denetimi
+      # Translation check: are the language lists consistent, does every language
+      # have all strings, do format specifiers match? Takes seconds, runs before Gradle.
+      - name: Check multilingual strings
         run: python3 tools/check_strings.py
 
-      - name: Site denetimi
+      - name: Check website
         run: python3 tools/check_site.py
 
-      # Play metinleri: karakter sınırları, 14 dilin tamamı, görünmez karakter.
-      - name: Mağaza metinleri denetimi
+      # Play texts: character limits, all 14 languages, invisible characters.
+      - name: Check store listing texts
         run: python3 tools/check_store.py
 
       - uses: actions/setup-java@v4
@@ -36,13 +36,13 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
-      - name: Çekirdek birim testleri (çözücü, ISBN/ISSN, içerik, CSV)
+      - name: Core unit tests (decoder, ISBN/ISSN, content, CSV)
         run: ./gradlew :core:test
 
-      - name: Debug APK derle
+      - name: Build debug APK
         run: ./gradlew :app:assembleDebug
 
-      - name: Test raporlarını yükle
+      - name: Upload test reports
         if: failure()
         uses: actions/upload-artifact@v4
         with:
@@ -51,7 +51,7 @@ jobs:
             core/build/reports/tests
             core/build/test-results
 
-      - name: APK'yı yükle
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: kodokur-debug-apk

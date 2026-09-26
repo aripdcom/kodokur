@@ -1,18 +1,18 @@
 package com.aripd.kodokur.core
 
 /**
- * Gri tonlu (Y düzlemi) görüntü; satırlar arasında boşluk yok. Kamera karesi de,
- * galeriden seçilen görsel de çözücüye bu biçimde gelir.
+ * Grayscale (Y plane) image with no padding between rows. Both camera frames and
+ * images picked from the gallery reach the decoder in this form.
  */
 class LumaImage(val pixels: ByteArray, val width: Int, val height: Int) {
 
     init {
         require(width > 0 && height > 0 && pixels.size >= width * height) {
-            "Geçersiz görüntü: ${width}x$height, ${pixels.size} bayt"
+            "Invalid image: ${width}x$height, ${pixels.size} bytes"
         }
     }
 
-    /** Saat yönünde [degrees] (0, 90, 180, 270) döndürülmüş kopya; 0 ise kendisi. */
+    /** A copy rotated clockwise by [degrees] (0, 90, 180, 270); itself if 0. */
     fun rotated(degrees: Int): LumaImage {
         val d = ((degrees % 360) + 360) % 360
         if (d == 0) return this
@@ -27,13 +27,13 @@ class LumaImage(val pixels: ByteArray, val width: Int, val height: Int) {
                 val row = y * width
                 for (x in 0 until width) out[(width - 1 - x) * height + y] = pixels[row + x]
             }
-            else -> throw IllegalArgumentException("Dik açı değil: $degrees")
+            else -> throw IllegalArgumentException("Not a right angle: $degrees")
         }
         return if (d == 180) LumaImage(out, width, height) else LumaImage(out, height, width)
     }
 
     companion object {
-        /** Satır adımı genişlikten büyük olabilen bir düzlemden sıkışık kopya. */
+        /** A packed copy from a plane whose row stride may exceed its width. */
         fun fromPlane(plane: ByteArray, width: Int, height: Int, rowStride: Int): LumaImage {
             if (rowStride == width && plane.size >= width * height) return LumaImage(plane, width, height)
             val out = ByteArray(width * height)
@@ -41,7 +41,7 @@ class LumaImage(val pixels: ByteArray, val width: Int, val height: Int) {
             return LumaImage(out, width, height)
         }
 
-        /** 0xAARRGGBB piksellerden parlaklık (BT.601 yaklaşık, tamsayı). */
+        /** Luminance from 0xAARRGGBB pixels (approximate BT.601, integer math). */
         fun fromArgb(argb: IntArray, width: Int, height: Int): LumaImage {
             val out = ByteArray(width * height)
             for (i in out.indices) {

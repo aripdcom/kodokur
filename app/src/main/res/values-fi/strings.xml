@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Kodokur'un metinleri: Fince. Varsayılan values altında İngilizce.
-  Bölüm başlıkları Türkçe: depodaki öbür yorumlar gibi geliştirici notu.
+  Kodokur strings: Finnish. The default in values is English.
+  Section headings are in English, like the other developer notes in the repo.
 -->
 <resources>
     <string name="app_tagline">Kaikki viivakoodit ja QR-koodit. Mikään ei lähde puhelimestasi.</string>
 
-    <!-- Ortak -->
+    <!-- Common -->
     <string name="back">Takaisin</string>
     <string name="cancel">Peruuta</string>
     <string name="delete">Poista</string>
@@ -15,7 +15,7 @@
     <string name="copied">Kopioitu</string>
     <string name="no_app">Mikään tämän puhelimen sovellus ei voi avata tätä</string>
 
-    <!-- Tarayıcı -->
+    <!-- Scanner -->
     <string name="scan_hint">Osoita viivakoodia tai QR-koodia</string>
     <string name="action_gallery">Kuvasta</string>
     <string name="action_torch_on">Sytytä taskulamppu</string>
@@ -34,7 +34,7 @@
     <string name="gallery_error">Kuvaa ei voitu avata</string>
     <string name="gallery_reading">Luetaan kuvaa…</string>
 
-    <!-- Kamera izni -->
+    <!-- Camera permission -->
     <string name="permission_title">Kameran käyttö</string>
     <string name="permission_body">Kodokur lukee koodit kameran kautta. Kuvat käsitellään puhelimessa, niitä ei tallenneta eikä lähetetä minnekään.</string>
     <string name="permission_grant">Salli kamera</string>
@@ -43,7 +43,7 @@
     <string name="no_camera">Tässä laitteessa ei ole kameraa. Voit silti lukea koodin valokuvasta.</string>
     <string name="camera_error">Kameraa ei voitu käynnistää</string>
 
-    <!-- İçerik türleri -->
+    <!-- Content kinds -->
     <string name="kind_book">Kirja</string>
     <string name="kind_periodical">Aikakausjulkaisu</string>
     <string name="kind_product">Tuote</string>
@@ -56,7 +56,7 @@
     <string name="kind_contact">Yhteystieto</string>
     <string name="kind_text">Teksti</string>
 
-    <!-- Ayrıntı etiketleri -->
+    <!-- Detail labels -->
     <string name="label_isbn13">ISBN-13</string>
     <string name="label_isbn10">ISBN-10</string>
     <string name="label_group">Rekisteröintiryhmä</string>
@@ -84,7 +84,7 @@
     <string name="label_raw">Raakasisältö</string>
     <string name="label_scanned_at">Luettu</string>
 
-    <!-- Eylemler -->
+    <!-- Actions -->
     <string name="act_copy">Kopioi</string>
     <string name="act_share">Jaa</string>
     <string name="act_open">Avaa</string>
@@ -102,7 +102,7 @@
     <string name="act_add_contact">Lisää yhteystietoihin</string>
     <string name="external_notice">Avautuu selaimessa tai toisessa sovelluksessa. Kodokur itse ei koskaan ota yhteyttä verkkoon.</string>
 
-    <!-- GS1 (ilaç karekodu) -->
+    <!-- GS1 (medicine codes) -->
     <string name="kind_gs1">Tuotekoodi (GS1)</string>
     <string name="label_expiry">Viimeinen käyttöpäivä</string>
     <string name="label_best_before">Parasta ennen</string>
@@ -113,7 +113,7 @@
     <string name="label_gs1_field">Kenttä (%1$s)</string>
     <string name="gs1_expired">Vanhentunut: viimeinen käyttöpäivä oli %1$s.</string>
 
-    <!-- Bağlantı güvenliği -->
+    <!-- Link safety -->
     <string name="label_destination">Kohde</string>
     <string name="label_encoded_name">Koodattu nimi</string>
     <string name="label_address">Koko osoite</string>
@@ -125,13 +125,13 @@
     <string name="link_confirm_body">Se vie osoitteeseen %1$s. Avaa se vain, jos luotat koodin alkuperään.</string>
     <string name="link_open_anyway">Avaa silti</string>
 
-    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <!-- Zoom and accessibility -->
     <string name="zoom_level">Zoomaus %1$s. Muuta napauttamalla.</string>
     <string name="act_copy_item">Kopioi %1$s</string>
     <string name="act_delete_item">Poista %1$s</string>
     <string name="act_more">Lisää vaihtoehtoja</string>
 
-    <!-- Geçmiş -->
+    <!-- History -->
     <string name="history_title">Historia</string>
     <string name="history_empty">Mitään ei ole vielä luettu</string>
     <string name="history_export">Vie CSV</string>
@@ -143,11 +143,11 @@
     </plurals>
     <string name="history_deleted">Luku poistettu</string>
 
-    <!-- Dil -->
+    <!-- Language -->
     <string name="language_title">Kieli</string>
     <string name="language_system">Puhelimen kieli</string>
 
-    <!-- Hakkında -->
+    <!-- About -->
     <string name="about_title">Tietoja</string>
     <string name="about_promise">Ei mainoksia. Ei seuraimia. Ei internet-lupaa. Ainoa lupa on kamera, eivätkä kameran kuvat koskaan poistu puhelimesta. Historia pysyy tässä laitteessa, eikä sitä sisällytetä varmuuskopioihin.</string>
     <string name="about_version">Versio %1$s</string>

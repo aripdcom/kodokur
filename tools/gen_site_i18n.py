@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""site/assets/i18n.js'i tools/site/<dil>.json dosyalarından üretir.
+"""Generates site/assets/i18n.js from the tools/site/<lang>.json files.
 
-İngilizce burada yok: site/index.html'in kendisinde duruyor, site.js açılışta
-anlık görüntüsünü alıyor. Her JSON: `name` (dilin kendi adı), `_title`, `_desc`
-ve index.html'deki her data-i18n anahtarı. Eksik ya da fazla anahtar hata.
+English is not here: it lives in site/index.html itself, and site.js takes a
+snapshot of it on load. Each JSON has `name` (the language's own name), `_title`,
+`_desc` and every data-i18n key in index.html. A missing or extra key is an error.
 
-Kullanım: python3 tools/gen_site_i18n.py
+Usage: python3 tools/gen_site_i18n.py
 """
 import json
 import os
@@ -18,9 +18,9 @@ INDEX = os.path.join(ROOT, "site", "index.html")
 OUT = os.path.join(ROOT, "site", "assets", "i18n.js")
 
 HEADER = """/*
-  Sitenin çevirileri. ÜRETİLMİŞ DOSYA: elle düzenlemeyin.
-  Kaynak: tools/site/<dil>.json → python3 tools/gen_site_i18n.py
-  İngilizce burada yok; index.html'in kendisinde duruyor.
+  Website translations. GENERATED FILE: do not edit by hand.
+  Source: tools/site/<lang>.json → python3 tools/gen_site_i18n.py
+  English is not here; it lives in index.html itself.
 */
 """
 
@@ -42,9 +42,9 @@ def render():
         missing = [k for k in want if not str(data.get(k, "")).strip()]
         extra = [k for k in data if k not in want]
         if missing:
-            errors.append(f"tools/site/{name}: eksik: {', '.join(missing)}")
+            errors.append(f"tools/site/{name}: missing: {', '.join(missing)}")
         if extra:
-            errors.append(f"tools/site/{name}: index.html'de olmayan: {', '.join(extra)}")
+            errors.append(f"tools/site/{name}: not in index.html: {', '.join(extra)}")
         table[tag] = {k: data[k] for k in want if k in data}
     body = json.dumps(table, ensure_ascii=False, indent=2)
     return table, errors, f"{HEADER}\nwindow.KODOKUR_I18N = {body};\n"
@@ -53,12 +53,12 @@ def render():
 def main():
     table, errors, js = render()
     for e in errors:
-        print(f"HATA   {e}")
+        print(f"ERROR  {e}")
     if errors:
         return 1
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     open(OUT, "w", encoding="utf-8").write(js)
-    print(f"{OUT}: {len(table)} dil ({' '.join(table)})")
+    print(f"{OUT}: {len(table)} languages ({' '.join(table)})")
     return 0
 
 

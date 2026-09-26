@@ -11,7 +11,7 @@ import com.aripd.kodokur.core.Scan
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-/** Sistem fotoğraf seçicisinden gelen görseldeki kodu okur. İzin gerekmez. */
+/** Reads the code in an image from the system photo picker. No permission needed. */
 object GalleryReader {
 
     sealed interface Outcome {
@@ -20,14 +20,14 @@ object GalleryReader {
         data object Failed : Outcome
     }
 
-    /** Uzun kenar bu boyuta indirilir: 12 MP fotoğrafı tam çözmek hem yavaş hem gereksiz. */
+    /** The long side is scaled down to this: decoding a full 12 MP photo is slow and unnecessary. */
     private const val MAX_SIDE = 2048
 
     suspend fun read(context: Context, uri: Uri): Outcome = withContext(Dispatchers.Default) {
         val bitmap = try {
             load(context, uri)
         } catch (e: Exception) {
-            Log.w("Kodokur", "Görsel açılamadı", e)
+            Log.w("Kodokur", "Could not open image", e)
             null
         } ?: return@withContext Outcome.Failed
 

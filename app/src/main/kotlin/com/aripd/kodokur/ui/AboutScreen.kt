@@ -86,7 +86,7 @@ fun AboutScreen(onLanguage: () -> Unit, onBack: () -> Unit) {
                     headlineContent = { Text(stringResource(R.string.about_privacy)) },
                     trailingContent = { Icon(KodokurIcons.OpenInNew, null) },
                     modifier = Modifier.clickable {
-                        // Politika tek sayfada, her dil kendi çapasında.
+                        // The policy is a single page, with an anchor per language.
                         val lang = AppLocale.normalize(current) ?: "en"
                         Actions.browse(context, "${Actions.PRIVACY_URL}#$lang")
                     },
@@ -115,8 +115,8 @@ fun AboutScreen(onLanguage: () -> Unit, onBack: () -> Unit) {
 }
 
 /**
- * Dil seçimi: ilk satır "telefonun dili", altında desteklenen diller kendi
- * adlarıyla. Seçim uygulanınca etkinlik yeniden oluşur.
+ * Language picker: the first row is "phone language", followed by the supported
+ * languages under their own names. Applying a choice recreates the activity.
  */
 @Composable
 fun LanguageScreen(onBack: () -> Unit) {

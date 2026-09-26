@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-/** Vizör köşeleri ve tarama çizgisi; ikonla aynı kehribar. */
+/** Viewfinder corners and scan line; the same amber as the icon. */
 val Amber = Color(0xFFFFB347)
 
 private val Light = lightColorScheme(
@@ -38,7 +38,7 @@ private val Dark = darkColorScheme(
     surface = Color(0xFF101414),
 )
 
-/** Android 12+ duvar kağıdı renklerini kullanır; öncesinde kendi paletimiz. */
+/** Uses wallpaper colors on Android 12+; our own palette before that. */
 @Composable
 fun KodokurTheme(content: @Composable () -> Unit) {
     val dark = isSystemInDarkTheme()

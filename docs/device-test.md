@@ -1,64 +1,67 @@
-# Cihaz test protokolü
+# Device test protocol
 
-Birim testleri çözücüyü, ayrıştırıcıları ve bağlantı denetimini üretilmiş kodlarla
-sınar (`./gradlew :core:test`). Gerçek dünyadaki kodlar (parlak kapak, eğri kutu,
-küçük baskı) ve kamera davranışı ancak telefonda görülür. Her sürümden önce bu
-liste, **imzalı release derlemesiyle** koşulur; sonuç en alttaki kütüğe yazılır.
+Unit tests exercise the decoder, the parsers and the link checks with generated codes
+(`./gradlew :core:test`). Real-world codes (glossy covers, curved boxes, small print)
+and camera behavior only show up on a phone. Before every release, run this list with
+the **signed release build** and log the result in the table at the bottom.
 
-Hazırlık: telefonda eski sürüm varsa üzerine kur (geçmiş korunmalı). Ekran
-okuyucu maddeleri için TalkBack'i aç.
+Setup: if an older version is on the phone, install over it (history must survive).
+Turn on TalkBack for the screen reader items.
 
-## 1. Kurulum ve izin
+## 1. Installation and permission
 
-- [ ] İlk açılış: izin penceresi çıkar, arkadaki düğme "Kameraya izin ver"
-- [ ] İki kez reddet → düğme "Uygulama ayarlarını aç" olur; ayarlardan izin ver,
-      uygulamaya dön → kamera açılır
-- [ ] İzinsizken "Fotoğraftan" çalışır
+- [ ] First launch: the permission dialog appears; the button behind it says "Allow camera"
+- [ ] Deny twice → the button becomes "Open app settings"; grant the permission in
+      settings, return to the app → the camera opens
+- [ ] "From photo" works without the permission
 
-## 2. Kamera
+## 2. Camera
 
-- [ ] Kitap barkodu (EAN-13 + 5 haneli fiyat eki): yakından ve 30 cm'den; yatay ve dik
-- [ ] İlaç kutusu karekodu (GS1 DataMatrix): SKT, parti, seri doğru; geçmiş bir kutuda
-      kırmızı uyarı
-- [ ] Market ürünü (EAN-13, EAN-8 ya da UPC)
-- [ ] Parlak / kavisli ambalaj: dokunarak odak yardım ediyor mu
-- [ ] Küçük barkod: yakınlaştırma düğmesi 1×→2×→4×→1×, iki parmak, çift dokunuş
-- [ ] Karanlıkta fener
-- [ ] Ters renkli (açık zeminde değil, koyu zeminde açık) QR — galeriden
+- [ ] Book barcode (EAN-13 + 5-digit price add-on): up close and from 30 cm; landscape
+      and portrait
+- [ ] Medicine box code (GS1 DataMatrix): expiry, batch and serial are correct; an
+      expired box shows a red warning
+- [ ] Grocery product (EAN-13, EAN-8 or UPC)
+- [ ] Glossy / curved packaging: does tap-to-focus help
+- [ ] Small barcode: zoom button 1×→2×→4×→1×, pinch, double tap
+- [ ] Flashlight in the dark
+- [ ] Inverted QR (light on dark instead of dark on light) — from the gallery
 
-## 3. İçerik türleri
+## 3. Content types
 
-- [ ] Wi-Fi QR: parola gizli, "Göster" çalışır, "Bağlan" sistem penceresini açar
-      (kaydetmeden iptal et)
-- [ ] Bağlantı QR'ı: başlıkta alan adı; `@`'li, Kiril harfli, `http://` IP adresli
-      bağlantılarda uyarı kartı ve "Aç" → onay penceresi
-- [ ] Kartvizit QR'ı (vCard / MECARD) → "Kişilere ekle" formu dolu açılır
-- [ ] E-posta, telefon, SMS, konum QR'ları ilgili uygulamayı açar
+- [ ] Wi-Fi QR: password hidden, "Show" works, "Connect" opens the system dialog
+      (cancel without saving)
+- [ ] Link QR: domain in the title; links with `@`, Cyrillic letters or an `http://`
+      IP address show a warning card, and "Open" → confirmation dialog
+- [ ] Contact card QR (vCard / MECARD) → the "Add to contacts" form opens pre-filled
+- [ ] Email, phone, SMS and location QRs open the matching app
 
-## 4. Seri tarama ve geçmiş
+## 4. Batch scanning and history
 
-- [ ] Seri kip: art arda 5 kitap; aynı kitap ikinci kez "zaten var" der, sayaç artmaz
-- [ ] Geçmiş: tek kayıt sil → "Geri al" geri getirir; "Geçmişi temizle" onay ister
-- [ ] CSV dışa aktar: dosya paylaşım sayfasında; tablo programında Türkçe karakterler ve
-      `isbn13` sütunu doğru
+- [ ] Batch mode: 5 books in a row; scanning the same book again says "already there"
+      and the counter does not go up
+- [ ] History: delete one entry → "Undo" restores it; "Clear history" asks for
+      confirmation
+- [ ] CSV export: file appears in the share sheet; in a spreadsheet the Turkish
+      characters and the `isbn13` column are correct
 
-## 5. Dil ve erişilebilirlik
+## 5. Language and accessibility
 
-- [ ] Hakkında → Dil: Türkçe, English ve Arapça (sağdan sola) arasında geçiş
-- [ ] TalkBack: tarayıcıdaki dört düğme okunuyor (Fotoğraftan, Fener, Yakınlaştırma
-      oranı, Seri); okuma yapılınca tür ve içerik duyuruluyor
-- [ ] TalkBack: sonuç ekranında başlık, kopyalama düğmeleri neyi kopyaladığını söylüyor
-- [ ] Yazı boyutu en büyükte: sonuç ve geçmiş ekranı taşmıyor
+- [ ] About → Language: switch between Turkish, English and Arabic (right-to-left)
+- [ ] TalkBack: the four scanner buttons are read out (From photo, Flashlight, Zoom
+      ratio, Batch); after a scan the type and content are announced
+- [ ] TalkBack: on the result screen, the title and copy buttons say what they copy
+- [ ] Largest font size: the result and history screens do not overflow
 
-## 6. Hakkında
+## 6. About
 
-- [ ] Gizlilik politikası bağlantısı `kodokur.aripd.com/privacy.html`'i uygulamanın
-      dilinde açar
-- [ ] Sürüm numarası doğru
+- [ ] The privacy policy link opens `kodokur.aripd.com/privacy.html` in the app's
+      language
+- [ ] Version number is correct
 
-## Kütük
+## Log
 
-| Tarih | Sürüm | Cihaz | Sonuç | Not |
+| Date | Version | Device | Result | Notes |
 |---|---|---|---|---|
-| 2026-09-26 | 1.1.0 (debug) | Galaxy A51, Android 13 | 3, 5 (kısmen) | Galeriden: GS1 DataMatrix (geçerli ve SKT'si geçmiş), `@` ve Kiril harfli bağlantılar, onay penceresi (IP adresli bağlantı yalnızca birim testinde); yakınlaştırma düğmesi 1→2→4→1; uiautomator ile etiket denetimi temiz. Kamera ve 1, 2, 4 kullanıcıyla koşulacak. |
-| 2026-09-26 | 1.1.0 (debug) | Galaxy A51, Android 13 | 2 (kısmen), 3, 6 | Kamera açılıyor (CameraX id 0 OPEN), fener kamera servisinde TORCH, yakınlaştırma oranı CameraX'ten geliyor; gerçek kodları kamerayla okuma v1.0'da kullanıcı tarafından doğrulandı, çözümleyici değişmedi. Galeriden İngilizce arayüzde ilaç karekodu (SKT uyarısı), `@` bağlantısı, Wi-Fi, kitap, vCard 3 kartvizit (unvan, adres): "Add to contacts" rehber formunu bütün alanlarla dolu açıyor, kaydetmeden çıkıldı (rehberde kayıt yok). Tarayıcıda durum çubuğu simgeleri açık renk. Mağaza görüntüleri `store/screenshots/en/`. |
+| 2026-09-26 | 1.1.0 (debug) | Galaxy A51, Android 13 | 3, 5 (partial) | From the gallery: GS1 DataMatrix (valid and expired), links with `@` and Cyrillic letters, confirmation dialog (IP address link only in unit tests); zoom button 1→2→4→1; label check with uiautomator is clean. Camera and sections 1, 2, 4 still to be run with a user. |
+| 2026-09-26 | 1.1.0 (debug) | Galaxy A51, Android 13 | 2 (partial), 3, 6 | Camera opens (CameraX id 0 OPEN), flashlight shows TORCH in the camera service, zoom ratio comes from CameraX; reading real codes with the camera was verified by the user in v1.0, and the decoder has not changed. From the gallery in the English UI: medicine code (expiry warning), `@` link, Wi-Fi, book, vCard 3 contact card (title, address): "Add to contacts" opens the contacts form with every field filled; exited without saving (no entry in contacts). Status bar icons on the scanner are light-colored. Store screenshots are in `store/screenshots/en/`. |

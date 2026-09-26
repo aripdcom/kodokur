@@ -1,29 +1,29 @@
-# Play mağaza paketi
+# Play Store package
 
-Play Console'a elle aktarılan her şey burada. Metinleri `tools/check_store.py`
-denetler (karakter sınırları, 14 dilin tamamı, görünmez karakter); CI her itmede
-koşturur.
+Everything that goes into the Play Console by hand lives here. `tools/check_store.py`
+checks the texts (character limits, all 14 languages present, invisible characters);
+CI runs it on every push.
 
 ```
-play/<dil>/title.txt          uygulama adı          ≤ 30 karakter
-play/<dil>/short.txt          kısa açıklama         ≤ 80
-play/<dil>/full.txt           tam açıklama          ≤ 4000
-play/<dil>/notes-<sürüm>.txt  sürüm notu            ≤ 500
-graphics/icon-512.png         yüksek çözünürlüklü simge (512×512)
-graphics/feature-1024.png     öne çıkan görsel (1024×500); metinsiz, bütün dillerde aynı
-screenshots/en/               telefon ekran görüntüleri, yalnız İngilizce (1080×2160: Play
-                              uzun kenarın kısa kenarın en fazla 2 katı olmasını ister;
-                              durum ve gezinme çubukları kırpılmış)
-data-safety.md                Veri güvenliği formunun cevapları
-content-rating.md             İçerik derecelendirme (IARC) ve hedef kitle cevapları
-checklist.md                  yayın adımları
+play/<lang>/title.txt           app name              ≤ 30 characters
+play/<lang>/short.txt           short description     ≤ 80
+play/<lang>/full.txt            full description      ≤ 4000
+play/<lang>/notes-<version>.txt release notes         ≤ 500
+graphics/icon-512.png           high-res icon (512×512)
+graphics/feature-1024.png       feature graphic (1024×500); no text, same in every language
+screenshots/en/                 phone screenshots, English only (1080×2160: Play requires
+                                the long side to be at most 2× the short side;
+                                status and navigation bars cropped)
+data-safety.md                  answers for the Data safety form
+content-rating.md               answers for Content rating (IARC) and Target audience
+checklist.md                    release steps
 ```
 
-Görseller SVG'den üretilir: `inkscape graphics/icon-512.svg --export-type=png -w 512 -h 512 …`
+Graphics are generated from SVG: `inkscape graphics/icon-512.svg --export-type=png -w 512 -h 512 …`
 
-## Dil klasörü → Play Console yerel ayarı
+## Language folder → Play Console locale
 
-| Klasör | Play | Klasör | Play |
+| Folder | Play | Folder | Play |
 |---|---|---|---|
 | `en` | English (United States) – en-US | `it` | Italian – it-IT |
 | `tr` | Turkish – tr-TR | `da` | Danish – da-DK |
@@ -33,6 +33,6 @@ Görseller SVG'den üretilir: `inkscape graphics/icon-512.svg --export-type=png 
 | `es` | Spanish (Spain) – es-ES | `ru` | Russian – ru-RU |
 | `pt` | Portuguese (Brazil) – pt-BR | `ar` | Arabic – ar |
 
-Varsayılan dil **en-US**. Sürüm notları Play'e tek kutuda, dil etiketleriyle
-yapıştırılır (`<tr-TR> … </tr-TR>`); her dilin metni kendi `notes-<sürüm>.txt`
-dosyasında.
+The default language is **en-US**. Release notes are pasted into Play in a single box,
+wrapped in language tags (`<tr-TR> … </tr-TR>`). Each language's text lives in its own
+`notes-<version>.txt` file.

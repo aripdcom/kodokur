@@ -7,7 +7,7 @@ import java.time.ZoneOffset
 class HistoryCsvTest {
 
     @Test
-    fun `başlık, ISBN sütunları ve tırnaklama`() {
+    fun `header, ISBN columns and quoting`() {
         val csv = HistoryCsv.export(
             listOf(
                 Record(0L, Scan("9780306406157", Symbology.EAN_13, "52495")),
@@ -24,7 +24,7 @@ class HistoryCsvTest {
     }
 
     @Test
-    fun `formül gibi başlayan metin etkisizleştirilir, sayılar kalır`() {
+    fun `formula-like text is neutralized, numbers are kept`() {
         assertEquals("'=HYPERLINK(1)", HistoryCsv.field("=HYPERLINK(1)"))
         assertEquals("'@SUM", HistoryCsv.field("@SUM"))
         assertEquals("-12", HistoryCsv.field("-12"))

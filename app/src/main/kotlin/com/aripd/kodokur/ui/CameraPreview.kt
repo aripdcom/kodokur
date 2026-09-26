@@ -36,8 +36,9 @@ import com.aripd.kodokur.core.Scan
 import java.util.concurrent.Executors
 
 /**
- * Çözümleyicinin tetiği. Bir kod bulununca çözümleyici kendini kapatır (aynı kod
- * saniyede on kez gelmesin); ekran sonucu işleyince yeniden kurar.
+ * The analyzer's trigger. Once a code is found the analyzer disarms itself (so the
+ * same code does not arrive ten times a second); the screen re-arms it after
+ * handling the result.
  */
 class ScanTrigger {
     @Volatile
@@ -45,14 +46,14 @@ class ScanTrigger {
 }
 
 /**
- * Yakınlaştırma. Kitap barkodu küçük; birçok telefon çok yakına odaklanamıyor,
- * uzaktan yakınlaştırmak daha iyi okur. Üç yol: iki parmak, çift dokunuş (1× ↔ 2×)
- * ve tarayıcıdaki oran düğmesi ([cycle]); sonuncusu ekran okuyucuyla da kullanılır.
+ * Zoom. Book barcodes are small and many phones cannot focus up close, so zooming
+ * from a distance reads better. Three ways: pinch, double tap (1× ↔ 2×) and the
+ * ratio button in the scanner ([cycle]); the last one also works with a screen reader.
  */
 class ZoomControl {
     internal var camera: Camera? = null
 
-    /** Kameranın bildirdiği anlık oran. */
+    /** Current ratio as reported by the camera. */
     var ratio by mutableFloatStateOf(1f)
         internal set
 
@@ -63,7 +64,7 @@ class ZoomControl {
         camera?.cameraControl?.setZoomRatio(value.coerceIn(1f, maxRatio))
     }
 
-    /** 1× → 2× → 4× → 1×; kameranın sınırını aşan adım atlanır. */
+    /** 1× → 2× → 4× → 1×; steps beyond the camera's limit are skipped. */
     fun cycle() {
         val next = STEPS.firstOrNull { it > ratio + 0.05f && it <= maxRatio } ?: 1f
         set(next)
@@ -75,8 +76,8 @@ class ZoomControl {
 }
 
 /**
- * Arka kamera önizlemesi ve kare çözümleme. Önizleme ekranı doldurur; çözümleyici
- * karenin tamamına bakar, vizör yalnızca kullanıcıya yol gösterir.
+ * Back camera preview and frame analysis. The preview fills the screen; the analyzer
+ * looks at the whole frame, and the viewfinder only guides the user.
  */
 @Composable
 fun CameraPreview(
@@ -122,7 +123,7 @@ fun CameraPreview(
                         ResolutionSelector.Builder()
                             .setResolutionStrategy(
                                 ResolutionStrategy(
-                                    // 720p: kitap barkodu uzaktan da okunur, kare yine hızlı çözülür.
+                                    // 720p: book barcodes still read from a distance, and frames still decode fast.
                                     Size(1280, 720),
                                     ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER,
                                 ),
@@ -142,7 +143,7 @@ fun CameraPreview(
                 }
                 currentOnTorchAvailable(bound.cameraInfo.hasFlashUnit())
             } catch (e: Exception) {
-                Log.w("Kodokur", "Kamera başlatılamadı", e)
+                Log.w("Kodokur", "Could not start camera", e)
                 currentOnError()
             }
         }, main)
@@ -164,10 +165,10 @@ fun CameraPreview(
 }
 
 /**
- * Dokunma hareketleri: tek dokunuş o noktaya odaklar ve pozlar, çift dokunuş
- * 1× ile 2× arasında geçer, iki parmak yakınlaştırır. Tek dokunuş, çift dokunuşun
- * ilk yarısı olmadığı kesinleşince çalışır; iki parmak hareketinin sonunda odak
- * yanlışlıkla değişmez.
+ * Touch gestures: a single tap focuses and meters at that point, a double tap
+ * toggles between 1× and 2×, and pinch zooms. A single tap fires only once it is
+ * certain not to be the first half of a double tap, and the end of a pinch does not
+ * move the focus by accident.
  */
 @SuppressLint("ClickableViewAccessibility")
 private fun PreviewView.setGestures(camera: () -> Camera?, zoom: ZoomControl) {
@@ -198,9 +199,9 @@ private fun PreviewView.setGestures(camera: () -> Camera?, zoom: ZoomControl) {
 }
 
 /**
- * Her kareden Y (parlaklık) düzlemini alır, dik konuma çevirir ve çözer. Çizgili
- * barkodlar için yan çevrilmiş deneme her iki karede bir yapılır: dik tutulan
- * kitap da okunur, kare süresi de ikiye katlanmaz.
+ * Takes the Y (luminance) plane from each frame, rotates it upright and decodes it.
+ * For linear barcodes, a sideways attempt is made every other frame: a book held
+ * vertically still reads, and frame time does not double.
  */
 private class ScanAnalyzer(
     private val trigger: ScanTrigger,

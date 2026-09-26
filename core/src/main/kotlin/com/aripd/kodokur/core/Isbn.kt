@@ -1,12 +1,12 @@
 package com.aripd.kodokur.core
 
 /**
- * Doğrulanmış bir ISBN. İçeride her zaman ISBN-13 olarak tutulur; 978 önekli
- * olanların ISBN-10 karşılığı da vardır (979 önekinin yoktur).
+ * A validated ISBN. Always stored internally as ISBN-13; those with a 978 prefix
+ * also have an ISBN-10 equivalent (the 979 prefix does not).
  */
 class Isbn private constructor(val isbn13: String) {
 
-    /** 978 önekliyse ISBN-10 karşılığı, değilse null. */
+    /** The ISBN-10 equivalent if the prefix is 978, otherwise null. */
     val isbn10: String?
         get() = if (isbn13.startsWith("978")) {
             isbn13.substring(3, 12).let { it + CheckDigits.isbn10(it) }
@@ -16,10 +16,10 @@ class Isbn private constructor(val isbn13: String) {
 
     private val parts: List<String>? by lazy { IsbnRanges.split(isbn13) }
 
-    /** "978-975-08-0171-6" biçimi; aralık bilinmiyorsa tiresiz. */
+    /** "978-975-08-0171-6" format; unhyphenated if the range is unknown. */
     val hyphenated13: String get() = parts?.joinToString("-") ?: isbn13
 
-    /** ISBN-10'un tireli biçimi; aralık bilinmiyorsa tiresiz, ISBN-10 yoksa null. */
+    /** Hyphenated ISBN-10; unhyphenated if the range is unknown, null if there is no ISBN-10. */
     val hyphenated10: String?
         get() {
             val plain = isbn10 ?: return null
@@ -27,7 +27,7 @@ class Isbn private constructor(val isbn13: String) {
             return (parts.subList(1, 4) + plain.last().toString()).joinToString("-")
         }
 
-    /** Kayıt grubunun adı: "Türkiye", "English language"… */
+    /** Name of the registration group: "Türkiye", "English language"… */
     val agency: String? get() = IsbnRanges.group(isbn13)?.agency
 
     override fun equals(other: Any?): Boolean = other is Isbn && other.isbn13 == isbn13
@@ -37,12 +37,12 @@ class Isbn private constructor(val isbn13: String) {
     companion object {
         private val LABEL = Regex("^ISBN(-1[03])?:?", RegexOption.IGNORE_CASE)
 
-        /** Aralık tablosunun tarihi. */
+        /** Date of the range table. */
         val rangesDate: String get() = IsbnRanges.date
 
         /**
-         * ISBN-13 ya da ISBN-10 metnini doğrular. Tireler, boşluklar ve baştaki
-         * "ISBN" / "ISBN-13:" etiketi yok sayılır. Sağlama hanesi tutmazsa null.
+         * Validates ISBN-13 or ISBN-10 text. Hyphens, whitespace and a leading
+         * "ISBN" / "ISBN-13:" label are ignored. Null if the check digit does not match.
          */
         fun parse(text: String): Isbn? {
             val code = text.trim().replace(LABEL, "")

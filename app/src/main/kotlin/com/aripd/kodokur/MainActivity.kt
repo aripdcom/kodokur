@@ -12,7 +12,7 @@ import com.aripd.kodokur.ui.KodokurTheme
 
 class MainActivity : ComponentActivity() {
 
-    /** Android 8–12'de seçili dili uygular; 13+'ta sistem zaten uygulamıştır. */
+    /** Applies the chosen language on Android 8–12; on 13+ the system has already applied it. */
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(AppLocale.wrap(newBase))
     }

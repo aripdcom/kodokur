@@ -4,6 +4,10 @@ The Play developer account is an **organization account** (opened September 2026
 the 12-tester / 14-day closed testing requirement for new personal accounts does not
 apply: the first release can go straight to **Production**.
 
+Kodokur is a **paid app on Google Play: €1.99** (same as Kerteriz). The APK on GitHub
+and the website stays free, as the GPL allows; the Play price pays for convenience and
+supports the project, and the store description says the app is open source.
+
 ## 1. Before the release
 
 - [ ] `docs/device-test.md` was run on a phone with real codes; result logged there
@@ -28,8 +32,18 @@ git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
 
 ## 3. Play Console: create the app (one time)
 
+- [ ] **Payments profile** (Settings → Payments profile) is set up with bank account and
+      tax information; paid apps cannot be published without it
 - [ ] **Create app:** name "Kodokur", default language English (United States),
-      App, Free, accept the declarations
+      App, **Paid**, accept the declarations. This cannot be undone later: a free app
+      can never become paid (a paid app can become free)
+- [ ] **Pricing** (Monetize → Products → App pricing): **€1.99**. Let Play convert it to
+      local prices, then review the suggestions for lower-income markets (e.g. Turkey)
+      and lower them by hand where the converted price looks too high
+- [ ] **Automatic protection** (Test and release → App integrity): **Off** (done).
+      Reason: the same app is legally free on GitHub under the GPL, so it protects
+      nothing, and it injects closed-source verification code into the APK Play serves,
+      which conflicts with the open-source and no-network promises
 - [ ] **App signing** (Test and release → Setup → App signing): choose
       *Use a different key* → *Export and upload a key from a Java keystore*. Download
       the PEPK tool and the encryption public key shown there, then run:
@@ -69,7 +83,8 @@ git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
   - Health apps: *My app does not have any health features* (see the note in
     `content-rating.md`)
   - Government apps / financial features / news: not applicable
-- [ ] **Countries:** all countries and regions
+- [ ] **Countries:** all countries and regions where Play supports paid apps (Play
+      hides the rest automatically for a paid app)
 
 ## 5. Play Console: production release
 

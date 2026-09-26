@@ -10,12 +10,12 @@ supports the project, and the store description says the app is open source.
 
 ## 1. Before the release
 
-- [ ] `docs/device-test.md` was run on a phone with real codes; result logged there
-- [ ] `python3 tools/check_strings.py`, `check_site.py`, `check_store.py` are clean
-- [ ] `./gradlew :core:test :app:assembleDebug` passed
-- [ ] `store/screenshots/en/` is up to date (1080×2160, 2–8 images; the same English
+- [x] `docs/device-test.md` was run on a phone with real codes; result logged there
+- [x] `python3 tools/check_strings.py`, `check_site.py`, `check_store.py` are clean
+- [x] `./gradlew :core:test :app:assembleDebug` passed
+- [x] `store/screenshots/en/` is up to date (1080×2160, 2–8 images; the same English
       screenshots are used for every language)
-- [ ] `store/play/<lang>/notes-<X.Y.Z>.txt` exists for the version in all 14 languages
+- [x] `store/play/<lang>/notes-<X.Y.Z>.txt` exists for the version in all 14 languages
 
 ## 2. Tag and verify the build
 
@@ -23,10 +23,10 @@ supports the project, and the store description says the app is open source.
 git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
 ```
 
-- [ ] `release.yml` is green: APK signed, only permission `CAMERA`, AAB built
-- [ ] From the GitHub release download `kodokur-v1.1.1-play.aab` and
+- [x] `release.yml` is green: APK signed, only permission `CAMERA`, AAB built
+- [x] From the GitHub release download `kodokur-v1.1.1-play.aab` and
       `kodokur-v1.1.1-mapping.txt`
-- [ ] Signing fingerprint matches the Kodokur line in `~/keystores/aripdcom/README.md`:
+- [x] Signing fingerprint matches the Kodokur line in `~/keystores/aripdcom/README.md`:
       `apksigner verify --print-certs kodokur.apk | grep 'certificate SHA-256'`
       → `8e97d791…448e16`
 
@@ -40,7 +40,7 @@ git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
 - [ ] **Pricing** (Monetize → Products → App pricing): **€1.99**. Let Play convert it to
       local prices, then review the suggestions for lower-income markets (e.g. Turkey)
       and lower them by hand where the converted price looks too high
-- [ ] **Automatic protection** (Test and release → App integrity): **Off** (done).
+- [x] **Automatic protection** (Test and release → App integrity): **Off** (done).
       Reason: the same app is legally free on GitHub under the GPL, so it protects
       nothing, and it injects closed-source verification code into the APK Play serves,
       which conflicts with the open-source and no-network promises

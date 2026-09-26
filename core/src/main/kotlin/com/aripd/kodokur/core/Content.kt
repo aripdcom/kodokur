@@ -1,18 +1,18 @@
 package com.aripd.kodokur.core
 
-/** Okunan metnin ne olduğu; sonuç ekranı hangi eylemleri sunacağına buna bakar. */
+/** What the scanned text is; the result screen decides which actions to offer based on this. */
 sealed interface Content {
 
-    /** 978/979 önekli EAN-13 ya da metin olarak yazılmış geçerli bir ISBN. */
+    /** An EAN-13 with a 978/979 prefix, or a valid ISBN written as text. */
     data class Book(val isbn: Isbn, val price: String?) : Content
 
-    /** 977 önekli EAN-13: dergi, gazete. [issue] 2 haneli ekten sayı numarası. */
+    /** An EAN-13 with a 977 prefix: magazine, newspaper. [issue] is the issue number from the 2-digit add-on. */
     data class Periodical(val issn: Issn, val issue: String?) : Content
 
-    /** GS1 verisi: ilaç karekodu, GS1-128, GS1 DataBar (GTIN + SKT, parti, seri…). */
+    /** GS1 data: medicine DataMatrix, GS1-128, GS1 DataBar (GTIN + expiry, batch, serial…). */
     data class Gs1(val data: Gs1Data) : Content
 
-    /** Öbür EAN/UPC kodları: market ürünleri. */
+    /** Other EAN/UPC codes: retail products. */
     data class Product(val gtin: String) : Content
 
     data class Link(val url: String) : Content
@@ -20,7 +20,7 @@ sealed interface Content {
     data class Wifi(
         val ssid: String,
         val password: String?,
-        /** "WPA", "WEP", "SAE", "nopass"… QR'da yazdığı gibi. */
+        /** "WPA", "WEP", "SAE", "nopass"… as written in the QR code. */
         val security: String?,
         val hidden: Boolean,
     ) : Content
@@ -39,9 +39,9 @@ sealed interface Content {
         val phones: List<String>,
         val emails: List<String>,
         val url: String?,
-        /** Unvan (vCard TITLE). */
+        /** Job title (vCard TITLE). */
         val title: String? = null,
-        /** Posta adresi, bileşenleri virgülle birleşmiş. */
+        /** Postal address, components joined with commas. */
         val address: String? = null,
         val note: String? = null,
     ) : Content

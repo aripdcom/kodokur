@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 108 108">
-  <!-- Uygulama ikonunun (ic_launcher_foreground) Play için 512 px karesi. Play köşeleri kendisi yuvarlar. -->
+  <!-- The app icon (ic_launcher_foreground) as a 512 px square for Play. Play rounds the corners itself. -->
   <rect width="108" height="108" fill="#0F3D3E"/>
   <path fill="none" stroke="#E8F3F1" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"
         d="M30,40 V33 A3,3 0 0 1 33,30 H40 M68,30 H75 A3,3 0 0 1 78,33 V40 M78,68 V75 A3,3 0 0 1 75,78 H68 M40,78 H33 A3,3 0 0 1 30,75 V68"/>

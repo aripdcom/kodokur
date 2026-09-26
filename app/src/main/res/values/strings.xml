@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Kodokur'un metinleri. Varsayılan (bu dosya) İngilizce; Türkçe values-tr altında.
-  Bölüm başlıkları Türkçe: depodaki öbür yorumlar gibi geliştirici notu.
+  Kodokur strings. The default (this file) is English; Turkish is in values-tr.
+  Section headings are in English, like the other developer notes in the repo.
 -->
 <resources>
     <string name="app_name" translatable="false">Kodokur</string>
     <string name="app_tagline">Every barcode and QR code. Nothing leaves your phone.</string>
 
-    <!-- Ortak -->
+    <!-- Common -->
     <string name="back">Back</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
@@ -16,7 +16,7 @@
     <string name="copied">Copied</string>
     <string name="no_app">No app on this phone can open this</string>
 
-    <!-- Tarayıcı -->
+    <!-- Scanner -->
     <string name="scan_hint">Point at a barcode or QR code</string>
     <string name="action_gallery">From photo</string>
     <string name="action_torch_on">Turn torch on</string>
@@ -35,7 +35,7 @@
     <string name="gallery_error">The image could not be opened</string>
     <string name="gallery_reading">Reading image…</string>
 
-    <!-- Kamera izni -->
+    <!-- Camera permission -->
     <string name="permission_title">Camera access</string>
     <string name="permission_body">Kodokur reads codes through the camera. Frames are processed on the phone, never stored and never sent anywhere.</string>
     <string name="permission_grant">Allow camera</string>
@@ -44,7 +44,7 @@
     <string name="no_camera">This device has no camera. You can still read a code from a photo.</string>
     <string name="camera_error">The camera could not be started</string>
 
-    <!-- İçerik türleri -->
+    <!-- Content kinds -->
     <string name="kind_book">Book</string>
     <string name="kind_periodical">Periodical</string>
     <string name="kind_product">Product</string>
@@ -57,7 +57,7 @@
     <string name="kind_contact">Contact</string>
     <string name="kind_text">Text</string>
 
-    <!-- Ayrıntı etiketleri -->
+    <!-- Detail labels -->
     <string name="label_isbn13">ISBN-13</string>
     <string name="label_isbn10">ISBN-10</string>
     <string name="label_group">Registration group</string>
@@ -85,7 +85,7 @@
     <string name="label_raw">Raw content</string>
     <string name="label_scanned_at">Scanned</string>
 
-    <!-- Eylemler -->
+    <!-- Actions -->
     <string name="act_copy">Copy</string>
     <string name="act_share">Share</string>
     <string name="act_open">Open</string>
@@ -103,7 +103,7 @@
     <string name="act_add_contact">Add to contacts</string>
     <string name="external_notice">Opens in your browser or another app. Kodokur itself never goes online.</string>
 
-    <!-- GS1 (ilaç karekodu) -->
+    <!-- GS1 (medicine codes) -->
     <string name="kind_gs1">Product code (GS1)</string>
     <string name="label_expiry">Expiry date</string>
     <string name="label_best_before">Best before</string>
@@ -114,7 +114,7 @@
     <string name="label_gs1_field">Field (%1$s)</string>
     <string name="gs1_expired">Expired: the expiry date was %1$s.</string>
 
-    <!-- Bağlantı güvenliği -->
+    <!-- Link safety -->
     <string name="label_destination">Goes to</string>
     <string name="label_encoded_name">Encoded name</string>
     <string name="label_address">Full address</string>
@@ -126,13 +126,13 @@
     <string name="link_confirm_body">It goes to %1$s. Open it only if you trust where the code came from.</string>
     <string name="link_open_anyway">Open anyway</string>
 
-    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <!-- Zoom and accessibility -->
     <string name="zoom_level">Zoom %1$s. Tap to change.</string>
     <string name="act_copy_item">Copy %1$s</string>
     <string name="act_delete_item">Delete %1$s</string>
     <string name="act_more">More options</string>
 
-    <!-- Geçmiş -->
+    <!-- History -->
     <string name="history_title">History</string>
     <string name="history_empty">Nothing scanned yet</string>
     <string name="history_export">Export CSV</string>
@@ -144,11 +144,11 @@
     </plurals>
     <string name="history_deleted">Scan deleted</string>
 
-    <!-- Dil -->
+    <!-- Language -->
     <string name="language_title">Language</string>
     <string name="language_system">Phone language</string>
 
-    <!-- Hakkında -->
+    <!-- About -->
     <string name="about_title">About</string>
     <string name="about_promise">No ads. No trackers. No internet permission. The only permission is the camera, and camera frames never leave the phone. History stays on this device and is excluded from backups.</string>
     <string name="about_version">Version %1$s</string>

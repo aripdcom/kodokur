@@ -22,7 +22,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "kodokur"
 
-// Çekirdek (çözücü, ISBN/ISSN, içerik ayrıştırma) saf Kotlin/JVM: Android SDK
-// olmayan bir makinede de derlenir ve test edilir. Uygulama katmanı ayrı.
+// The core (decoder, ISBN/ISSN, content parsing) is pure Kotlin/JVM: it builds and
+// tests on a machine without the Android SDK. The app layer is separate.
 include(":core")
 include(":app")

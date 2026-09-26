@@ -6,13 +6,13 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
-// Sürüm tek kaynaktan yönetilir: release.yml, etiketten türettiği sürümü
-// -PappVersion=X.Y.Z olarak geçirir; yerel derlemeler alttaki varsayılanı
-// kullanır. versionCode = major*10000 + minor*100 + patch.
+// The version has a single source: release.yml derives it from the tag and
+// passes it as -PappVersion=X.Y.Z; local builds use the default below.
+// versionCode = major*10000 + minor*100 + patch.
 val appVersion: String = (project.findProperty("appVersion") as? String) ?: "1.1.0"
 val appVersionCode: Int = appVersion.split('.').map { it.toInt() }.let { (major, minor, patch) ->
-    require(major < 214 && minor < 100 && patch < 100) { "Geçersiz sürüm: $appVersion" }
-    // AGP, versionCode için pozitif tamsayı ister.
+    require(major < 214 && minor < 100 && patch < 100) { "Invalid version: $appVersion" }
+    // AGP requires a positive integer versionCode.
     (major * 10_000 + minor * 100 + patch).coerceAtLeast(1)
 }
 
@@ -28,13 +28,14 @@ android {
         versionName = appVersion
     }
 
-    // Release imzası CI'da ortam değişkenleriyle sağlanır (bkz. release.yml).
-    // Değişkenler yoksa imzasız release üretilir; debug derlemeler etkilenmez.
+    // Release signing comes from environment variables in CI (see release.yml).
+    // Without them an unsigned release is built; debug builds are unaffected.
     //
-    // Boş dizge de "yok" sayılır. Tanımlı ama boş bir değişken `file("")` ile
-    // modül kökünü keystore diye gösterirdi; parola da boşken AGP böyle bir
-    // yapılandırmayı imzaya hazır saymaz, uyarıp imzasız APK üretir ve derleme
-    // yeşil döner. Etiketli koşumda imzasızlığı release.yml ayrıca hata sayar.
+    // An empty string also counts as unset. A defined but empty variable would
+    // point `file("")` at the module root as the keystore; with an empty password
+    // too, AGP does not consider that config ready to sign, so it warns, builds an
+    // unsigned APK and the build stays green. On tagged runs release.yml
+    // separately treats an unsigned APK as a failure.
     val releaseKeystorePath = System.getenv("ANDROID_KEYSTORE_PATH")?.takeIf { it.isNotBlank() }
     if (releaseKeystorePath != null) {
         signingConfigs {
@@ -89,7 +90,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-    // Kamera: önizleme + kare çözümleme. Çözme ZXing ile :core'da.
+    // Camera: preview + frame analysis. Decoding happens in :core with ZXing.
     implementation(libs.androidx.camera.camera2)
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)

@@ -9,30 +9,30 @@ import android.os.LocaleList
 import java.util.Locale
 
 /**
- * Uygulamanın dili (Reyon'daki yapının aynısı).
+ * The app language (same setup as in Reyon).
  *
- * Varsayılan dil İngilizce'dir (`res/values`); her çeviri kendi `res/values-<dil>`
- * klasöründe durur. Dili telefondan bağımsız seçmek iki yoldan yürür:
- * - Android 13+: sistemin uygulama-dili altyapısı ([LocaleManager]). Kullanıcı dili
- *   Ayarlar'dan da değiştirebilir; doğru kaynak her zaman sistemdir.
- * - Android 8–12: seçim [SettingsStore]'da saklanır, [wrap] etkinliğin taban
- *   bağlamını o dile sarar. appcompat eklemeye gerek kalmaz.
+ * The default language is English (`res/values`); each translation lives in its own
+ * `res/values-<lang>` folder. Choosing a language independent of the phone works two ways:
+ * - Android 13+: the system per-app language support ([LocaleManager]). The user can
+ *   also change it in Settings; the system is always the source of truth.
+ * - Android 8–12: the choice is stored in [SettingsStore], and [wrap] wraps the
+ *   activity's base context in that language. No need to add appcompat.
  */
 object AppLocale {
 
-    /** "Telefonun dili": kullanıcı özel bir dil seçmemiş. */
+    /** "Phone language": the user has not picked a specific language. */
     const val SYSTEM = ""
 
     /**
-     * Desteklenen diller: yalnız gerçekten çevirisi olanlar.
-     * `res/xml/locales_config.xml` ile birebir aynı olmalı; `tools/check_strings.py`
-     * ikisini karşılaştırır.
+     * Supported languages: only those that actually have a translation.
+     * Must match `res/xml/locales_config.xml` exactly; `tools/check_strings.py`
+     * compares the two.
      */
     val TAGS: List<String> = listOf(
         "en", "tr", "de", "fr", "nl", "es", "pt", "it", "da", "sv", "nb", "fi", "ru", "ar",
     )
 
-    /** Dilin kendi dilindeki adı; seçicide kullanıcı kendi dilini tanısın diye. */
+    /** Each language's name in that language, so users recognize their own in the picker. */
     private val ENDONYMS: Map<String, String> = mapOf(
         "en" to "English",
         "tr" to "Türkçe",
@@ -52,7 +52,7 @@ object AppLocale {
 
     fun endonym(tag: String): String = ENDONYMS[tag] ?: tag
 
-    /** Kullanıcının seçtiği dil, ya da [SYSTEM]. */
+    /** The language the user picked, or [SYSTEM]. */
     fun selected(context: Context): String =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val locales = context.getSystemService(LocaleManager::class.java)?.applicationLocales
@@ -61,7 +61,7 @@ object AppLocale {
             SettingsStore(context).language
         }
 
-    /** Dili uygular ve saklar; etkinlik yeniden oluşur. */
+    /** Applies and stores the language; the activity is recreated. */
     fun choose(context: Context, tag: String) {
         val clean = if (tag in TAGS) tag else SYSTEM
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -76,7 +76,7 @@ object AppLocale {
         }
     }
 
-    /** Taban bağlamı seçili dile sarar; `MainActivity.attachBaseContext` çağırır. */
+    /** Wraps the base context in the chosen language; called from `MainActivity.attachBaseContext`. */
     fun wrap(base: Context): Context {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) return base
         val tag = SettingsStore(base).language
@@ -89,7 +89,7 @@ object AppLocale {
         return ContextWrapper(base.createConfigurationContext(config))
     }
 
-    /** `de-DE` → `de`, `pt-BR` → `pt`, `no` → `nb`; desteklenmiyorsa null. */
+    /** `de-DE` → `de`, `pt-BR` → `pt`, `no` → `nb`; null if unsupported. */
     fun normalize(locale: Locale): String? {
         val language = locale.language.lowercase(Locale.ROOT)
         val canonical = if (language == "no") "nb" else language

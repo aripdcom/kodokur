@@ -83,7 +83,7 @@ import com.aripd.kodokur.platform.GalleryReader
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-/** Seri taramada iki okuma arası: aynı kod kadrajdan çıkmadan yenisi gelmesin. */
+/** Pause between reads in batch mode, so the same code is not read again before it leaves the frame. */
 private const val BATCH_PAUSE_MS = 1200L
 
 @Composable
@@ -100,7 +100,7 @@ fun ScannerScreen(
     val hasCamera = remember { context.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY) }
     var granted by remember { mutableStateOf(context.hasCameraPermission()) }
     var asked by rememberSaveable { mutableStateOf(false) }
-    // İzin reddedildi ve sistem artık sormuyor: yalnızca ayarlardan verilebilir.
+    // Permission denied and the system no longer asks: it can only be granted in Settings.
     var blocked by rememberSaveable { mutableStateOf(false) }
     var cameraFailed by remember { mutableStateOf(false) }
     var torch by remember { mutableStateOf(false) }
@@ -109,8 +109,8 @@ fun ScannerScreen(
     val trigger = remember { ScanTrigger() }
     val zoom = remember { ZoomControl() }
 
-    // Tarayıcının zemini her temada siyah: durum çubuğu simgeleri açık renk olmalı.
-    // Açık temada öbür ekranlar koyu simge kullanır; çıkarken önceki hâle dönülür.
+    // The scanner background is black in every theme, so status bar icons must be light.
+    // In the light theme other screens use dark icons; the previous state is restored on exit.
     DisposableEffect(view) {
         val window = context.findActivity()?.window
         val controller = window?.let { WindowCompat.getInsetsController(it, view) }
@@ -121,12 +121,12 @@ fun ScannerScreen(
 
     val permissionLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
         granted = it
-        // Reddedildikten sonra gerekçe istenmiyorsa sistem bir daha sormayacak demektir.
-        // Sonuç geldiği anda hesaplanır; sonradan okunsa ekran yenilenmezdi.
+        // If no rationale is requested after a denial, the system will not ask again.
+        // Computed as soon as the result arrives; reading it later would not recompose the screen.
         blocked = !it && context.findActivity()
             ?.shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) == false
     }
-    // Ayarlardan izin verip dönen kullanıcı için.
+    // For users who grant the permission in Settings and come back.
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { granted = context.hasCameraPermission() }
     LaunchedEffect(Unit) {
         if (hasCamera && !granted && !asked) {
@@ -145,8 +145,8 @@ fun ScannerScreen(
     fun onScan(scan: Scan) {
         confirm()
         if (!vm.batchMode) {
-            // Ekran okuyucu yeni ekrana kendiliğinden geçmeyebilir: ne okunduğunu söyle.
-            // Seri kipte bildirim zaten duyurulur.
+            // A screen reader may not move to the new screen on its own: say what was read.
+            // In batch mode the snackbar is announced anyway.
             val content = ContentParser.parse(scan)
             @Suppress("DEPRECATION")
             view.announceForAccessibility("${context.getString(content.kindLabel())}: ${content.headline()}")
@@ -214,7 +214,7 @@ fun ScannerScreen(
             )
         }
 
-        // Üst çubuk
+        // Top bar
         Row(
             Modifier.fillMaxWidth().statusBarsPadding().padding(horizontal = 8.dp, vertical = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -233,7 +233,7 @@ fun ScannerScreen(
             }
         }
 
-        // Alt çubuk
+        // Bottom bar
         Column(
             Modifier.align(Alignment.BottomCenter).fillMaxWidth().navigationBarsPadding().padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -314,7 +314,7 @@ fun ScannerScreen(
     }
 }
 
-/** Seri taramada bildirimde gösterilen kısa ad: kitapta tireli ISBN. */
+/** Short name shown in the batch-mode snackbar: the hyphenated ISBN for a book. */
 private fun batchLabel(scan: Scan): String = when (val c = ContentParser.parse(scan)) {
     is Content.Book -> c.isbn.hyphenated13
     else -> scan.text.take(40)
@@ -338,7 +338,7 @@ private fun RoundButton(
     }
 }
 
-/** Karartılmış çerçeve ve kehribar köşeler. Yalnız yol gösterir; çözücü tüm kareye bakar. */
+/** Dimmed frame with amber corners. It only guides the user; the decoder looks at the whole frame. */
 @Composable
 private fun Viewfinder(modifier: Modifier) {
     Canvas(modifier.graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }) {
@@ -353,7 +353,7 @@ private fun Viewfinder(modifier: Modifier) {
         )
         val arm = 28.dp.toPx()
         val stroke = Stroke(width = 4.dp.toPx(), cap = StrokeCap.Round)
-        // Her köşede bir çeyrek yay ve iki kısa kol.
+        // Each corner has a quarter arc and two short arms.
         val corners = listOf(
             Offset(left, top) to 180f,
             Offset(left + w - 2 * radius, top) to 270f,
@@ -378,8 +378,9 @@ private fun Viewfinder(modifier: Modifier) {
 }
 
 /**
- * Kamera yoksa ya da izin verilmediyse. İzin ikinci kez de reddedildiyse sistem
- * bir daha sormaz; o zaman ayarlara yönlendirilir. Galeriden okuma her durumda açık.
+ * Shown when there is no camera or no permission. If the permission is denied a second
+ * time the system stops asking, so the user is sent to Settings. Reading from the
+ * gallery is always available.
  */
 @Composable
 private fun NoCamera(

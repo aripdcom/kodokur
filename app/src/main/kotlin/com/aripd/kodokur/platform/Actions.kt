@@ -20,9 +20,9 @@ import java.io.File
 import java.time.LocalDate
 
 /**
- * Dışarıya devredilen her şey. Uygulamanın INTERNET izni yok: bağlantı, arama,
- * harita, arama/SMS/e-posta ilgili uygulamaya niyetle (intent) gider; hiçbiri
- * izin gerektirmez (ACTION_DIAL aramayı başlatmaz, yalnızca numarayı çevirir).
+ * Everything handed off to other apps. The app has no INTERNET permission: links,
+ * search, maps, calls/SMS/email go to the relevant app via an intent; none of them
+ * needs a permission (ACTION_DIAL does not place the call, it only fills in the number).
  */
 object Actions {
 
@@ -40,9 +40,9 @@ object Actions {
     fun browse(context: Context, url: String) = start(context, Intent(Intent.ACTION_VIEW, Uri.parse(url)))
 
     /**
-     * Panoya kopyalar. [sensitive] (parola) Android 13+ panosu önizlemesinde
-     * gizlenir. Android 13+ kopyalamayı kendisi gösterdiği için bildirim yalnızca
-     * öncesinde çıkar.
+     * Copies to the clipboard. [sensitive] content (a password) is hidden in the
+     * Android 13+ clipboard preview. Android 13+ shows its own copy confirmation,
+     * so the toast appears only on earlier versions.
      */
     fun copy(context: Context, text: String, sensitive: Boolean = false) {
         val clipboard = context.getSystemService(ClipboardManager::class.java) ?: return
@@ -93,7 +93,7 @@ object Actions {
     fun map(context: Context, latitude: Double, longitude: Double) =
         start(context, Intent(Intent.ACTION_VIEW, Uri.parse("geo:$latitude,$longitude?q=$latitude,$longitude")))
 
-    /** Kişi ekleme formunu doldurup açar; kaydı kullanıcı yapar, izin gerekmez. */
+    /** Opens a prefilled new-contact form; the user saves it, so no permission is needed. */
     fun addContact(context: Context, contact: Content.Contact) {
         val intent = Intent(ContactsContract.Intents.Insert.ACTION).apply {
             type = ContactsContract.RawContacts.CONTENT_TYPE
@@ -119,9 +119,9 @@ object Actions {
     }
 
     /**
-     * Android 11+ "ağ ekle" penceresi: kullanıcı onaylar, ağ kaydedilir. İzin
-     * gerekmez. WEP ve kurumsal (EAP) ağlar öneri olarak eklenemez; onlar için
-     * parolayı kopyalama kalır.
+     * Android 11+ "add network" dialog: the user confirms and the network is saved.
+     * No permission needed. WEP and enterprise (EAP) networks cannot be added as
+     * suggestions; for those, copying the password remains.
      */
     fun canConnect(wifi: Content.Wifi): Boolean =
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && suggestion(wifi) != null
@@ -142,7 +142,7 @@ object Actions {
             when (wifi.security?.uppercase()) {
                 "WPA", "WPA2" -> builder.setWpa2Passphrase(password ?: return null)
                 "SAE", "WPA3" -> builder.setWpa3Passphrase(password ?: return null)
-                // T alanı yoksa: parola varsa pratikte WPA2, yoksa açık ağ.
+                // No T field: with a password it is WPA2 in practice, otherwise an open network.
                 null, "" -> if (password != null) builder.setWpa2Passphrase(password)
                 "NOPASS" -> Unit
                 else -> return null
@@ -150,14 +150,14 @@ object Actions {
             if (wifi.hidden) builder.setIsHiddenSsid(true)
             builder.build()
         } catch (_: IllegalArgumentException) {
-            // Kurallara uymayan parola (WPA2 için 8–63 karakter) ya da SSID.
+            // Invalid password (WPA2 needs 8–63 characters) or SSID.
             null
         }
     }
 
     /**
-     * Geçmişi CSV dosyası olarak paylaşır. Dosya önbellekteki paylaşım klasörüne
-     * yazılır (eskiler silinir); alıcıya yalnızca bu dosya için okuma yetkisi verilir.
+     * Shares the history as a CSV file. The file is written to the share folder in
+     * the cache (older ones are deleted); the receiver gets read access to this file only.
      */
     fun shareCsv(context: Context, csv: String) {
         val dir = File(context.cacheDir, "share").apply { mkdirs() }

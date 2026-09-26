@@ -1,3 +1,3 @@
-// Kök projede plugins bloğu yok: eklenti sürümleri katalogda sabit ve her modül
-// kendi eklentisini uyguluyor. Böylece :core, Android SDK kurulu olmayan bir
-// makinede de yapılandırılıp test edilebiliyor.
+// The root project has no plugins block: plugin versions are pinned in the catalog
+// and each module applies its own plugins. That way :core can be configured and
+// tested on a machine without the Android SDK.

@@ -1,3 +1,3 @@
-# Kodokur yansıma (reflection) kullanmaz; ZXing ve CameraX kendi kurallarını taşır.
-# ISBN aralık tablosu :core'un Java kaynağıdır ve mutlak yolla okunur; R8 kaynak
-# dosyalarını budamaz.
+# Kodokur uses no reflection; ZXing and CameraX ship their own rules.
+# The ISBN range table is a Java resource of :core, read by absolute path; R8 does
+# not strip resource files.

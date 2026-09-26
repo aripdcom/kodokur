@@ -1,9 +1,9 @@
 <!doctype html>
 <!--
-  Kodokur'un tanıtım sayfası. İngilizce metin doğrudan bu dosyada; öbür diller
-  assets/i18n.js'te (tools/site/<dil>.json → tools/gen_site_i18n.py). Metin
-  taşıyan her öğe data-i18n anahtarıyla işaretli; assets/site.js açılışta dili
-  seçip metinleri değiştirir. Kerteriz'in sitesiyle aynı düzen.
+  Kodokur's landing page. The English text lives directly in this file; the other
+  languages are in assets/i18n.js (tools/site/<lang>.json → tools/gen_site_i18n.py).
+  Every element that carries text is marked with a data-i18n key; on load
+  assets/site.js picks the language and swaps the texts. Same layout as Kerteriz's site.
 -->
 <html lang="en">
 <head>
@@ -31,7 +31,7 @@
 <link rel="alternate" hreflang="ar" href="https://kodokur.aripd.com/?lang=ar">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F3D3E'/%3E%3Cpath fill='%23E8F3F1' d='M8 9h2v14H8zM11.5 9h1v14h-1zM14 9h2v14h-2zM17.5 9h1v14h-1zM20 9h2.5v14H20zM24 9h1v14h-1z'/%3E%3Crect x='6' y='15' width='20' height='2' fill='%23FFB347'/%3E%3C/svg%3E">
 <style>
-  /* Uygulamanın renkleri. Tema düğmesi yok; sistem tercihine uyulur. */
+  /* The app's colors. No theme toggle; the system preference is followed. */
   :root {
     color-scheme: light dark;
     --bg: #F4F8F7;
@@ -138,7 +138,7 @@
   .card h3 { font-size: 17px; font-weight: 600; }
   .card .info { flex: 1 1 auto; min-width: 0; }
   .card .info p { color: var(--muted); font-size: 15px; margin-top: 2px; }
-  /* Örnek sonuç: kitap barkodundan çıkan bilgiler, uygulamadaki gibi. */
+  /* Sample result: details read from a book barcode, as in the app. */
   .sample {
     background: var(--surface);
     border: 1px solid var(--line);
@@ -179,7 +179,7 @@
   }
   footer a { color: var(--brand); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
-  /* Dil seçici: JavaScript kapalıysa gizli kalır, sayfa İngilizce okunur. */
+  /* Language picker: stays hidden without JavaScript, and the page reads in English. */
   .top { display: flex; justify-content: flex-end; margin-bottom: 24px; }
   .picker { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
   .picker select {

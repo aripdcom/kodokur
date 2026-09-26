@@ -14,9 +14,10 @@ import java.io.File
 import java.util.concurrent.Executors
 
 /**
- * Okuma geçmişi: uygulamanın özel alanında tek bir JSON dosyası. Değişiklikler
- * ana iş parçacığında belleğe, arka planda sırayla diske yazılır. Dosya önce
- * geçici adla yazılıp yerine taşınır; yazarken çökme geçmişi yarım bırakmaz.
+ * Scan history: a single JSON file in the app's private storage. Changes go to
+ * memory on the main thread and to disk in order on a background thread. The file
+ * is written under a temporary name and then moved into place, so a crash while
+ * writing never leaves the history half-written.
  */
 class HistoryStore(context: Context) {
 
@@ -25,10 +26,10 @@ class HistoryStore(context: Context) {
 
     private val _records = MutableStateFlow(load())
 
-    /** En yeni önde. */
+    /** Newest first. */
     val records: StateFlow<List<Record>> = _records.asStateFlow()
 
-    /** Ekler; aynı kod art arda okunduysa üstteki satırın yerine geçer. */
+    /** Adds a record; if the same code was read twice in a row, it replaces the top entry. */
     fun add(scan: Scan, timeMillis: Long = System.currentTimeMillis()): Record {
         val record = Record(timeMillis, scan)
         update { list ->
@@ -40,7 +41,7 @@ class HistoryStore(context: Context) {
 
     fun remove(record: Record) = update { it - record }
 
-    /** Silmeyi geri alır: kaydı zamanına göre eski yerine koyar. */
+    /** Undoes a delete: puts the record back in its place by timestamp. */
     fun restore(record: Record) = update { list ->
         (list + record).sortedByDescending { it.timeMillis }.take(MAX)
     }
@@ -71,8 +72,8 @@ class HistoryStore(context: Context) {
                 )
             }
         } catch (e: Exception) {
-            // Bozuk dosya uygulamayı açılmaz hâle getirmesin; kenara alınır.
-            Log.w(TAG, "Geçmiş okunamadı, yenisi başlıyor", e)
+            // A corrupt file must not stop the app from opening; move it aside.
+            Log.w(TAG, "Could not read history, starting a new one", e)
             file.renameTo(File(file.parentFile, "history.broken.json"))
             emptyList()
         }
@@ -94,7 +95,7 @@ class HistoryStore(context: Context) {
         }
         val tmp = File(file.parentFile, "history.json.tmp")
         tmp.writeText(array.toString())
-        if (!tmp.renameTo(file)) Log.w(TAG, "Geçmiş kaydedilemedi")
+        if (!tmp.renameTo(file)) Log.w(TAG, "Could not save history")
     }
 
     private companion object {

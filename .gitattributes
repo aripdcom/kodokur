@@ -1,4 +1,4 @@
-# Satır sonlarını platformdan bağımsız sabitle.
+# Pin line endings regardless of platform.
 * text=auto eol=lf
 *.bat text eol=crlf
 *.jar binary
@@ -6,5 +6,5 @@
 *.webp binary
 *.ttf binary
 
-# Ses dosyaları ikili.
+# Audio files are binary.
 *.wav binary

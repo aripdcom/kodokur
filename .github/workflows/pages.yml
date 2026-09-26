@@ -1,14 +1,14 @@
 name: Pages
 
-# site/ klasörünü GitHub Pages'e yayınlar: https://kodokur.aripd.com
-# (aripdcom.github.io/kodokur oraya yönlenir). Depo ayarlarında Pages kaynağı
-# "GitHub Actions", alan adı Settings → Pages'te tanımlı. Alan adı değişirse
-# platform/Actions.kt, site/index.html, tools/gen_privacy.py ve
-# tools/check_site.py'deki adresler birlikte güncellenir.
+# Publishes the site/ folder to GitHub Pages: https://kodokur.aripd.com
+# (aripdcom.github.io/kodokur redirects there). In the repository settings the
+# Pages source is "GitHub Actions" and the domain is set under Settings → Pages.
+# If the domain changes, update the addresses in platform/Actions.kt,
+# site/index.html, tools/gen_privacy.py and tools/check_site.py together.
 
 on:
   push:
-    # github-pages ortamı yalnızca varsayılan daldan (main) dağıtıma izin verir.
+    # The github-pages environment only allows deploys from the default branch (main).
     branches: [main]
     paths:
       - 'site/**'

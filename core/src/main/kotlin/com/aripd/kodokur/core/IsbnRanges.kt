@@ -1,29 +1,29 @@
 package com.aripd.kodokur.core
 
 /**
- * ISBN International'ın aralık tablosu: bir ISBN'in hangi gruba (dil/ülke)
- * ait olduğunu ve yayıncı bölümünün kaç hane sürdüğünü söyler; tireleme
- * buna dayanır. Tablo pakete gömülüdür (uygulama ağa bağlanmaz) ve
- * `tools/isbn_ranges.py` ile tazelenir.
+ * The ISBN International range table: tells which group (language/country) an
+ * ISBN belongs to and how many digits the publisher element spans; hyphenation
+ * relies on it. The table is bundled in the package (the app does not go online)
+ * and refreshed with `tools/isbn_ranges.py`.
  */
 internal object IsbnRanges {
 
     class Rule(val low: Int, val high: Int, val length: Int)
 
-    /** [digits] tiresiz önek ("978975"); [group] ISBN'deki grup bölümü ("975"). */
+    /** [digits] is the unhyphenated prefix ("978975"); [group] is the group element of the ISBN ("975"). */
     class Group(val digits: String, val group: String, val agency: String, val rules: List<Rule>)
 
-    // Mutlak yol: R8 sınıfı başka pakete taşısa da kaynak bulunur.
+    // Absolute path: the resource is found even if R8 moves the class to another package.
     private const val RESOURCE = "/com/aripd/kodokur/core/isbn-ranges.txt"
 
-    /** Tablonun kaynaktaki tarihi; hakkında ekranında gösterilir. */
+    /** The table's date at the source; shown on the About screen. */
     val date: String by lazy { load().first }
 
     private val groups: List<Group> by lazy { load().second }
 
     private fun load(): Pair<String, List<Group>> {
         val stream = IsbnRanges::class.java.getResourceAsStream(RESOURCE)
-            ?: error("ISBN aralık tablosu pakette yok: $RESOURCE")
+            ?: error("ISBN range table missing from the package: $RESOURCE")
         var date = ""
         val groups = ArrayList<Group>(300)
         stream.bufferedReader(Charsets.UTF_8).useLines { lines ->
@@ -49,12 +49,12 @@ internal object IsbnRanges {
         return date to groups
     }
 
-    /** Grup önekleri birbirinin öneki olmadığından ilk eşleşme tek eşleşmedir. */
+    /** No group prefix is a prefix of another, so the first match is the only match. */
     fun group(isbn13: String): Group? = groups.firstOrNull { isbn13.startsWith(it.digits) }
 
     /**
-     * ISBN-13'ü beş bölüme ayırır: önek, grup, yayıncı, yayın, sağlama.
-     * Grup bilinmiyorsa ya da aralık henüz tanımlanmamışsa null.
+     * Splits an ISBN-13 into five elements: prefix, group, publisher, title, check digit.
+     * Null if the group is unknown or the range is not defined yet.
      */
     fun split(isbn13: String): List<String>? {
         val group = group(isbn13) ?: return null

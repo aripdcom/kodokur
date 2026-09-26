@@ -3,13 +3,13 @@ package com.aripd.kodokur.core
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-/** Karekodlu kartvizitler: vCard 2.1–4.0 ve MECARD. */
+/** Business cards in QR codes: vCard 2.1–4.0 and MECARD. */
 class ContactCardTest {
 
     private fun parse(text: String) = ContentParser.parse(Scan(text, Symbology.QR_CODE)) as Content.Contact
 
     @Test
-    fun `vCard 3 unvan, adres, not ve kaçışlar`() {
+    fun `vCard 3 title, address, note and escapes`() {
         val card = parse(
             "BEGIN:VCARD\r\nVERSION:3.0\r\nN:Selman;Cem;;;\r\nFN:Cem Selman\r\n" +
                 "ORG:ARIPD\\, Ltd.;Yazılım\r\nTITLE:Kurucu\r\n" +
@@ -27,8 +27,8 @@ class ContactCardTest {
     }
 
     @Test
-    fun `vCard 2_1 quoted-printable Türkçe ve yumuşak satır sonu`() {
-        // "Gül Şahin", "Ürün Müdürü", "Çankaya, Ankara" — UTF-8 baytları =XX olarak.
+    fun `vCard 2_1 quoted-printable Turkish and soft line break`() {
+        // "Gül Şahin", "Ürün Müdürü", "Çankaya, Ankara" — UTF-8 bytes as =XX.
         val card = parse(
             "BEGIN:VCARD\nVERSION:2.1\n" +
                 "N;CHARSET=UTF-8;ENCODING=QUOTED-PRINTABLE:=C5=9Eahin;G=C3=BCl;;;\n" +
@@ -43,13 +43,13 @@ class ContactCardTest {
     }
 
     @Test
-    fun `quoted-printable Latin-5 karakter kümesi`() {
+    fun `quoted-printable Latin-5 charset`() {
         // ISO-8859-9: ş = 0xFE, ı = 0xFD
         assertEquals("Işık", ContentParser.decodeQuotedPrintable("I=FE=FDk", "ISO-8859-9"))
     }
 
     @Test
-    fun `MECARD adres ve not`() {
+    fun `MECARD address and note`() {
         val card = parse("MECARD:N:Selman,Cem;ADR:Bağdat Cd. 1,Kadıköy,İstanbul;NOTE:Fuar standı B12;TEL:+905551112233;;")
         assertEquals("Cem Selman", card.name)
         assertEquals("Bağdat Cd. 1, Kadıköy, İstanbul", card.address)

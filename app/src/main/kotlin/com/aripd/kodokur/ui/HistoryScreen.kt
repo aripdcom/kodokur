@@ -163,7 +163,7 @@ fun HistoryScreen(store: HistoryStore, onOpen: (Record) -> Unit, onBack: () -> U
     }
 }
 
-/** Uygulama dilinde tarih ve saat ("26 Eyl 2026 14:05"). */
+/** Date and time in the app language (e.g. "26 Sep 2026 14:05"). */
 @Composable
 fun formatTime(millis: Long): String {
     val locale = LocalConfiguration.current.locales[0]

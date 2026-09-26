@@ -1,13 +1,13 @@
 package com.aripd.kodokur.core
 
 /**
- * Süreli yayın numarası. Dergi ve gazetelerin barkodu 977 önekli bir EAN-13'tür:
- * 977 + ISSN'in ilk yedi hanesi + iki haneli yayın varyantı + GS1 sağlaması.
- * ISSN'in kendi sağlama hanesi barkodda yoktur, yeniden hesaplanır.
+ * International Standard Serial Number. Magazine and newspaper barcodes are an EAN-13
+ * with a 977 prefix: 977 + first seven ISSN digits + two-digit variant + GS1 check digit.
+ * The ISSN's own check digit is not in the barcode; it is recomputed.
  */
 class Issn private constructor(val digits: String) {
 
-    /** "0317-8471" biçimi. */
+    /** "0317-8471" format. */
     val formatted: String get() = "${digits.substring(0, 4)}-${digits.substring(4)}"
 
     override fun equals(other: Any?): Boolean = other is Issn && other.digits == digits
@@ -15,14 +15,14 @@ class Issn private constructor(val digits: String) {
     override fun toString(): String = formatted
 
     companion object {
-        /** 977 önekli, sağlaması tutan bir EAN-13'ten ISSN; değilse null. */
+        /** ISSN from an EAN-13 with a 977 prefix and a valid check digit; otherwise null. */
         fun fromEan13(ean: String): Issn? {
             if (ean.length != 13 || !ean.startsWith("977") || !CheckDigits.isValidGs1(ean)) return null
             val body = ean.substring(3, 10)
             return Issn(body + CheckDigits.issn(body))
         }
 
-        /** "0317-8471" ya da "03178471"; sağlaması tutmazsa null. */
+        /** "0317-8471" or "03178471"; null if the check digit does not match. */
         fun parse(text: String): Issn? {
             val code = text.trim().removePrefix("ISSN").trim().replace("-", "").uppercase()
             if (code.length != 8) return null

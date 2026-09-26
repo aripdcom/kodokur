@@ -63,7 +63,7 @@ fun ResultScreen(record: Record, onBack: () -> Unit) {
     val content = remember(record) { ContentParser.parse(record.scan) }
     val actions = remember(content) { content.actions(record.scan.text) }
     val link = remember(content) { (content as? Content.Link)?.let { LinkCheck.inspect(it.url) } }
-    // Onay bekleyen eylem: uyarılı bir bağlantıyı açmak.
+    // Action awaiting confirmation: opening a flagged link.
     var pending by remember { mutableStateOf<ResultAction?>(null) }
 
     Scaffold(
@@ -111,7 +111,7 @@ fun ResultScreen(record: Record, onBack: () -> Unit) {
                 }
             }
 
-            // Uyarılar: bağlantının gerçek hedefi ve süresi geçmiş son kullanma tarihi.
+            // Warnings: the link's real destination and an expiry date in the past.
             val warnings = buildList {
                 link?.warnings?.forEach { add(warningText(it, link.host)) }
                 val expiry = (content as? Content.Gs1)?.data?.expiry
@@ -164,14 +164,14 @@ fun ResultScreen(record: Record, onBack: () -> Unit) {
                 }
             }
 
-            // Ham içerik, ayrıştırılmış görünümden farklıysa (kişi kartı, e-posta…).
-            // Gizli alan (Wi-Fi parolası) varsa gösterilmez: maske anlamsız kalırdı.
-            // Bağlantının tam adresi zaten ayrıntılarda; tekrar gösterilmez.
+            // Raw content, if it differs from the parsed view (contact card, email…).
+            // Not shown when there is a sensitive field (Wi-Fi password): the mask would be pointless.
+            // A link's full address is already in the details; it is not shown again.
             if (record.scan.text != content.headline() && content !is Content.Link && details.none { it.sensitive }) {
                 Text(stringResource(R.string.label_raw), style = MaterialTheme.typography.labelLarge)
                 SelectionContainer {
                     Text(
-                        // GS1 ayracı görünmez bir denetim karakteri; yerini belli et.
+                        // The GS1 separator is an invisible control character; make its position visible.
                         record.scan.text.replace(Gs1.GS, '\u241D'),
                         style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,

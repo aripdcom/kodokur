@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""site/privacy.html'i uygulamanın bütün dillerinde üretir.
+"""Generates site/privacy.html in all of the app's languages.
 
-Gizlilik politikası tek adreste durur (Play bir URL ister), her dil kendi
-bölümünde. Metinler tools/privacy/<dil>.json dosyalarında; üretilen sayfa
-depoda, `tools/check_site.py` ikisinin ayrışmadığını denetler.
+The privacy policy lives at a single address (Play asks for one URL), with each
+language in its own section. The texts are in tools/privacy/<lang>.json; the
+generated page is committed, and `tools/check_site.py` checks the two stay in sync.
 
-JSON alanları: name, title, meta, short_label, short, sections ([[başlık, metin], …]),
-contact, contact_intro. Metinler HTML'dir (<code> geçebilir), kaçışlanmaz.
+JSON fields: name, title, meta, short_label, short, sections ([[heading, text], …]),
+contact, contact_intro. Texts are HTML (<code> is allowed) and are not escaped.
 
-Kullanım: python3 tools/gen_privacy.py
+Usage: python3 tools/gen_privacy.py
 """
 import json
 import os
@@ -25,7 +25,7 @@ ISSUES = "https://github.com/aripdcom/kodokur/issues/new"
 RTL = {"ar"}
 FIELDS = ["name", "title", "meta", "short_label", "short", "sections", "contact", "contact_intro"]
 
-# Uygulama simgesi: koyu yeşil zemin, beyaz çizgiler, kehribar tarama çizgisi.
+# App icon: dark green background, white bars, amber scan line.
 ICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E"
         "%3Crect width='32' height='32' rx='7' fill='%230F3D3E'/%3E"
         "%3Cpath fill='%23E8F3F1' d='M8 9h2v14H8zM11.5 9h1v14h-1zM14 9h2v14h-2zM17.5 9h1v14h-1zM20 9h2.5v14H20zM24 9h1v14h-1z'/%3E"
@@ -56,7 +56,7 @@ STYLE = """  :root {
     margin-top: 18px; background: var(--surface); border: 1px solid var(--card-border); border-radius: 16px; padding: 16px 18px;
   }
   .summary strong { color: var(--title); }
-  /* JavaScript kapalıyken bölümler alt alta; açıkken yalnız biri görünür. */
+  /* Without JavaScript the sections stack; with it only one is shown. */
   section + section { margin-top: 44px; padding-top: 12px; border-top: 1px solid var(--card-border); }
   section[hidden] { display: none; }
   html.one section { margin-top: 0; padding-top: 0; border-top: 0; }
@@ -66,7 +66,7 @@ STYLE = """  :root {
 
 
 def app_tags():
-    """AppLocale.TAGS: uygulamanın dilleri, kaynak sırasıyla."""
+    """AppLocale.TAGS: the app's languages, in source order."""
     src = open(APP_LOCALE, encoding="utf-8").read()
     block = re.search(r"val TAGS: List<String> = listOf\((.*?)\)", src, re.S)
     return re.findall(r'"([^"]+)"', block.group(1))
@@ -81,7 +81,7 @@ def load():
         data = json.load(open(os.path.join(TEXTS, name), encoding="utf-8"))
         missing = [f for f in FIELDS if f not in data]
         if missing:
-            sys.exit(f"{name}: eksik alan: {', '.join(missing)}")
+            sys.exit(f"{name}: missing fields: {', '.join(missing)}")
         policy[tag] = data
     return policy
 
@@ -89,8 +89,8 @@ def load():
 def section(tag, policy):
     p = policy[tag]
     rtl = ' dir="rtl"' if tag in RTL else ""
-    # data-lang: site.js yalnız seçilen dilin bölümünü gösterir; id, uygulamanın
-    # açtığı privacy.html#tr gibi bağlantılar için.
+    # data-lang: site.js shows only the selected language's section; id serves
+    # links the app opens, such as privacy.html#tr.
     out = [f'  <section id="{tag}" lang="{tag}" data-lang="{tag}" data-title="Kodokur · {p["title"]}"{rtl}>',
            f'    <h1>{p["title"]}</h1>',
            f'    <p class="meta">{p["meta"]}</p>',
@@ -111,10 +111,10 @@ def page(tags, policy):
     body = "\n".join(section(t, policy) for t in tags)
     return f"""<!doctype html>
 <!--
-  ÜRETİLMİŞ DOSYA: tools/privacy/<dil>.json → python3 tools/gen_privacy.py
-  Her dil kendi bölümünde; assets/site.js seçilen dilinkini gösterir (index.html
-  ile aynı seçim: ?lang=xx, #xx, önceki seçim, tarayıcının dili). JavaScript
-  kapalıysa bütün bölümler alt alta okunur.
+  GENERATED FILE: tools/privacy/<lang>.json → python3 tools/gen_privacy.py
+  Each language has its own section; assets/site.js shows the selected one (same
+  choice as index.html: ?lang=xx, #xx, previous choice, browser language). With
+  JavaScript off, all sections read one after another.
 -->
 <html lang="en">
 <head>
@@ -159,17 +159,17 @@ def render():
     policy = load()
     missing = [t for t in tags if t not in policy]
     if missing:
-        sys.exit(f"politika metni olmayan dil: {', '.join(missing)}")
+        sys.exit(f"languages without a policy text: {', '.join(missing)}")
     extra = [t for t in policy if t not in tags]
     if extra:
-        sys.exit(f"AppLocale.TAGS içinde olmayan dil: {', '.join(extra)}")
+        sys.exit(f"languages not in AppLocale.TAGS: {', '.join(extra)}")
     return tags, page(tags, policy)
 
 
 def main():
     tags, html = render()
     open(OUT, "w", encoding="utf-8").write(html)
-    print(f"{OUT}: {len(tags)} dil ({' '.join(tags)})")
+    print(f"{OUT}: {len(tags)} languages ({' '.join(tags)})")
     return 0
 
 

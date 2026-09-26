@@ -1,17 +1,17 @@
 /*
-  Sayfanın dili (Kerteriz'deki site.js'in Kodokur uyarlaması).
+  Page language (Kodokur's adaptation of the site.js in Kerteriz).
   ---------------------------------------------------------------------------
-  Sıra:
-      1. adresteki ?lang=xx ya da #xx (uygulama gizlilik bağlantısını #tr ile açar)
-      2. daha önce yapılmış seçim  (localStorage)
-      3. navigator.languages       (tarayıcının, yani sistemin dili)
-      4. İngilizce
+  Order:
+      1. ?lang=xx or #xx in the address (the app opens the privacy link with #tr)
+      2. an earlier choice          (localStorage)
+      3. navigator.languages        (the browser's, i.e. the system's, language)
+      4. English
 
-  İki tür sayfa aynı betiği kullanır:
-  - index.html: metinler [data-i18n] öğelerinde. İngilizce HTML'in kendisinde
-    durur; ilk yüklemede anlık görüntüsü alınır, çeviri assets/i18n.js'ten gelir.
-  - privacy.html: her dilin kendi <section data-lang="xx"> bölümü var; seçilen
-    gösterilir, öbürleri gizlenir. JavaScript kapalıysa hepsi okunur.
+  Two kinds of page use the same script:
+  - index.html: texts live in [data-i18n] elements. English is in the HTML
+    itself and is snapshotted on first load; translations come from assets/i18n.js.
+  - privacy.html: each language has its own <section data-lang="xx">; the selected
+    one is shown and the others hidden. Without JavaScript all of them read.
 */
 
 (function () {
@@ -59,7 +59,7 @@
   }
 
   function remember(code) {
-    try { localStorage.setItem(STORE_KEY, code); } catch (e) { /* özel sekme */ }
+    try { localStorage.setItem(STORE_KEY, code); } catch (e) { /* private tab */ }
   }
 
   function fromUrl() {
@@ -89,7 +89,7 @@
     root.lang = code;
     root.dir = RTL[code] ? "rtl" : "ltr";
 
-    // Sayfa başlığı ve özet yalnız tanıtım sayfasında tablodan gelir.
+    // Only on the landing page do the page title and description come from the table.
     if (document.body.hasAttribute("data-i18n-page")) {
       document.title = text(code, "_title");
       var desc = metaDescription();
@@ -99,10 +99,10 @@
       node.textContent = text(code, node.getAttribute("data-i18n"));
     });
 
-    // Gizlilik sayfası: yalnız seçilen dilin bölümü görünür, başlık onundur.
+    // Privacy page: only the selected language's section is visible, and the title is its own.
     var sections = document.querySelectorAll("[data-lang]");
     if (sections.length) {
-      // Tek bölüm kalınca aradaki ayırıcılar anlamsız (CSS: html.one).
+      // With a single section left, the dividers between sections are pointless (CSS: html.one).
       root.classList.add("one");
       var shown = document.querySelector('[data-lang="' + code + '"]') ? code : DEFAULT;
       each("[data-lang]", function (node) {
@@ -112,7 +112,7 @@
       });
     }
 
-    // Aynı dili sayfalar arası bağlantılarda da taşı.
+    // Carry the same language across links between pages.
     each("a[data-keep-lang]", function (link) {
       link.href = link.getAttribute("data-keep-lang") + "?lang=" + code;
     });
@@ -130,7 +130,7 @@
     for (var code in TABLE) {
       if (Object.prototype.hasOwnProperty.call(TABLE, code) && code !== DEFAULT) list.push(code);
     }
-    // Kendi dilindeki adına göre: listeye bakan kendi dilini arar.
+    // Sort by native name: whoever scans the list looks for their own language.
     return list.sort(function (a, b) { return name(a).localeCompare(name(b), "en"); });
   }
 
@@ -158,7 +158,7 @@
     code = known(code) || DEFAULT;
     remember(code);
     apply(code);
-    // Adres çubuğu seçimi göstersin ki bağlantı paylaşılabilsin.
+    // Reflect the choice in the address bar so the link can be shared.
     if (history.replaceState) {
       history.replaceState(null, "", location.pathname + "?lang=" + code);
     }
@@ -171,10 +171,11 @@
     if (urlChoice) remember(urlChoice);
     buildPicker(codes(), current);
     apply(current);
-    // privacy.html#tr gibi bir çapa, tarayıcıyı yüklemenin sonunda o bölüme
-    // kaydırır (scrollTo'dan da sonra). Bölüm artık tek başına gösterildiği
-    // için baştan okunmalı: çapa, kaydırma gerçekleşmeden ?lang= adresine
-    // çevrilir. JavaScript kapalıysa çapa eskisi gibi o dile atlar.
+    // An anchor like privacy.html#tr makes the browser scroll to that section at
+    // the end of loading (even after scrollTo). Since the section is now shown on
+    // its own, it should be read from the top: the anchor is turned into a ?lang=
+    // address before the scroll happens. Without JavaScript the anchor still jumps
+    // to that language as before.
     if (urlChoice && location.hash && history.replaceState) {
       history.replaceState(null, "", location.pathname + "?lang=" + urlChoice);
     }

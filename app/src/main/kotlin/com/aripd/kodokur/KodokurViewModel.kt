@@ -9,7 +9,7 @@ import com.aripd.kodokur.core.Record
 import com.aripd.kodokur.core.Scan
 import com.aripd.kodokur.platform.HistoryStore
 
-/** Ekranlar. Sonuç ekranı, geri basınca nereye döneceğini bilir. */
+/** Screens. The result screen knows where Back returns to. */
 sealed interface Screen {
     data object Scanner : Screen
     data object History : Screen
@@ -25,11 +25,11 @@ class KodokurViewModel(app: Application) : AndroidViewModel(app) {
     var screen: Screen by mutableStateOf(Screen.Scanner)
         private set
 
-    /** Seri tarama: okunan kod sonuç ekranı açmadan geçmişe eklenir. */
+    /** Batch scanning: each code read goes into history without opening the result screen. */
     var batchMode by mutableStateOf(false)
         private set
 
-    /** Bu seride okunan kodlar; aynı kitap ikinci kez eklenmez. */
+    /** Codes read in this batch; the same book is not added twice. */
     private val batchSeen = LinkedHashSet<String>()
 
     var batchCount by mutableStateOf(0)
@@ -49,7 +49,7 @@ class KodokurViewModel(app: Application) : AndroidViewModel(app) {
         return true
     }
 
-    /** Tek okuma: geçmişe yazar ve sonucu açar. */
+    /** Single read: writes to history and opens the result. */
     fun open(scan: Scan) {
         val record = history.add(scan)
         screen = Screen.Result(record, from = Screen.Scanner)
@@ -61,7 +61,7 @@ class KodokurViewModel(app: Application) : AndroidViewModel(app) {
         batchCount = 0
     }
 
-    /** Seriye ekler; bu seride zaten varsa false. */
+    /** Adds to the batch; false if already in this batch. */
     fun addToBatch(scan: Scan): Boolean {
         if (!batchSeen.add(scan.text)) return false
         history.add(scan)

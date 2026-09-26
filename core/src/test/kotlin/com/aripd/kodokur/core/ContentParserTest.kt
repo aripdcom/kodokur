@@ -10,7 +10,7 @@ class ContentParserTest {
         ContentParser.parse(Scan(text, symbology, addOn))
 
     @Test
-    fun `kitap barkodu ve fiyat eki`() {
+    fun `book barcode and price add-on`() {
         val book = parse("9780306406157", Symbology.EAN_13, addOn = "52495") as Content.Book
         assertEquals("978-0-306-40615-7", book.isbn.hyphenated13)
         assertEquals("$24.95", book.price)
@@ -19,27 +19,27 @@ class ContentParserTest {
     }
 
     @Test
-    fun `dergi barkodu ve sayı eki`() {
+    fun `magazine barcode and issue add-on`() {
         val magazine = parse("9770317847001", Symbology.EAN_13, addOn = "07") as Content.Periodical
         assertEquals("0317-8471", magazine.issn.formatted)
         assertEquals("07", magazine.issue)
     }
 
     @Test
-    fun `market ürünü`() {
+    fun `retail product`() {
         assertEquals(Content.Product("4006381333931"), parse("4006381333931", Symbology.EAN_13))
         assertEquals(Content.Product("03600029145"), parse("03600029145", Symbology.UPC_A))
     }
 
     @Test
-    fun `QR içinde metin olarak ISBN`() {
+    fun `ISBN as text inside a QR code`() {
         assertTrue(parse("ISBN 978-975-08-0171-6") is Content.Book)
-        // Sağlaması tutmayan numara düz metindir.
+        // A number with an invalid check digit is plain text.
         assertEquals(Content.Text("978-975-08-0171-5"), parse("978-975-08-0171-5"))
     }
 
     @Test
-    fun `bağlantılar`() {
+    fun `links`() {
         assertEquals(Content.Link("https://aripd.com/a?b=1"), parse("https://aripd.com/a?b=1"))
         assertEquals(Content.Link("https://www.aripd.com"), parse("www.aripd.com"))
         assertEquals(Content.Link("http://x.org"), parse("URLTO:http://x.org"))
@@ -47,7 +47,7 @@ class ContentParserTest {
     }
 
     @Test
-    fun `Wi-Fi ve kaçışlı karakterler`() {
+    fun `Wi-Fi and escaped characters`() {
         assertEquals(
             Content.Wifi("Ev Ağı", "pa;ss:w\\rd", "WPA", hidden = true),
             parse("WIFI:T:WPA;S:Ev Ağı;P:pa\\;ss\\:w\\\\rd;H:true;;"),
@@ -57,7 +57,7 @@ class ContentParserTest {
     }
 
     @Test
-    fun `e-posta biçimleri`() {
+    fun `email formats`() {
         assertEquals(
             Content.Email("a@b.com", "Merhaba dünya", null),
             parse("mailto:a@b.com?subject=Merhaba%20d%C3%BCnya"),
@@ -66,7 +66,7 @@ class ContentParserTest {
     }
 
     @Test
-    fun `telefon, SMS, konum`() {
+    fun `phone, SMS, location`() {
         assertEquals(Content.Phone("+902121234567"), parse("tel:+902121234567"))
         assertEquals(Content.Sms("+90555", "Selam"), parse("SMSTO:+90555:Selam"))
         assertEquals(Content.Sms("+90555", null), parse("sms:+90555"))
@@ -75,7 +75,7 @@ class ContentParserTest {
     }
 
     @Test
-    fun `kişi kartları`() {
+    fun `contact cards`() {
         assertEquals(
             Content.Contact("Cem Selman", "ARIPD", listOf("+905551112233", "02121112233"), listOf("cem@aripd.com"), null),
             parse("MECARD:N:Selman,Cem;ORG:ARIPD;TEL:+905551112233;TEL:02121112233;EMAIL:cem@aripd.com;;"),
@@ -90,7 +90,7 @@ class ContentParserTest {
     }
 
     @Test
-    fun `tanınmayan metin`() {
+    fun `unrecognized text`() {
         assertEquals(Content.Text("Merhaba"), parse("  Merhaba  "))
         assertEquals(Content.Text("ABC-123"), parse("ABC-123", Symbology.CODE_128))
     }

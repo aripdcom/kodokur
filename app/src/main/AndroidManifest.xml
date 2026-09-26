@@ -2,20 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Söz: tek izin kamera. INTERNET yok; kitap araması, bağlantı açma gibi her
-         şey tarayıcıya ya da ilgili uygulamaya niyet (intent) ile devredilir.
-         Galeriden görsel sistem seçicisiyle gelir (izin gerekmez); CSV paylaşımı
-         FileProvider ile yalnızca o tek dosyaya okuma yetkisi verir. -->
+    <!-- Promise: the only permission is the camera. No INTERNET; everything such as
+         book lookup or opening a link is handed to the browser or the relevant app
+         via an intent. Gallery images come through the system picker (no permission
+         needed); CSV sharing uses FileProvider to grant read access to that one file. -->
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <!-- Kamerası olmayan cihaz da kurabilir: galeriden okuma çalışır. -->
+    <!-- Devices without a camera can install too: reading from the gallery works. -->
     <uses-feature
         android:name="android.hardware.camera.any"
         android:required="false" />
 
-    <!-- androidx.core'un kendi manifestinden gelen imza düzeyi izin (bkz. Reyon).
-         Kodokur registerReceiver(…, RECEIVER_NOT_EXPORTED) çağırmıyor; biri
-         eklerse bu iki satır kaldırılmalı, yoksa API 26–32'de çöker. -->
+    <!-- Signature-level permission merged in from androidx.core's own manifest (see Reyon).
+         Kodokur does not call registerReceiver(…, RECEIVER_NOT_EXPORTED); if anyone
+         adds such a call, remove these two entries or it crashes on API 26–32. -->
     <permission
         android:name="${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         tools:node="remove" />
@@ -23,7 +23,7 @@
         android:name="${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         tools:node="remove" />
 
-    <!-- Geçmiş Wi-Fi parolası içerebilir: bulut yedeğine girmez, cihazda kalır. -->
+    <!-- History may contain Wi-Fi passwords: it is kept out of cloud backup and stays on the device. -->
     <application
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"

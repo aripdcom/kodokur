@@ -7,8 +7,8 @@ import androidx.compose.ui.graphics.vector.addPathNodes
 import androidx.compose.ui.unit.dp
 
 /**
- * material-icons-core'da olmayan birkaç simge. Yol verileri Material Icons'tan
- * (Apache 2.0); bütün extended paketini çekmek yerine yalnız gerekenler.
+ * A few icons missing from material-icons-core. Path data comes from Material Icons
+ * (Apache 2.0); only the ones needed, instead of pulling in the whole extended package.
  */
 object KodokurIcons {
     val History by lazy {
@@ -58,7 +58,7 @@ object KodokurIcons {
                 "2,-0.9 2,-2V4c0,-1.1 -0.9,-2 -2,-2zM19,11h-4v4h-2v-4H9V9h4V5h2v4h4v2z",
         )
     }
-    /** DataMatrix: sol ve alt kenarda dolu "L", üst ve sağda kesikli kenar. */
+    /** DataMatrix: a solid "L" on the left and bottom edges, dashed edges on the top and right. */
     val DataMatrix by lazy {
         icon(
             "M3,3h2v18H3zM3,19h18v2H3zM7,3h2v2H7zM11,3h2v2h-2zM15,3h2v2h-2zM19,3h2v2h-2zM19,7h2v2h-2z" +

@@ -2,7 +2,7 @@
 <resources>
     <string name="app_tagline">Her barkodu ve karekodu okur. Telefonunuzdan hiçbir şey çıkmaz.</string>
 
-    <!-- Ortak -->
+    <!-- Common -->
     <string name="back">Geri</string>
     <string name="cancel">Vazgeç</string>
     <string name="delete">Sil</string>
@@ -11,7 +11,7 @@
     <string name="copied">Kopyalandı</string>
     <string name="no_app">Bu telefonda bunu açabilecek bir uygulama yok</string>
 
-    <!-- Tarayıcı -->
+    <!-- Scanner -->
     <string name="scan_hint">Kamerayı bir barkoda ya da QR koda tutun</string>
     <string name="action_gallery">Fotoğraftan</string>
     <string name="action_torch_on">Feneri aç</string>
@@ -30,7 +30,7 @@
     <string name="gallery_error">Görsel açılamadı</string>
     <string name="gallery_reading">Görsel okunuyor…</string>
 
-    <!-- Kamera izni -->
+    <!-- Camera permission -->
     <string name="permission_title">Kamera erişimi</string>
     <string name="permission_body">Kodokur kodları kamerayla okur. Kareler telefonda işlenir; hiçbir yere kaydedilmez, hiçbir yere gönderilmez.</string>
     <string name="permission_grant">Kameraya izin ver</string>
@@ -39,7 +39,7 @@
     <string name="no_camera">Bu cihazda kamera yok. Bir fotoğraftaki kodu yine de okuyabilirsiniz.</string>
     <string name="camera_error">Kamera başlatılamadı</string>
 
-    <!-- İçerik türleri -->
+    <!-- Content kinds -->
     <string name="kind_book">Kitap</string>
     <string name="kind_periodical">Süreli yayın</string>
     <string name="kind_product">Ürün</string>
@@ -52,7 +52,7 @@
     <string name="kind_contact">Kişi</string>
     <string name="kind_text">Metin</string>
 
-    <!-- Ayrıntı etiketleri -->
+    <!-- Detail labels -->
     <string name="label_isbn13">ISBN-13</string>
     <string name="label_isbn10">ISBN-10</string>
     <string name="label_group">Kayıt grubu</string>
@@ -80,7 +80,7 @@
     <string name="label_raw">Ham içerik</string>
     <string name="label_scanned_at">Okunma</string>
 
-    <!-- Eylemler -->
+    <!-- Actions -->
     <string name="act_copy">Kopyala</string>
     <string name="act_share">Paylaş</string>
     <string name="act_open">Aç</string>
@@ -98,7 +98,7 @@
     <string name="act_add_contact">Kişilere ekle</string>
     <string name="external_notice">Tarayıcınızda ya da başka bir uygulamada açılır. Kodokur kendisi internete hiç çıkmaz.</string>
 
-    <!-- GS1 (ilaç karekodu) -->
+    <!-- GS1 (medicine codes) -->
     <string name="kind_gs1">Ürün karekodu (GS1)</string>
     <string name="label_expiry">Son kullanma tarihi</string>
     <string name="label_best_before">Tavsiye edilen tüketim tarihi</string>
@@ -109,7 +109,7 @@
     <string name="label_gs1_field">Alan (%1$s)</string>
     <string name="gs1_expired">Süresi geçmiş: son kullanma tarihi %1$s idi.</string>
 
-    <!-- Bağlantı güvenliği -->
+    <!-- Link safety -->
     <string name="label_destination">Gideceği site</string>
     <string name="label_encoded_name">Kodlanmış ad</string>
     <string name="label_address">Tam adres</string>
@@ -121,13 +121,13 @@
     <string name="link_confirm_body">%1$s adresine gidiyor. Kodun nereden geldiğine güveniyorsanız açın.</string>
     <string name="link_open_anyway">Yine de aç</string>
 
-    <!-- Yakınlaştırma ve erişilebilirlik -->
+    <!-- Zoom and accessibility -->
     <string name="zoom_level">Yakınlaştırma %1$s. Değiştirmek için dokunun.</string>
     <string name="act_copy_item">Kopyala: %1$s</string>
     <string name="act_delete_item">Sil: %1$s</string>
     <string name="act_more">Diğer seçenekler</string>
 
-    <!-- Geçmiş -->
+    <!-- History -->
     <string name="history_title">Geçmiş</string>
     <string name="history_empty">Henüz bir şey okunmadı</string>
     <string name="history_export">CSV olarak dışa aktar</string>
@@ -139,11 +139,11 @@
     </plurals>
     <string name="history_deleted">Okuma silindi</string>
 
-    <!-- Dil -->
+    <!-- Language -->
     <string name="language_title">Dil</string>
     <string name="language_system">Telefonun dili</string>
 
-    <!-- Hakkında -->
+    <!-- About -->
     <string name="about_title">Hakkında</string>
     <string name="about_promise">Reklam yok. İzleyici yok. İnternet izni yok. Tek izin kamera; kamera kareleri telefondan hiç çıkmaz. Geçmiş bu cihazda kalır, yedeklemeye de girmez.</string>
     <string name="about_version">Sürüm %1$s</string>

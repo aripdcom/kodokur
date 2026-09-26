@@ -1,10 +1,10 @@
 package com.aripd.kodokur.core
 
 /**
- * Bir okuma. [addOn], EAN/UPC barkodunun sağındaki 2 ya da 5 haneli ek barkoddur:
- * kitaplarda 5 hane önerilen fiyatı, dergilerde 2 hane sayı numarasını taşır.
- * [gs1]: tarayıcı kodu GS1 olarak işaretledi (ilaç karekodu, GS1-128, DataBar);
- * metindeki alanlar [Gs1] ile ayrıştırılır.
+ * A single scan. [addOn] is the 2- or 5-digit add-on barcode to the right of an
+ * EAN/UPC barcode: on books the 5 digits carry the suggested price, on magazines the
+ * 2 digits carry the issue number. [gs1]: the scanner flagged the code as GS1
+ * (medicine DataMatrix, GS1-128, DataBar); the fields in the text are parsed with [Gs1].
  */
 data class Scan(
     val text: String,
@@ -12,11 +12,11 @@ data class Scan(
     val addOn: String? = null,
     val gs1: Boolean = false,
 ) {
-    /** 5 haneli ekten fiyat ("$24.95", "£7.99"); fiyat yoksa ya da ek başka türse null. */
+    /** Price from the 5-digit add-on ("$24.95", "£7.99"); null if there is no price or the add-on is of another kind. */
     val suggestedPrice: String?
         get() {
             val code = addOn?.takeIf { it.length == 5 && it.all(Char::isDigit) } ?: return null
-            // ZXing'in UPCEANExtension5Support'u ile aynı kurallar.
+            // Same rules as ZXing's UPCEANExtension5Support.
             return when (code) {
                 "90000" -> null
                 "99991" -> "0.00"

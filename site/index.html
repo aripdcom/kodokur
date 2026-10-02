@@ -105,6 +105,7 @@
     white-space: nowrap;
   }
   .btn:hover { filter: brightness(1.1); }
+  .btn.alt { background: var(--brand-weak); color: var(--on-brand-weak); }
   .cta a.all { color: var(--brand); font-size: 14px; text-decoration: none; }
   .cta a.all:hover { text-decoration: underline; }
   main { margin-top: 40px; display: grid; gap: 36px; }
@@ -235,7 +236,8 @@
       <span class="chip" data-i18n="chipOpen">open source</span>
     </div>
     <div class="cta">
-      <a class="btn" href="https://github.com/aripdcom/kodokur/releases/latest/download/kodokur.apk" data-i18n="btnDownload">Download the APK</a>
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.aripd.kodokur" data-i18n="btnPlay">Get it on Google Play</a>
+      <a class="btn alt" href="https://github.com/aripdcom/kodokur/releases/latest/download/kodokur.apk" data-i18n="btnDownload">Download the APK</a>
       <a class="all" href="https://github.com/aripdcom/kodokur/releases" data-i18n="allReleases">All releases and source archives</a>
     </div>
   </header>

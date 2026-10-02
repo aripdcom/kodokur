@@ -101,7 +101,7 @@ git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
 - [x] Review the warnings: "no native debug symbols" can be ignored (only CameraX ships a
       small native library; there is no NDK code of our own)
 - [x] **Send for review**; the first review of a new app can take several days
-      (sent 2026-09-26, status: *In review*)
+      (sent 2026-09-26; live on Google Play by 2026-10-02)
 
 ## 6. After it is live
 
@@ -109,5 +109,5 @@ git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
 - [ ] Check the Play-installed signature equals GitHub's:
       `adb shell pm path com.aripd.kodokur` → `adb pull <base.apk>` →
       `apksigner verify --print-certs base.apk`
-- [ ] Add the Play link to `site/index.html` and `README.md`
+- [x] Add the Play link to `site/index.html` and `README.md`
 - [ ] Watch the pre-launch report and Android vitals during the first week

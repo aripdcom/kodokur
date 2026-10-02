@@ -10,12 +10,12 @@ supports the project, and the store description says the app is open source.
 
 ## 1. Before the release
 
-- [ ] `docs/device-test.md` was run on a phone with real codes; result logged there
-- [ ] `python3 tools/check_strings.py`, `check_site.py`, `check_store.py` are clean
-- [ ] `./gradlew :core:test :app:assembleDebug` passed
-- [ ] `store/screenshots/en/` is up to date (1080×2160, 2–8 images; the same English
+- [x] `docs/device-test.md` was run on a phone with real codes; result logged there
+- [x] `python3 tools/check_strings.py`, `check_site.py`, `check_store.py` are clean
+- [x] `./gradlew :core:test :app:assembleDebug` passed
+- [x] `store/screenshots/en/` is up to date (1080×2160, 2–8 images; the same English
       screenshots are used for every language)
-- [ ] `store/play/<lang>/notes-<X.Y.Z>.txt` exists for the version in all 14 languages
+- [x] `store/play/<lang>/notes-<X.Y.Z>.txt` exists for the version in all 14 languages
 
 ## 2. Tag and verify the build
 
@@ -23,28 +23,28 @@ supports the project, and the store description says the app is open source.
 git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
 ```
 
-- [ ] `release.yml` is green: APK signed, only permission `CAMERA`, AAB built
-- [ ] From the GitHub release download `kodokur-v1.1.1-play.aab` and
+- [x] `release.yml` is green: APK signed, only permission `CAMERA`, AAB built
+- [x] From the GitHub release download `kodokur-v1.1.1-play.aab` and
       `kodokur-v1.1.1-mapping.txt`
-- [ ] Signing fingerprint matches the Kodokur line in `~/keystores/aripdcom/README.md`:
+- [x] Signing fingerprint matches the Kodokur line in `~/keystores/aripdcom/README.md`:
       `apksigner verify --print-certs kodokur.apk | grep 'certificate SHA-256'`
       → `8e97d791…448e16`
 
 ## 3. Play Console: create the app (one time)
 
-- [ ] **Payments profile** (Settings → Payments profile) is set up with bank account and
+- [x] **Payments profile** (Settings → Payments profile) is set up with bank account and
       tax information; paid apps cannot be published without it
-- [ ] **Create app:** name "Kodokur", default language English (United States),
+- [x] **Create app:** name "Kodokur", default language English (United States),
       App, **Paid**, accept the declarations. This cannot be undone later: a free app
       can never become paid (a paid app can become free)
-- [ ] **Pricing** (Monetize → Products → App pricing): **€1.99**. Let Play convert it to
+- [x] **Pricing** (Monetize → Products → App pricing): **€1.99**. Let Play convert it to
       local prices, then review the suggestions for lower-income markets (e.g. Turkey)
       and lower them by hand where the converted price looks too high
-- [ ] **Automatic protection** (Test and release → App integrity): **Off** (done).
+- [x] **Automatic protection** (Test and release → App integrity): **Off** (done).
       Reason: the same app is legally free on GitHub under the GPL, so it protects
       nothing, and it injects closed-source verification code into the APK Play serves,
       which conflicts with the open-source and no-network promises
-- [ ] **App signing** (Test and release → Setup → App signing): choose
+- [x] **App signing** (Test and release → Setup → App signing): choose
       *Use a different key* → *Export and upload a key from a Java keystore*. Download
       the PEPK tool and the encryption public key shown there, then run:
 
@@ -66,10 +66,10 @@ git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
 
 ## 4. Play Console: store listing and app content
 
-- [ ] **Main store listing:** app name, short and full description from `store/play/en/`;
+- [x] **Main store listing:** app name, short and full description from `store/play/en/`;
       then *Manage translations → Add your own* for the other 13 languages using the
       locale table in `store/README.md` (`nb` → Norwegian `no-NO`, `pt` → `pt-BR`)
-- [ ] **Graphics:** icon `graphics/icon-512.png`, feature graphic
+- [x] **Graphics:** icon `graphics/icon-512.png`, feature graphic
       `graphics/feature-1024.png`, phone screenshots `screenshots/en/1…6`
 - [x] **Store settings:** category **Tools**; tags **Barcode scanner, Books & reference,
       Privacy & security, Shopping, Wi-Fi** (no health tag, to stay consistent with the
@@ -77,7 +77,7 @@ git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
       `https://kodokur.aripd.com`
 - [x] **External marketing:** left **on**. Google may promote the app outside Play at no
       cost; it does not change the app, its data safety answers or its privacy
-- [ ] **App content:**
+- [x] **App content:**
   - Privacy policy: `https://kodokur.aripd.com/privacy.html`
   - Ads: no ads
   - App access: all functionality available without special access
@@ -87,20 +87,21 @@ git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
   - Health apps: *My app does not have any health features* (see the note in
     `content-rating.md`)
   - Government apps / financial features / news: not applicable
-- [ ] **Countries:** all countries and regions where Play supports paid apps (Play
+- [x] **Countries:** all countries and regions where Play supports paid apps (Play
       hides the rest automatically for a paid app)
 
 ## 5. Play Console: production release
 
-- [ ] Test and release → **Production → Create new release**
-- [ ] Upload `kodokur-v1.1.1-play.aab`
-- [ ] Upload the deobfuscation file `kodokur-v1.1.1-mapping.txt` (App bundle explorer →
+- [x] Test and release → **Production → Create new release**
+- [x] Upload `kodokur-v1.1.1-play.aab`
+- [x] Upload the deobfuscation file `kodokur-v1.1.1-mapping.txt` (App bundle explorer →
       the version → Downloads → *ReTrace mapping file*), so crash reports are readable
-- [ ] Release notes: paste every language, each wrapped in its Play locale tag, e.g.
+- [x] Release notes: paste every language, each wrapped in its Play locale tag, e.g.
       `<en-US>` … `</en-US>`, `<tr-TR>` … `</tr-TR>` (texts: `play/<lang>/notes-1.1.1.txt`)
-- [ ] Review the warnings: "no native debug symbols" can be ignored (only CameraX ships a
+- [x] Review the warnings: "no native debug symbols" can be ignored (only CameraX ships a
       small native library; there is no NDK code of our own)
-- [ ] **Send for review**; the first review of a new app can take several days
+- [x] **Send for review**; the first review of a new app can take several days
+      (sent 2026-09-26; live on Google Play by 2026-10-02)
 
 ## 6. After it is live
 
@@ -108,5 +109,5 @@ git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
 - [ ] Check the Play-installed signature equals GitHub's:
       `adb shell pm path com.aripd.kodokur` → `adb pull <base.apk>` →
       `apksigner verify --print-certs base.apk`
-- [ ] Add the Play link to `site/index.html` and `README.md`
+- [x] Add the Play link to `site/index.html` and `README.md`
 - [ ] Watch the pre-launch report and Android vitals during the first week

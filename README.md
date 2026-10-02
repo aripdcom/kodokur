@@ -10,7 +10,8 @@ permission and there is no internet permission.
 
 - **Website:** https://kodokur.aripd.com
 - **Privacy policy:** https://kodokur.aripd.com/privacy.html
-- **APK:** [latest release](https://github.com/aripdcom/kodokur/releases/latest/download/kodokur.apk)
+- **Google Play:** [com.aripd.kodokur](https://play.google.com/store/apps/details?id=com.aripd.kodokur) (paid; the same app, signed with the same key)
+- **APK (free):** [latest release](https://github.com/aripdcom/kodokur/releases/latest/download/kodokur.apk)
 - **Contributing:** [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## What it reads

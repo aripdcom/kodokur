@@ -62,7 +62,7 @@ git tag -a v1.1.1 -m "Kodokur 1.1.1" && git push origin v1.1.1
       Upload `kodokur-signing-key.zip`. The same key then signs uploads too, so no separate
       upload key is needed. Result: apps installed from Play and from GitHub carry the same
       signature and update each other.
-- [ ] Delete `kodokur-signing-key.zip` afterwards (it contains the encrypted private key)
+- [x] Delete `kodokur-signing-key.zip` afterwards (it contains the encrypted private key)
 
 ## 4. Play Console: store listing and app content
 
